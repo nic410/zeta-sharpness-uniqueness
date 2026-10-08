@@ -12,15 +12,16 @@ on:
 jobs:
   build-and-audit:
     name: lake build + scripts/audit.sh
-    runs-on: ubuntu-latest
-    # A cold build (Zeta23 from source) on a 4-core runner takes a few hours; later runs reuse the cache.
+    runs-on: ubuntu-24.04
+    # The first build compiles the needed Zeta23 modules from source (about 10 minutes on a 4-core runner); later runs
+    # reuse the cache.
     timeout-minutes: 355
     defaults:
       run:
         shell: bash
         working-directory: paper/anc/lean
     env:
-      # GitHub-hosted ubuntu-latest runners have 4 cores and 16 GB of RAM. Some Zeta23 modules
+      # GitHub-hosted ubuntu-24.04 runners have 4 cores and 16 GB of RAM. Some Zeta23 modules
       # need several GB each to elaborate, so fewer threads per file plus swap avoid running out of memory.
       CORES: "0-3"
       LEAN_NUM_THREADS: "2"
@@ -55,7 +56,7 @@ jobs:
           echo started
 
       - name: Check out
-        uses: actions/checkout@v4
+        uses: actions/checkout@v7
 
       - name: Install elan
         working-directory: .
@@ -64,7 +65,7 @@ jobs:
           echo "$HOME/.elan/bin" >> "$GITHUB_PATH"
 
       - name: Restore the .lake cache
-        uses: actions/cache/restore@v4
+        uses: actions/cache/restore@v6
         with:
           path: paper/anc/lean/.lake
           key: lake-${{ runner.os }}-${{ hashFiles('paper/anc/lean/lake-manifest.json', 'paper/anc/lean/lean-toolchain') }}-${{ github.sha }}
@@ -86,7 +87,7 @@ jobs:
 
       - name: Save the .lake cache
         if: always()
-        uses: actions/cache/save@v4
+        uses: actions/cache/save@v6
         with:
           path: paper/anc/lean/.lake
           key: lake-${{ runner.os }}-${{ hashFiles('paper/anc/lean/lake-manifest.json', 'paper/anc/lean/lean-toolchain') }}-${{ github.sha }}
@@ -96,7 +97,7 @@ jobs:
 
       - name: Upload the build and audit logs
         if: always()
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v7
         with:
           name: lean-logs
           path: |

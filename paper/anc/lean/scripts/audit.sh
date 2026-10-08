@@ -126,7 +126,7 @@ echo
 echo "== (d) statement pin: scripts/Statements.lean against scripts/Statements.baseline.txt =="
 st_out=$($RUN scripts/Statements.lean 2>&1)
 if [ "$st_out" = "$(cat scripts/Statements.baseline.txt)" ]; then
-  echo "statement pin: $(echo "$st_out" | head -1 | sed -n 's/^== statement pin: \([0-9]*\) declarations.*/\1/p') declarations, identical to scripts/Statements.baseline.txt"
+  echo "statement pin: $(sed -n '1s/^== statement pin: \([0-9]*\) declarations.*/\1/p' <<< "$st_out") declarations, identical to scripts/Statements.baseline.txt"
 else
   echo "FAIL: the statements differ from scripts/Statements.baseline.txt (the meaning of a headline or of an axiom changed):"
   diff <(cat scripts/Statements.baseline.txt) <(echo "$st_out") | head -60
