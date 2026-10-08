@@ -1,5 +1,7 @@
 # Sharpness and uniqueness for positive solutions of the explicit formula for ζ(s)
 
+[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.23238100.svg)](https://doi.org/10.5281/zenodo.23238100) [![Lean](https://github.com/nic410/zeta-sharpness-uniqueness/actions/workflows/lean.yml/badge.svg)](https://github.com/nic410/zeta-sharpness-uniqueness/actions/workflows/lean.yml)
+
 **Status: preprint, version 1.0 (October 2026); not peer-reviewed.** This paper was produced by AI agents,
 mainly Anthropic's Claude with supplementary assistance from OpenAI's Astra, under the author's direction; it has not yet
 been checked by a human expert. Author: Nic Johns. Licences: the paper and documentation are CC BY 4.0; the code, data
@@ -83,12 +85,14 @@ No human mathematician has yet checked the proofs line by line.
   author       = {Johns, Nic},
   title        = {Sharpness and uniqueness for positive solutions of the explicit formula for $\zeta(s)$},
   howpublished = {Preprint (Part II), \url{https://github.com/nic410/zeta-sharpness-uniqueness}},
-  year         = {2026}
+  year         = {2026},
+  doi          = {10.5281/zenodo.23238100}
 }
 ```
 
-Zenodo assigns a DOI when the release is archived. The Zenodo record and GitHub's "Cite this repository" button
-(generated from `CITATION.cff`) then give the reference with its DOI.
+The DOI above is the concept DOI, which always resolves to the latest archived version; each release also has its own
+version DOI on [Zenodo](https://doi.org/10.5281/zenodo.23238100) (v1.0: 10.5281/zenodo.23238101). GitHub's "Cite this
+repository" button (generated from `CITATION.cff`) gives the same reference in other formats.
 
 Part I: N. Johns, *Positive solutions of the explicit formula for ζ(s): near-criticality and uniqueness*,
 [doi:10.5281/zenodo.23197915](https://doi.org/10.5281/zenodo.23197915).
