@@ -5,7 +5,7 @@ type: software
 authors:
   - family-names: Johns
     given-names: Nic
-version: "1.1"
+version: "1.2"
 doi: "10.5281/zenodo.23238100"
 repository-code: "https://github.com/nic410/zeta-sharpness-uniqueness"
 url: "https://github.com/nic410/zeta-sharpness-uniqueness"

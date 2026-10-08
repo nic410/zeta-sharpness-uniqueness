@@ -2,7 +2,7 @@
 
 [![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.23238100.svg)](https://doi.org/10.5281/zenodo.23238100) [![Lean](https://github.com/nic410/zeta-sharpness-uniqueness/actions/workflows/lean.yml/badge.svg)](https://github.com/nic410/zeta-sharpness-uniqueness/actions/workflows/lean.yml)
 
-**Status: preprint, version 1.1 (October 2026); not peer-reviewed.** This paper was produced by AI agents,
+**Status: preprint, version 1.2 (October 2026); not peer-reviewed.** This paper was produced by AI agents,
 mainly Anthropic's Claude with supplementary assistance from OpenAI's Astra, under the author's direction; it has not yet
 been checked by a human expert. Author: Nic Johns. Licences: the paper and documentation are CC BY 4.0; the code, data
 and Lean formalisation are Apache-2.0 (see [Licence](#licence)).
@@ -81,6 +81,9 @@ No human mathematician has yet checked the proofs line by line.
 
 ## Version notes
 
+- **v1.2** (October 2026; no DOI yet): credits only. Bondarenko–Radchenko–Seip are credited as the precedent for removing
+  all zeros of ζ (test functions that vanish, with multiplicity, at every non-trivial zero); the inputs from Part I now
+  carry precise locators. The mathematics is unchanged.
 - **v1.1** (October 2026; doi:10.5281/zenodo.23239278): attributions and citations only. The architecture of Sections 4–5 is credited to
   Viazovska's construction; Remark 4.11 cites the Laplacian lemma of Alfes, Burban and Raum; the history of how the input
   was found is told in full; Odlyzko's Open Problem 2.2 is cited; and related work on exact bootstrap functionals,
