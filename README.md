@@ -87,7 +87,7 @@ No human mathematician has yet checked the proofs line by line.
 
 ## Version notes
 
-- **v1.3** (October 2026; no DOI yet): a new result, Corollary 8.2 with Appendix C. The equivalences of Corollary 3 hold
+- **v1.3** (October 2026; doi:10.5281/zenodo.23246727): a new result, Corollary 8.2 with Appendix C. The equivalences of Corollary 3 hold
   for every prime-side gap in [0, log 2/2π], in particular for the classical cone: RH holds if and only if 𝒜(F) ≥ 0 for
   every F with F ≥ 0 and F̂ ≥ 0, if and only if κ*_OPS = 0. The proof uses the transform of the function of Theorem 1,
   which is positive on (−log 2/2π, log 2/2π), a transfer lemma, and a proof of the duality theorem at every gap. The
@@ -118,7 +118,7 @@ No human mathematician has yet checked the proofs line by line.
 ```
 
 The DOI above is the concept DOI, which always resolves to the latest archived version; each release also has its own
-version DOI on [Zenodo](https://doi.org/10.5281/zenodo.23238100) (v1.0: 10.5281/zenodo.23238101; v1.1: 10.5281/zenodo.23239278; v1.2: 10.5281/zenodo.23240818). GitHub's "Cite this
+version DOI on [Zenodo](https://doi.org/10.5281/zenodo.23238100) (v1.0: 10.5281/zenodo.23238101; v1.1: 10.5281/zenodo.23239278; v1.2: 10.5281/zenodo.23240818; v1.3: 10.5281/zenodo.23246727). GitHub's "Cite this
 repository" button (generated from `CITATION.cff`) gives the same reference in other formats.
 
 Part I: N. Johns, *Positive solutions of the explicit formula for ζ(s): near-criticality and uniqueness*,
