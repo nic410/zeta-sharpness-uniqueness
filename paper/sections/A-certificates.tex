@@ -6,7 +6,9 @@ This appendix describes the four computer-assisted ingredients listed in Section
 ancillary files, with its exact inputs pinned by SHA-256, the command that was run, and the log of a fresh run; the file \ancf{README.md} of
 the ancillary files lists the expected decisive output lines and the runtimes. Paths below are relative to the top directory of the
 ancillary files. In the scripts and logs the function $\Pi$ of Theorem~\ref{thm:F} is called \texttt{R}, $\Ax$ is \texttt{Phi}, $\Bx$ is \texttt{g},
-$\ck_t$ is \texttt{fhat\_t}, and the large-$|t|$ theorem and the window are called Theorem~L and Certificate~W.
+$\ck_t$ is \texttt{fhat\_t}; the large-$|t|$ theorem, the window and the moment certificate are called Theorem~L, Certificate~W and
+Certificate~M (Certificate~M-box on the trivial-bound box $\TB$). Certificate~W and the run of Theorem~L at $t=8$ are independent checks, not
+used in the proofs of the main results.
 
 \emph{Conventions.} All bounds are computed in ball arithmetic (Arb \cite{Joh17}, through python-flint, version~0.9.0, built on FLINT
 \cite{FLINT}): every quantity is a midpoint--radius interval with outward rounding that contains the exact value, and every truncation, tail and
@@ -20,7 +22,8 @@ $\nu=0,1$) is used, which follows from $K_\nu(w)=\int_0^\infty e^{-w\cosh s}\cos
 
 \emph{Statement.} Certified balls for $a_n=n\Ss_n+\frac14\delta_{n1}$: for $n\le1500$ from the terms $c\le10^4$ ($n\le60$) or
 $c\le\max(600,\lceil4\pi\sqrt n\rceil+1)$ ($60<n\le1500$); for $n\le6$ from $c\le3\cdot10^5$; for $n\le2$ from $c\le6\cdot10^5$; in each case plus a
-rigorous bound for the remaining terms. The positivity certificates use $n\le300$ and the bound $|a_n|\le\abar_n$ beyond; with $c\le3\cdot10^5$,
+rigorous bound for the remaining terms. Certificate~W and the run of Theorem~L at $t=8$ use $n\le300$ and the bound $|a_n|\le\abar_n$ beyond; with
+$c\le3\cdot10^5$,
 \[
 a_1=4581.370553408\pm6.9\cdot10^{-5},\qquad a_2=1025727.234918\pm2.7\cdot10^{-4},
 \]
@@ -39,9 +42,14 @@ bound of Lemma~\ref{lem:small-w}, and partial summation with $\sum_{c\le u}d(c)\
 three coefficient files read by the positivity certificates are in \ancf{coefficients/data/}; a fresh run of the scripts reproduces their
 certified numbers (\ancf{coefficients/compare_outputs.py}).
 
+\emph{The trivial-bound box.} The centres $c_n=nT_1(z_n)+\frac14\delta_{n1}$ of \eqref{eq:box} are the terms $c=1$, which \ancf{coefficients/cert_an.py}
+computes in Arb at $256$ bits (key \texttt{T1} of \ancf{coefficients/data/an_cert_X1e4.json}); the half-widths $w_n=\abar_n\varrho(z_n)$ are evaluated in
+Arb by \ancf{positivity/boxlib.py}. Neither involves a Kloosterman sum with $c\ge2$. In the proofs of the main results the enclosures of this
+subsection are used only for the value of $C$ (Appendix~\ref{app:cert-C}); the positivity certificates of the proofs use the box.
+
 \subsection{The window}\label{app:cert-W}
 
-\emph{Statement.} Theorem~\ref{thm:window}; script \ancf{positivity/run_window.py} (with \ancf{positivity/cert_window.py} and
+\emph{Statement.} Theorem~\ref{thm:window}, an independent check; script \ancf{positivity/run_window.py} (with \ancf{positivity/cert_window.py} and
 \ancf{positivity/poslib.py}).
 
 \emph{Conical series.} For $Y\ge\frac12$ put $z_1:=\sin^2\frac{\theta(Y)}2=1/(4Y^2+1)\le\frac12$, $s:=t^2$ and
@@ -103,7 +111,7 @@ enclosure $\Pi(0)\in[1.400011\cdot10^{-3},1.401747\cdot10^{-3}]$ is computed in 
 (\ancf{positivity/check_r0.py}).
 
 \emph{Negative control} (\ancf{positivity/negctl.py}; not used in any proof). With $a_n$ replaced by its term $c=1$, the same certifier proves the
-upper bounds of Remark~\ref{rem:negctl}.
+upper bounds of Remark~\ref{rem:negctl} for the right side of \eqref{eq:physical}.
 
 \emph{Independent cross-check} (\ancf{coefficients/cert_Ht.py}, \ancf{coefficients/compare_window.py}; not used in any proof). The
 density route of Appendix~\ref{app:cert-C}, run at $s=\frac12+it$, gives certified point values of $H_{\rm raw}(t)$ that do not use the
@@ -111,19 +119,77 @@ conical functions or the four-path formula. At all $16$ cell centres in $[0,8]$ 
 $\Pi(t)=2\pi^2(t^2+\frac14)^2H_{\rm raw}(t)$ overlap those of the window certificate ($21$ of $21$). The two routes share only the coefficient
 enclosures.
 
+\subsection{The moment certificate}\label{app:cert-M}
+
+\emph{Statement.} Theorem~\ref{thm:moments}; script \ancf{positivity/cert_moments_box.py} (with \ancf{positivity/cert_moments.py} and
+\ancf{positivity/boxlib.py}). The same computation with the certified coefficients, \ancf{positivity/cert_moments.py}, gives the check $|t|\le10.402$
+and the numbers of Remarks~\ref{rem:sign} and~\ref{rem:moments}.
+
+\emph{The transform at a node.} For real $x>1$, $\Gh_{\rm raw}(x)=\sin^2(\pi x)\sqrt x\,[\sum_{n\le N}a_nK_0(4\pi\sqrt{nx})+T_N(x)]$. The tail $T_N$ is
+bracketed in closed form from the bounds $\abar_n(\lambda_0(z_n)-\eta_N)\le a_n\le\abar_n(1-1/z_n+\eps_N)$ for $n>N$, which hold on $\TB$; here
+$\eta_N$ and $\eps_N$ are the remainder terms of $\lambda_-$ and $\lambda_+$ at $z_{N+1}$, and $\lambda_0(z)\ge1-\frac{11}{8z}-(\frac3{32}+\frac{\pi^3}{16})z^{-2}$. With
+$\sqrt{\pi/2y}\,e^{-y}(1-\frac1{8y})\le K_0(y)\le\sqrt{\pi/2y}\,e^{-y}$ the sums over $n>N$ become sums of $e^{-\kappa\sqrt n}$ and
+$n^{-1/2}e^{-\kappa\sqrt n}$, $\kappa=4\pi(\sqrt x-1)$, which are compared with integrals. $N$ is chosen per node: $60$ near $x=1$ for $\TB$
+($1500$ for the certified coefficients), and about $20$ for $x\ge10$.
+
+\emph{Quadrature.} The integrals \eqref{eq:moments} are split at integers, where $W_j$ is not analytic, and computed by $24$-node
+Gauss--Legendre rules on $99$ panels: $[1+2^{-k-1},1+2^{-k}]$ for $1\le k\le21$ ($\rho=2$), $[1.5,1.75]$ and $[1.75,2]$ ($\rho=3$), and two panels in each
+$[k,k+1]$, $2\le k\le39$ ($\rho=4$). The error is bounded by Lemma~\ref{lem:gauss}, with $M$ an Arb bound on an outward box containing the
+Bernstein ellipse, from $|K_0(w)|\le K_0(\Re w)$, $\Re\sqrt w\ge\sqrt{\Re w}$, $|\sin\pi w|\le\cosh(\pi\Im w)$ and $|\sin\pi w|\le\sinh(\pi|w-k|)$; only
+real arguments of $K_0$ are evaluated.
+
+\emph{Ends.} Every $(b_n)\in\TB$ satisfies $0<b_n\le\abar_n$, so the transform formed from it lies between $0$ and the function $U$ of the last
+paragraph below. On
+$[1,1+2^{-22}]$ this gives $\Gh_{\rm raw}(x)\le x^{1/4}[(x-1)^2/16+x/(32\pi^2)]$, by $\sin^2(\pi x)\le\pi^2(x-1)^2$, $\kappa\ge2\pi(x-1)/\sqrt x$ and
+$e^{-\kappa}(1+\kappa)\le1$. On $[40,\infty)$ it gives $\Gh_{\rm raw}(x)\le x^{1/4}e^{-\kappa}(1+2(1+\kappa)/\kappa^2)/(16\pi^2)$; with
+$\sum_{m\le x}d(m)m^{-1/2}\le x(1+\log x)$ the integral is bounded by an incomplete Gamma function. For $M_0$ the quadrature error, the first end and the second end are at most $2.1\cdot10^{-17}$, $2.4\cdot10^{-10}$ and
+$6\cdot10^{-31}$.
+
+\emph{Uniformity on the box.} $P_7(t)$ is linear in the coefficient sequence. Let $\pi_n(t)$ be its value for the sequence that is $1$ at $n$ and
+$0$ elsewhere. For every $b\in\TB$ the certificate uses
+\[
+P_7(t;b)\ge P_7^{\rm low}(t)-\sum_{n\le8}w_n|\pi_n(t)|-\eps\,P_7^{\rm abs}(t),
+\]
+where $P_7^{\rm low}(t)$ is the lower bound obtained from the centres $c_n$ for $n\le60$ and the brackets above for $n>60$,
+$\eps:=\max_{8<n\le60}w_n/(c_n-w_n)=1.7331\cdot10^{-8}$, and $P_7^{\rm abs}(t)$ is the same polynomial with all signs $+$ and the upper ends of the
+moments of the centres.
+
+\emph{Continuum in $t$.} On cells $[t_a,t_b]$ of width $1/256$, the even and odd parts of $P_7$ are increasing in $t\ge0$, because the moments are
+non-negative; so $P_7\ge P_+(t_a)-P_-(t_b)$, where $P_+$ uses the lower ends of the even-indexed terms and $P_-$ the upper ends of the
+odd-indexed ones. No Taylor model in $t$ is needed.
+
+\emph{Results} (\ancf{positivity/logs/cert_moments_box.log}; $64$ bits, $14$ seconds on $6$ cores). The lower bound is positive on every cell of
+$[0,10.35546875]$, and the verdict line checks that this interval contains $[0,9]$. With the certified coefficients
+(\ancf{positivity/logs/cert_moments_true.log}; $128$ bits, $20$ seconds), $M_0=0.00028062\pm4.3\cdot10^{-9}$ and the bound is positive on
+$[0,10.40234375]$; this log also prints the enclosure of $M_0/\Xi(0)^2$ quoted in Remark~\ref{rem:sign} and the ratios of Remark~\ref{rem:moments}.
+
+\emph{The elementary range} (\ancf{positivity/cert_elementary.py}; not used in any proof). From Theorem~\ref{thm:an-bounds} and the bounds for $K_0$
+above, $L\le\Gh_{\rm raw}\le U$ on $(1,\infty)$, where
+\[
+U(x)=\frac{\sin^2(\pi x)\,x^{1/4}e^{-\kappa}}{16\pi^2}\Big(1+\frac{2(1+\kappa)}{\kappa^2}\Big),\qquad
+L(x)=\frac{\sin^2(\pi x)\,x^{1/4}}{16\pi^2}\Big(\frac{2e^{-\kappa}(1+\kappa)}{\kappa^2}-\frac{2.125}{2\pi\kappa}\Big).
+\]
+Arb's rigorous integration gives $M_0\ge\frac1\pi\int_1^{1.3}L\,\frac{\dd x}x\ge1.6932\cdot10^{-4}$ and
+$M_2\le\frac1\pi\int_1^\infty W_1U\,\frac{\dd x}x\le4.2931\cdot10^{-7}$, so $P_0(t)=M_0-2\pi^2t^2M_2>0$ for $|t|<4.4699$. Keeping the term $n=1$, with
+$a_1\in[c_1-w_1,c_1+w_1]$, gives $M_0\ge1.9672\cdot10^{-4}$, $M_2\le3.6864\cdot10^{-7}$ and $|t|<5.1995$ (\ancf{positivity/logs/cert_elementary.log}).
+
 \subsection{The large-\texorpdfstring{$|t|$}{|t|} numbers}\label{app:cert-L}
 
-\emph{Statement.} Proposition~\ref{prop:L-numbers}; scripts \ancf{positivity/cert_large_t.py} (items (i), (iii), (iv)) and
-\ancf{positivity/cert_gtail.py} (item (ii)).
+\emph{Statement.} Propositions~\ref{prop:L-numbers-box} and~\ref{prop:L-numbers}; scripts \ancf{positivity/cert_large_t.py} (items (i), (iii), (iv))
+and \ancf{positivity/cert_gtail.py} (item (ii)). For Proposition~\ref{prop:L-numbers-box} the wrapper \ancf{positivity/run_on_box.py} runs the same two
+scripts, unchanged, with the coefficient balls for $n\le300$ replaced by the intervals of $\TB$ (\ancf{positivity/boxlib.py}); beyond $n=300$ the
+scripts use $0<a_n\le\abar_n$, which holds on $\TB$. The scripts enclose every quantity they bound in Arb as a function of the coefficient balls,
+so the certified bounds hold for every sequence in $\TB$.
 
-\emph{Method.} $p_+(8)$ is bounded below by a Riemann sum over $2000$ geometric cells of $[1,4]$, with the integrand enclosed on each cell and the
-sum rounded down; $p_-(8)$ is bounded above by a Riemann sum over $8000$ cells of $[\frac12,0.870]$, with $\Bx^-$ bounded by the negative of the
-lower end of the ball of $\Bx$, rounded up; $\pc_0(\pm\cos\theta)$ come from the conical series at $t=0$. The cell minima of $\Bx$ in (i) are the
-minima of the exact lower ends over $300$ cells of $[0.870,1]$ and the $2000$ cells of $[1,4]$. $I_{\rm ax}$ is computed by Gauss--Legendre
+\emph{Method.} With $(T_0,Y_z)=(9,0.90)$ or $(8,0.870)$: $p_+(T_0)$ is bounded below by a Riemann sum over $2000$ geometric cells of $[1,4]$, with the
+integrand enclosed on each cell and the sum rounded down; $p_-(T_0)$ is bounded above by a Riemann sum over $8000$ cells of $[\frac12,Y_z]$, with
+$\Bx^-$ bounded by the negative of the lower end of the ball of $\Bx$, rounded up; $\pc_0(\pm\cos\theta)$ come from the conical series at $t=0$. The
+cell minima of $\Bx$ in (i) are the minima of the exact lower ends over $300$ cells of $[Y_z,1]$ and the $2000$ cells of $[1,4]$. $I_{\rm ax}$ is computed by Gauss--Legendre
 quadrature with Lemma~\ref{lem:gauss} (quadrature error about $2.5\cdot10^{-17}$, tail beyond $Y=13$ about $5\cdot10^{-32}$, both included in the bound). For (ii), the terms
 $2\le n\le399$ of $\bar\rho(4)$ are summed in Arb with $a_1$ replaced by the lower end of its ball, which gives an upper bound for $\bar\rho(4)$, and the terms $n\ge400$ are at most twice the
 term $n=400$, since consecutive ratios are at most $(1+\frac1n)e^{2\pi/\sqrt n-8\pi}<10^{-10}$. The lower bound in (iv) is formed in Arb from the exact
-endpoints of the bounds in (iii); the run takes $138$ seconds on one core.
+endpoints of the bounds in (iii). The runs take $133$ seconds (Proposition~\ref{prop:L-numbers-box}, \ancf{positivity/logs/cert_large_t_T9_box.log}) and
+$138$ seconds (Proposition~\ref{prop:L-numbers}) on one core.
 
 \subsection{The normalising constant}\label{app:cert-C}
 
@@ -178,17 +244,17 @@ example $\lambda_-(4\pi)=0.850104915628\pm2\cdot10^{-13}$.
 \subsection{The Lean formalisation}\label{app:lean}
 
 The ancillary directory \ancf{lean/} contains a Lean~4 project, built on Mathlib and on the corresponding project for Part~I, that formalises
-the logical spine of the proof. It states Theorems~\ref{thm:main-S} and~\ref{thm:main-U}, Corollary~\ref{cor:main-RH} and the reduction
+the logical spine of the proof. It states Theorems~\ref{thm:main-S} and~\ref{thm:main-U}, Corollaries~\ref{cor:main-RH} and~\ref{cor:nogap} and the reduction
 (Lemma~\ref{lem:voronoi}(a) and Proposition~\ref{prop:reduction}), and derives them from Mathlib, from six axioms of Part~I's ledger, and from
 exactly two axioms for this paper. The six axioms of Part~I are the explicit formula (Lemma~\ref{lem:I-EF}) and the bound \eqref{eq:XB}, used for
 Theorem~\ref{thm:main-S}; the zero-side support theorem (Theorem~\ref{thm:I-zerosupport}) and Theorem~\ref{thm:I-logic}(b), added for
-Theorem~\ref{thm:main-U}; the duality theorem (Theorem~\ref{thm:I-duality}), added for Corollary~\ref{cor:main-RH}; and the lower bound for
+Theorem~\ref{thm:main-U}; the duality theorem (Theorem~\ref{thm:I-duality}), added for Corollaries~\ref{cor:main-RH} and~\ref{cor:nogap}; and the lower bound for
 $\kstar$ of Part~I, Proposition~2.8, used only to show that $\kstar$ and $\kOPS$ are finite. The Part~I axiom for
 Theorem~\ref{thm:I-zerosupport} states only its first conclusion, $\nu=\nuz$; the remaining conclusions, RH and $\mu=\muz$, are derived in Lean
 from Theorem~\ref{thm:I-logic}(b), as in Part~I. The two axioms for this paper are: first, one axiom stating
 parts (b) and (c) of the Voronoi decoupling (Lemma~\ref{lem:voronoi}); second, one joint existence axiom for the object: an $H\in\Wc_\delta$, for
-some $\delta<\frac12$, with (C3), $\Gh_H\ge0$ on $[0,\infty)$ and $H>0$ on $\RR$, which is what Theorem~\ref{thm:main-object} and
-Corollary~\ref{cor:Pi-positive} provide. The
+some $\delta<\frac12$, with (C3), $\Gh_H\ge0$ on $[0,\infty)$, $\Gh_H>0$ on $[0,\xin2)$ and $H>0$ on $\RR$, which is what
+Theorem~\ref{thm:main-object}, Corollary~\ref{cor:Pi-positive} and the proof of Corollary~\ref{cor:nogap}(a) provide. The
 project builds with no unproved step (\texttt{sorry}) and passes its audit script; its \ancf{README.md}, \ancf{LEDGER.md} and \ancf{FAITHFUL.md}
 describe the axioms and list every difference between the Lean statements and the paper's. In particular the Lean form of the
 first part of Theorem~\ref{thm:main-S} asserts less about $H$ than the paper does: membership in $\Wc_\delta$ for one $\delta<\frac12$, that is, the
@@ -196,3 +262,5 @@ exponent $8$ of (C1) instead of $9-\delta$ for every $\delta<1$, and no entirene
 the Lean form of $\hF'(\xin n)=0$ says that the derivative of $\hF$ at $\xin n$, if it exists (\texttt{HasDerivAt}), is $0$. The Lean kernel
 therefore checks the assembly of the proof, namely that the main statements follow from these inputs. It
 does not check the inputs: Sections~\ref{sec:automorphic}--\ref{sec:physical}, the appendices and the certificates are not formalised.
+Corollary~\ref{cor:nogap} is formalised as \texttt{rh\_iff\_kappaOPS\_zero} (with \texttt{corollary8\_2}, \texttt{corollary8\_2\_b},
+\texttt{FT\_window}; Lemma~\ref{lem:transfer} as \texttt{transfer}), except the zero set in (a) and clause (c)(iv).

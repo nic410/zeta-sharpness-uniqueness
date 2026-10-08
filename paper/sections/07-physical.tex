@@ -5,7 +5,8 @@
 The function $H_{\rm raw}$ is defined through a Mellin transform, and on the Fourier side $\Gh_{\rm raw}$ is of size $O(1)$ while $H_{\rm raw}(t)$
 grows roughly like $e^{\pi|t|/2-2\sqrt{2\pi|t|}}$; a direct Mellin inversion would have to resolve that growth out of a cancellation. Instead we
 apply the four-path functional of Section~\ref{sec:lift} to the Mellin transform of the kernel itself. The result is a formula for $H_{\rm raw}$ in
-which the growth is carried by a positive kernel, built from conical Legendre functions.
+which the growth is carried by a positive kernel, built from conical Legendre functions. It gives $H_{\rm raw}>0$ for $|t|\ge9$
+(Theorem~\ref{thm:large-t-box}), which with Theorem~\ref{thm:moments} proves $H_{\rm raw}>0$ on $\RR$ (Corollary~\ref{cor:Pi-positive}).
 
 \subsection{The conical kernel}
 
@@ -77,8 +78,9 @@ and Definition~\ref{def:Hraw} gives \eqref{eq:physical}. Evenness: $\cos(t\log Y
 
 All Gamma factors have cancelled. The only cancellation left in \eqref{eq:physical} is near $t=0$: there the two integrals are about $+5.585$
 and $-5.584$, and $\Pi(0)=1.40\cdot10^{-3}$; as a function of the coefficients $a_n$ the cancellation is much stronger
-(Remark~\ref{rem:conditioning}). For large $t$ the kernel $\ck_t(\theta)\approx\frac12e^{t(\pi/2-\theta)}$ carries the growth, and the
-arc integral, whose integrand peaks at $Y\approx\sqrt{t/2\pi}$, dominates.
+(Remark~\ref{rem:conditioning}). Near $t=0$ we therefore use the Fourier side (Section~\ref{ssec:moments}). For large $t$ the kernel
+$\ck_t(\theta)\approx\frac12e^{t(\pi/2-\theta)}$ carries the growth, and the arc integral, whose integrand peaks at $Y\approx\sqrt{t/2\pi}$,
+dominates.
 
 \subsection{Large \texorpdfstring{$|t|$}{|t|}}
 
@@ -90,7 +92,10 @@ $\Pi(t)\ge0.2554\,e^{0.6435|t|}>0$ for every real $t$ with $|t|\ge8$.
 \end{theorem}
 
 The proof is analytic except for the numerical inputs of Proposition~\ref{prop:L-numbers}: the sign of $\Bx$ on $[0.870,4]$, the tail constant
-$\bar\rho(4)$, and three integrals evaluated at $t=8$. A monotonicity argument carries the inequality from $t=8$ to $\infty$. We need four lemmas. Let $r(y):=|\Gamma(\frac34+iy)|^2e^{\pi y}/(2\pi\sqrt y)$, so that by
+$\bar\rho(4)$, and three integrals evaluated at $t=8$, all computed with the certified enclosures of the coefficients. A monotonicity argument
+carries the inequality from $t=8$ to $\infty$. Theorem~\ref{thm:large-t} is an independent check: the proofs of the main results use instead
+Theorem~\ref{thm:large-t-box} (Section~\ref{ssec:large-t-box}), which runs the same argument from $t=9$ with the coefficients known only to lie
+in $\TB$. We need four lemmas. Let $r(y):=|\Gamma(\frac34+iy)|^2e^{\pi y}/(2\pi\sqrt y)$, so that by
 \cite[14.5.1]{DLMF}
 \begin{equation}\label{eq:P0}
 1/\pc_t(0)=r(t/2)\sqrt{2\pi t}\,e^{-\pi t/2}\qquad(t>0).
@@ -133,7 +138,7 @@ Lemma~\ref{lem:stirling}.
 
 \begin{lemma}[Signs of $\Bx$]\label{lem:B-sign}
 \begin{enumerate}[label=\textup{(\alph*)}]
-\item $\Bx>0$ on $[Y_z,Y_3]=[0.870,4]$.
+\item $\Bx>0$ on $[Y_z,Y_3]$.
 \item $\Bx>0$ on $[Y_3,\infty)$.
 \end{enumerate}
 \end{lemma}
@@ -194,7 +199,60 @@ e^{-t(\pi/2-\theta_s)}\,\Pi(t)\ge p_+(t)-p_-(t)-I_{\rm ax}e^{-t(\pi/2-\theta_s)}
 which is $\ge0.2554$ by Proposition~\ref{prop:L-numbers}. Since $\Pi$ is even, the same holds for $t\le-8$.
 \end{proof}
 
-\subsection{The window}
+\subsection{Large \texorpdfstring{$|t|$}{|t|} from the trivial bound}\label{ssec:large-t-box}
+
+In this subsection $Y_z:=0.90$, and $c_{\min}$, $t_{\rm mono}$ and $p_-$ are defined with this value, so that $c_{\min}=\theta(0.90)-\theta_s=0.0869017\ldots$
+and $t_{\rm mono}=5.75362\ldots$; $Y_s$, $Y_3$, $\kappa$, $\theta_s$ and $p_+$ are as before. With Proposition~\ref{prop:L-numbers-box}(i),(ii) in
+place of Proposition~\ref{prop:L-numbers}(i),(ii), Lemmas~\ref{lem:B-sign} and~\ref{lem:comparison} and their proofs hold verbatim.
+
+\begin{proposition}[Computer-assisted; trivial-bound box]\label{prop:L-numbers-box}
+With $Y_z=0.90$:
+\begin{enumerate}[label=\textup{(\roman*)}]
+\item $\Bx>0$ on $[0.90,4]$: the certified cell minima are $\ge4.9187$ on $[0.90,1]$ and $\ge1.6807\cdot10^{-7}$ on $[1,4]$.
+\item $\bar\rho(4)\le4.3470864\cdot10^{-9}$.
+\item $p_+(9)\ge2.6935133525$, $p_-(9)\le1.7101517469$, $I_{\rm ax}\le5.7023813255$, and $I_{\rm ax}e^{-9(\pi/2-\theta_s)}\le0.0174114697$.
+\item Consequently $p_+(9)-p_-(9)-I_{\rm ax}e^{-9(\pi/2-\theta_s)}\ge0.96595013>0$.
+\end{enumerate}
+Each bound is certified for every sequence in $\TB$ in place of $(a_n)$, with $\Ax$, $\Bx$, $p_\pm$, $I_{\rm ax}$ and $\bar\rho$ formed from it.
+\end{proposition}
+
+The certificate (Appendix~\ref{app:cert-L}) is that of Proposition~\ref{prop:L-numbers}, run on $\TB$.
+
+\begin{theorem}[Large $|t|$ from the trivial bound]\label{thm:large-t-box}
+$\Pi(t)\ge0.9659\,e^{0.6435|t|}>0$ for every real $t$ with $|t|\ge9$. The proof uses the coefficients only through $(a_n)\in\TB$.
+\end{theorem}
+
+\begin{proof}
+For $t\ge9\ge t_{\rm mono}$, Theorem~\ref{thm:F} and Lemma~\ref{lem:comparison} give, as in the proof of Theorem~\ref{thm:large-t},
+\[
+e^{-t(\pi/2-\theta_s)}\,\Pi(t)\ge p_+(t)-p_-(t)-I_{\rm ax}e^{-t(\pi/2-\theta_s)}\ge p_+(9)-p_-(9)-I_{\rm ax}e^{-9(\pi/2-\theta_s)},
+\]
+which is $\ge0.9659$ by Proposition~\ref{prop:L-numbers-box}; and $\Pi$ is even. The coefficients enter only through Lemma~\ref{lem:B-sign}, whose
+part (b) uses $0<a_n\le\abar_n$ and a lower bound for $a_1$, through the positivity of $\Ax$ in Lemma~\ref{lem:comparison}(c), and through
+Proposition~\ref{prop:L-numbers-box}; all of these hold for every sequence in $\TB$.
+\end{proof}
+
+\subsection{Positivity on the real line}
+
+\begin{corollary}\label{cor:Pi-positive}
+$\Pi(t)>0$ for every real $t$. Consequently $H_{\rm raw}(t)>0$ for every real $t$, $H_{\rm raw}(0)=8\Pi(0)/\pi^2>0$, and
+$H:=H_{\rm raw}/H_{\rm raw}(0)$ satisfies $H(0)=1$ and $H(t)>0$ on $\RR$; for $|t|\ge9$,
+$H(t)\ge0.9659\,C\,e^{0.6435|t|}/(2\pi^2(t^2+\frac14)^2)$ with $C=1/H_{\rm raw}(0)$.
+\end{corollary}
+
+\begin{proof}
+$\Pi$ is even. Theorem~\ref{thm:moments} gives $H_{\rm raw}>0$, hence $\Pi>0$ by Theorem~\ref{thm:F}, for $|t|\le10.355$, and
+Theorem~\ref{thm:large-t-box} gives $\Pi>0$ for $|t|\ge9$. Theorem~\ref{thm:F} transfers the sign to $H_{\rm raw}$ and, at $t=0$, gives
+$H_{\rm raw}(0)=8\Pi(0)/\pi^2$. The lower bound for $|t|\ge9$ is Theorem~\ref{thm:large-t-box}.
+\end{proof}
+
+The positivity of $H$ on $\RR$ thus uses the coefficients only through $(a_n)\in\TB$, that is, through $S(\pm1,n;1)=1$ and
+$|S(\pm1,n;c)|\le\varphi(c)$; and the sign of $C$ needs no computation (Proposition~\ref{prop:posdef}).
+
+\emph{An independent window.} The following certificate is not used in the proofs of the main results. It proves the positivity of $\Pi$ on
+$[0,40]$ directly from \eqref{eq:physical}, with the certified enclosures of the coefficients and Taylor models in $t$. It is independent of
+Theorem~\ref{thm:moments}: the two share only the coefficient data and the Bessel library, and they use different representations of $H_{\rm raw}$
+and different special functions.
 
 \begin{theorem}[Window; computer-assisted]\label{thm:window}
 $\Pi(t)>0$ for every $t\in[0,40]$. More precisely, $[0,40]$ is covered by the $80$ closed cells $[t_c-\frac14,t_c+\frac14]$,
@@ -209,35 +267,30 @@ estimate on the circle $|z-t_c|=1$ with the majorant of Theorem~\ref{thm:kernel-
 bounds the tails in $Y$ (beyond $13$), in the conical series, and in $n$ (via $|a_n|\le\abar_n$). Every error term is an explicit ball, and the
 certified lower bound on each cell is at least $0.295$ times the value at its centre.
 
-\begin{corollary}\label{cor:Pi-positive}
-$\Pi(t)>0$ for every real $t$. Consequently $H_{\rm raw}(t)>0$ for every real $t$, $H_{\rm raw}(0)=8\Pi(0)/\pi^2>0$, and
-$H:=H_{\rm raw}/H_{\rm raw}(0)$ satisfies $H(0)=1$ and $H(t)>0$ on $\RR$; for $|t|\ge8$,
-$H(t)\ge0.2554\,C\,e^{0.6435|t|}/(2\pi^2(t^2+\frac14)^2)$ with $C=1/H_{\rm raw}(0)$.
-\end{corollary}
-
-\begin{proof}
-$\Pi$ is even; $[0,40]$ is covered by Theorem~\ref{thm:window} and $[8,\infty)$ by Theorem~\ref{thm:large-t}. Theorem~\ref{thm:F} transfers the sign
-to $H_{\rm raw}$.
-\end{proof}
-
-\begin{remark}[The certificate is sharp at small $t$]\label{rem:negctl}
-Positivity of $\Pi$ near $t=0$ depends on the Kloosterman terms with $c\ge2$. If every $a_n$ is replaced by its term $c=1$,
-$n(\Jdot-\Idot)(z_n)+\frac14\delta_{n1}$, the same certifier, with all error terms, proves that the resulting $\Pi$ is negative on $[0,1]$: its
-certified upper bounds are $-0.25267$ on $[-10^{-6},10^{-6}]$, $-0.25060$ on $[0,\frac12]$ and $-0.22702$ on $[\frac12,1]$ (Appendix~\ref{app:cert-W}). The cancellation
-at $t=0$ is about $4000:1$ between the axis and arc integrals, and the terms $c\ge2$ change $a_1$ only by a relative $3.3\cdot10^{-3}$.
+\begin{remark}[Conditioning, not arithmetic]\label{rem:negctl}
+On the physical side the sign of $\Pi$ near $t=0$ is sensitive to the Kloosterman terms with $c\ge2$, because of the cancellation described after
+Theorem~\ref{thm:F} and in Remark~\ref{rem:conditioning}. If every $a_n$ is replaced by its term $c=1$, that is, by the centre $c_n$ of $\TB$, the
+window certifier, with all error terms, proves that the right side of \eqref{eq:physical} becomes negative on $[0,1]$: its certified upper
+bounds are $-0.25267$ on $[-10^{-6},10^{-6}]$, $-0.25060$ on $[0,\frac12]$ and $-0.22702$ on $[\frac12,1]$ (Appendix~\ref{app:cert-W}). This is a
+property of that formula as a linear functional of the coefficient sequence, badly conditioned at small $t$. It is not a statement about $H$:
+the sequence $(c_n)$ defines no lift and no function $H$. The moment representation of Section~\ref{ssec:moments} is well conditioned
+(Remark~\ref{rem:moments}), and the certified lower bounds in the proof of Corollary~\ref{cor:Pi-positive}, those of Theorems~\ref{thm:moments}
+and~\ref{thm:large-t-box}, hold uniformly on $\TB$. So the positivity of $H$ needs no information on Kloosterman sums beyond $S(\pm1,n;1)=1$ and
+the trivial bound; the terms $c\ge2$ matter only for the value of $C$ (Proposition~\ref{prop:C}).
 \end{remark}
 
 \begin{remark}[Conditioning of $\Pi(0)$ in the coefficients]\label{rem:conditioning}
-At $t=0$, \eqref{eq:physical} is linear in the coefficients: $\Pi(0)=\sum_na_nw_n$, where $w_n$ is the value at $t=0$ of the two integrals for
-the $n$-th terms of $\Ax$ and $\Bx$. The terms $a_nw_n$ alternate in sign and are large, about $+51.7$, $-330$, $+719$, $-849$, $+680$, $-413$,
+At $t=0$, \eqref{eq:physical} is linear in the coefficients: $\Pi(0)=\sum_na_n\Pi_n$, where $\Pi_n$ is the value at $t=0$ of the right side of
+\eqref{eq:physical} for the sequence that is $1$ at $n$ and $0$ elsewhere. The terms $a_n\Pi_n$ alternate in sign and are large, about $+51.7$, $-330$, $+719$, $-849$, $+680$, $-413$,
 $+203$ for $n=1,\dots,7$, while $\Pi(0)=1.40\cdot10^{-3}$; so in coefficient space the cancellation is about $6\cdot10^5:1$. In particular
-$\partial\Pi(0)/\partial a_1=w_1=0.011287\ldots$, and a relative change of $-2.7\cdot10^{-5}$ in $a_1$ alone (about $-0.124$) would make $\Pi(0)$
-vanish. The certificates take this into account: every $a_n$ enters through a certified enclosure, a ball that includes the tail of its
+$\partial\Pi(0)/\partial a_1=\Pi_1=0.011287\ldots$, and a relative change of $-2.7\cdot10^{-5}$ in $a_1$ alone (about $-0.124$) would make $\Pi(0)$
+vanish. The window certificate takes this into account: every $a_n$ enters through a certified enclosure, a ball that includes the tail of its
 Kloosterman series for $n\le300$ (Appendix~\ref{app:cert-coeffs}) and the bounds $0<a_n\le\abar_n$ beyond, and all radii are propagated. The enclosure of $\Pi(0)$ in Theorem~\ref{thm:window} has radius
-$8.7\cdot10^{-7}$, of which $7.7\cdot10^{-7}$ is $w_1$ times the radius $6.9\cdot10^{-5}$ of the ball for $a_1$, and $\Pi(0)$ exceeds this
+$8.7\cdot10^{-7}$, of which $7.7\cdot10^{-7}$ is $\Pi_1$ times the radius $6.9\cdot10^{-5}$ of the ball for $a_1$, and $\Pi(0)$ exceeds this
 radius by a factor of about $1600$. A floating-point evaluation of $H_{\rm raw}(0)=8\Pi(0)/\pi^2$ through \eqref{eq:physical} needs $a_1$ to an
 absolute accuracy of about $2\cdot10^{-7}$ (relative $4\cdot10^{-11}$) to reach the precision of Proposition~\ref{prop:C}, so the $c$-series
 must be summed far: its partial sums for $\Ss_1$ up to $c=10^4$ and up to $c=3\cdot10^5$ differ by $3.2\cdot10^{-7}$. Proposition~\ref{prop:C} is certified by the density route of Appendix~\ref{app:cert-C}, which is far less sensitive to
-$a_1$: with a ball for $a_1$ of radius $2.7\cdot10^{-5}$, the radius of $H_{\rm raw}(0)$ is $1.86\cdot10^{-9}$. The figures in this remark,
-apart from the certified radii, are floating-point evaluations and are not used in any proof.
+$a_1$: with a ball for $a_1$ of radius $2.7\cdot10^{-5}$, the radius of $H_{\rm raw}(0)$ is $1.86\cdot10^{-9}$. The proofs of the main results
+avoid this conditioning altogether, by working on the Fourier side near $t=0$ (Section~\ref{ssec:moments}). The figures in this remark, apart from
+the certified radii, are floating-point evaluations and are not used in any proof.
 \end{remark}

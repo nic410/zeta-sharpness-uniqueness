@@ -2,7 +2,7 @@
 
 [![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.23238100.svg)](https://doi.org/10.5281/zenodo.23238100) [![Lean](https://github.com/nic410/zeta-sharpness-uniqueness/actions/workflows/lean.yml/badge.svg)](https://github.com/nic410/zeta-sharpness-uniqueness/actions/workflows/lean.yml)
 
-**Status: preprint, version 1.2 (October 2026); not peer-reviewed.** This paper was produced by AI agents,
+**Status: preprint, version 1.3 (October 2026); not peer-reviewed.** This paper was produced by AI agents,
 mainly Anthropic's Claude with supplementary assistance from OpenAI's Astra, under the author's direction; it has not yet
 been checked by a human expert. Author: Nic Johns. Licences: the paper and documentation are CC BY 4.0; the code, data
 and Lean formalisation are Apache-2.0 (see [Licence](#licence)).
@@ -23,6 +23,10 @@ powers give one exactly when the Riemann hypothesis holds. The paper proves:
   explicit function reaches the conductor 1 of ζ exactly.
 - **Uniqueness.** If the formula has any solution in non-negative weights, it is ζ's own: its zeros on one side and the
   prime powers, with their usual weights, on the other.
+- **The classical cone.** The classical method, with test functions F ≥ 0 whose Fourier transform is ≥ 0 everywhere,
+  proves no conductor bound above 1 if and only if the Riemann hypothesis holds: RH is equivalent to 𝒜(F) ≥ 0 for every
+  such F, a condition with no gap on the prime side and no arithmetic input. For every gap up to log 2/2π the positive
+  solutions are the same as above.
 - These resolve Conjectures S and U of Part I.
 
 **Why it matters.** It shows that a classical optimisation method of analytic number theory is exactly sharp for ζ, with
@@ -31,7 +35,7 @@ Gamma factor leaves room for no positive solution other than ζ's own zeros and 
 explicit eigenfunction of the hyperbolic Laplacian built from Kloosterman sums.
 
 **What it does not say.** The Riemann hypothesis is **not** proved. By these results it is equivalent to the existence
-of a positive solution, and this reformulation does not make it easier. There is no circularity in using ζ to build the
+of a positive solution, and to κ*_OPS = 0; we do not claim that either reformulation makes it easier. There is no circularity in using ζ to build the
 function: it has the form F = Ξ²H, and Ξ vanishes at every non-trivial zero of ζ, on or off the critical line, so no
 information about where the zeros lie is used and the Riemann hypothesis is assumed nowhere.
 
@@ -43,16 +47,16 @@ at log n/2π for every integer n ≥ 2, and the archimedean side of the formula 
 eigenfunction of the hyperbolic Laplacian with eigenvalue ¼, a spectral derivative of an odd Niebur–Poincaré series made
 into an exact eigenfunction by a first-order operator at a double root. A contour argument that follows the architecture
 of Viazovska's sphere-packing construction, with Green's identity in place of Cauchy's theorem and this non-holomorphic
-function as its new input, then produces F. Figure 1 of the paper plots H and the transform, and
-Table 1 lists the first coefficients.
+function as its new input, then produces F. Figure 1 of the paper plots H and its Γ-only transform, and Table 1 lists
+the first coefficients.
 
 ## How the claims are supported
 
 | Evidence | Covers | Where |
 |---|---|---|
 | **Written proofs** | everything except the items marked computer-assisted | `paper/` |
-| **Certified computation** (FLINT/Arb ball arithmetic) | positivity of H on the compact interval [0, 40]; the numerical inputs of the large-\|t\| bound at t = 8; certified enclosures of the first coefficients and of the normalising constant | `paper/anc/` (README, SHA256SUMS, logs) |
-| **Lean 4 spine** | the logical assembly: Theorems 1–2 and Corollary 3 derived in Lean from Part I's spine (6 of its axioms) plus 2 named Part II axioms (an analytic lemma, and the existence of the object with its properties). The existence of the object itself is **not** formalised. | `paper/anc/lean/` (README, LEDGER, FAITHFUL, STATUS) |
+| **Certified computation** (FLINT/Arb ball arithmetic) | positivity of H for \|t\| ≤ 10.355 (moments of the transform of Ξ²H) and the numerical inputs of the large-\|t\| bound at t = 9, both using only the term c = 1 and the trivial bound for Kloosterman sums; certified enclosures of the first coefficients and the value of the normalising constant (its sign is proved without computation); independent checks (the window [0, 40], the large-\|t\| bound at t = 8) | `paper/anc/` (README, SHA256SUMS, logs) |
+| **Lean 4 spine** | the logical assembly: Theorems 1–2 and Corollaries 3 and 8.2 (the latter except the zero set in its part (a) and its clause (c)(iv)) derived in Lean from Part I's spine (6 of its axioms) plus 2 named Part II axioms (an analytic lemma, and the existence of the object with its properties). The existence of the object itself is **not** formalised. | `paper/anc/lean/` (README, LEDGER, FAITHFUL, STATUS) |
 | **AI referees** | separate (AI) referees, also Claude agents, checked each component and re-ran the certificates; an external review by another AI system is pending | — |
 
 No human mathematician has yet checked the proofs line by line.
@@ -62,7 +66,9 @@ No human mathematician has yet checked the proofs line by line.
 - `REVIEWING.md`: a guide for reviewers who want to check one slice of the proof.
 - `paper/`: LaTeX sources (`main.tex`, `sections/`, `refs.bib`), the PDF (`build/main.pdf`) and the ancillary files
   (`anc/`):
-  - `anc/positivity/`: the window certificate, the large-|t| constants, the tail check, R(0), and a negative control;
+  - `anc/positivity/`: the moment certificate and the large-|t| constants on the trivial-bound box (used in the
+    proofs); the window certificate, the large-|t| constants with the certified coefficients, the tail check, R(0), the
+    elementary range and a negative control (checks);
   - `anc/coefficients/`: coefficient enclosures and the normalising constant;
   - `anc/figures/`: the data and script of Figure 1 (an illustration, not a certificate);
   - `anc/lib/`, `anc/tools/`, `anc/runlog.sh`: shared code (Part I's K₀/K₁ library, unchanged);
@@ -81,6 +87,14 @@ No human mathematician has yet checked the proofs line by line.
 
 ## Version notes
 
+- **v1.3** (October 2026; no DOI yet): a new result, Corollary 8.2 with Appendix C. The equivalences of Corollary 3 hold
+  for every prime-side gap in [0, log 2/2π], in particular for the classical cone: RH holds if and only if 𝒜(F) ≥ 0 for
+  every F with F ≥ 0 and F̂ ≥ 0, if and only if κ*_OPS = 0. The proof uses the transform of the function of Theorem 1,
+  which is positive on (−log 2/2π, log 2/2π), a transfer lemma, and a proof of the duality theorem at every gap. The
+  positivity proof is reorganised: Ξ²H is positive definite, which gives the sign of the normalising constant without
+  computation, and the positivity of H now rests on a moment certificate for |t| ≤ 10.355 and the large-|t| bound from
+  t = 9, which use only the term c = 1 and the trivial bound for Kloosterman sums. The window certificate and the
+  large-|t| bound at t = 8 are kept as independent checks. The statements of Theorems 1–4 and Corollary 3 are unchanged.
 - **v1.2** (October 2026; doi:10.5281/zenodo.23240818): credits only. Bondarenko–Radchenko–Seip are credited as the precedent for removing
   all zeros of ζ (test functions that vanish, with multiplicity, at every non-trivial zero); the inputs from Part I now
   carry precise locators. The mathematics is unchanged.

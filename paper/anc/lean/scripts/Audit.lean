@@ -20,12 +20,14 @@ namespace PosRigIIAudit
 
 def standardAxioms : List Name := [``propext, ``Classical.choice, ``Quot.sound]
 
-/-- The headline theorems: Theorems S and U, the Corollary, and Proposition `prop:reduction`. -/
+/-- The headline theorems: Theorems S and U, Corollary 3, Proposition `prop:reduction`, Corollary 8.2 and Lemma C.1. -/
 def headlines : List Name :=
   [``PosRigII.theorem1, ``PosRigII.theorem1_conductor, ``PosRigII.theorem1_finite,
    ``PosRigII.theorem1_object, ``PosRigII.theorem2, ``PosRigII.theorem2_condU, ``PosRigII.corollary3,
    ``PosRigII.corollary3_RH, ``PosRigII.corollary3_notRH, ``PosRigII.corollary_minimiser,
-   ``PosRigII.main_summary, ``PosRigII.reduction, ``PosRigII.reduction_OPS]
+   ``PosRigII.main_summary, ``PosRigII.reduction, ``PosRigII.reduction_OPS,
+   ``PosRigII.rh_iff_kappaOPS_zero, ``PosRigII.corollary8_2, ``PosRigII.corollary8_2_b,
+   ``PosRigII.FT_window, ``PosRigII.kappaStar_nonneg_iff_kappaOPS_nonneg, ``PosRigII.transfer]
 
 def showNames (l : List Name) : String :=
   if l.isEmpty then "none" else ", ".intercalate (l.map toString)

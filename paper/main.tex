@@ -57,7 +57,7 @@ for $\zeta(s)$}
 
 \thanks{This is Part~II of a series. Part~I is \cite{Joh26}, \texttt{doi:10.5281/zenodo.23217537}; we refer to it as Part~I throughout.}
 
-\date{October 2026 (version 1.2)}
+\date{October 2026 (version 1.3)}
 
 \subjclass[2020]{Primary 11M26; Secondary 11F30, 11F72, 11L05, 33C10, 42A38, 65G20}
 \keywords{Riemann zeta function, Weil explicit formula, positivity, linear programming, magic function, Maass forms, Niebur--Poincar\'e series, Kloosterman sums, conical functions, computer-assisted proof}
@@ -68,13 +68,14 @@ for $\zeta(s)$}
 Weil's explicit formula for $\zeta(s)$ equates a functional $\Arch(F)$, which depends only on the archimedean data of $\zeta$, with sums over
 the zeros and over the prime powers. We construct an explicit even function $F=\Xi^2H$, with $H$ entire and positive on $\RR$, such that
 $F\ge0$ and $\hF\ge0$ on $\RR$, $\hF$ vanishes at $\log n/2\pi$ for every integer $n\ge2$, and $\Arch(F)=0$. Since $\Xi$ vanishes at every
-non-trivial zero, on or off the critical line, no information about the zeros is used. $F$ is an exact magic function, in the sense of the
+non-trivial zero, on or off the critical line, no information about the zeros is used. $F$ is an exact magic function, as in the
 sphere-packing bounds of Cohn--Elkies and Viazovska, for the linear programme of Odlyzko, Poitou and Serre: for the data of $\zeta$ the
-programme has no positive slack, so the method is sharp, and $F$ is a minimiser under RH. With a support theorem of Part~I, every pair of
-positive measures satisfying the formula, on the zero side and on the prime side beyond $\log2/2\pi$, is then $\zeta$'s own. This resolves
-Conjectures~S and~U of Part~I. $H$ comes from an eigenvalue-$\frac14$ eigenfunction of the hyperbolic Laplacian through a contour argument of
-Viazovska's type, with Green's identity in place of Cauchy's theorem; its positivity is partly computer-assisted. We do not prove RH; by
-these results it is equivalent to the existence of such a pair.
+programme has optimal value at most $0$, so the method is sharp, and under RH $F$ is a minimiser. With a support theorem of Part~I, every
+positive solution of the formula, with prime measure beyond $\log2/2\pi$, is then $\zeta$'s own. This resolves Conjectures~S and~U of
+Part~I. Moreover, RH holds if and only if this classical programme has optimal value exactly $0$. $H$ comes from an eigenvalue-$\frac14$
+eigenfunction of the hyperbolic Laplacian through a contour argument of Viazovska's type, with Green's identity in place of Cauchy's theorem;
+its positivity is partly computer-assisted. We do not prove RH; by these results it is equivalent to the existence of such a positive
+solution.
 \end{abstract}
 
 \maketitle
@@ -105,6 +106,7 @@ author's direction; it has not yet been checked by a human expert.
 \appendix
 \inputsection{A-certificates}
 \inputsection{B-bessel}
+\inputsection{C-gap}
 
 \bibliographystyle{production/amsplain-doi}
 \bibliography{refs}

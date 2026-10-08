@@ -22,19 +22,36 @@ is $\pz$. Part~I asked whether \condU\ forces an exact magic function without sp
 with $Z(F)=\Zz$. The existence statement \condE\ without RH, the last question of Part~I, is equivalent to RH by Corollary~\ref{cor:main-RH}.
 Part~I, Corollary~3.12, characterised \condS\ by atomicity of the admissible zero measures; under RH there is now only one admissible pair.
 
+\subsection{How the function was found}\label{ssec:history}
+
+The input was found by analogy with a holomorphic model case. For a model problem whose kernel is $K_1$ instead of $K_0$,
+Viazovska's contour argument with the depth-$2$ quasimodular form $E_4-E_2^2=288\sum_nn\sigma_1(n)q^n$ gives, up to a constant factor, the
+function $\sin^2(\pi x)\sum_n\sigma_1(n)\sqrt{nx}\,K_1(4\pi\sqrt{nx})$, which is positive off the integers and vanishes doubly at the positive integers;
+it is an object of the type studied by Feigenbaum, Grabner and Hardin, formally the case $d=0$ of their family \cite{FGH21}. Its Eisenstein
+analogue, built from the completed Eisenstein series $E^*(\tau,\frac12)$, is $\sin^2(\pi x)\sum_nn\,d(n)K_0(4\pi\sqrt{nx})$: it has the right
+kernel, but the constant term of the Eisenstein series makes the corresponding $H$ singular at $t=\pm\frac i2$ (compare the remark after
+Lemma~\ref{lem:small-x}). Numerical interpolation at the integer nodes, whose canonical interpolants only semi-converge, and a numerical
+construction of $\mathrm{Sym}^2$-equivariant eigenvalue-$\frac14$ functions without constant terms then singled out one candidate, which was
+recognised, first numerically and then in closed form, as the spectral derivative of Section~\ref{sec:automorphic}. The proofs were
+written for that function, and no step of them uses these computations.
+
 \subsection{What remains open}
 
 \begin{enumerate}[label=(\arabic*),leftmargin=*]
-\item \emph{RH}, equivalently \condE, equivalently $\kstar=0$ (Corollary~\ref{cor:main-RH}).
+\item \emph{RH}, equivalently \condE, equivalently $\kstar=0$, equivalently $\kOPS=0$ (Corollaries~\ref{cor:main-RH} and~\ref{cor:nogap}).
 \item \emph{Uniqueness of the integer-critical function.} We do not know whether $H$ is the only even function in $\Wc_\delta$, with $H(0)=1$, whose
 $\Gamma$-only transform vanishes at all integers $\ge2$ and is non-negative beyond the gap.
 \item \emph{The prime-power family of Part~I.} Whether the exact Hermite family $\Xi^2P_J(t^2)$ of Part~I converges, and to what, is open
 (Part~I, Conjecture~6.1). The transform $\hF$ of our function vanishes doubly at $\xin n$ for all integers $n\ge2$, not only at the prime powers, and $F$ is not obtained
 as a limit.
 Canonical polynomial interpolants at the integer nodes approach it numerically and then diverge.
-\item \emph{A conceptual proof of positivity.} The positivity of $H$ for $|t|<8$ rests on a certified computation, as did the original
-proofs of the corresponding statements for the magic functions of sphere packing \cite{Via17,CKMRV17,CKMRV22}. Remark~\ref{rem:negctl} shows that it depends on the
-arithmetic of the Kloosterman terms: it fails if only the term $c=1$ is kept. (This concerns the positivity of $H$; the positivity of the $a_n$
-holds for every $n$ by Theorem~\ref{thm:an-positive}.)
+\item \emph{A proof of positivity without computer.} In our proof only $H(0)>0$ needs no computation (Proposition~\ref{prop:posdef}). For
+$t\ne0$ positivity rests on two certified computations on the trivial-bound box: the moment certificate for $|t|\le10.355$
+(Theorem~\ref{thm:moments}) and the numerical inputs of the large-$|t|$ theorem at $T_0=9$ (Proposition~\ref{prop:L-numbers-box}); the original
+proofs for the magic functions of sphere packing also rested on certified computations \cite{Via17,CKMRV17,CKMRV22}. Theorem~\ref{thm:an-bounds}
+with two one-dimensional integrals, which we evaluated in Arb, reaches $|t|<4.4699$ (Remark~\ref{rem:moments}). A proof without computer would
+need hand bounds for more moments (six moments, with their certified values, reach only $|t|\le8.47$) and a hand treatment of the large-$|t|$
+inputs, which are integrals of $\Bx$ near its zero at $\sqrt3/2$. Positivity does not depend on the arithmetic of the Kloosterman terms beyond
+the trivial bound (Remark~\ref{rem:negctl}).
 \item \emph{Other Gamma factors and lattices.} Which archimedean data admit an exact magic function, and through which automorphic objects?
 \end{enumerate}

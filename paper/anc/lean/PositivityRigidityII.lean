@@ -8,3 +8,4 @@ import PositivityRigidityII.Faithful
 import PositivityRigidityII.Reduction
 import PositivityRigidityII.Object
 import PositivityRigidityII.Main
+import PositivityRigidityII.NoGap

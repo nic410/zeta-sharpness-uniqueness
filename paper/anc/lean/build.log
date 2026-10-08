@@ -1,7 +1,8 @@
 # command : LEAN_NUM_THREADS=4 taskset -c 10-13 lake build   (fresh build of Part I's spine, fetched at tag v1.3, and of PositivityRigidityII)
-# date    : 2026-10-08T11:23:40Z
+# date    : 2026-10-08T17:44:30Z
 # toolchain: leanprover/lean4:v4.33.0-rc2; Mathlib 51e6992efd06126df61a496bebf8f49482a4e129; Zeta23 fbdc36bbf17d20af3fd0447c6d1a8a02773c9844; Part I spine at commit 5bed664909d161fb148a0232e715f55f9a520f1b
 # Mathlib and the imported Zeta23 modules were prebuilt (replayed, nothing rebuilt); their replay lines are omitted.
+# Part I's spine lines are those of its fresh build at tag v1.3; PositivityRigidityII was then rebuilt with NoGap.lean.
 ✔ [8756/8794] Built PositivityRigidity.PosCert (31s)
 ✔ [8757/8794] Built PositivityRigidity.Basic (32s)
 ✔ [8758/8794] Built PositivityRigidity.CertDefs (6.5s)
@@ -33,11 +34,12 @@
 ✔ [8784/8794] Built PositivityRigidity.NearRigidity (4.3s)
 ✔ [8785/8794] Built PositivityRigidity.Main (4.6s)
 ✔ [8786/8794] Built PositivityRigidity (3.8s)
-✔ [8787/8794] Built PositivityRigidityII.Defs (4.1s)
-✔ [8788/8794] Built PositivityRigidityII.Ledger (3.9s)
-✔ [8789/8794] Built PositivityRigidityII.Faithful (5.3s)
-✔ [8790/8794] Built PositivityRigidityII.Reduction (5.4s)
-✔ [8791/8794] Built PositivityRigidityII.Object (4.4s)
-✔ [8792/8794] Built PositivityRigidityII.Main (4.1s)
-✔ [8793/8794] Built PositivityRigidityII (3.7s)
-Build completed successfully (8794 jobs).
+✔ [8789/8797] Built PositivityRigidityII.Defs (4.0s)
+✔ [8790/8797] Built PositivityRigidityII.Ledger (3.8s)
+✔ [8791/8797] Built PositivityRigidityII.Faithful (5.2s)
+✔ [8792/8797] Built PositivityRigidityII.Reduction (5.1s)
+✔ [8793/8797] Built PositivityRigidityII.Object (4.3s)
+✔ [8794/8797] Built PositivityRigidityII.Main (4.2s)
+✔ [8795/8797] Built PositivityRigidityII.NoGap (5.6s)
+✔ [8796/8797] Built PositivityRigidityII (4.1s)
+Build completed successfully (8797 jobs).

@@ -24,6 +24,7 @@ every difference between the two. Lean names are in namespace `PosRigII`; Part I
 | (C2) `H ≥ 0` on `ℝ`; `H > 0` on `ℝ` | `CondC2`, `CondC2Strict` | |
 | (C3) `Ĝ_H(ξ_k) = 0`, every integer `k ≥ 2` | `CondC3` | |
 | (C4) `Ĝ_H ≥ 0` on `[ξ₂, ∞)`; `Ĝ_H ≥ 0` on `[0, ∞)` | `CondC4`, `CondC4Zero` | |
+| `Ĝ_H > 0` on `[0, ξ₂)` (`1 ≤ x < 2`), used in Corollary 8.2(a) | `CondWindow` | Added for Corollary 8.2, as a conjunct of the object axiom |
 | (C5) `Ĝ_H(0) > 0` | `CondC5` | Not a hypothesis of the paper's proposition (which assumes `H ≢ 0`); proved from it (`condC5_of`) |
 | Γ-only integer-critical function: `H ∈ 𝒲_δ`, `H(0) = 1`, (C2)–(C4) (after Proposition `prop:reduction`) | `IntegerCritical δ H` | |
 | The `m`-th term of (eq:voronoi), `d(m) m^{−1/2} Ĝ_H(ξ + ξ_m)` | `voronoiTerm` | `d = σ₀`; the term `m = 0` is `0`, so `∑'` over `ℕ` is the sum over `m ≥ 1` (`voronoiTerm_zero`, `voronoiTerm_one`) |
@@ -49,7 +50,13 @@ every difference between the two. Lean names are in namespace `PosRigII`; Part I
 | Proposition `prop:reduction`, last sentence: if moreover `Ĝ_H ≥ 0` on `[0, ∞)`, then `F ∈ 𝒞_OPS` and `κ*_OPS ≤ 0` | `reduction_OPS` | `Reduction.lean` | proved from axioms | (C4), implied by the new hypothesis, is not assumed |
 | (C5) `Ĝ_H(0) = ∫ F > 0` (the proposition's `∫ F = Ĝ_H(0) > 0`) | `condC5_of` | `Reduction.lean` | proved from axioms | |
 | The object: Theorem "The object" (`thm:main-object`) with Corollary `cor:Pi-positive`, as used in the proof of Theorem S | `exists_integer_critical_object` | `Ledger.lean` | **ledger axiom** | weaker: see `LEDGER.md` |
-| The normalisation `H := H_raw/H_raw(0)` (`sec:assembly`) | `exists_object` | `Object.lean` | proved from axioms | |
+| The normalisation `H := H_raw/H_raw(0)` (`sec:assembly`) | `exists_object` | `Object.lean` | proved from axioms | also carries the window clause |
+| Corollary 8.2 (`cor:nogap`, "The classical cone"), last sentence: RH ⟺ `𝒜(F) ≥ 0` for every `F ∈ 𝒯` with `F ≥ 0`, `F̂ ≥ 0` on `ℝ` ⟺ `κ*_OPS = 0` | `rh_iff_kappaOPS_zero : (RH ↔ ∀ F ∈ ConeOPS, 0 ≤ Arch F) ∧ (RH ↔ 0 ≤ kappaOPS) ∧ (RH ↔ kappaOPS = 0) ∧ (¬RH → kappaStar ≤ kappaOPS ∧ kappaOPS < 0)` | `NoGap.lean` | proved from axioms | adds `κ*_OPS ≥ 0` and the case `ℓ = 0` of (d) |
+| Corollary 8.2 (a): `F̂₀ ≥ Ĝ_H > 0` on `[0, ξ₂)`, `F̂₀ > 0` on `(−ξ₂, ξ₂)`, real zeros of `F̂₀` exactly `±ξ_n` | `FT_window` | `NoGap.lean` | proved from axioms | the zero-set statement is not formalised; the comparison `F̂₀ ≥ Ĝ_H` is stated in `ℂ`'s order (both sides real) |
+| Corollary 8.2 (b): `0 ≤ ℓ ≤ ξ₂` ⇒ every `(μ, ν) ∈ 𝒦_ℓ` has `ν([ℓ, ξ₂)) = 0`; `𝒦_ℓ = 𝒦` | `corollary8_2_b : Kset Arch ℓ = K` | `NoGap.lean` | proved from axioms | `𝒦_ℓ` is Part I's `Kset Arch ℓ` (pairs admissible at the gap `ℓ`; an atom of `ν` at `0` is allowed when `ℓ = 0`); the set equality contains the statement on `ν` |
+| Corollary 8.2 (c), (d), `0 ≤ ℓ ≤ ξ₂`: (i) RH, (ii) `𝒦_ℓ ≠ ∅`, (iii) `𝒜 ≥ 0` on `𝒞_ℓ`, (iv) on `𝒞_ℓ ∩ 𝒢`, (v) `κ*_ℓ ≥ 0`, (vi) `κ*_ℓ = 0` are equivalent; RH ⇒ `𝒦_ℓ = {p_ζ}`, `κ*_ℓ = 0`; ¬RH ⇒ `𝒦_ℓ = ∅`, `κ* ≤ κ*_ℓ ≤ κ*_OPS < 0` | `corollary8_2` | `NoGap.lean` | proved from axioms | clause (iv) is omitted (it needs Proposition C.2, not formalised); `𝒞_ℓ` is `ConeG ℓ` and `κ*_ℓ` is `slack Arch (ConeG ℓ)` (Part I §5.5); `𝒞_0 = 𝒞_OPS` is `ConeG_zero_eq`; "`κ*_ℓ = 0` under RH" is the equivalence (i) ⟺ (vi) |
+| — (by-product of Lemma C.1 and Theorem S, without Theorem U or duality): `κ* ≥ 0` ⟺ `κ*_OPS ≥ 0` | `kappaStar_nonneg_iff_kappaOPS_nonneg`, `arch_nonneg_Cone_iff_ConeOPS` | `NoGap.lean` | proved from axioms | the optional addition suggested by the referee of Corollary 8.2 |
+| Lemma C.1 "Transfer across the gap" (`lem:transfer`): `ℓ₁ > 0`, `Θ ∈ 𝒞_OPS` with `Θ̂ > 0` on `[0, ℓ₁)`, `L : 𝒯 → ℝ` linear with `L(Θ) ≤ 0`; if `L ≥ 0` on `𝒞_OPS` then `L ≥ 0` on `𝒞_{ℓ₁}` (hence on `𝒞_ℓ`, `ℓ ≤ ℓ₁`) | `transfer`; for `L = 𝒜`, `transfer_Arch` | `NoGap.lean` | **proved (Mathlib and Zeta23; no ledger axiom)** | "linear" is "additive on `𝒯` and homogeneous for real scalars"; the hypothesis `ℓ₁ > 0` is not needed; "hence on `𝒞_ℓ`" is `ConeG_mono` |
 
 The two ledger axioms, and the six axioms of Part I that the spine uses, are described in `LEDGER.md`.
 
@@ -70,6 +77,9 @@ axiom of Part I or Part II:
 | `zero_set_of_strict` | `H > 0` on `ℝ` ⇒ the real zeros of `Ξ² H` are exactly `Z_ζ` (how Theorem U uses strict positivity) |
 | `identity_theorem` | "`H ≢ 0`" in Proposition `prop:reduction` gives a real point with `H(t) ≠ 0` |
 | `deriv_at_zero_of_nonneg` | a non-negative real-valued function has derivative `0`, if any, at each of its zeros (Theorem S(b)) |
+| `transfer_lemma` | Lemma C.1 for `𝒜` uses no axiom: only the window positivity of the object, an input, reaches Corollary 8.2 through the ledger |
+| `arch_additive` | `𝒜` is additive on `𝒯` and `𝒯` is closed under addition (the archimedean integral converges absolutely on `𝒯`) |
+| `classical_cone_zero` | `𝒞_0 = 𝒞_OPS`: Corollary 8.2 at the gap `0` is about the classical cone |
 
 The lower finiteness `κ* ≠ ⊥` needs Part I's `floor_bound` and is `theorem1_finite`, not a non-vacuity theorem.
 

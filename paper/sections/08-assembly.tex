@@ -2,7 +2,8 @@
 \section{Proofs of the main results}\label{sec:assembly}
 %======================================================================
 
-\emph{The object.} By Corollary~\ref{cor:Pi-positive}, $H_{\rm raw}(t)>0$ for every real $t$; in particular $H_{\rm raw}(0)>0$. Put
+\emph{The object.} By Proposition~\ref{prop:posdef}, $H_{\rm raw}(0)>0$, and by Corollary~\ref{cor:Pi-positive}, $H_{\rm raw}(t)>0$ for every
+real $t$. Put
 \[
 C:=\frac1{H_{\rm raw}(0)}>0,\qquad H:=C\,H_{\rm raw},\qquad F:=\Xi^2H .
 \]
@@ -51,12 +52,122 @@ $\kstar<0$, and $\Kad=\emptyset$ by Theorem~\ref{thm:I-duality}.
 \begin{remark}[Where each input enters]\label{rem:inputs}
 Theorem~\ref{thm:main-S} uses Part~I only through Definitions~\ref{def:testclass} and~\ref{def:admissible}, Lemma~\ref{lem:I-EF} (in
 Corollary~\ref{cor:I-zerokilling}) and the bound \eqref{eq:XB}. Theorem~\ref{thm:main-U} uses in addition Lemma~\ref{lem:I-compslack} and
-Theorem~\ref{thm:I-zerosupport} (whose proof in Part~I uses Lemma~\ref{lem:I-apriori}, Theorem~\ref{thm:I-logic}(b) and the membership of the
-Bondarenko--Radchenko--Seip functions in $\Tc$, item (P5) of Section~\ref{sec:setting}), and
+Theorem~\ref{thm:I-zerosupport} (see (P4)--(P5) in Section~\ref{sec:setting}), and
 Corollary~\ref{cor:main-RH} uses Theorems~\ref{thm:I-duality} and~\ref{thm:I-logic}; Section~\ref{sec:setting} lists which of these proofs are
 reproduced. Within this paper, the
-positivity of the $a_n$ enters through (C4) and through the positivity of $\Ax$ in Lemma~\ref{lem:comparison}(c); the upper bound $a_n\le\abar_n$
-of Theorem~\ref{thm:an-bounds} enters Lemma~\ref{lem:B-sign}(b) and the tail estimates of the certificates. The positivity of $H$ enters
-through (C2) and, for Theorem~\ref{thm:main-U}, through the location of the real zeros of $F$. The certified enclosures of the $a_n$ enter
-through the window, the numbers of Proposition~\ref{prop:L-numbers} and the value of $C$.
+positivity of the $a_n$ enters through (C4), through the positive definiteness of $\Xi^2H_{\rm raw}$ (Proposition~\ref{prop:posdef}), which gives
+$C>0$ and Lemma~\ref{lem:moments}, and through the positivity of $\Ax$ in Lemma~\ref{lem:comparison}(c); the upper bound $a_n\le\abar_n$ of
+Theorem~\ref{thm:an-bounds} enters Lemma~\ref{lem:B-sign}(b) and the tail estimates of the certificates. The positivity of $H$ enters through
+(C2) and, for Theorem~\ref{thm:main-U}, through the location of the real zeros of $F$; its proof uses the coefficients only through the
+trivial-bound box $\TB$ (Corollary~\ref{cor:Pi-positive}). The certified enclosures of the $a_n$ enter only through the value of $C$
+(Proposition~\ref{prop:C}), that is, through Theorem~\ref{thm:main-object}(b) and Table~\ref{tab:coefficients}, and through the checks of
+Section~\ref{sec:physical}.
+\end{remark}
+
+\subsection*{The classical cone}
+
+Corollary~\ref{cor:main-RH} concerns admissible pairs, whose prime measure lives on $[\xin2,\infty)$, and the cone $\Cone$ with the same gap; its
+duality step is Theorem~\ref{thm:I-duality}, which Part~I proves for that gap. The function of Theorem~\ref{thm:main-S} allows us to remove the
+gap. For $\ell\ge0$
+let $\Kad_\ell$ be the set of pairs $(\mu,\nu)$ of positive Radon measures, $\mu$ even on $\RR$ and $\nu$ on $[\ell,\infty)$, such that for every $F\in\Tc$
+the integrals $\int F\dd\mu$ and $\int\hF\dd\nu$ converge absolutely and
+\[
+\Arch(F)=\int_\RR F\dd\mu+\frac1\pi\int_{[\ell,\infty)}\hF\dd\nu ,
+\]
+and put, as in Part~I, \S5.5 (where the gap is called $g$),
+\[
+\Cone_\ell:=\{F\in\Tc:F\ge0\text{ on }\RR,\ \hF\ge0\text{ on }[\ell,\infty)\},\qquad
+\kstar_\ell:=\inf\Big\{\Arch(F):F\in\Cone_\ell,\ \int F=1\Big\}.
+\]
+Thus $\Kad_{\xin2}=\Kad$, $\Cone_{\xin2}=\Cone$ and $\kstar_{\xin2}=\kstar$, while $\Cone_0=\ConeOPS$ and $\kstar_0=\kOPS$ because $\hF$ is even. If
+$0\le \ell\le \ell'$, then $\ConeOPS\subseteq\Cone_\ell\subseteq\Cone_{\ell'}$, so $\kstar_{\ell'}\le\kstar_\ell\le\kOPS$, and $\Kad_{\ell'}\subseteq\Kad_\ell$ (extend $\nu$ by zero);
+a pair in $\Kad_\ell$ whose $\nu$ vanishes on $[\ell,\xin2)$ is identified with the pair in $\Kad$ obtained by restricting $\nu$. For $\ell=0$ the measure $\nu$
+may have an atom at $0$, which contributes $\frac1\pi\nu(\{0\})\hF(0)=\frac1\pi\nu(\{0\})\int F$. Finally, $\Gc$ denotes the set of even
+real-valued elements of $\operatorname{span}_\CC\{e^{-\pi(t-a)^2/s^2+2\pi ibt}:a,b\in\RR,\ s>0\}$, the Gaussian wave packets of Part~I,
+Definition~2.1; $\Gc\subset\Tc$.
+
+\begin{corollary}[The classical cone]\label{cor:nogap}
+Let $H$ and $F$ be as in Theorem~\ref{thm:main-S}, defined at the start of this section, so that Theorem~\ref{thm:main-object} also holds;
+we write $F_0:=F=\Xi^2H$, since $F$ is a variable below.
+\begin{enumerate}[label=\textup{(\alph*)}]
+\item $\widehat{F_0}(\xi)\ge\Gh_H(\xi)>0$ for $0\le\xi<\xin2$. Hence $\widehat{F_0}>0$ on $(-\xin2,\xin2)$, and the real zeros of $\widehat{F_0}$ are
+exactly the points $\pm\xin n$, $n\ge2$.
+\item Let $0\le \ell\le\xin2$. Every $(\mu,\nu)\in\Kad_\ell$ has $\nu([\ell,\xin2))=0$; thus $\Kad_\ell=\Kad$. No hypothesis on the zeros of $\zeta$ is made.
+\item Let $0\le \ell\le\xin2$. The following are equivalent: \textup{(i)} RH; \textup{(ii)} $\Kad_\ell\ne\emptyset$; \textup{(iii)} $\Arch(F)\ge0$ for every
+$F\in\Cone_\ell$; \textup{(iv)} $\Arch(F)\ge0$ for every $F\in\Cone_\ell\cap\Gc$; \textup{(v)} $\kstar_\ell\ge0$; \textup{(vi)} $\kstar_\ell=0$.
+\item If RH holds, then $\Kad_\ell=\{\pz\}$ and $\kstar_\ell=0$ for every $\ell\in[0,\xin2]$. If RH fails, then $\Kad_\ell=\emptyset$ and
+$\kstar\le\kstar_\ell\le\kOPS<0$ for every $\ell\in[0,\xin2]$.
+\end{enumerate}
+In particular, RH holds if and only if $\Arch(F)\ge0$ for every $F\in\Tc$ with $F\ge0$ and $\hF\ge0$ on $\RR$, and if and only if $\kOPS=0$.
+\end{corollary}
+
+\begin{proof}
+(a) Let $0\le\xi<\xin2$ and $x:=e^{2\pi\xi}\in[1,2)$. By Lemma~\ref{lem:voronoi}(c),
+\[
+\widehat{F_0}(\xi)=\sum_{m\ge1}d(m)\,m^{-1/2}\,\Gh_H(\xi+\xin m),
+\]
+an absolutely convergent series whose $m$-th term is $d(m)m^{-1/2}$ times the value of $\Gh_H$ at the point $mx\ge1$ of the multiplicative
+coordinate. By the proof of Theorem~\ref{thm:main-S}, $\Gh_H\ge0$ on $[0,\infty)$; so every term is non-negative, and
+$\widehat{F_0}(\xi)\ge\Gh_H(\xi)$, the term $m=1$. If $x=1$, then $\Gh_H(\xi)=C/(32\pi^2)>0$ by Theorem~\ref{thm:main-object}(b) (and directly
+$\widehat{F_0}(0)=\int F_0>0$ by Theorem~\ref{thm:main-S}(c)). If $1<x<2$, then by Theorem~\ref{thm:main-object}(b)
+\[
+\Gh_H(\xi)=C\sin^2(\pi x)\sqrt x\sum_{n\ge1}a_nK_0(4\pi\sqrt{nx}),
+\]
+where $C>0$, $\sin^2(\pi x)>0$ because $x\notin\ZZ$, $a_n>0$ for every $n$ by Theorem~\ref{thm:main-object}(a), and $K_0>0$ on $(0,\infty)$; the
+series converges, so its sum is at least $a_1K_0(4\pi\sqrt x)>0$. Hence $\Gh_H(\xi)>0$. The same argument gives $\widehat{F_0}(\xi)\ge\Gh_H(\xi)>0$
+for every $\xi\ge0$ with $e^{2\pi\xi}\notin\{2,3,\dots\}$; with Theorem~\ref{thm:main-S}(b) and the evenness of $\widehat{F_0}$ this gives the zero set.
+
+(b) We may assume $\ell<\xin2$. Let $(\mu,\nu)\in\Kad_\ell$. As $F_0\in\ConeOPS\subseteq\Cone_\ell$ and $\Arch(F_0)=0$,
+\[
+0=\int_\RR F_0\dd\mu+\frac1\pi\int_{[\ell,\infty)}\widehat{F_0}\dd\nu ,
+\]
+and both terms are non-negative; so $\int\widehat{F_0}\dd\nu=0$. For $0<\eta<\xin2-\ell$ the continuous function $\widehat{F_0}$ is positive on the
+compact interval $[\ell,\xin2-\eta]$ by (a), hence at least some $m_\eta>0$ there, and $\nu([\ell,\xin2-\eta])\le m_\eta^{-1}\int\widehat{F_0}\dd\nu=0$.
+Letting $\eta\to0$ gives $\nu([\ell,\xin2))=0$. Restricting $\nu$ to $[\xin2,\infty)$ changes no integral, so $(\mu,\nu)\in\Kad$; conversely
+$\Kad\subseteq\Kad_\ell$.
+
+(c) (i)$\Rightarrow$(ii): $\pz\in\Kad\subseteq\Kad_\ell$ by Theorem~\ref{thm:I-logic}(a). (ii)$\Rightarrow$(i): by (b), $\Kad=\Kad_\ell\ne\emptyset$, and
+Corollary~\ref{cor:main-RH} gives RH. (ii)$\Rightarrow$(iii) is weak duality: for $(\mu,\nu)\in\Kad_\ell$ and $F\in\Cone_\ell$ both integrals are
+non-negative. (iii)$\Rightarrow$(iv) is trivial, and (iv)$\Rightarrow$(iii) is Proposition~\ref{prop:gap-duality}(a). (iii)$\Rightarrow$(ii): as
+$\ConeOPS\subseteq\Cone_\ell$, (iii) gives $\Arch\ge0$ on $\ConeOPS$. By (a), Lemma~\ref{lem:transfer} applies with $\ell_1=\xin2$, $\Theta=F_0$ and $L=\Arch$,
+and gives $\Arch\ge0$ on $\Cone$; then $\Kad\ne\emptyset$ by Theorem~\ref{thm:I-duality}, and $\Kad\subseteq\Kad_\ell$. (Alternatively,
+Proposition~\ref{prop:gap-duality}(a) at the gap $\ell$ gives (iii)$\Rightarrow$(ii) directly.) (iii)$\Leftrightarrow$(v) by homogeneity, since an
+$F\in\Cone_\ell$ with $\int F=0$ vanishes identically. (v)$\Leftrightarrow$(vi) because $\kstar_\ell\le\kOPS\le0$ by Theorem~\ref{thm:main-S}.
+
+(d) If RH holds, Corollary~\ref{cor:main-RH} and (b) give $\Kad_\ell=\Kad=\{\pz\}$, and (c) gives $\kstar_\ell=0$. If RH fails, then
+$\Kad_\ell=\Kad=\emptyset$ by (b) and Corollary~\ref{cor:main-RH}, $\kstar_\ell<0$ by (c), and $\kstar\le\kstar_\ell\le\kOPS$ by monotonicity; $\kOPS<0$
+is the case $\ell=0$. The final sentence is (c) and (d) for $\ell=0$.
+\end{proof}
+
+\begin{remark}\label{rem:nogap}
+\begin{enumerate}[label=(\arabic*),leftmargin=*]
+\item \emph{Inputs.} Part (a) uses Lemma~\ref{lem:voronoi}(c) and Theorem~\ref{thm:main-object}(a),(b): the positivity of $C$, of every $a_n$
+and of $K_0$. Part (b) uses in addition only Theorem~\ref{thm:main-S} and positivity; it is complementary slackness
+(Lemma~\ref{lem:I-compslack}) at the gap $\ell$. Parts (c) and (d) use in addition Corollary~\ref{cor:main-RH} (hence Theorem~\ref{thm:main-U},
+Theorems~\ref{thm:I-duality} and~\ref{thm:I-logic}), Lemma~\ref{lem:transfer} and, for (iv) only, Proposition~\ref{prop:gap-duality}. Apart
+from Lemma~\ref{lem:transfer} and Proposition~\ref{prop:gap-duality}, which Appendix~\ref{app:gap} proves from the ingredients of Part~I's duality
+proof, no input beyond those of Corollary~\ref{cor:main-RH} is used. Theorem~\ref{thm:main-S} needs only $\Gh_H\ge0$ on $[0,\infty)$; part (a) is
+the only place where the strict positivity of $\Gh_H$ is used. (The strict positivity of $H$ enters through Theorem~\ref{thm:main-U}.)
+\item \emph{Without Theorem~\ref{thm:main-U}.} Lemma~\ref{lem:transfer}, with $\ell_1=\xin2$, $\Theta=F_0$ and $L=\Arch$, together with part (a)
+and Theorem~\ref{thm:main-S}, gives unconditionally, and without Theorem~\ref{thm:main-U} or any duality theorem: $\kstar\ge0$ if and only if
+$\kOPS\ge0$, and $\kstar=0$ if and only if $\kOPS=0$.
+\item \emph{Why the gap mattered.} An element of $\Kad_\ell$ with $\ell<\xin2$ might put mass on $[\ell,\xin2)$, which Theorem~\ref{thm:main-U}, a statement
+about $\Kad$, does not exclude; this is why Corollary~\ref{cor:main-RH} is stated for the cone $\Cone$. Part (b) excludes it through the strict
+positivity of $\widehat{F_0}$ on $[0,\xin2)$, that is, through more than Theorem~\ref{thm:main-U}; whether Theorem~\ref{thm:main-U}
+alone would suffice we do not know. The argument is special to conductor $1$: for $\Arch_q=\Arch+\frac{\log q}{2\pi}\int(\cdot)$ with $q>1$ one
+has $\Arch_q(F_0)=\frac{\log q}{2\pi}\int F_0>0$, and if $(\mu,\nu)$ is admissible for $\Arch_q$ with $\mu\ge c\dd t$ for some $c>0$, then
+$(\mu-c\dd t,\nu+\pi c\,\delta_0)$ represents $\Arch_q$ at the gap $0$ but not at the gap $\xin2$, so the analogue of (b) fails. Such pairs exist
+unconditionally for every $q\ge1.0172$, by the certified pair of Part~I, Proposition~5.10, at $q=e^{0.02}$, whose zero measure is at least
+$4.71949\cdot10^{-4}\dd t$ (the threshold $1.0172$ and the number $1.017182$ in (4) both come from this pair); and under RH for every $q>1$, for
+instance $(\muz+\frac{\log q}{2\pi}\dd t,\nuz)$.
+\item \emph{Size.} If RH fails, Part~I, Proposition~5.10, gives $-2.7112\cdot10^{-3}\le\kstar\le\kstar_\ell\le\kOPS<0$ for $0\le \ell\le\xin2$; so the
+classical bound $e^{-2\pi\kOPS}$ would lie in $(1,1.017182)$.
+\item \emph{Larger gaps.} If $\ell>\xin2$, then $\Kad_\ell\subseteq\Kad\subseteq\{\pz\}$, while $\nuz(\{\xin2\})=\frac{\log2}{\sqrt2}>0$; so $\Kad_\ell=\emptyset$
+without any hypothesis, and $\kstar_\ell<0$ by Proposition~\ref{prop:gap-duality}(a). Since $\kstar_\ell\le0$ for all $\ell\ge0$, RH holds if and only if
+$\kstar_\ell=0$ for some $\ell\ge0$, and then $\{\ell:\kstar_\ell=0\}=[0,\xin2]$: under RH, $\log2/2\pi$ is the largest gap at which the data of $\zeta$ are
+critical.
+\item \emph{Not claimed.} We do not know whether $\kstar_\ell$ is independent of $\ell\in[0,\xin2]$ when RH fails. The proof that RH fails only if
+$\kOPS<0$ is not constructive: it passes through the duality theorem, and it does not produce an explicit $F\in\ConeOPS$ with $\Arch(F)<0$ from
+a zero off the line.
+\end{enumerate}
 \end{remark}

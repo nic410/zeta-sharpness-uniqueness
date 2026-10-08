@@ -5,7 +5,7 @@ type: software
 authors:
   - family-names: Johns
     given-names: Nic
-version: "1.2"
+version: "1.3"
 doi: "10.5281/zenodo.23238100"
 repository-code: "https://github.com/nic410/zeta-sharpness-uniqueness"
 url: "https://github.com/nic410/zeta-sharpness-uniqueness"
@@ -29,13 +29,14 @@ abstract: >-
   sums over the zeros and over the prime powers. We construct an explicit even function F = Ξ²H, with H entire and
   positive on ℝ, such that F ≥ 0 and F̂ ≥ 0 on ℝ, F̂ vanishes at log n/(2π) for every integer n ≥ 2, and 𝒜(F) = 0.
   Since Ξ vanishes at every non-trivial zero, on or off the critical line, no information about the zeros is used. F
-  is an exact magic function, in the sense of the sphere-packing bounds of Cohn–Elkies and Viazovska, for the linear
-  programme of Odlyzko, Poitou and Serre: for the data of ζ the programme has no positive slack, so the method is
-  sharp, and F is a minimiser under RH. With a support theorem of Part I, every pair of positive measures satisfying
-  the formula, on the zero side and on the prime side beyond log 2/(2π), is then ζ's own. This resolves Conjectures
-  S and U of Part I. H comes from an eigenvalue-¼ eigenfunction of the hyperbolic Laplacian through a contour
-  argument of Viazovska's type, with Green's identity in place of Cauchy's theorem; its positivity is partly
-  computer-assisted. We do not prove RH; by these results it is equivalent to the existence of such a pair.
+  is an exact magic function, as in the sphere-packing bounds of Cohn–Elkies and Viazovska, for the linear programme
+  of Odlyzko, Poitou and Serre: for the data of ζ the programme has optimal value at most 0, so the method is sharp,
+  and under RH F is a minimiser. With a support theorem of Part I, every positive solution of the formula, with
+  prime measure beyond log 2/(2π), is then ζ's own. This resolves Conjectures S and U of Part I. Moreover, RH holds
+  if and only if this classical programme has optimal value exactly 0. H comes from an eigenvalue-¼ eigenfunction of
+  the hyperbolic Laplacian through a contour argument of Viazovska's type, with Green's identity in place of
+  Cauchy's theorem; its positivity is partly computer-assisted. We do not prove RH; by these results it is
+  equivalent to the existence of such a positive solution.
 preferred-citation:
   type: article
   status: preprint

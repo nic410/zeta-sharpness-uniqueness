@@ -6,8 +6,9 @@ reused from Part I's spine, and proved from Mathlib, Part I's spine (its theorem
 ledger axioms of `Ledger.lean`.  `axioms.log` records `#print axioms` for each.
 
 Theorem S is unconditional and says `κ* ≤ κ*_OPS ≤ 0`; it does not say that `κ*` is attained.  Attainment is the
-content of `corollary_minimiser`: `F/∫F` is a minimiser for `κ*` if and only if RH holds.  The Corollary states
-`RH ⇔ (E) ⇔ κ* ≥ 0 ⇔ κ* = 0`; `κ*_OPS = 0 ⇒ RH` is not claimed (only `RH ⇒ κ*_OPS = 0`).
+content of `corollary_minimiser`: `F/∫F` is a minimiser for `κ*` if and only if RH holds.  Corollary 3 states
+`RH ⇔ (E) ⇔ κ* ≥ 0 ⇔ κ* = 0` and gives `RH ⇒ κ*_OPS = 0`; the converse, `κ*_OPS = 0 ⇒ RH`, is Corollary 8.2
+(`cor:nogap`; `NoGap.lean`, `rh_iff_kappaOPS_zero`).
 -/
 import PositivityRigidityII.Object
 
@@ -72,7 +73,7 @@ theorem corollary3 :
   exact ⟨hRE, hEk, ⟨fun h => le_antisymm (hS.1.trans hS.2) h, fun h => h ▸ le_rfl⟩⟩
 
 /-- **Corollary (`cor:main-RH`), if they hold.**  Under RH: `𝒦 = {p_ζ}`, `κ* = κ*_OPS = 0`, and the optimised
-conductor bounds are exactly `1`: `q_min = e^{−2πκ*_OPS} = 1`.  (The converse `κ*_OPS = 0 ⇒ RH` is not claimed.) -/
+conductor bounds are exactly `1`: `q_min = e^{−2πκ*_OPS} = 1`.  (The converse `κ*_OPS = 0 ⇒ RH` is Corollary 8.2, `rh_iff_kappaOPS_zero`.) -/
 theorem corollary3_RH (hRH : RiemannHypothesis) :
     K = {pZeta} ∧ kappaStar = 0 ∧ kappaOPS = 0 ∧ qmin = 1 ∧ qminOPS = 1 := by
   have hK : K = {pZeta} := (logic_c.1.mp theorem2_condU).2 hRH

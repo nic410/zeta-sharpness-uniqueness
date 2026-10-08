@@ -54,7 +54,8 @@ Corollary `cor:Pi-positive`, as used in the proof of Theorem `thm:main-S`.**  Th
 `H_raw`) such that
 1. `H ∈ 𝒲_δ` for some `δ ∈ (0, 1/2)`;
 2. (C3) `Ĝ_H(ξ_k) = 0` for every integer `k ≥ 2`;
-3. `Ĝ_H(ξ) ≥ 0` for every `ξ ≥ 0` (`x ≥ 1`; (C4) and more);
+3. `Ĝ_H(ξ) ≥ 0` for every `ξ ≥ 0` (`x ≥ 1`; (C4) and more), and `Ĝ_H(ξ) > 0` for `0 ≤ ξ < ξ₂` (`1 ≤ x < 2`, the
+   window);
 4. (C2), strictly: `H(t) > 0` for every real `t`.
 
 Sources, property by property (Part II; `sec:assembly`, "Proof of Theorem `thm:main-S`", checks 1–4):
@@ -77,52 +78,81 @@ Sources, property by property (Part II; `sec:assembly`, "Proof of Theorem `thm:m
 3. Theorem "Positivity of the coefficients" (`thm:an-positive`): `a_n = n𝒦_n + δ_{n1}/4 > 0` for every `n ≥ 1`, using only
    the trivial Kloosterman bound and no finite check (with Theorem "Two-sided bounds", `thm:an-bounds`); `K₀ > 0`; so
    `Ĝ_raw(x) = sin²(πx) √x Σ_n a_n K₀(4π√(nx)) ≥ 0` for `x > 1` (Theorem `thm:lift`(c)), and `Ĝ_raw(1) = 1/(32π²) > 0`
-   (Proposition `prop:C3`(a)).
-4. Corollary `cor:Pi-positive`: `Π(t) > 0`, hence `H_raw(t) > 0`, for every real `t`, from
-   * Theorem "The physical-side formula" (`thm:F`): `H_raw(t) = Π(t)/(2π² (t² + 1/4)²)`,
+   (Proposition `prop:C3`(a)).  The window clause: for `1 < x < 2` every factor of that formula is positive
+   (`sin²(πx) > 0` as `x ∉ ℤ`, every `a_n > 0`, `K₀ > 0`, the series converging, so its sum is at least
+   `a_1 K₀(4π√x) > 0`), and at `x = 1` the value is `1/(32π²) > 0`; this is the proof of part (a) of Corollary 8.2
+   (`cor:nogap`, "The classical cone"), from Theorem "The object" (`thm:main-object`(a),(b)) and Theorem "Positivity
+   of the coefficients" (`thm:an-positive`), independently refereed.
+4. Corollary 7.12 (`cor:Pi-positive`): `Π(t) > 0`, hence `H_raw(t) > 0`, for every real `t`.  The proof of Corollary 7.12
+   (the primary path):
+   * Theorem 7.3 "The physical-side formula" (`thm:F`): `H_raw(t) = Π(t)/(2π² (t² + 1/4)²)`,
      `Π(t) = ∫_1^∞ A(Y) cos(t log Y) dY + (1/2) ∫_{1/2}^∞ B(Y) k_t(θ(Y)) dY` with `A`, `B` the `K₀`-series in the `a_n` of
-     (eq:AB), `θ(Y) = 2 arccot(2Y)` and the conical kernel `k_t` of (eq:ck); `Π` is even;
-   * Theorem "Positivity of the kernel" (`thm:kernel-pos`; Mehler–Dirichlet's formula, DLMF 14.12.1);
-   * Theorem "Window; computer-assisted" (`thm:window`): `Π(t) > 0` on `[0, 40]` (80 cells of width `1/2`, a Taylor model
-     of degree 19 in `t` with a Cauchy remainder, Gauss–Legendre quadrature with Bernstein-ellipse error bounds, tails
-     in `Y`, in the conical series and in `n`, all in Arb ball arithmetic).  Script `positivity/run_window.py`
-     (sha256 f4e45fad77bd5b40…) with `positivity/cert_window.py` (sha256 9f6e359deabc174b…) and `positivity/poslib.py`
-     (sha256 6d1830c291015d03…); log `positivity/logs/window_0_40.log`:
+     (eq:AB), `θ(Y) = 2 arccot(2Y)` and the conical kernel `k_t` of (eq:ck), positive by Theorem 7.2 "Positivity of the
+     kernel" (`thm:kernel-pos`; Mehler–Dirichlet's formula, DLMF 14.12.1); `Π` is even;
+   * Theorem 6.8 "Moment certificate" (`thm:moments`, Certificate M-box), with Lemma 6.7 "Moment minorant"
+     (`lem:moments`) and Proposition 6.5 "Positive definiteness" (`prop:posdef`): `H_raw(t) > 0` for `|t| ≤ 10.355`, the
+     coefficients entering only through the trivial-bound box `TB` of (6.1) (`eq:box`: `|a_n − c_n| ≤ w_n`, from the
+     trivial Kloosterman bound in the proof of Theorem 6.1).  Script `positivity/cert_moments_box.py`
+     (sha256 b7b795195be452fafa58f24d9bb07f06772e018d10e5cbb59a92b27de65a9a38) with `positivity/cert_moments.py`
+     (sha256 22be4eba843685fafad7bc78ceccd67f57f9b0018f5686d0543bade891389940) and `positivity/boxlib.py`
+     (sha256 3d42eb955f76f78118470367183d02d44ff69115e9189256efdbadeddbe94b93); log `positivity/logs/cert_moments_box.log`:
+     `eps = max_{n0<n<=N} w_n/(c_n - w_n) = [1.7331e-8 ± 1.33e-14]`,
+     `box moment bound with M_0..M_30: lower bound of P_K(t; b) > 0 for every b in the box, on [0, 10.35546875]`,
+     `DECISIVE (Certificate M-box, trivial Kloosterman bound only): P_K(t; b) > 0 for every b in the box, hence (b = a) F(t) = Xi(t)^2 H_raw(t) > 0 and H_raw(t) > 0, for |t| <= 10.35546875 (moments M_0..M_30) ; covers [0, 9]: True`;
+   * Theorem 7.11 "Large `|t|` from the trivial bound" (`thm:large-t-box`): `Π(t) ≥ 0.9659 e^{0.6435|t|}` for `|t| ≥ 9`,
+     for every sequence in `TB`, from Lemmas 7.5 "Stirling bracket" (`lem:stirling`, DLMF §5.11(ii)), 7.6 "Kernel bounds"
+     (`lem:kernel-bounds`), 7.7 "Signs of `B`" (`lem:B-sign`; DLMF §10.40(ii) for `K₀`), 7.8 (`lem:comparison`) and the numbers
+     of Proposition 7.10 (`prop:L-numbers-box`); it also gives the explicit lower bound for `|t| ≥ 9` (constant `0.9659`)
+     in the statement of Corollary 7.12, which this axiom does not use.  Script `positivity/run_on_box.py`
+     (sha256 916b9bbef306d6086cbe0a3adef023177b1f5047b6c6e0dc26aeeb8db6d77785), which runs the unchanged
+     `positivity/cert_large_t.py` (sha256 11a38aac755bf0efe400f53c5437021c61ef865fec4235a8fb5b5f4b136e6b22) and
+     `positivity/cert_gtail.py` (sha256 5601d7dc6c5f48b8b6f3c21b3e9da89e731013cf3c418899291ab9e454df15f2) on `TB`;
+     log `positivity/logs/cert_large_t_T9_box.log`:
+     `box: a_1 in [[4425.193206 ± 1.10e-7], [4707.097194 ± 4.72e-7]], a_2 in [[1024479.78541 ± 3.69e-6], [1027350.95717 ± 4.25e-6]] ; every box hull for n <= 300 lies in (0, A0(n)): True`,
+     `p(T0) >= [2.69351335258 ± 2.81e-12] ; n(T0) <= [1.71015174683 ± 4.54e-12] ; A_Phi e^{-T0(pi/2-th_s)} <= [0.0174114696412 ± 4.28e-14] ; margin = [0.965950136102 ± 4.98e-13] ; ratio p/(n + axis term) >= [1.55914 ± 2.55e-7]`,
+     `DECISIVE (all-Arb): Theorem L hypotheses verified for T0 = 9: True`;
+     log `positivity/logs/cert_gtail_box.log`:
+     `rhobar(4) = [4.347086309e-9 ± 7.56e-20]  (< 1 needed): True`, `DECISIVE: g > 0 on [4, oo): True`;
+   * `[0, 10.355] ∪ [9, ∞) ⊇ [0, ∞)` and `Π` is even.
+   Independent checks, not used in the proof of Corollary 7.12 (the same statements with the certified coefficient
+   enclosures in place of `TB`):
+   * Theorem 7.13 "Window; computer-assisted" (`thm:window`, Certificate W): `Π(t) > 0` on `[0, 40]` (80 cells, Taylor
+     models in `t`, Arb ball arithmetic).  Script `positivity/run_window.py`
+     (sha256 f4e45fad77bd5b4065cdc8a32a41f4c2d7c2e628c6253bdf5304139322d4e71c) with `positivity/cert_window.py`
+     (sha256 9f6e359deabc174b925347a308eca36831587a34c1c748d4fed75f48f5087bca) and `positivity/poslib.py`
+     (sha256 6d1830c291015d03ed43e8811af463e08689a27638da28145ac7b7c8ece73a50); log `positivity/logs/window_0_40.log`:
      `cell [0.0000, 0.5000]: R(tc)=[0.002192 ± 9.41e-7]  lower=[0.00112926259401 ± 1.26e-15]  ok=True`,
      `DECISIVE: R(t) > 0 on [0, 40] (all 80 cells certified): True`;
-   * Theorem "Large `|t|`" (`thm:large-t`): `Π(t) ≥ 0.2554 e^{0.6435|t|}` for `|t| ≥ 8`, from Lemmas "Stirling bracket"
-     (`lem:stirling`, DLMF §5.11(ii)), "Kernel bounds" (`lem:kernel-bounds`), "Signs of `B`" (`lem:B-sign`; DLMF §10.40(ii)
-     for `K₀`), `lem:comparison` and the six numbers of Proposition "Computer-assisted" (`prop:L-numbers`).  Script
-     `positivity/cert_large_t.py` (sha256 11a38aac755bf0ef…); log `positivity/logs/cert_large_t_T8.log`:
-     `th_s = [0.9272952180 ± 1.62e-12], th(Yz) = [1.043236594 ± 1.93e-10], t_mono = [4.3125243 ± 1.90e-8]`,
-     `(1a) min lower bound of g on [Yz, Ys] = [0.581726 ± 3.27e-7]  (> 0 needed)`,
-     `(1b) min lower bound of g on [Ys, Y3] = [1.74105e-7 ± 7.7e-16] ; p(T0) >= [2.22681094932 ± 1.09e-12]`,
-     `(2) n(T0) <= [1.93894945416 ± 1.93e-12]  (7009 cells with possible g < 0)`,
-     `(3) A_Phi = int_1^oo Phi in [5.5848933 ± 6.46e-8]  (quad err <= [2.51e-17 ± 4.88e-20], Y-tail <= [5.02e-32 ± 8.03e-36]): A_Phi <= [5.58489336212 ± 3.21e-12]`,
-     `p(T0) >= [2.22681094932 ± 1.09e-12] ; n(T0) <= [1.93894945416 ± 1.93e-12] ; A_Phi e^{-T0(pi/2-th_s)} <= [0.0324536120224 ± 3.66e-14] ; margin = [0.255407883141 ± 3.57e-13] ; ratio p/(n + axis term) >= [1.12956 ± 3.61e-6]`,
+   * Theorem 7.4 "Large `|t|`" (`thm:large-t`, `T₀ = 8`, certified coefficients), from Proposition 7.9 (`prop:L-numbers`);
+     log `positivity/logs/cert_large_t_T8.log`:
+     `margin = [0.255407883141 ± 3.57e-13]`,
      `DECISIVE (all-Arb): Theorem L hypotheses verified for T0 = 8: True`;
-     and script `positivity/cert_gtail.py` (sha256 5601d7dc6c5f48b8…), log `positivity/logs/cert_gtail.log`:
+     log `positivity/logs/cert_gtail.log`:
      `rhobar(4) = [4.198895694e-9 ± 1.65e-19]  (< 1 needed): True`, `DECISIVE: g > 0 on [4, oo): True`;
-   * `[0, 40] ∪ [8, ∞) ⊇ [0, ∞)` and `Π` is even.  (Also certified, and not needed for the sign of `H_raw`: `Π(0)`,
-     script `positivity/check_r0.py` (sha256 ab3b7412b7b452de…), log `positivity/logs/check_r0.log`:
-     `[certified] R(0) in [[0.001400011269 ± 2.50e-13], [0.001401746815 ± 4.55e-13]] ; H_raw(0) = 8 R(0)/pi^2 in [0.00114 ± 5.20e-6]`.)
-   The logs write `R` for `Π`, `Phi` for `A` and `g` for `B`; a SHA-256 ending in `…` is the 16-hex-digit prefix that
-   the logs record.  Inputs of both certificates: the certified balls for the
-   `a_n`, `n ≤ 300`, in `coefficients/data/an_small_X1e4.json`
+   * Certificate M with the certified enclosures (the remark after Theorem 6.8): output
+     `positivity/out/moments_true_N1500_p128.json` (sha256 0fe5c48adfd2f1d4563eff6cd9711af3fa714666056e3e4861e8667dfef2ef6a);
+     log `positivity/logs/cert_moments_true.log`:
+     `DECISIVE (Certificate M, mode=true): F(t) = Xi(t)^2 H_raw(t) > 0, hence H_raw(t) > 0, for |t| <= 10.40234375 (moments M_0..M_30) ; covers [0, 9]: True`;
+   * `Π(0)`, script `positivity/check_r0.py` (sha256 ab3b7412b7b452de2b184ce5d6f119760b170bb01faab949eca85153551c629c),
+     log `positivity/logs/check_r0.log`:
+     `[certified] R(0) in [[0.001400011269 ± 2.50e-13], [0.001401746815 ± 4.55e-13]] ; H_raw(0) = 8 R(0)/pi^2 in [0.00114 ± 5.20e-6]`.
+   The logs write `R` for `Π`, `Phi` for `A`, `g` for `B` and "Theorem L" for the large-`|t|` theorems.  Inputs of the
+   certificates: the coefficient data `coefficients/data/an_small_X1e4.json`
    (sha256 59fe6e24647252db6cfa4e673b5ba89e741ed5c0b34b56e2db5cfe0c97aa546a), `coefficients/data/an_cert_X1e4.json`
    (sha256 59d50f17db2199b1e9a039a616f1a9de51bfdf642549b25097c341e5e077b577) and
    `coefficients/data/extra_smalln_X3e5.json` (sha256 ff4b86318eed86f1badcde7e53c0c80f859f2cbee74a287d9493b2643d173e76);
-   the bound `|a_n| ≤ ā_n` of Theorem `thm:an-bounds`; and Part I's rigorous `K₀`, `lib/besselk.py`
-   (sha256 3d3fd6601742c49b17fc355a0d9310474704ad480508010f91ae92615131501a).  The certificates were audited by an
-   independent referee, whose own all-Arb reruns agree (80 of 80 cells; the margin of Theorem `thm:large-t`
-   `0.2554078831 ± 4.1e-11`).
+   the bounds of Theorems 6.1–6.2 (`thm:an-positive`, `thm:an-bounds`), which define `TB`; and Part I's rigorous `K₀`,
+   `lib/besselk.py` (sha256 3d3fd6601742c49b17fc355a0d9310474704ad480508010f91ae92615131501a).  The SHA-256 values are
+   those of the ancillary `SHA256SUMS`.  The certificates were refereed independently.
 
 Weaker than the paper: only one `δ` is asserted (the paper has every `δ < 1`, and the exponent `−9 + δ`); `H` entire,
 the formula for `Ĝ_H` and the double zeros of `Ĝ_H` are not stated; the normalisation `H(0) = 1` is not part of the
 axiom (it is derived in Lean, `exists_object`).  Everything that the spine derives from this axiom (`H(0) = 1` after
-scaling, (C4), (C5), `F = Ξ² H ∈ 𝒞_OPS ⊆ 𝒞`, `F̂(ξ_n) = 0`, `∫ F > 0`, `𝒜(F) = 0`, and Theorems S and U) is proved
-in Lean. -/
+scaling, (C4), (C5), `F = Ξ² H ∈ 𝒞_OPS ⊆ 𝒞`, `F̂(ξ_n) = 0`, `∫ F > 0`, `𝒜(F) = 0`, `F̂ > 0` on `(−ξ₂, ξ₂)`, Theorems S
+and U, Corollary 3 and Corollary 8.2) is proved in Lean.  The window clause of property 3 was added for Corollary 8.2
+(an added conjunct of the same axiom; it is used only in `NoGap.lean`). -/
 axiom exists_integer_critical_object :
-    ∃ H : ℂ → ℂ, (∃ δ : ℝ, δ < 1 / 2 ∧ ClassW δ H) ∧ CondC3 H ∧ CondC4Zero H ∧ CondC2Strict H
+    ∃ H : ℂ → ℂ, (∃ δ : ℝ, δ < 1 / 2 ∧ ClassW δ H) ∧ CondC3 H ∧ CondC4Zero H ∧ CondWindow H ∧
+      CondC2Strict H
 
 end PosRigII

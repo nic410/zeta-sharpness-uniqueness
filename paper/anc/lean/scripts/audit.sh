@@ -24,7 +24,7 @@
 # (e) provenance: every SHA-256 (or prefix) cited in PositivityRigidityII/Ledger.lean matches the cited file of the
 #     ancillary directory (..), and every log line quoted there occurs in the cited log (scripts/check_provenance.py);
 #     reported as SKIPPED, without failing, if the ancillary directory is not present next to the project;
-# (f) non-vacuity: scripts/NonVacuity.lean compiles, and each of its 10 theorems depends only on propext,
+# (f) non-vacuity: scripts/NonVacuity.lean compiles, and each of its 13 theorems depends only on propext,
 #     Classical.choice, Quot.sound;
 # (g) hygiene (scripts/check_hygiene.py): no absolute path in the files of the project; and, when the maintainers'
 #     list of names that must not be published is present (HYGIENE_PATTERNS, by default a file in a directory next to
@@ -109,7 +109,7 @@ echo "$audit_out" | grep -q '^declarations depending on sorryAx: none$' \
 if echo "$audit_out" | grep -q '^headline .*: \(MISSING\|NOT A THEOREM\)'; then
   echo "FAIL: a headline theorem is missing"; fail=1; fi
 n_head=$(echo "$audit_out" | grep -c '^headline .*: theorem; ')
-[ "$n_head" -eq 13 ] || { echo "FAIL: expected 13 headline theorems, found $n_head"; fail=1; }
+[ "$n_head" -eq 19 ] || { echo "FAIL: expected 19 headline theorems, found $n_head"; fail=1; }
 echo
 
 echo "== (c) regression: scripts/print_axioms.lean against axioms.log =="
@@ -153,10 +153,11 @@ nv_bad=$(echo "$nv_out" | sed '/^$/d' | grep -vxE "$std_re")
 nv_n=$(echo "$nv_out" | grep -cxE "$std_re")
 if [ $nv_rc -ne 0 ] || [ -n "$nv_bad" ]; then
   echo "FAIL: scripts/NonVacuity.lean has errors, or a theorem there uses an axiom other than propext, Classical.choice, Quot.sound"; fail=1
-elif [ "$nv_n" -ne 10 ]; then echo "FAIL: expected 10 non-vacuity theorems, found $nv_n"; fail=1
+elif [ "$nv_n" -ne 13 ]; then echo "FAIL: expected 13 non-vacuity theorems, found $nv_n"; fail=1
 else
   for t in classW_nonempty gammaInf_faithful voronoi_indexing positivity_transfer vanishing_transfer cones_not_junk \
-           exact_magic_meaning zero_set_of_strict identity_theorem deriv_at_zero_of_nonneg; do
+           exact_magic_meaning zero_set_of_strict identity_theorem deriv_at_zero_of_nonneg \
+           transfer_lemma arch_additive classical_cone_zero; do
     echo "$nv_out" | grep -q "^'PosRigII\.NonVacuity\.$t' " || { echo "FAIL: non-vacuity theorem $t missing"; fail=1; }
   done
   echo "non-vacuity: $nv_n theorems, each with axioms among propext, Classical.choice, Quot.sound"

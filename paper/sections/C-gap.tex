@@ -1,0 +1,124 @@
+%======================================================================
+\section{Duality at an arbitrary gap}\label{app:gap}
+
+We use the notation introduced before Corollary~\ref{cor:nogap}. For $\lambda\in\RR$ put $\Arch^\lambda:=\Arch+\lambda\int(\cdot)$ (so
+$\Arch^\lambda=\Arch_q$ with $\lambda=\log q/2\pi$); $\Kad_\ell(\Arch^\lambda)$ and $\kstar_\ell(\Arch^\lambda)=\kstar_\ell+\lambda$ are defined with
+$\Arch^\lambda$ in place of $\Arch$. We write $\mathsf g_\sigma(t):=\sigma^{-1}e^{-\pi t^2/\sigma^2}$, so that
+$\widehat{\mathsf g_\sigma}(\xi)=e^{-\pi\sigma^2\xi^2}$, and $\mathsf g:=\mathsf g_1$, the Gaussian of the proof of Lemma~\ref{lem:I-apriori}.
+
+\begin{lemma}[Transfer across the gap]\label{lem:transfer}
+Let $\ell_1>0$, let $\Theta\in\ConeOPS$ with $\widehat\Theta>0$ on $[0,\ell_1)$, and let $L:\Tc\to\RR$ be linear with $L(\Theta)\le0$. If $L\ge0$ on $\ConeOPS$,
+then $L\ge0$ on $\Cone_{\ell_1}$, and hence on $\Cone_\ell$ for every $\ell\in[0,\ell_1]$.
+\end{lemma}
+
+\begin{proof}
+Suppose that $F\in\Cone_{\ell_1}$ and $L(F)<0$. Since $\mathsf g\in\ConeOPS$ and $\widehat{\mathsf g}=\mathsf g>0$, we may choose $\eps>0$ with
+$L(F)+\eps L(\mathsf g)<0$; put $F_1:=F+\eps\mathsf g$. Then $\widehat{F_1}\ge\eps\widehat{\mathsf g}>0$ on $[\ell_1,\infty)$, and since $\widehat{F_1}$ is
+continuous there is $\eta\in(0,\ell_1)$ with $\widehat{F_1}>0$ on $[\ell_1-\eta,\ell_1]$. As $\widehat\Theta$ is continuous and positive on the compact interval
+$[0,\ell_1-\eta]$, $m:=\min_{[0,\ell_1-\eta]}\widehat\Theta>0$; and $M:=\sup_\RR|\widehat{F_1}|\le\int|F_1|<\infty$. Put $F_2:=F_1+(M/m)\Theta$. Then
+$F_2\in\Tc$ (if $F\in\Tc_\delta$ and $\Theta\in\Tc_{\delta'}$, then $F_2\in\Tc_{\min(\delta,\delta')}$), $F_2\ge0$ on $\RR$, and $\widehat{F_2}\ge0$ on
+$[0,\infty)$: on $[0,\ell_1-\eta]$ because $\widehat{F_1}+(M/m)\widehat\Theta\ge-M+M$, and on $[\ell_1-\eta,\infty)$ because $\widehat{F_1}>0$ and
+$\widehat\Theta\ge0$ there. As $\widehat{F_2}$ is even, $F_2\in\ConeOPS$. But $L(F_2)=L(F)+\eps L(\mathsf g)+(M/m)L(\Theta)<0$, a contradiction. The
+last assertion holds because $\Cone_\ell\subseteq\Cone_{\ell_1}$ for $\ell\le \ell_1$.
+\end{proof}
+
+The margin $\eps\mathsf g$ is needed: $\widehat\Theta$ may tend to $0$ at $\ell_1$ (for $\Theta=F_0$ and $\ell_1=\xin2$ it vanishes doubly there), while
+$\widehat F$ may be negative just below $\ell_1$.
+
+\begin{proposition}[Duality at an arbitrary gap]\label{prop:gap-duality}
+Let $\ell\ge0$ and $\lambda\in\RR$.
+\begin{enumerate}[label=\textup{(\alph*)}]
+\item The following are equivalent: \textup{(i)} $\Kad_\ell(\Arch^\lambda)\ne\emptyset$; \textup{(ii)} $\Arch^\lambda\ge0$ on $\Cone_\ell$;
+\textup{(iii)} $\Arch^\lambda\ge0$ on $\Cone_\ell\cap\Gc$; \textup{(iv)} $\kstar_\ell(\Arch^\lambda)\ge0$.
+\item There is a constant $C_\lambda$, independent of $\ell$, with the following property. Let $\mu$ be an even positive Radon measure on $\RR$ and
+$\nu$ a positive Radon measure on $[\ell,\infty)$ such that, for every $F\in\Gc$, the integrals $\int F\dd\mu$ and $\int\hF\dd\nu$ converge absolutely and
+$\Arch^\lambda(F)=\Spec_{\mu,\nu}(F):=\int F\dd\mu+\frac1\pi\int\hF\dd\nu$. Then $\mu([T-1,T+1])\le C_\lambda\log(3+|T|)$ and
+$\nu([X-1,X+1])\le C_\lambda e^{\pi|X|}$ for all real $T,X$, and $(\mu,\nu)\in\Kad_\ell(\Arch^\lambda)$. The set $\Kad_\ell(\Arch^\lambda)$ is convex and
+compact for the product of the vague topologies.
+\end{enumerate}
+\end{proposition}
+
+For $\ell=\xin2$ these are Part~I's Theorem~2.7 and Lemma~\ref{lem:I-apriori}, and the proof is theirs (Part~I, Appendices~B.1.1 and~B.1.2)
+with $[\xin2,\infty)$ replaced by $[\ell,\infty)$. We give it in full, citing from Part~I only its approximation step and the convergence of the
+two auxiliary series $P_W$ and $Q_W$.
+
+\begin{proof}
+\emph{A priori bounds.} The functions $A_T,B_X$ of the proof of Lemma~\ref{lem:I-apriori} lie in $\Gc\cap\ConeOPS\subseteq\Cone_\ell$, and that
+proof applies under the hypothesis of (b): with $\int A_T=4$ and $0\le\int B_X\le4$ it gives $\mu([T-1,T+1])\le C_\lambda\log(3+|T|)$ and
+$\nu([X-1,X+1])\le C_\lambda e^{\pi|X|}$, with $C_\lambda$ depending only on $\lambda$. Summing over unit intervals, $\int(1+t^2)^{-1}\dd\mu<\infty$
+and $\int e^{-\pi(1+\eta)\xi}\dd\nu(\xi)<\infty$ for every $\eta>0$. The same holds for every pair in $\Kad_\ell(\Arch^\lambda)$, since
+$\Gc\subset\Tc$.
+
+\emph{Approximation.} We use the approximation paragraph of Part~I, Appendix~B.1.1, which does not involve the gap: for $F\in\Tc_\delta$,
+$0<\sigma\le1$ and $N\ge1$ the function $R_{\sigma,N}:=N^{-1}\sum_{|k|\le N^2}F(k/N)\mathsf g_\sigma(\cdot-k/N)$ lies in $\Gc$ (it is even because $F$ is),
+$\widehat{R_{\sigma,N}}=\widehat{\mathsf g_\sigma}S_N$ with $S_N$ real and $|S_N|\le C_F$, $|S_N(\xi)-\hF(\xi)|\le\eps_N:=C_F(e^{-\pi N/2}+N^{-1})$ for
+$|\xi|\le N/2$, and $\lim_{\sigma\to0}\lim_{N\to\infty}\Arch^\lambda(R_{\sigma,N})=\Arch^\lambda(F)$, while
+$\lim_{\sigma\to0}\lim_{N\to\infty}\Spec_{\mu,\nu}(R_{\sigma,N})=\Spec_{\mu,\nu}(F)$, with absolutely convergent integrals, whenever
+$\int(1+t^2)^{-1}\dd|\mu|<\infty$ and $\int e^{-\pi(1+2\delta)|\xi|}\dd|\nu|<\infty$. (For the term $\lambda\int R_{\sigma,N}=\lambda S_N(0)$ note
+$S_N(0)\to\hF(0)$.)
+
+\emph{Proof of \textup{(b)}.} The a priori bounds hold, and the approximation gives
+$\Spec_{\mu,\nu}(F)=\lim\lim\Spec_{\mu,\nu}(R_{\sigma,N})=\lim\lim\Arch^\lambda(R_{\sigma,N})=\Arch^\lambda(F)$ for $F\in\Tc$, with absolutely
+convergent integrals; so $(\mu,\nu)\in\Kad_\ell(\Arch^\lambda)$. Convexity is clear. The masses of all elements of $\Kad_\ell(\Arch^\lambda)$ on compact sets
+are uniformly bounded, so the set is relatively compact for the vague topologies. It is closed: if $(\mu_k,\nu_k)\to(\mu,\nu)$ vaguely, with
+$(\mu_k,\nu_k)\in\Kad_\ell(\Arch^\lambda)$, then $\nu$ is carried by the closed set $[\ell,\infty)$, and for $F\in\Gc$ the contributions of $|t|>R$ and of
+$\xi>R$ to $\Spec_{\mu_k,\nu_k}(F)$ tend to $0$ as $R\to\infty$, uniformly in $k$, by the Gaussian decay of $F$ and $\hF$ against the uniform bounds;
+so the identity passes to the limit on $\Gc$, and the limit lies in $\Kad_\ell(\Arch^\lambda)$ by the first part.
+
+\emph{Proof of \textup{(a)}.} (i)$\Rightarrow$(ii): for $(\mu,\nu)\in\Kad_\ell(\Arch^\lambda)$ and $F\in\Cone_\ell$ both integrals in $\Spec_{\mu,\nu}(F)$ are
+non-negative. (ii)$\Rightarrow$(iii) is trivial, and (ii)$\Leftrightarrow$(iv) holds by homogeneity, since an $F\in\Cone_\ell$ with $\int F=0$ vanishes
+identically.
+
+(iii)$\Rightarrow$(ii). Let $F\in\Cone_\ell\cap\Tc_\delta$, fix $0<\sigma'<\sigma\le1$, and let $N\ge2\ell$. Then $R_{\sigma,N}\ge0$. On $[\ell,N/2]$,
+$\widehat{R_{\sigma,N}}=\widehat{\mathsf g_\sigma}S_N\ge\widehat{\mathsf g_\sigma}(\hF-\eps_N)\ge-\eps_N\widehat{\mathsf g_\sigma}\ge-\eps_N\widehat{\mathsf g_{\sigma'}}$;
+for $|\xi|>N/2$, $|\widehat{R_{\sigma,N}}|\le C_F\widehat{\mathsf g_\sigma}\le C_Fe^{-\pi(\sigma^2-\sigma'^2)N^2/4}\widehat{\mathsf g_{\sigma'}}$. Hence, with
+$\eta_N:=\max(\eps_N,C_Fe^{-\pi(\sigma^2-\sigma'^2)N^2/4})\to0$, the function $R_{\sigma,N}+\eta_N\mathsf g_{\sigma'}$ lies in $\Cone_\ell\cap\Gc$. By (iii),
+$\Arch^\lambda(R_{\sigma,N})+\eta_N\Arch^\lambda(\mathsf g_{\sigma'})\ge0$; letting $N\to\infty$ and then $\sigma\to0$ gives $\Arch^\lambda(F)\ge0$.
+
+(ii)$\Rightarrow$(i). Every element of $\Gc$ is a real combination of the functions
+$e^{-\pi(t-a)^2/s^2}\cos(2\pi bt+\varphi)+e^{-\pi(t+a)^2/s^2}\cos(2\pi bt-\varphi)$. Let $\{F_j\}_{j\ge1}$ enumerate the rational combinations of these
+functions with rational parameters, together with all $A_T,B_X$ $(T,X\in\ZZ)$. Every $F\in\Gc$ is the limit of a sequence $F_{j_k}$ with
+$\|F_{j_k}-F\|_\delta\to0$ and $|F_{j_k}(t)|\le Ce^{-ct^2}$, $|\widehat{F_{j_k}}(\xi)|\le Ce^{-c\xi^2}$ for some $C,c>0$ independent of $k$. Put
+$P_W:=\sum_{T\in\ZZ}(1+|T|)^{-4}A_T$ and $Q_W:=\sum_{X\in\ZZ}e^{-2\pi|X|}B_X$; as in Part~I, Appendix~B.1.1, both series converge in
+$\|\cdot\|_{\delta'}$ for every $\delta'<\frac12$, $P_W,Q_W\in\Tc_{\delta'}\cap\ConeOPS$, $P_W(t)\ge c(1+|t|)^{-4}$ and
+$\widehat{Q_W}(\xi)\ge ce^{-2\pi|\xi|}$. Let $V_K:=\operatorname{span}\{F_1,\dots,F_K,P_W,Q_W\}$, $C_K:=\Cone_\ell\cap V_K$ and
+$\mathcal N(F):=\int F(t)e^{-t^2}\dd t$. If $F\in C_K\setminus\{0\}$, then $\mathcal N(F)>0$, because $F\ge0$ is continuous and not identically $0$; so by
+(ii) the functional $\Arch^\lambda_\eps:=\Arch^\lambda+\eps\mathcal N$ $(0<\eps\le1)$ is positive on $C_K\setminus\{0\}$. In $V_K^*$ let $\Gamma_K$ be
+the convex cone generated by the functionals $F\mapsto F(t)$ $(t\in\RR)$ and $F\mapsto\hF(\xi)/\pi$ $(\xi\in[\ell,\infty))$. Its dual cone in $V_K$ is
+$C_K$, so the dual cone of $C_K$ is $\overline{\Gamma_K}$ (bipolar theorem). Since $\{F\in C_K:\|F\|=1\}$ is compact for any norm on $V_K$, every
+functional close to $\Arch^\lambda_\eps|_{V_K}$ is positive on $C_K\setminus\{0\}$; so $\Arch^\lambda_\eps|_{V_K}$ is an interior point of
+$\overline{\Gamma_K}$, hence of $\Gamma_K$ \cite[Theorem~6.3]{Roc70}. By Carath\'eodory's theorem \cite[Theorem~17.1]{Roc70} there are finitely
+supported measures $\mu_K\ge0$ on $\RR$, which we may take even since $V_K$ consists of even functions, and $\nu_K\ge0$ on $[\ell,\infty)$, with
+$\Arch^\lambda_\eps=\Spec_{\mu_K,\nu_K}$ on $V_K$. Testing on $P_W$ and on $Q_W$, whose integrands are non-negative where the measures live, gives
+$\int(1+|t|)^{-4}\dd\mu_K\le B$ and $\int e^{-2\pi\xi}\dd\nu_K\le B$ with $B:=\pi c^{-1}\max\{\Arch^\lambda(P_W)+\mathcal N(P_W),
+\Arch^\lambda(Q_W)+\mathcal N(Q_W)\}$, which is independent of $K$, of $\eps\le1$ and of $\ell$. By Helly's selection theorem a subsequence converges
+vaguely to some $(\mu^\eps,\nu^\eps)$; $\nu^\eps$ is carried by the closed set $[\ell,\infty)$, and both bounds persist by lower semicontinuity. For fixed
+$j$ the identity $\Spec_{\mu_K,\nu_K}(F_j)=\Arch^\lambda_\eps(F_j)$ holds for $K\ge j$, and the Gaussian decay of $F_j$ and $\widehat{F_j}$ against the
+two bounds makes the contributions of $|t|>R$ and of $\xi>R$ small uniformly in $K$; so $\Spec_{\mu^\eps,\nu^\eps}(F_j)=\Arch^\lambda_\eps(F_j)$ for every
+$j$. Letting $\eps\to0$ along a sequence in the same way gives $(\mu,\nu)$, with $\nu$ on $[\ell,\infty)$, such that
+$\Spec_{\mu,\nu}(F_j)=\Arch^\lambda(F_j)$ for every $j$. By the density property of $\{F_j\}$, the continuity of $\Arch^\lambda$ on $\Tc_\delta$
+(Part~I, Lemma~2.2(c)) and dominated convergence, the identity holds on $\Gc$, and $(\mu,\nu)\in\Kad_\ell(\Arch^\lambda)$ by (b).
+\end{proof}
+
+\begin{remark}[Where the gap enters Part~I's proof]\label{rem:gap-uses}
+In Part~I, the gap enters the proofs of Lemma~2.6 and Theorem~2.7 (Appendices~B.1.1 and~B.1.2) in exactly the following places, and each is
+the corresponding step above with $\xin2$ replaced by $\ell$: (1) the support $[\xin2,\infty)$ of $\nu$ in Definition~\ref{def:admissible}, and with it the set
+carrying the vague limits in the proof of Part~I, Theorem~2.7(b), and in Helly's theorem; only the closedness of this set is used; (2) the sign condition
+$\hF\ge0$ on $[\xin2,\infty)$ in $\Cone$, used in weak duality (Part~I, Lemma~2.5), on $[\xin2,N/2]$ in the proof of (iii)$\Rightarrow$(ii), and in the
+identification of the dual cone of $\Gamma_K$; (3) the generators $F\mapsto\hF(\xi)/\pi$, $\xi\ge\xin2$, of $\Gamma_K$, hence the support of $\nu_K$;
+(4) the term $\int_{\xin2}^\infty\hF(\xi)e^{-\xi^2}\dd\xi$ of the auxiliary functional $\mathcal N$, which is not needed for its positivity on
+$C_K\setminus\{0\}$ and is omitted above; (5) the set $J=[X-1,X+1]\cap[\xin2,\infty)$ in the a priori bound for $\nu$. Every auxiliary function,
+namely $A_T$, $B_X$, $P_W$, $Q_W$ and $\mathsf g_{\sigma'}$, lies in $\ConeOPS$, hence in $\Cone_\ell$ for every $\ell$, and no estimate depends on the size of the
+gap. In Part~I, Section~2, the size of the gap enters only the lower bound of Proposition~2.8 and the moment bound (2.4) of Theorem~2.12,
+through the interval $(-\xin2,\xin2)$ on which $\hF$ is unconstrained; the duality theorem uses neither.
+\end{remark}
+
+\begin{remark}[The point $\xi=0$]\label{rem:xi0}
+For $\ell=0$ nothing goes wrong at the end point $\xi=0$. Mass of the approximating prime measures cannot blow up near $0$: testing on
+$Q_W\in\ConeOPS$ gives $\int e^{-2\pi\xi}\dd\nu_K\le B$. Mass that accumulates at $0$ becomes an atom at $0$ in the vague limit, which is allowed,
+since $\nu$ lives on the closed half-line $[0,\infty)$ and every $\hF$ is continuous at $0$. An atom $c\,\delta_0$ contributes $\frac c\pi\int F$,
+exactly as the density $\frac c\pi$ added to $\mu$; so $(\mu,\nu)\in\Kad_0(\Arch^\lambda)$ if and only if
+$(\mu+\frac c\pi\dd t,\nu-c\,\delta_0)\in\Kad_0(\Arch^\lambda)$, where $c=\nu(\{0\})$, and (a) remains true if one requires $\nu(\{0\})=0$ in
+the definition of $\Kad_0$ (but then $\Kad_0$ need not be closed). No closedness of a cone of representable functionals in infinite dimensions
+is used: the separation takes place in the finite-dimensional spaces $V_K$, at an interior point.
+\end{remark}

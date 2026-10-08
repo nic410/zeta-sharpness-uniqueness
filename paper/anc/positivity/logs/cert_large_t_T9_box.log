@@ -1,0 +1,16 @@
+# command : python positivity/run_on_box.py large_t 9 0.5 1 0.90 4 2000 8000
+# env     : (COEFF_DATA, COEFF_EXTRA, NGL, NSUB not set)
+# date    : 2026-10-08T18:40:49Z
+# system  : Linux x86_64, 1 visible cores
+# python  : 3.10.12 | python-flint 0.9.0 | mpmath 1.3.0
+run_on_box.py 916b9bbef306d608 ; boxlib 3d42eb955f76f781 ; running the UNCHANGED cert_large_t.py (sha 11a38aac755bf0ef) on the trivial-bound box
+box: a_1 in [[4425.193206 +/- 1.10e-7], [4707.097194 +/- 4.72e-7]], a_2 in [[1024479.78541 +/- 3.69e-6], [1027350.95717 +/- 4.25e-6]] ; every box hull for n <= 300 lies in (0, A0(n)): True
+cert_large_t: T0=9 kappa=0.5 Ys=1 Yz=0.9 Y3=4 Np=2000 Nn=8000; hashes poslib 6d1830c291015d03 cert_window 9f6e359deabc174b cert_large_t 11a38aac755bf0ef an_small 59fe6e24647252db an_cert 59d50f17db2199b1 extra none
+th_s = [0.9272952180 +/- 1.62e-12], th(Yz) = [1.014197009 +/- 2.16e-10], t_mono = [5.7536214 +/- 3.63e-8]
+(1a) min lower bound of g on [Yz, Ys] = [4.91871 +/- 5.24e-7]  (> 0 needed)
+(1b) min lower bound of g on [Ys, Y3] = [1.68071e-7 +/- 6.16e-14] ; p(T0) >= [2.69351335258 +/- 2.81e-12]  (13s)
+(2) n(T0) <= [1.71015174683 +/- 4.54e-12]  (7313 cells with possible g < 0)  (131s)
+(3) A_Phi = int_1^oo Phi in [6e+0 +/- 0.561]  (quad err <= [2.55e-17 +/- 3.35e-20], Y-tail <= [5.16e-32 +/- 3.07e-35]): A_Phi <= [5.70238132548 +/- 3.13e-12]
+p(T0) >= [2.69351335258 +/- 2.81e-12] ; n(T0) <= [1.71015174683 +/- 4.54e-12] ; A_Phi e^{-T0(pi/2-th_s)} <= [0.0174114696412 +/- 4.28e-14] ; margin = [0.965950136102 +/- 4.98e-13] ; ratio p/(n + axis term) >= [1.55914 +/- 2.55e-7]
+DECISIVE (all-Arb): Theorem L hypotheses verified for T0 = 9: True   (133s)
+# exit code 0; wall time 133.4 s

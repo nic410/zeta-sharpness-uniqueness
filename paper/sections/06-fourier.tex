@@ -4,8 +4,9 @@
 
 On $(1,\infty)$ the $\Gamma$-only transform is $\sin^2(\pi x)\sqrt x\sum_na_nK_0(4\pi\sqrt{nx})$ (Theorem~\ref{thm:lift}(c)), so the sign of
 $\Gh_{\rm raw}$ beyond $x=1$ is decided by the signs of the coefficients $a_n=n\Ss_n+\frac14\delta_{n1}$ of \eqref{eq:an}. This section proves that
-every $a_n$ is positive, with explicit two-sided bounds, using only the trivial bound for Kloosterman sums; and it records the certified value
-of the normalising constant.
+every $a_n$ is positive, with explicit two-sided bounds, using only the trivial bound for Kloosterman sums. It follows that $\Xi^2H_{\rm raw}$ is
+positive definite. This gives the sign of the normalising constant without computation (Section~\ref{ssec:C}), and, through the moments of the
+transform of $\Xi^2H_{\rm raw}$, the positivity of $H_{\rm raw}$ for $|t|\le10.355$ (Section~\ref{ssec:moments}).
 
 \subsection{The coefficients are positive}
 
@@ -22,16 +23,15 @@ For every $n\ge1$,
 \[
 \frac2{z_n}\ee(z_n)\,\lambda_-(z_n)\le\Ss_n\le\frac2{z_n}\ee(z_n)\,\lambda_+(z_n),
 \]
-and $\lambda_-$ is increasing on $[4\pi,\infty)$ with $\lambda_-(4\pi)=0.85010\ldots$. Hence $\Ss_n>0$ and $a_n>0$ for every $n\ge1$. The proof uses
-only the trivial bound $|S(\pm1,n;c)|\le\varphi(c)$; it involves no check over finitely many $n$, and its only numerical input is the
-evaluation of $\lambda_-$ at the single point $z=4\pi$.
+and $\lambda_-$ is increasing on $[4\pi,\infty)$ with $\lambda_-(4\pi)=0.85010\ldots$. Hence $\Ss_n>0$ and $a_n>0$ for every $n\ge1$.
 \end{theorem}
 
 \begin{theorem}[Two-sided bounds]\label{thm:an-bounds}
 For every $n\ge1$, $(1-2/z_n)\,\abar_n\le a_n\le\abar_n$.
 \end{theorem}
 
-The decisive numbers are elementary evaluations at the single point $z=4\pi$: $\lambda_0(4\pi)=0.877952$, $(\pi+1)z/(4\ee(z))=0.000403$, and the five
+The proofs use only the trivial bound $|S(\pm1,n;c)|\le\varphi(c)$ and involve no check over finitely many $n$. Their only numerical inputs are
+elementary evaluations at the single point $z=4\pi$: $\lambda_0(4\pi)=0.877952$, $(\pi+1)z/(4\ee(z))=0.000403$, and the five
 summands of $\varrho(4\pi)$ are $0.000250$, $0.002641$, $0.003145$, $0.015725$, $0.005683$, so $\lambda_-(4\pi)=0.850105$. We evaluated all of them
 in ball arithmetic as a check (Appendix~\ref{app:cert}); a pocket calculator suffices.
 
@@ -69,17 +69,30 @@ The bounds are sharp in the main term: the term $c=1$ alone is $nT_1=\frac{\sqrt
 Lemma~\ref{lem:bessel-basic}(c), and the certified values of Appendix~\ref{app:cert} show $\sum_{c\ge2}|\text{term}_c|\le3.6\cdot10^{-3}\,T_1$ for
 $n\le1500$, so Theorem~\ref{thm:an-positive} loses only a factor of about $8$ in $\varrho$.
 
+\emph{The trivial-bound box.} The proof of Theorem~\ref{thm:an-positive} gives more. With $T_1(z)=\Jdot(z)-\Idot(z)$ and $R_n$ as in that proof,
+$nT_1(z_n)$ is the term $c=1$ of $n\Ss_n$; put
+\begin{equation}\label{eq:box}
+c_n:=nT_1(z_n)+\tfrac14\delta_{n1},\qquad w_n:=\abar_n\varrho(z_n).
+\end{equation}
+Then $|a_n-c_n|=n|R_n|\le w_n$ for every $n$. We call the set $\TB$ of real sequences $(b_n)_{n\ge1}$ with $|b_n-c_n|\le w_n$ for every $n$ the
+\emph{trivial-bound box}; that $(a_n)\in\TB$ uses only $S(\pm1,n;1)=1$ and $|S(\pm1,n;c)|\le\varphi(c)$. By the two proofs above, every
+$(b_n)\in\TB$ satisfies $(1-2/z_n)\abar_n\le\abar_n\lambda_-(z_n)\le b_n\le\abar_n\lambda_+(z_n)+\frac14\delta_{n1}\le\abar_n$. The relative
+half-width $w_n/c_n$ is $3.09\cdot10^{-2}$, $1.40\cdot10^{-3}$ and $1.41\cdot10^{-4}$ for $n=1,2,3$. The two certificates on which the positivity
+of $H$ rests, Theorem~\ref{thm:moments} and Proposition~\ref{prop:L-numbers-box}, use the coefficients only through $(a_n)\in\TB$: each bound they
+certify holds for every sequence in $\TB$ in place of $(a_n)$.
+
 \begin{remark}[The Weil bound is not needed]
 The Weil--Estermann bound $|S(m,n;c)|\le d(c)(m,n,c)^{1/2}c^{1/2}$ \cite{Wei48,Est61} (see also \cite[Chapter~11]{IK04}) would improve the constants, but
 the trivial bound already suffices for every $n$. The Weil bound enters the paper only through the tails of the certified coefficient
-enclosures (Appendix~\ref{app:cert}), which are used by the window, by the numbers of the large-$|t|$ theorem and by the value of $C$.
+enclosures (Appendix~\ref{app:cert-coeffs}). In the proofs of the main results these are used only for the value of $C$
+(Proposition~\ref{prop:C}); they also enter the independent checks of Section~\ref{sec:physical}.
 \end{remark}
 
 \subsection{The normalising constant}\label{ssec:C}
 
 The function $H_{\rm raw}$ of Definition~\ref{def:Hraw} has $\Gamma$-only transform $\Gh_{\rm raw}$, whose coefficients are the $a_n$. The object of
-Theorem~\ref{thm:main-object} is normalised by $H(0)=1$, i.e.\ $H:=H_{\rm raw}/H_{\rm raw}(0)$, provided $H_{\rm raw}(0)\neq0$. Its sign is decided
-by the physical side: we prove in Section~\ref{sec:physical} that $H_{\rm raw}>0$ on all of $\RR$, so $H_{\rm raw}(0)>0$. The value is
+Theorem~\ref{thm:main-object} is normalised by $H(0)=1$, i.e.\ $H:=H_{\rm raw}/H_{\rm raw}(0)$, provided $H_{\rm raw}(0)\neq0$. The sign of
+$H_{\rm raw}(0)$ follows from the positivity of the $a_n$ without computation (Proposition~\ref{prop:posdef} below); its value is
 computer-assisted.
 
 \begin{proposition}[Computer-assisted]\label{prop:C}
@@ -95,9 +108,91 @@ is why its radius is small. With
 Theorem~\ref{thm:an-bounds}, Proposition~\ref{prop:C} gives the normalised bounds of Theorem~\ref{thm:main-object}:
 $C/(4\sqrt2\pi^2)\in[15.77370,15.77376]$.
 
-\begin{remark}[Sign coherence three times]\label{rem:sign}
-The positivity of $C$ follows in three independent ways: from Proposition~\ref{prop:C}; from the certified value $\Pi(0)>0$ of the physical-side
-function (Section~\ref{sec:physical}), since $H_{\rm raw}(0)=\Pi(0)/(2\pi^2\cdot\frac1{16})$; and, given only that $H_{\rm raw}$ has constant sign on
-$\RR$, from the exact identity $\int\Xi^2H_{\rm raw}=\frac1{32\pi^2}>0$ of Proposition~\ref{prop:C3}(b). The proof of the main theorems uses the
-second.
+\begin{proposition}[Positive definiteness]\label{prop:posdef}
+Put $F_{\rm raw}:=\Xi^2H_{\rm raw}$. For every $\xi\ge0$,
+\[
+\widehat{F_{\rm raw}}(\xi)=\sum_{m\ge1}d(m)\,m^{-1/2}\,\Gh_{\rm raw}(\xi+\xin m)\ge0,
+\]
+where the $m$-th argument is the point $me^{2\pi\xi}\ge1$ of the multiplicative coordinate; and $\widehat{F_{\rm raw}}$ is even, so
+$\widehat{F_{\rm raw}}\ge0$ on $\RR$. Consequently
+\[
+\Xi(0)^2H_{\rm raw}(0)=\int_\RR\widehat{F_{\rm raw}}(\xi)\dd\xi=\frac1\pi\sum_{m\ge1}\frac{d(m)}{\sqrt m}\int_m^\infty\Gh_{\rm raw}(x)\,\frac{\dd x}x>0,
+\]
+so $H_{\rm raw}(0)>0$ and $C:=1/H_{\rm raw}(0)>0$.
+\end{proposition}
+
+\begin{proof}
+By Proposition~\ref{prop:Hraw}(b),(c), $H_{\rm raw}\in\Wc_\delta$ for every $\delta\in(0,1)$, and its $\Gamma$-only transform is $\Gh_{\rm raw}$; fix
+$\delta\in(0,\frac12)$. Lemma~\ref{lem:voronoi}(c) gives the series for every real $\xi$. In the multiplicative coordinate $\Gh_{\rm raw}\ge0$ on
+$[1,\infty)$: for $x>1$ by \eqref{eq:Graw} and Theorem~\ref{thm:an-positive}, and $\Gh_{\rm raw}(1)=\frac1{32\pi^2}$. So every term is non-negative
+when $\xi\ge0$. $F_{\rm raw}$ is even and real on $\RR$ (Proposition~\ref{prop:Hraw}(a)) and lies in $\Tc_\delta$ (Lemma~\ref{lem:voronoi}(a)); so
+$\widehat{F_{\rm raw}}$ is real, even and integrable (Lemma~\ref{lem:I-decay}), and Fourier inversion holds at $t=0$, as $F_{\rm raw}$ and
+$\widehat{F_{\rm raw}}$ are continuous and integrable. Since $\widehat{F_{\rm raw}}$ is continuous and non-negative, with
+$\widehat{F_{\rm raw}}(0)=\int F_{\rm raw}=\frac1{32\pi^2}$ (Proposition~\ref{prop:C3}(b)), $\int\widehat{F_{\rm raw}}>0$. The series form follows from
+Tonelli's theorem and the substitution $x=me^{2\pi\xi}$ in the $m$-th term. Finally $\Xi(0)$ is real, so $\Xi(0)^2H_{\rm raw}(0)>0$ forces
+$H_{\rm raw}(0)>0$.
+\end{proof}
+
+Proposition~\ref{prop:posdef} is dual to Proposition~\ref{prop:C3}(b). The identity $\int F_{\rm raw}=\widehat{F_{\rm raw}}(0)=\frac1{32\pi^2}$ fixes
+the sign of $C$ only once $H_{\rm raw}$ is known to have constant sign; the identity $F_{\rm raw}(0)=\int\widehat{F_{\rm raw}}$ needs only
+$\widehat{F_{\rm raw}}\ge0$, which the positivity of the $a_n$ provides. For $F=CF_{\rm raw}$ the inequality $\hF\ge0$ is part of
+Theorem~\ref{thm:main-S}(a); the point is that the proof above does not use the sign of $C$ (in particular it does not use
+Theorem~\ref{thm:main-object}(b), which is stated for $H=CH_{\rm raw}$), so it determines that sign.
+
+\begin{remark}[Checks of the normalising constant]\label{rem:sign}
+The proofs of the main theorems take the sign of $C$ from Proposition~\ref{prop:posdef}. Two computations confirm it, Proposition~\ref{prop:C} and
+the certified enclosure of $\Pi(0)>0$ in Theorem~\ref{thm:window} (as $H_{\rm raw}(0)=8\Pi(0)/\pi^2$ by Theorem~\ref{thm:F}); so does the identity of
+Proposition~\ref{prop:C3}(b), given that $H_{\rm raw}$ has constant sign on $\RR$. The value of Proposition~\ref{prop:C} is
+confirmed by the moment certificate of Section~\ref{ssec:moments} with the certified coefficients, which encloses $M_0=\int\widehat{F_{\rm raw}}$ and so
+gives $H_{\rm raw}(0)=M_0/\Xi(0)^2=0.0011355178\pm1.5\cdot10^{-8}$; this enclosure contains that of Proposition~\ref{prop:C}. (A
+floating-point evaluation of $M_0$, which is not part of the certificates, agrees with Proposition~\ref{prop:C} to $3.5\cdot10^{-12}$.)
+\end{remark}
+
+\subsection{Positivity near \texorpdfstring{$t=0$}{t = 0}}\label{ssec:moments}
+
+Proposition~\ref{prop:posdef} is the case $t=0$ of a lower bound for $F_{\rm raw}(t)$ by the moments of $\widehat{F_{\rm raw}}$. For $j\ge0$ put
+\begin{equation}\label{eq:moments}
+M_{2j}:=\int_\RR\xi^{2j}\,\widehat{F_{\rm raw}}(\xi)\dd\xi=\frac1\pi\int_1^\infty W_j(x)\,\Gh_{\rm raw}(x)\,\frac{\dd x}x,
+\end{equation}
+where $W_j(x):=\sum_{m\le x}d(m)m^{-1/2}(\log(x/m)/2\pi)^{2j}$; the second form follows as the series form in Proposition~\ref{prop:posdef}. The moments are finite, since $\widehat{F_{\rm raw}}$ decays
+exponentially (Lemma~\ref{lem:I-decay}), and positive.
+
+\begin{lemma}[Moment minorant]\label{lem:moments}
+For every real $t$ and every integer $K\ge0$,
+\[
+F_{\rm raw}(t)=\int_\RR\widehat{F_{\rm raw}}(\xi)\cos(2\pi\xi t)\dd\xi\ \ge\ P_K(t):=\sum_{j=0}^{2K+1}(-1)^j\frac{(2\pi t)^{2j}}{(2j)!}\,M_{2j}.
+\]
+If $P_K(t)>0$, then $\Xi(t)\ne0$ and $H_{\rm raw}(t)>0$.
+\end{lemma}
+
+\begin{proof}
+The integral is Fourier inversion, as in the proof of Proposition~\ref{prop:posdef}, together with evenness. Let
+$T_k(y):=\sum_{j\le k}(-1)^jy^{2j}/(2j)!$. Starting from $\cos y\le1$ and $\sin y\le y$ and integrating from $0$, induction on $k$ gives
+$(-1)^{k+1}(\cos y-T_k(y))\ge0$ for $y\ge0$ and every $k\ge0$. For $k=2K+1$, where the truncation stops after a negative term, and by evenness,
+$\cos y\ge T_{2K+1}(y)$ for every real $y$. Put $y=2\pi\xi t$ and integrate against $\widehat{F_{\rm raw}}\ge0$ (Proposition~\ref{prop:posdef}).
+Finally $F_{\rm raw}(t)=\Xi(t)^2H_{\rm raw}(t)$ with $\Xi(t)$ real, so $F_{\rm raw}(t)>0$ forces $\Xi(t)\ne0$ and $H_{\rm raw}(t)>0$.
+\end{proof}
+
+\begin{theorem}[Moment certificate; computer-assisted]\label{thm:moments}
+$P_7(t)>0$ for every real $t$ with $|t|\le10.355$; hence $H_{\rm raw}(t)>0$ there. The certificate uses the coefficients only through
+$(a_n)\in\TB$: the lower bound for $P_7(t)$ that it certifies holds for every sequence in $\TB$ in place of $(a_n)$.
+\end{theorem}
+
+The certificate (Appendix~\ref{app:cert-M}) bounds $P_7(t)$ from below uniformly on $\TB$, through enclosures of the sixteen moments
+$M_0,\dots,M_{30}$ of the centre sequence of $\TB$ and of the first eight coefficients separately, with all quadrature, truncation and tail
+errors. One set of moments covers the whole interval, since $P_7$ is a polynomial in $t$; no Taylor model in $t$ is needed.
+With the certified enclosures of the $a_n$ (Appendix~\ref{app:cert-coeffs}) in place of $\TB$, the same computation gives $P_7(t)>0$ for
+$|t|\le10.402$. No $P_K$ can be positive at $t=14.1347\ldots$, the first zero of $\zeta$ on the critical line, where $F_{\rm raw}$ vanishes;
+Theorem~\ref{thm:large-t-box} covers $|t|\ge9$.
+
+\begin{remark}[Conditioning, and the elementary range]\label{rem:moments}
+Lemma~\ref{lem:moments} is well conditioned near $t=0$. Every coefficient enters $M_0=F_{\rm raw}(0)$ with a positive weight, so the condition
+number of $F_{\rm raw}(0)$ as a function of the coefficients is $1$, against about $6\cdot10^5$ for $\Pi(0)$ (Remark~\ref{rem:conditioning}); and
+$\int\widehat{F_{\rm raw}}(\xi)|\cos(2\pi\xi t)|\dd\xi/F_{\rm raw}(t)$, which measures the cancellation in Lemma~\ref{lem:moments}, is $1.0000$,
+$1.047$, $1.495$, $3.083$ and $9.34$ at $t=0,4,6,8,10$. This is why the box $\TB$, whose half-width for $a_1$ is $3\%$, suffices. With the
+elementary bounds for $\Gh_{\rm raw}$ that Theorem~\ref{thm:an-bounds} and the bounds
+$\sqrt{\pi/2y}\,e^{-y}(1-\frac1{8y})\le K_0(y)\le\sqrt{\pi/2y}\,e^{-y}$ give, instead of certified values of all the moments, $P_0$ shows
+$H_{\rm raw}(t)>0$ for $|t|<4.4699$, and for $|t|<5.1995$ if $a_1$ is kept in its interval in $\TB$. These two ranges rest on two
+one-dimensional integrals, a lower bound for $M_0$ and an upper bound for $M_2$, which we evaluated in Arb (Appendix~\ref{app:cert-M}); they are not
+used in the proofs.
 \end{remark}

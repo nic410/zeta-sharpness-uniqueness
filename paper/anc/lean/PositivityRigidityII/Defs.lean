@@ -77,6 +77,10 @@ def CondC4 (H : ℂ → ℂ) : Prop := ∀ ξ : ℝ, xi2 ≤ ξ → 0 ≤ GammaF
 gives `F ∈ 𝒞_OPS`. -/
 def CondC4Zero (H : ℂ → ℂ) : Prop := ∀ ξ : ℝ, 0 ≤ ξ → 0 ≤ GammaFT H ξ
 
+/-- `Ĝ_H > 0` on the window `[0, ξ₂)` (`1 ≤ x < 2`): the strict positivity of the Γ-only transform used in the proof
+of Corollary 8.2 (`cor:nogap`, "The classical cone"), part (a). -/
+def CondWindow (H : ℂ → ℂ) : Prop := ∀ ξ : ℝ, 0 ≤ ξ → ξ < xi2 → 0 < GammaFT H ξ
+
 /-- (C5) `Ĝ_H(0) > 0` (`x = 1`); automatic under (C2) and (C3) for `H ≢ 0` (`condC5_of`). -/
 def CondC5 (H : ℂ → ℂ) : Prop := 0 < GammaFT H 0
 

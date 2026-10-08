@@ -33,11 +33,11 @@ theorem ZF_Xi_sq_mul {H : ℂ → ℂ} (h2 : CondC2Strict H) :
 
 /-- **The object, normalised** (`sec:assembly`: `H := C H_raw`, `C = 1/H_raw(0) > 0`).  There is a Γ-only
 integer-critical function `H` (`H ∈ 𝒲_δ` for some `δ < 1/2`, `H(0) = 1`, (C2)–(C4)) that is positive on `ℝ`, with
-`Ĝ_H ≥ 0` on `[0, ∞)` and (C5). -/
+`Ĝ_H ≥ 0` on `[0, ∞)`, (C5), and `Ĝ_H > 0` on the window `[0, ξ₂)`. -/
 theorem exists_object :
     ∃ H : ℂ → ℂ, ∃ δ : ℝ, δ < 1 / 2 ∧ IntegerCritical δ H ∧ CondC2Strict H ∧ CondC4Zero H ∧
-      CondC5 H := by
-  obtain ⟨H₀, ⟨δ, hδ, hW⟩, h3, h4z, h2s⟩ := exists_integer_critical_object
+      CondC5 H ∧ CondWindow H := by
+  obtain ⟨H₀, ⟨δ, hδ, hW⟩, h3, h4z, hwin, h2s⟩ := exists_integer_critical_object
   have h00 : 0 < H₀ 0 := by simpa using h2s 0
   obtain ⟨hre, him⟩ := Complex.pos_iff.mp h00
   set r : ℝ := (H₀ 0).re with hr
@@ -59,7 +59,10 @@ theorem exists_object :
   have hne : ∃ z ∈ closedStrip (1 / 2 + δ), H z ≠ 0 :=
     ⟨0, by show |(0 : ℂ).im| ≤ 1 / 2 + δ; rw [Complex.zero_im, abs_zero]; linarith [hW.pos],
       by rw [hH0]; exact one_ne_zero⟩
-  exact ⟨H, δ, hδ, ⟨hWH, hH0, h2H, h3H, h4H⟩, h2sH, h4zH, condC5_of hWH hδ hne h2H h3H⟩
+  have hwinH : CondWindow H := fun ξ h0 h1 => by
+    rw [hHdef, GammaFT_smul]
+    exact mul_pos (Complex.zero_lt_real.mpr hcpos) (hwin ξ h0 h1)
+  exact ⟨H, δ, hδ, ⟨hWH, hH0, h2H, h3H, h4H⟩, h2sH, h4zH, condC5_of hWH hδ hne h2H h3H, hwinH⟩
 
 /-- **Theorem `thm:main-S`, first part: the function `H` and the exact magic function `F = Ξ² H`.**  There is a
 function `H` with `H ∈ 𝒲_δ` for some `δ ∈ (0, 1/2)` (even, real on `ℝ`, analytic near `S_δ`, with (C1)), `H(0) = 1`
@@ -78,7 +81,7 @@ theorem theorem1_object :
       0 < intR (fun z => Xi z ^ 2 * H z) ∧ Arch (fun z => Xi z ^ 2 * H z) = 0 ∧
       (fun z => Xi z ^ 2 * H z) ∈ Cone ∧ IsExactMagic (fun z => Xi z ^ 2 * H z) ∧
       ZF (fun z => Xi z ^ 2 * H z) = Zzeta := by
-  obtain ⟨H, δ, hδ, hIC, h2s, h4z, -⟩ := exists_object
+  obtain ⟨H, δ, hδ, hIC, h2s, h4z, -, -⟩ := exists_object
   obtain ⟨hW, hH0, h2, h3, h4⟩ := hIC
   have hne : ∃ z ∈ closedStrip (1 / 2 + δ), H z ≠ 0 :=
     ⟨0, by show |(0 : ℂ).im| ≤ 1 / 2 + δ; rw [Complex.zero_im, abs_zero]; linarith [hW.pos],

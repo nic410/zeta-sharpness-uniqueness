@@ -42,3 +42,18 @@ requires the output to equal `axioms.log`, its `# ` header lines excepted, exact
 #print axioms PosRigII.voronoiTerm_one
 #print axioms PosRigII.xiOf_add_natCast
 #print axioms PosRigII.hasDerivAt_eq_zero_of_nonneg
+-- Corollary 8.2 (cor:nogap, "The classical cone") and Lemma C.1 (lem:transfer), Appendix C
+#print axioms PosRigII.rh_iff_kappaOPS_zero
+#print axioms PosRigII.corollary8_2
+#print axioms PosRigII.corollary8_2_b
+#print axioms PosRigII.FT_window
+#print axioms PosRigII.kappaStar_nonneg_iff_kappaOPS_nonneg
+#print axioms PosRigII.arch_nonneg_Cone_iff_ConeOPS
+#print axioms PosRigII.transfer
+#print axioms PosRigII.transfer_Arch
+#print axioms PosRigII.Arch_add
+#print axioms PosRigII.TestClass.add
+#print axioms PosRigII.TestClass.integrable_re_mul_Ωinf
+#print axioms PosRigII.ConeG_zero_eq
+#print axioms PosRigII.slack_anti
+#print axioms PosRigII.FT_re_ge_GammaFT_re

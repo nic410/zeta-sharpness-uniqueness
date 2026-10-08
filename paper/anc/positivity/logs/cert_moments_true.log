@@ -1,0 +1,45 @@
+# command : python positivity/cert_moments.py true 1500 15 12 9 128 6
+# env     : (COEFF_DATA, COEFF_EXTRA, NGL, NSUB not set)
+# date    : 2026-10-08T18:43:30Z
+# system  : Linux x86_64, 6 visible cores
+# python  : 3.10.12 | python-flint 0.9.0 | mpmath 1.3.0
+cert_moments.py mode=true NMAX=1500 J=15 T=12 T_req=9 prec=128 nodes/panel=24 KG=22 XMAX=40
+hashes: script 22be4eba843685fa boxlib 3d42eb955f76f781 besselk 3d3fd6601742c49b ; an_cert_X1e4.json 59d50f17db2199b1 an_small_X1e4.json 59fe6e24647252db extra_smalln_X3e5.json ff4b86318eed86f1
+a_1 = [4581.371 +/- 5.16e-4]   a_2 = [1025727.235 +/- 3.49e-4]
+node values: 2376 nodes in 14s
+min lower end of Ghat over all nodes: [1.7721e-36 +/- 4.48e-41]
+M_0  = [0.00028062 +/- 4.23e-9]   (rel. radius 1.31e-05 ; quad err 2.1e-17 ; sliver 2.4e-10 ; tail 6.0e-31)
+M_2  = [3.250184e-7 +/- 4.70e-14]   (rel. radius 4.61e-08 ; quad err 4.8e-20 ; sliver 3.5e-25 ; tail 2.1e-31)
+M_4  = [1.1136888e-9 +/- 1.15e-17]   (rel. radius 9.98e-09 ; quad err 2.2e-22 ; sliver 5.0e-40 ; tail 7.5e-32)
+M_6  = [7.769343e-12 +/- 5.24e-19]   (rel. radius 1.20e-08 ; quad err 1.2e-24 ; sliver 7.2e-55 ; tail 2.7e-32)
+M_8  = [1.0605239e-13 +/- 3.43e-21]   (rel. radius 1.35e-08 ; quad err 7.7e-27 ; sliver 1.0e-69 ; tail 9.4e-33)
+M_10 = [2.2828990e-15 +/- 4.09e-23]   (rel. radius 1.42e-08 ; quad err 4.9e-29 ; sliver 1.5e-84 ; tail 3.3e-33)
+M_12 = [6.444186e-17 +/- 3.23e-24]   (rel. radius 1.45e-08 ; quad err 3.2e-31 ; sliver 2.1e-99 ; tail 1.2e-33)
+M_14 = [2.2282959e-18 +/- 4.55e-26]   (rel. radius 1.47e-08 ; quad err 2.0e-33 ; sliver 3.1e-114 ; tail 4.2e-34)
+M_16 = [9.183902e-20 +/- 3.89e-27]   (rel. radius 1.48e-08 ; quad err 1.3e-35 ; sliver 4.4e-129 ; tail 1.5e-34)
+M_18 = [4.4070349e-21 +/- 6.57e-29]   (rel. radius 1.48e-08 ; quad err 8.5e-38 ; sliver 6.4e-144 ; tail 5.3e-35)
+M_20 = [2.4092076e-22 +/- 4.73e-30]   (rel. radius 1.49e-08 ; quad err 5.5e-40 ; sliver 9.2e-159 ; tail 1.9e-35)
+M_22 = [1.4747641e-23 +/- 6.66e-31]   (rel. radius 1.49e-08 ; quad err 3.5e-42 ; sliver 1.3e-173 ; tail 6.8e-36)
+M_24 = [9.978235e-25 +/- 2.07e-32]   (rel. radius 1.49e-08 ; quad err 2.3e-44 ; sliver 1.9e-188 ; tail 2.4e-36)
+M_26 = [7.386384e-26 +/- 4.57e-33]   (rel. radius 1.50e-08 ; quad err 1.5e-46 ; sliver 2.7e-203 ; tail 8.7e-37)
+M_28 = [5.931737e-27 +/- 5.79e-34]   (rel. radius 1.50e-08 ; quad err 9.5e-49 ; sliver 4.0e-218 ; tail 3.1e-37)
+M_30 = [5.1308468e-28 +/- 9.59e-36]   (rel. radius 1.51e-08 ; quad err 6.2e-51 ; sliver 5.7e-233 ; tail 1.1e-37)
+[C] F(0) = M_0 = [0.00028062 +/- 4.23e-9] > 0 : True
+[cross-check, not used in any proof] Xi(0) = [0.4971207781883 +/- 1.42e-14] ; M_0/Xi(0)^2 = H_raw(0) in [0.001135517760 +/- 1.49e-8] ; Proposition 6.4: [0.0011355097904 +/- 1.87e-9] ; overlap: True
+[C] F( 0) = [0.00028062 +/- 4.47e-9] ; int Fhat |cos| = [0.00028062 +/- 4.23e-9] ; conditioning int|.|/F = [1.0000 +/- 2.62e-5]
+[C] F( 2) = [0.00025607 +/- 6.94e-9] ; int Fhat |cos| = [0.00025622 +/- 4.68e-9] ; conditioning int|.|/F = [1.0006 +/- 5.96e-5]
+[C] F( 4) = [0.00019413 +/- 6.09e-9] ; int Fhat |cos| = [0.00020324 +/- 4.06e-9] ; conditioning int|.|/F = [1.0469 +/- 7.59e-5]
+[C] F( 6) = [0.00012036 +/- 6.32e-9] ; int Fhat |cos| = [0.00017996 +/- 8.22e-9] ; conditioning int|.|/F = [1.4951 +/- 8.74e-5]
+[C] F( 8) = [5.800e-5 +/- 4.56e-9] ; int Fhat |cos| = [0.00017879 +/- 3.75e-9] ; conditioning int|.|/F = [3.083 +/- 7.21e-4]
+[C] F(10) = [1.914e-5 +/- 6.70e-9] ; int Fhat |cos| = [0.00017866 +/- 3.68e-9] ; conditioning int|.|/F = [9.34 +/- 6.21e-3]
+[C] F(12) = [3.03e-6 +/- 8.51e-9] ; int Fhat |cos| = [0.00017866 +/- 3.90e-9] ; conditioning int|.|/F = [5.9e+1 +/- 0.131]
+moment bound with M_0..M_2: F > 0 certified on [0, 6.61328125]
+moment bound with M_0..M_6: F > 0 certified on [0, 7.89843750]
+moment bound with M_0..M_10: F > 0 certified on [0, 8.47656250]
+moment bound with M_0..M_14: F > 0 certified on [0, 9.01562500]
+moment bound with M_0..M_18: F > 0 certified on [0, 9.50000000]
+moment bound with M_0..M_22: F > 0 certified on [0, 9.91796875]
+moment bound with M_0..M_26: F > 0 certified on [0, 10.23046875]
+moment bound with M_0..M_30: F > 0 certified on [0, 10.40234375]
+DECISIVE (Certificate M, mode=true): F(t) = Xi(t)^2 H_raw(t) > 0, hence H_raw(t) > 0, for |t| <= 10.40234375 (moments M_0..M_30) ; covers [0, 9]: True   (20s)
+# exit code 0; wall time 20.0 s

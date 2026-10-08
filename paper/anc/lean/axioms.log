@@ -1,5 +1,5 @@
 # command : taskset -c 10-13 lake env lean scripts/print_axioms.lean
-# date    : 2026-10-08T11:23:40Z
+# date    : 2026-10-08T17:39:30Z
 # toolchain: leanprover/lean4:v4.33.0-rc2; Mathlib 51e6992efd06126df61a496bebf8f49482a4e129; Zeta23 fbdc36bbf17d20af3fd0447c6d1a8a02773c9844; Part I spine (PositivityRigidity): github.com/nic410/zeta-positive-solutions, tag v1.3, commit 5bed664909d161fb148a0232e715f55f9a520f1b, paper/anc/lean
 # Every theorem depends only on the two ledger axioms of Part II (PosRigII.*, PositivityRigidityII/Ledger.lean), ledger axioms of Part I (PosRig.*), and propext, Classical.choice, Quot.sound.
 'PosRigII.theorem1' depends on axioms: [propext,
@@ -134,3 +134,59 @@
 'PosRigII.voronoiTerm_one' depends on axioms: [propext, Classical.choice, Quot.sound]
 'PosRigII.xiOf_add_natCast' depends on axioms: [propext, Classical.choice, Quot.sound]
 'PosRigII.hasDerivAt_eq_zero_of_nonneg' depends on axioms: [propext, Classical.choice, Quot.sound]
+'PosRigII.rh_iff_kappaOPS_zero' depends on axioms: [propext,
+ Classical.choice,
+ PosRig.duality_no_gap,
+ PosRig.explicit_formula,
+ PosRig.logic_b,
+ PosRig.xi_decay,
+ PosRig.zero_support_rigidity,
+ PosRigII.exists_integer_critical_object,
+ PosRigII.voronoi_decoupling,
+ Quot.sound]
+'PosRigII.corollary8_2' depends on axioms: [propext,
+ Classical.choice,
+ PosRig.duality_no_gap,
+ PosRig.explicit_formula,
+ PosRig.logic_b,
+ PosRig.xi_decay,
+ PosRig.zero_support_rigidity,
+ PosRigII.exists_integer_critical_object,
+ PosRigII.voronoi_decoupling,
+ Quot.sound]
+'PosRigII.corollary8_2_b' depends on axioms: [propext,
+ Classical.choice,
+ PosRig.explicit_formula,
+ PosRig.xi_decay,
+ PosRigII.exists_integer_critical_object,
+ PosRigII.voronoi_decoupling,
+ Quot.sound]
+'PosRigII.FT_window' depends on axioms: [propext,
+ Classical.choice,
+ PosRig.explicit_formula,
+ PosRig.xi_decay,
+ PosRigII.exists_integer_critical_object,
+ PosRigII.voronoi_decoupling,
+ Quot.sound]
+'PosRigII.kappaStar_nonneg_iff_kappaOPS_nonneg' depends on axioms: [propext,
+ Classical.choice,
+ PosRig.explicit_formula,
+ PosRig.xi_decay,
+ PosRigII.exists_integer_critical_object,
+ PosRigII.voronoi_decoupling,
+ Quot.sound]
+'PosRigII.arch_nonneg_Cone_iff_ConeOPS' depends on axioms: [propext,
+ Classical.choice,
+ PosRig.explicit_formula,
+ PosRig.xi_decay,
+ PosRigII.exists_integer_critical_object,
+ PosRigII.voronoi_decoupling,
+ Quot.sound]
+'PosRigII.transfer' depends on axioms: [propext, Classical.choice, Quot.sound]
+'PosRigII.transfer_Arch' depends on axioms: [propext, Classical.choice, Quot.sound]
+'PosRigII.Arch_add' depends on axioms: [propext, Classical.choice, Quot.sound]
+'PosRigII.TestClass.add' depends on axioms: [propext, Classical.choice, Quot.sound]
+'PosRigII.TestClass.integrable_re_mul_Ωinf' depends on axioms: [propext, Classical.choice, Quot.sound]
+'PosRigII.ConeG_zero_eq' depends on axioms: [propext, Classical.choice, Quot.sound]
+'PosRigII.slack_anti' depends on axioms: [propext, Classical.choice, Quot.sound]
+'PosRigII.FT_re_ge_GammaFT_re' depends on axioms: [propext, Classical.choice, Quot.sound]

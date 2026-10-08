@@ -3,9 +3,17 @@
 This directory contains the computer-assisted certificates of the paper *Sharpness and uniqueness for positive solutions
 of the explicit formula for ζ(s)* (Part II of a series). The companion paper *Positive solutions of the explicit formula
 for ζ(s): near-criticality and uniqueness* is called Part I. The directory holds the exact input files, standalone verification
-scripts and logs of fresh runs of the shipped scripts on the shipped inputs. Sections 3–9 list each certificate with its
-statement, method, inputs (SHA-256), exact command, expected output and runtime. Section 13 describes the data and script
-of Figure 1 of the paper, which is an illustration and not a certificate.
+scripts and logs of fresh runs of the shipped scripts on the shipped inputs. Sections 3–13 list each certificate with its
+statement, method, inputs (SHA-256), exact command, expected output and runtime:
+- Sections 3 and 4: the two positivity certificates on which the proofs of the paper rest (Theorem 6.8 and
+  Proposition 7.10). They use the coefficients only through the trivial-bound box: the term c = 1 of each a_n and the
+  trivial bound |S(±1, n; c)| ≤ φ(c) for the others.
+- Sections 5–11: checks that are not used in the proofs (Section 6 is the elementary range of Remark 6.9; Sections 7–9
+  are the positivity certificates of versions 1.0–1.2, which use the certified coefficient balls).
+- Sections 12 and 13: the certified coefficient balls and the normalising constant C, whose value enters Theorem 4(b) and
+  Table 1 of the paper.
+
+Section 17 describes the data and script of Figure 1 of the paper, which is an illustration and not a certificate.
 
 The directory `lean/` (if present) is a separate component with its own README. It is not described here and is not
 covered by `SHA256SUMS`.
@@ -19,11 +27,11 @@ covered by `SHA256SUMS`.
 - Run every command from this directory (the top directory of the ancillary files). Scripts locate their inputs relative
   to their own location: the Part I library in `lib/` and the coefficient files in `coefficients/data/`. The scripts of
   `coefficients/` write their results to `coefficients/out/` and read the results of earlier steps from there; the
-  Kloosterman tables are cached in `coefficients/cache/` (Section 8).
+  Kloosterman tables are cached in `coefficients/cache/` (Section 12).
 - **Environment variables** read by the scripts:
   - `COEFF_EXTRA`: path of the file with sharper balls for the first coefficients. The shipped runs of
-    Sections 3, 4 and 5 set it to `coefficients/data/extra_smalln_X3e5.json`. `check_r0.py` uses that file by default,
-    and `negctl.py` ignores the variable.
+    Sections 7, 8 and 9 set it to `coefficients/data/extra_smalln_X3e5.json`. `check_r0.py` uses that file by default,
+    `negctl.py` and `run_on_box.py` ignore the variable, and the scripts of Sections 3, 5 and 6 do not read it.
   - `COEFF_DATA`: directory of the coefficient files, written with a final `/` (default `coefficients/data/`).
   - `NGL`: Gauss–Legendre nodes per panel (default 30).
   - `NSUB`: sub-balls per cell in `run_window.py` (default 8).
@@ -44,54 +52,221 @@ covered by `SHA256SUMS`.
     they are;
   - to choose the ellipse parameters ρ;
   - for truncation and loop control;
-  - to enlarge the stored coefficient radii.
+  - to enlarge the stored coefficient radii;
+  - in `cert_moments.py`, to pass balls between worker processes as (decimal midpoint, exact radius, a bound for the
+    decimal rounding of the midpoint); the sender asserts that the rebuilt ball contains the original.
 
   In `coefficients/`, binary64 numbers also hold the midpoints of the Arb-DFT Kloosterman tables (with one rigorous
   radius per table), and `kloost_fast.py` computes Kloosterman sums in binary64 with an a-priori bound for all rounding
-  errors (Section 8); both enter Arb as balls with these radii.
+  errors (Section 12); both enter Arb as balls with these radii.
 - **Lower and upper bounds.** A certified lower or upper bound is an exact binary number computed in Arb, for example the
   minimum of the lower endpoints over the sub-balls of a cell. It is printed as a decimal ball `[m +/- r]` that contains
   it, so the lower end of the printed ball of a lower bound is again a lower bound, and the upper end of the printed ball
   of an upper bound is again an upper bound. The verdicts (`ok=True`, `R(0) > 0: True`, the `DECISIVE` lines) are exact
   Arb comparisons, not comparisons of printed decimals.
-- **Verdicts and checks.** The result of each certificate is its `DECISIVE` line (Sections 3, 4, 5, 7, 8 and 9; Section 6 has
+- **Verdicts and checks.** The result of each certificate is its `DECISIVE` line (Sections 3–9 and 11–13; Section 10 has
   the line `[certified] R(0) in [...] ... R(0) > 0: True`).
   - The scripts exit with code 0 whether the verdict is `True` or `False`, so the verdict line is the result, not the
     exit code.
   - Preconditions and internal checks are Python `assert` statements or raise `ValueError`; a failing check stops the run
     with a traceback and a non-zero exit code. These include the coverage of [T_A, T_B] by the cells, r_t < 3/2, the
     admissibility of the ellipse boxes, the ratio bounds of the geometric tails of the K₀-sums, of the conical series
-    and of the Y-tail, the bracket constant < 0.6 and the overlap of coefficient balls from different files; in
+    and of the Y-tail, the bracket constant < 0.6, the overlap of coefficient balls from different files, the admissibility
+  of the ellipse boxes of `cert_moments.py` (Re x > 1), the containment of the balls passed between processes, and
+  that every interval of the trivial-bound box lies in (0, A0(n)] (`run_on_box.py`); in
     `coefficients/`, also the hypotheses of the c-tail bounds (X ≥ 4π√n) and Q0² > X.
   - `python -O` removes `assert` statements, so the scripts must be run without `-O` and without `PYTHONOPTIMIZE`.
     `runlog.sh` refuses to run in either case.
 - **Bessel functions.** K₀ for real arguments comes from `lib/besselk.py`: Part I's library, shipped byte-identical, with
   the DLMF 10.31 series and the DLMF 10.40 asymptotics with the error bound of DLMF 10.40(ii). Complex arguments occur
-  only through the majorant |K₀(z)| ≤ K₀(Re z) (Re z > 0). In `positivity/`, Arb's own `bessel_k` is not used. In
+  only through the majorant |K₀(z)| ≤ K₀(Re z) (Re z > 0). In `positivity/`, Arb's own `bessel_k` is used only by
+  `cert_elementary.py` (Section 6; not used in any proof), at exact (midpoint) complex arguments with a derivative bound
+  for the radius, as in Section 13. In
   `coefficients/`, K₀ and K₁ for real arguments also come from `lib/besselk.py` and the other Bessel functions
   (I₀, I₁, I₂, J₀, J₁, J₂, Y₂) from Arb; `cert_H0.py` and `cert_Ht.py` call Arb's `bessel_k` only at exact (midpoint)
-  complex arguments and add a derivative bound for the radius (Section 9).
+  complex arguments and add a derivative bound for the radius (Section 13).
 - `tools/logdiff.py` compares a re-run log, or the window output JSON, with the shipped one after removing dates, the
-  system line and timings (Section 11).
+  system line and timings (Section 15).
 
 ## 2. Layout
 
 | Path | Contents |
 |---|---|
-| `positivity/` | The positivity certificates for R (Sections 3–7). `poslib.py`: library (coefficient balls and the n-tail bound, the K₀-sums A and B, the conical functions P_{−1/2+it} by hypergeometric series with Arb tail bounds, Gauss–Legendre nodes). `cert_window.py`: certificate W on one cell (Taylor model in t with all error terms). `run_window.py`: the driver over [T_A, T_B] (8 worker processes). `cert_large_t.py`: the numerical hypotheses of Theorem L at T₀. `cert_gtail.py`: B > 0 on [4, ∞). `check_r0.py`: the enclosure of R(0). `negctl.py`: the negative control. `positivity/logs/` holds the logs of the shipped runs, and `positivity/out/` the per-cell output of the window run (JSON). |
-| `coefficients/` | The coefficient certificates (Sections 8 and 9). `coefflib.py`: library (the Bessel order derivatives J̇₂, İ₂, the Kloosterman tables by Arb DFT with twisted multiplicativity, the c-tail bounds). `kloost_fast.py`: Kloosterman sums for prime powers q > 10⁴ in binary64 with a proved error bound. `cert_an.py`, `cert_small_n.py`: the coefficient balls. `fix_json_radii.py`: outward rounding of the stored radii (called by the writers). `make_extra.py`: the {n: [midpoint, radius]} files in the format of `COEFF_EXTRA`. `analytic_constants.py`: the constants of Theorems 6.1–6.2 of the paper. `cert_H0.py`: H_raw(0) and the normalising constant C. `cert_Ht.py`: H_raw(t) by the same route (cross-check). `compare_window.py`, `compare_outputs.py`: comparisons with the window certificate and with `coefficients/data/`. `check_kloost_fast.py`: self-test of `kloost_fast.py`. `coefficients/logs/` holds the logs of the shipped runs, and `coefficients/out/` their outputs (JSON). `.gitignore`: excludes `cache/`. |
-| `coefficients/data/` | The three coefficient files read by `positivity/` (certified balls for a_n). Their numerical content is that of the files consumed by the original certified runs; one metadata key was renamed before publication (Section 10). |
-| `coefficients/cache/` | Not shipped: the cache of Kloosterman tables (47 MB), written by `cert_an.py` and rebuilt when absent (Section 8). |
-| `figures/` | Figure 1 of the paper, an illustration and not a certificate (Section 13). `make_figure1.py`: the script. `figure1_H.csv`, `figure1_G.csv`: the plotted values. `figure1.pdf`: the figure included by the paper. `figures/logs/` holds the log of the shipped run. |
+| `positivity/` | The positivity certificates (Sections 3–11). `boxlib.py`: the trivial-bound box (centres c_n and half-widths w_n). `cert_moments.py`: Certificate M (moments of the transform of Ξ²H_raw) with the certified coefficients, and the functions used by `cert_moments_box.py`: Certificate M on the trivial-bound box. `run_on_box.py`: runs `cert_large_t.py` and `cert_gtail.py`, unchanged, on the trivial-bound box. `cert_elementary.py`: the elementary range (not used in any proof). `poslib.py`: library (coefficient balls and the n-tail bound, the K₀-sums A and B, the conical functions P_{−1/2+it} by hypergeometric series with Arb tail bounds, Gauss–Legendre nodes). `cert_window.py`: certificate W on one cell (Taylor model in t with all error terms). `run_window.py`: the driver over [T_A, T_B] (8 worker processes). `cert_large_t.py`: the numerical hypotheses of Theorem L at T₀. `cert_gtail.py`: B > 0 on [4, ∞). `check_r0.py`: the enclosure of R(0). `negctl.py`: the negative control. `positivity/logs/` holds the logs of the shipped runs, and `positivity/out/` the per-cell output of the window run and the moments of Section 5 (JSON). |
+| `coefficients/` | The coefficient certificates (Sections 12 and 13). `coefflib.py`: library (the Bessel order derivatives J̇₂, İ₂, the Kloosterman tables by Arb DFT with twisted multiplicativity, the c-tail bounds). `kloost_fast.py`: Kloosterman sums for prime powers q > 10⁴ in binary64 with a proved error bound. `cert_an.py`, `cert_small_n.py`: the coefficient balls. `fix_json_radii.py`: outward rounding of the stored radii (called by the writers). `make_extra.py`: the {n: [midpoint, radius]} files in the format of `COEFF_EXTRA`. `analytic_constants.py`: the constants of Theorems 6.1–6.2 of the paper. `cert_H0.py`: H_raw(0) and the normalising constant C. `cert_Ht.py`: H_raw(t) by the same route (cross-check). `compare_window.py`, `compare_outputs.py`: comparisons with the window certificate and with `coefficients/data/`. `check_kloost_fast.py`: self-test of `kloost_fast.py`. `coefficients/logs/` holds the logs of the shipped runs, and `coefficients/out/` their outputs (JSON). `.gitignore`: excludes `cache/`. |
+| `coefficients/data/` | The three coefficient files read by `positivity/` (certified balls for a_n). Their numerical content is that of the files consumed by the original certified runs; one metadata key was renamed before publication (Section 14). |
+| `coefficients/cache/` | Not shipped: the cache of Kloosterman tables (47 MB), written by `cert_an.py` and rebuilt when absent (Section 12). |
+| `figures/` | Figure 1 of the paper, an illustration and not a certificate (Section 17). `make_figure1.py`: the script. `figure1_H.csv`, `figure1_G.csv`: the plotted values. `figure1.pdf`: the figure included by the paper. `figures/logs/` holds the log of the shipped run. |
 | `lib/` | Part I library, byte-identical to the files of the same names in Part I's ancillary files. `besselk.py`: rigorous K₀, K₁ for real arguments. `common.py`: the explicit-check helper used by `besselk.py` (with other helpers of Part I that are not used here). `__init__.py`: empty. |
 | `tools/` | `logdiff.py`: compare logs (or the window JSON) up to dates and timings. |
 | `runlog.sh` | Wrapper that writes a log with header and footer. |
 | `SHA256SUMS` | SHA-256 of every shipped file except the logs, this README and `lean/` (`sha256sum -c SHA256SUMS`); the cache `coefficients/cache/` is not shipped. |
 | `lean/` | If present: a separate component with its own README, not covered by `SHA256SUMS`. |
 
-## 3. Certificate W: R(t) > 0 on [0, 40] (`positivity/run_window.py`)
+## 3. Certificate M-box: H_raw(t) > 0 for |t| ≤ 10.355 (`positivity/cert_moments_box.py`)
 
-**What it proves** (Certificate W: Theorem 7.10 of the paper, where R is called Π). For every t ∈ [0, 40],
+**What it proves** (Theorem 6.8 of the paper; used in its proofs). Let F = Ξ²H_raw, and for j ≥ 0
+
+  M_{2j} = ∫ ξ^{2j} F̂(ξ) dξ = (1/π) ∫₁^∞ W_j(x) Ĝ_raw(x) dx/x,  W_j(x) = Σ_{m≤x} d(m) m^{−1/2} (log(x/m)/(2π))^{2j},
+
+where Ĝ_raw(x) = sin²(πx) √x Σ_n a_n K₀(4π√(nx)) for x > 1. By Proposition 6.5 and Lemma 6.7 of the paper, F̂ ≥ 0 on ℝ
+and, for every real t,
+
+  F(t) ≥ P_K(t) = Σ_{j=0}^{2K+1} (−1)^j (2πt)^{2j} M_{2j}/(2j)!,
+
+so P_K(t) > 0 implies Ξ(t) ≠ 0 and H_raw(t) > 0. The script certifies P_7(t) > 0 (moments M₀, …, M₃₀) for
+0 ≤ t ≤ 10.35546875; the verdict checks that this interval contains [0, 9], and Section 4 covers |t| ≥ 9. The certified
+lower bound for P_7(t) holds for every sequence b in the **trivial-bound box** in place of (a_n):
+
+  |b_n − c_n| ≤ w_n,  c_n = n T1_n + δ_{n,1}/4,  w_n = A0(n) ϱ(4π√n)
+
+(`boxlib.py`; Section 6.1 of the paper). Here T1_n is the term c = 1 of the Kloosterman series of S_n
+(S(±1, n; 1) = 1), and w_n bounds the terms c ≥ 2 with the trivial bound |S(±1, n; c)| ≤ φ(c) (proof of Theorem 6.1 of the
+paper). So this certificate uses no Kloosterman sum with c ≥ 2. For a general sequence in the box there is no function H;
+the statement is about the linear functional P_7(t; ·) only, and it is applied to the coefficients a_n, which lie in the
+box.
+
+**Method** (Arb at 64 bits; Appendix A.3 of the paper).
+- **Node values.** Ĝ at the quadrature nodes for the centres c_n, n ≤ N (N = 60 near x = 1, about 20 for x ≥ 10), plus
+  a closed-form bracket of the terms n > N from the bounds of Theorem 6.1, which hold on the box. K₀ comes from
+  `lib/besselk.py`, at real arguments only.
+- **Quadrature.** 24-node Gauss–Legendre rules (Arb nodes and weights) on 99 panels of [1, 40] with integer break points,
+  where W_j is not analytic; the error is the m-node Bernstein-ellipse bound (Lemma A.2 of the paper) with Arb majorants
+  on outward ellipse boxes in Re x > 1.
+- **Ends.** On [1, 1 + 2⁻²²], 0 ≤ Ĝ ≤ x^{1/4}[(x−1)²/16 + x/(32π²)]; on [40, ∞), an incomplete-Gamma bound.
+- **Uniformity on the box.** P_7(t; b) ≥ P_7^low(t; centres) − Σ_{n≤8} w_n|π_n(t)| − ε P_7^abs(t), where π_n is the
+  polynomial of the single coefficient n, ε = max_{8<n≤60} w_n/(c_n − w_n) = 1.7331·10⁻⁸, and P_7^abs has all signs +.
+- **Continuum in t.** Cells of width 1/256 from t = 0; on [t_a, t_b], P ≥ P₊(t_a) − P₋(t_b), because the even and odd
+  parts increase in t ≥ 0 (the exact moments are ≥ 0). No Taylor model in t is needed.
+
+**Inputs.** `coefficients/data/an_cert_X1e4.json` (`59d50f17db2199b1`; its `T1` entries; the script also hashes the
+other two coefficient files). Scripts `positivity/cert_moments_box.py`, `positivity/cert_moments.py`,
+`positivity/boxlib.py` and `lib/besselk.py`; the log prints their hash prefixes.
+
+**Command** (from this directory):
+
+```sh
+./runlog.sh positivity/logs/cert_moments_box.log "$PY" positivity/cert_moments_box.py 60 8 15 12 9 64 6
+```
+
+The arguments are N = 60, n₀ = 8, J = 15 (moments M₀, …, M₃₀), the largest t tried (12), the required reach T_req = 9,
+the precision (64 bits) and the number of worker processes (6).
+
+**Expected output** (verbatim lines or parts of lines of `positivity/logs/cert_moments_box.log`):
+- `box n=1: centre c_n = [4566.14520029 +/- 6.30e-10], half-width w_n = [140.952 +/- 6.19e-6] (relative 3.09e-02)`
+- `eps = max_{n0<n<=N} w_n/(c_n - w_n) = [1.7331e-8 +/- 1.33e-14]`
+- `box moment bound with M_0..M_30: lower bound of P_K(t; b) > 0 for every b in the box, on [0, 10.35546875]`
+- `DECISIVE (Certificate M-box, trivial Kloosterman bound only): P_K(t; b) > 0 for every b in the box, hence (b = a) F(t) = Xi(t)^2 H_raw(t) > 0 and H_raw(t) > 0, for |t| <= 10.35546875 (moments M_0..M_30) ; covers [0, 9]: True`
+
+**Runtime.** 14.4 s wall time with 6 worker processes on 6 cores.
+
+## 4. Theorem L at T₀ = 9 on the trivial-bound box (`positivity/run_on_box.py`)
+
+**What it proves** (Proposition 7.10 of the paper, used in Theorem 7.11: R(t) > 0 for |t| ≥ 9; used in its proofs). The
+scripts `cert_large_t.py` and `cert_gtail.py` of Sections 8 and 9 are run unchanged (the log prints their SHA-256
+prefixes), with every coefficient ball for n ≤ 300 replaced by the interval [c_n − w_n, c_n + w_n] of the trivial-bound box
+(Section 3). Beyond n = 300 they use 0 < a_n ≤ A0(n), which every element of the box satisfies; the wrapper checks that
+every box interval for n ≤ 300 lies in (0, A0(n)). The parameters are those of Section 8 except Y_z = 0.90 (instead of
+0.87) and T₀ = 9 (instead of 8), so that t_mono = 5.7536… ≤ 9. The scripts enclose every quantity in Arb as a function of
+the coefficient balls, so each certified bound holds for every sequence in the box. The certified hypotheses are:
+- (a) B > 0 on [0.90, 4]: cell minima ≥ 4.91871 on [0.90, 1] and ≥ 1.68071·10⁻⁷ on [1, 4];
+- (b) T₀ = 9 ≥ t_mono = 1/(2(θ(0.90) − θ_s));
+- (c) p(9) − n(9) − A_Φ e^{−9(π/2 − θ_s)} ≥ 0.965950136102 > 0;
+- (`gtail`) ρ̄(4) = 4.347086309·10⁻⁹ < 1, so B > 0 on [4, ∞); here a₁ is the lower end 4425.193… of its box interval.
+
+**Method.** That of Sections 8 and 9, with 300 cells of [0.90, 1], 2000 of [1, 4] and 8000 of [1/2, 0.90].
+
+**Inputs.** `coefficients/data/an_cert_X1e4.json` (`59d50f17db2199b1`; its `T1` entries; the scripts also hash
+`an_small_X1e4.json`). Scripts `positivity/run_on_box.py`, `positivity/boxlib.py`, `positivity/cert_large_t.py`,
+`positivity/cert_gtail.py`, `positivity/cert_window.py`, `positivity/poslib.py` and `lib/besselk.py`. The wrapper removes
+`COEFF_EXTRA` from the environment.
+
+**Commands** (from this directory):
+
+```sh
+./runlog.sh positivity/logs/cert_large_t_T9_box.log "$PY" positivity/run_on_box.py large_t 9 0.5 1 0.90 4 2000 8000
+./runlog.sh positivity/logs/cert_gtail_box.log "$PY" positivity/run_on_box.py gtail
+```
+
+**Expected output** (verbatim parts of lines):
+- `positivity/logs/cert_large_t_T9_box.log`:
+  - `t_mono = [5.7536214 +/- 3.63e-8]`
+  - `(1a) min lower bound of g on [Yz, Ys] = [4.91871 +/- 5.24e-7]  (> 0 needed)`
+  - `(1b) min lower bound of g on [Ys, Y3] = [1.68071e-7 +/- 6.16e-14] ; p(T0) >= [2.69351335258 +/- 2.81e-12]`
+  - `(2) n(T0) <= [1.71015174683 +/- 4.54e-12]  (7313 cells with possible g < 0)`
+  - `A_Phi <= [5.70238132548 +/- 3.13e-12]`
+  - `A_Phi e^{-T0(pi/2-th_s)} <= [0.0174114696412 +/- 4.28e-14] ; margin = [0.965950136102 +/- 4.98e-13] ; ratio p/(n + axis term) >= [1.55914 +/- 2.55e-7]`
+  - `DECISIVE (all-Arb): Theorem L hypotheses verified for T0 = 9: True`
+- `positivity/logs/cert_gtail_box.log`:
+  - `rhobar(4) = [4.347086309e-9 +/- 7.56e-20]  (< 1 needed): True`
+  - `DECISIVE: g > 0 on [4, oo): True`
+
+**Runtime.** 133.4 s and 0.1 s wall time on one core.
+
+## 5. Certificate M with the certified coefficients (`positivity/cert_moments.py`; a check, not used in any proof)
+
+**What it shows** (the check after Theorem 6.8 of the paper, and the numbers in Remarks 6.6 and 6.9). The computation of
+Section 3, with the certified coefficient balls (Section 12; n ≤ N ≤ 1500 per node, and the bracket of Theorem 6.1
+beyond) in place of the box, gives P_7(t) > 0 for 0 ≤ t ≤ 10.40234375. The log also prints:
+- the sixteen moments, for example M₀ = [0.00028062 ± 4.23·10⁻⁹], with their quadrature, end and tail errors;
+- M₀/Ξ(0)² ∈ [0.001135517760 ± 1.49·10⁻⁸], an enclosure of H_raw(0) (Ξ(0) = ξ(1/2) computed in Arb), which overlaps the
+  value of Section 13;
+- certified values of F(t) and of the ratio ∫F̂|cos(2πξt)|dξ/F(t) at t = 0, 2, …, 12 (1.0000 at t = 0, 3.083 at t = 8);
+- the reach of the bound with fewer moments, for example 6.61328125 with M₀ and M₂.
+
+The moments are written to `positivity/out/moments_true_N1500_p128.json` as Arb balls.
+
+**Inputs.** The three coefficient files (Section 14). Scripts `positivity/cert_moments.py`, `positivity/boxlib.py` (for the
+constants of the bracket) and `lib/besselk.py`.
+
+**Command** (from this directory):
+
+```sh
+./runlog.sh positivity/logs/cert_moments_true.log "$PY" positivity/cert_moments.py true 1500 15 12 9 128 6
+```
+
+**Expected output** (verbatim parts of lines of `positivity/logs/cert_moments_true.log`):
+- `M_0  = [0.00028062 +/- 4.23e-9]`
+- `[cross-check, not used in any proof] Xi(0) = [0.4971207781883 +/- 1.42e-14] ; M_0/Xi(0)^2 = H_raw(0) in [0.001135517760 +/- 1.49e-8] ; Proposition 6.4: [0.0011355097904 +/- 1.87e-9] ; overlap: True`
+- `DECISIVE (Certificate M, mode=true): F(t) = Xi(t)^2 H_raw(t) > 0, hence H_raw(t) > 0, for |t| <= 10.40234375 (moments M_0..M_30) ; covers [0, 9]: True`
+
+**Runtime.** 20.0 s wall time with 6 worker processes on 6 cores.
+
+## 6. The elementary range (`positivity/cert_elementary.py`; not used in any proof)
+
+**What it shows** (Remark 6.9 and Appendix A.3 of the paper). From Theorem 6.2 of the paper and
+√(π/(2y))e^{−y}(1 − 1/(8y)) ≤ K₀(y) ≤ √(π/(2y))e^{−y}, the transform satisfies L ≤ Ĝ_raw ≤ U on (1, ∞), with κ = 4π(√x − 1),
+
+  U(x) = sin²(πx) x^{1/4} e^{−κ}(1 + 2(1+κ)/κ²)/(16π²),  L(x) = sin²(πx) x^{1/4} [2e^{−κ}(1+κ)/κ² − 2.125/(2πκ)]/(16π²).
+
+Two one-dimensional integrals, M₀ ≥ (1/π)∫₁^{1.3} L dx/x and M₂ ≤ (1/π)∫₁^∞ W₁U dx/x, then give H_raw(t) > 0 for
+|t| < 4.4699 through the two-moment bound M₀ − 2π²t²M₂ > 0. With the term n = 1 kept, a₁ in its box interval
+[c₁ − w₁, c₁ + w₁], the range is |t| < 5.1995. The script also evaluates the four-moment bound (with M₄ and M₆), which is
+weaker here, and reports the better of the two.
+
+**Method** (Arb at 96 bits). Arb's rigorous integration `acb.integral` with analytic integrands (the removable singularity
+at x = 1 is written with sinc, and branch-cut functions return non-finite balls off Re x > 0, as `acb.integral`
+requires); the range x > 30 is bounded by an incomplete Gamma function. In the variant with a₁, K₀ of complex argument is
+Arb's `bessel_k` at the exact midpoint plus a derivative bound.
+
+**Inputs.** `coefficients/data/an_cert_X1e4.json` (`59d50f17db2199b1`; the entry `T1` for n = 1). Scripts
+`positivity/cert_elementary.py` and `positivity/boxlib.py`.
+
+**Command** (from this directory):
+
+```sh
+./runlog.sh positivity/logs/cert_elementary.log "$PY" positivity/cert_elementary.py 1.3 30
+```
+
+**Expected output** (verbatim line of `positivity/logs/cert_elementary.log`):
+- `DECISIVE (elementary regime, not used in any proof): H_raw(t) > 0 for |t| < 4.4699 using only Theorem 6.2 ; for |t| < 5.1995 with a_1 in its trivial-bound interval`
+
+**Runtime.** 20.1 s wall time on one core.
+
+## 7. Certificate W: R(t) > 0 on [0, 40] (`positivity/run_window.py`; an independent check)
+
+**What it proves** (Certificate W: Theorem 7.13 of the paper, where R is called Π; an independent check, not used in the
+proofs of the paper since version 1.3). For every t ∈ [0, 40],
 
   R(t) = axis(t) + arcs(t) > 0,  axis(t) = ∫₁^∞ A(Y) cos(t log Y) dY,  arcs(t) = ½ ∫_{1/2}^∞ B(Y) c_t(θ(Y)) dY.
 
@@ -102,7 +277,9 @@ Here:
 - a_n = n S_n + δ_{n,1}/4 is the coefficient sequence of the paper.
 
 In the scripts A is `Phi`, B is `g`, c_t is `fhat_t`, and H_raw(t) = R(t)/(2π²(t² + 1/4)²). R is even, so W gives
-R > 0 on [−40, 40]. Theorem L (Sections 4 and 5) covers |t| ≥ 8, so W and Theorem L together give R > 0 on ℝ.
+R > 0 on [−40, 40]. Theorem L (Sections 8 and 9) covers |t| ≥ 8, so W and Theorem L together give R > 0 on ℝ. Since
+version 1.3 the paper proves R > 0 on ℝ with Sections 3 and 4 instead, which use only the trivial-bound box; W shares
+with them only the coefficient data and `lib/besselk.py`.
 
 **Method** (all in Arb at 192 bits; the m-node bound and the bracket bound below are Lemmas A.2 and A.1 of the paper).
 - **Cells.** [0, 40] is covered by 80 closed cells [t_c − 1/4, t_c + 1/4], t_c = 1/4, 3/4, …, 79/4. The coverage is
@@ -138,12 +315,12 @@ on the cell [0.5, 1]). The quadrature error is at most 1.35·10⁻⁷·R(t_c) (t
 
 **Inputs.**
 - `coefficients/data/an_small_X1e4.json` (`59fe6e24647252db`), `coefficients/data/an_cert_X1e4.json`
-  (`59d50f17db2199b1`) and `coefficients/data/extra_smalln_X3e5.json` (`ff4b86318eed86f1`); see Section 10 for their
+  (`59d50f17db2199b1`) and `coefficients/data/extra_smalln_X3e5.json` (`ff4b86318eed86f1`); see Section 14 for their
   provenance.
 - Scripts `positivity/run_window.py`, `positivity/cert_window.py`, `positivity/poslib.py`, `lib/besselk.py`.
 
 The log prints the first 16 hex digits of the SHA-256 of the three scripts of `positivity/` and of the three input
-files; full hashes are in Section 10 and `SHA256SUMS`.
+files; full hashes are in Section 14 and `SHA256SUMS`.
 
 **Command** (from this directory):
 
@@ -165,10 +342,11 @@ timing `secs`.
 **Runtime.** 31.2 s wall time with 8 worker processes on 8 cores. Each worker first builds the quadrature nodes
 (about 12 s).
 
-## 4. Theorem L at T₀ = 8: R(t) > 0 for |t| ≥ 8 (`positivity/cert_large_t.py`)
+## 8. Theorem L at T₀ = 8: R(t) > 0 for |t| ≥ 8 (`positivity/cert_large_t.py`)
 
-**What it proves** (the numerical inputs of Theorem L, the large-|t| theorem: Proposition 7.9 of the paper, used in Theorem 7.4, at T₀ = 8). The notation is that of
-Section 3, with B⁻ = max(−B, 0). The parameters are Y_z = 0.87, Y_s = 1, Y₃ = 4 and κ = 1/2, and
+**What it proves** (the numerical inputs of Theorem L, the large-|t| theorem: Proposition 7.9 of the paper, used in Theorem 7.4, at T₀ = 8;
+since version 1.3 a check). The notation is that of
+Section 7, with B⁻ = max(−B, 0). The parameters are Y_z = 0.87, Y_s = 1, Y₃ = 4 and κ = 1/2, and
 θ_s = θ(Y_s) = 2 arccot 2. The script certifies, in Arb with directed rounding:
 - (a) B(Y) > 0 on [Y_z, Y₃]. The minimum of the cell lower bounds is ≥ 0.581726 on [0.87, 1] and ≥ 1.74105·10⁻⁷ on
   [1, 4].
@@ -182,23 +360,23 @@ The quantities in (c) are:
 
 Here θ = θ(Y), r₋(y) = exp(−9/(32y²) − 1/(3y)), r₊(y) = exp(9/(64y²) + 1/(3y)) and P₀ = P_{−1/2}.
 
-With B > 0 on [4, ∞) (Section 5), these are the hypotheses of Theorem L, which then gives R(t) > 0 for every |t| ≥ 8.
+With B > 0 on [4, ∞) (Section 9), these are the hypotheses of Theorem L, which then gives R(t) > 0 for every |t| ≥ 8.
 The `DECISIVE` line of this script covers (a), (b) and (c); the hypothesis B > 0 on [4, ∞) is certified separately by
 `cert_gtail.py`.
 
 **Method** (Arb at 160 bits; integration cells are exact balls with binary64 endpoints that tile the intervals exactly).
 - **p(T₀).** A lower Riemann sum over 2000 geometric cells of [1, 4]. The integrand is enclosed on each cell, with B
-  given by its K₀-sum and the n-tail bound of Section 3, and the sum is rounded down.
+  given by its K₀-sum and the n-tail bound of Section 7, and the sum is rounded down.
 - **n(T₀).** An upper Riemann sum over 8000 cells of [1/2, 0.87], rounded up. On each cell, B⁻ is bounded by the
   negative of the lower endpoint of the ball of B, an exact number. P₀(±cos θ) comes from the conical series at t = 0.
   7009 cells contribute.
 - **(a).** The minimum of the exact lower endpoints of B over 300 cells of [0.87, 1] and the 2000 cells of [1, 4].
-- **A_Φ.** 20 panels × 30 Gauss–Legendre nodes on [1, 13] with the m-node error bound of Section 3 and Arb majorants on
+- **A_Φ.** 20 panels × 30 Gauss–Legendre nodes on [1, 13] with the m-node error bound of Section 7 and Arb majorants on
   ellipse boxes, plus the Y-tail ∫_{13}^∞ A ≤ sup_{[13,14]} A/(1 − √(14/13)e^{−2π}). The result is
   A_Φ ≤ 5.58489336212, with quadrature error ≤ 2.51·10⁻¹⁷ and Y-tail ≤ 5.02·10⁻³².
 - **The margin.** It is formed from the exact endpoints p(T₀)_lower, n(T₀)_upper and the upper bound of the axis term.
 
-**Inputs.** The three coefficient files of Section 3. Scripts `positivity/cert_large_t.py`, `positivity/cert_window.py`
+**Inputs.** The three coefficient files of Section 7. Scripts `positivity/cert_large_t.py`, `positivity/cert_window.py`
 (for the Arb majorants and ellipse boxes), `positivity/poslib.py` and `lib/besselk.py`. The log prints the hash prefixes.
 
 **Command** (from this directory):
@@ -220,9 +398,10 @@ The arguments are T₀, κ, Y_s, Y_z, Y₃, then the cell counts N_p = 2000 for 
 
 **Runtime.** 137.2 s wall time on one core.
 
-## 5. B > 0 on [4, ∞) (`positivity/cert_gtail.py`)
+## 9. B > 0 on [4, ∞) (`positivity/cert_gtail.py`)
 
-**What it proves** (the positivity of B on [Y₃, ∞), Y₃ = 4: Lemma 7.7(b) and Proposition 7.9(ii) of the paper, used in the proof of Theorem 7.4). For every
+**What it proves** (the positivity of B on [Y₃, ∞), Y₃ = 4: Lemma 7.7(b) and Proposition 7.9(ii) of the paper, used in the proof of Theorem 7.4;
+Section 4 runs the same script on the trivial-bound box). For every
 Y ≥ 4, B(Y) > 0. Write
 
   ρ(Y) = Σ_{n≥2} n a_n K₀(2πnY)/(a₁K₀(2πY)).
@@ -241,7 +420,7 @@ and ρ̄ is decreasing in Y. The script certifies ρ̄(4) < 1.
   consecutive terms is at most (1 + 1/n) e^{2π/√n − 2πY} < 10⁻¹⁰ for n ≥ 400 and Y = 4 (from
   A0(n+1)/A0(n) ≤ (1 + 1/n)^{1/4} e^{2π/√n}; this estimate is not re-checked by the script).
 
-**Inputs.** The three coefficient files of Section 3 (only a₁ is used, from its sharpest ball). Scripts
+**Inputs.** The three coefficient files of Section 7 (only a₁ is used, from its sharpest ball). Scripts
 `positivity/cert_gtail.py` and `positivity/poslib.py`.
 
 **Command** (from this directory):
@@ -256,19 +435,20 @@ COEFF_EXTRA=coefficients/data/extra_smalln_X3e5.json ./runlog.sh positivity/logs
 
 **Runtime.** 0.1 s wall time.
 
-## 6. The enclosure of R(0) (`positivity/check_r0.py`)
+## 10. The enclosure of R(0) (`positivity/check_r0.py`)
 
-**What it proves** (the enclosure of Π(0) stated in Theorem 7.10 of the paper). R(0) ∈ [0.001400011269, 0.001401746815] (each endpoint up to the radius of
+**What it proves** (the enclosure of Π(0) stated in Theorem 7.13 of the paper; a check). R(0) ∈ [0.001400011269, 0.001401746815] (each endpoint up to the radius of
 its printed ball). Hence R(0) > 0 and H_raw(0) = 8R(0)/π² > 0. This is sign coherence: the normalising constant
 C = π²/(8R(0)) is positive. Certificate W also gives R(0) > 0, since its first cell contains t = 0; this script gives the
-two-sided enclosure.
+two-sided enclosure. The paper proves C > 0 without computation
+(Proposition 6.5); this is a check.
 
-**Method.** The certifier of Section 3, with all error terms, on the cell [−10⁻⁶, 10⁻⁶] (K = 8, r_t = 1/2, 192 bits).
+**Method.** The certifier of Section 7, with all error terms, on the cell [−10⁻⁶, 10⁻⁶] (K = 8, r_t = 1/2, 192 bits).
 It returns the minimum of the lower endpoints and the maximum of the upper endpoints over the 8 sub-balls of the cell.
 The point t = 0 is the left endpoint of one of these sub-balls.
 
 The line also prints, for comparison only, an independently computed value H_raw(0) = 0.0011355097904 ± 1.9·10⁻⁹ (a
-constant in the script; see Section 9). The script does not check this value.
+constant in the script; see Section 13). The script does not check this value.
 
 The lines marked `[not a certificate]` compare H(t) = R(t)/(16(t² + 1/4)²R(0)) at t = 1, 2, 4, 8, 12, 20, 40 with
 Fourier-side floating-point values of H(t) that are constants in the script. Both R(t) and R(0) are the quadrature values
@@ -276,20 +456,20 @@ without error terms. The relative differences are about 3.9·10⁻⁷, a constan
 R(0) corresponds to a change of only about 5·10⁻⁸ in a₁; see **Conditioning** below).
 
 **Conditioning.** R(0) is a small difference of large terms in the coefficients. At t = 0 the formula is linear in the a_n:
-R(0) = Σ_n a_n w_n, where w_n is the value at t = 0 of the axis and arc integrals for the n-th terms of A and B. The terms
-a_n w_n are about +51.7, −330, +719, −849, +680, −413, +203 (n = 1, …, 7), against R(0) ≈ 1.40·10⁻³: a cancellation of
-about 6·10⁵:1. In particular ∂R(0)/∂a₁ = w₁ ≈ 0.0113, and a relative change of −2.7·10⁻⁵ in a₁ alone would make R(0)
-vanish. The certifier handles this rigorously: every a_n enters through a certified enclosure (the balls of Section 8 for
+R(0) = Σ_n a_n R_n, where R_n is the value at t = 0 of the axis and arc integrals for the n-th terms of A and B. The terms
+a_n R_n are about +51.7, −330, +719, −849, +680, −413, +203 (n = 1, …, 7), against R(0) ≈ 1.40·10⁻³: a cancellation of
+about 6·10⁵:1. In particular ∂R(0)/∂a₁ = R₁ ≈ 0.0113, and a relative change of −2.7·10⁻⁵ in a₁ alone would make R(0)
+vanish. The certifier handles this rigorously: every a_n enters through a certified enclosure (the balls of Section 12 for
 n ≤ 300, which include the tail of the Kloosterman series, and 0 < a_n ≤ A0(n) beyond), and all radii are propagated. The
-radius of the enclosure above, 8.7·10⁻⁷, is mostly (7.7·10⁻⁷) w₁ times the radius 6.9·10⁻⁵ of a₁ in
+radius of the enclosure above, 8.7·10⁻⁷, is mostly (7.7·10⁻⁷) R₁ times the radius 6.9·10⁻⁵ of a₁ in
 `extra_smalln_X3e5.json`, and R(0) exceeds it by a factor of about 1600. A floating-point reproduction of R(0), or of
-H_raw(0) = 8R(0)/π² at the precision of Section 9, needs a₁ to an absolute accuracy of about 2·10⁻⁷. The c-series must
+H_raw(0) = 8R(0)/π² at the precision of Section 13, needs a₁ to an absolute accuracy of about 2·10⁻⁷. The c-series must
 therefore be summed far: its partial sums for a₁ up to c = 10⁴ and up to c = 3·10⁵ differ by 3.2·10⁻⁷ (`checkpoints_K` in
-`coefficients/out/an_smalln_X6e5.json`). The certificate of Section 9 uses a route that is far less sensitive to a₁. See
-Remark 7.13 of the paper; the figures other than the certified radii are floating-point evaluations and are not used by any
+`coefficients/out/an_smalln_X6e5.json`). The certificate of Section 13 uses a route that is far less sensitive to a₁. See
+Remark 7.15 of the paper; the figures other than the certified radii are floating-point evaluations and are not used by any
 proof.
 
-**Inputs.** The three coefficient files of Section 3; `COEFF_EXTRA` defaults to `coefficients/data/extra_smalln_X3e5.json`.
+**Inputs.** The three coefficient files of Section 7; `COEFF_EXTRA` defaults to `coefficients/data/extra_smalln_X3e5.json`.
 Scripts `positivity/check_r0.py`, `positivity/cert_window.py`, `positivity/poslib.py` and `lib/besselk.py`.
 
 **Command** (from this directory):
@@ -303,7 +483,7 @@ Scripts `positivity/check_r0.py`, `positivity/cert_window.py`, `positivity/posli
 
 **Runtime.** 17.6 s wall time on one core.
 
-## 7. Negative control (`positivity/negctl.py`; Remark 7.12 of the paper; not used by any proof)
+## 11. Negative control (`positivity/negctl.py`; Remark 7.14 of the paper; not used by any proof)
 
 **What it shows.** The same certifier, with all error terms, is run with the coefficients replaced by
 a_n → n·T1_n + δ_{n,1}/4. Here T1_n is the c = 1 Kloosterman term, so the terms with c ≥ 2 are dropped. The T1 balls are
@@ -315,8 +495,11 @@ The script certifies **upper bounds R < 0**:
 - −0.2506014462 on [0, 1/2];
 - −0.2270255023 on [1/2, 1].
 
-So the positivity of R near t = 0 depends on the c ≥ 2 terms of the coefficients, and the certifier proves a negative
-sign when the sign is negative. The cells [0, 1/2] and [1/2, 1] are covered exactly by their sub-balls. The cell
+So the sign of the physical-side formula near t = 0, as a linear functional of the coefficient sequence, depends on the
+terms c ≥ 2 (it is badly conditioned there; Section 10), and the certifier proves a negative sign when the sign is
+negative. This is not a statement about H: the sequence of c = 1 terms defines no function H. The certificates of
+Sections 3 and 4, whose lower bounds hold for every sequence in the trivial-bound box, show that the positivity of H
+needs only the terms c = 1 and the trivial bound. The cells [0, 1/2] and [1/2, 1] are covered exactly by their sub-balls. The cell
 [−10⁻⁶, 10⁻⁶] is covered by its 8 sub-balls up to three gaps narrower than 3·10⁻²²: its binary64 sub-ball endpoints are
 rounded.
 
@@ -337,14 +520,14 @@ Scripts `positivity/negctl.py`, `positivity/cert_window.py`, `positivity/poslib.
 
 **Runtime.** 15.9 s wall time on one core.
 
-## 8. Coefficient balls (`coefficients/cert_an.py`, `coefficients/cert_small_n.py`)
+## 12. Coefficient balls (`coefficients/cert_an.py`, `coefficients/cert_small_n.py`)
 
 **What it proves** (Appendix A.1 of the paper). Certified balls for the coefficients
 
   a_n = n S_n + δ_{n,1}/4,  S_n = Σ_{c≥1} c⁻¹ [S(1,n;c) J̇₂(4π√n/c) − S(−1,n;c) İ₂(4π√n/c)],
 
 where S(m,n;c) is the Kloosterman sum and J̇₂ = ∂_μJ_μ|_{μ=2}, İ₂ = ∂_μI_μ|_{μ=2}. They also certify the coefficients at
-ν = 1, α_n = A_n(1) = 2 Σ_{c≥1} c⁻¹ [S(1,n;c) J₂(4π√n/c) − S(−1,n;c) I₂(4π√n/c)], which Section 9 uses together with
+ν = 1, α_n = A_n(1) = 2 Σ_{c≥1} c⁻¹ [S(1,n;c) J₂(4π√n/c) − S(−1,n;c) I₂(4π√n/c)], which Section 13 uses together with
 A_n′(1) = 4S_n. The scripts write `Kc_n` or `K` for S_n, and `alpha` for α_n.
 - `cert_an.py`: a_n for n ≤ 1500, from the terms c ≤ 10⁴ (n ≤ 60) or c ≤ max(600, ⌈4π√n⌉ + 1) (60 < n ≤ 1500), plus a
   rigorous bound for all further terms; α_n for n ≤ 60. Every a_n with n ≤ 1500 is certified positive; Theorem 6.1 of
@@ -353,6 +536,10 @@ A_n′(1) = 4S_n. The scripts write `Kc_n` or `K` for S_n, and `alpha` for α_n.
 - `cert_small_n.py`: sharper balls for n ≤ 6 from the terms c ≤ 3·10⁵, and for n ≤ 2 from c ≤ 6·10⁵. For example
   a₁ = 4581.3705534082 ± 6.86·10⁻⁵, a₂ = 1025727.234918 ± 2.67·10⁻⁴ and a₃ = 62590223.689992 ± 5.9·10⁻⁴ (c ≤ 3·10⁵),
   and a₁ = 4581.3705534088 ± 2.69·10⁻⁵ (c ≤ 6·10⁵). The radius of a₁ is dominated by the bound for the terms c > X.
+
+In the proofs of the paper (version 1.3) these balls are used only for the normalising constant (Section 13). The terms
+c = 1 (`T1`), which `cert_an.py` computes at 256 bits and which involve no Kloosterman sum, give the centres of the
+trivial-bound box (Sections 3, 4 and 6).
 
 **Method** (Arb at 96 bits, the term c = 1 at 256 bits; the Bessel bounds below are proved in the paper).
 - **Kloosterman sums, prime powers q ≤ 10⁴.** For each q the whole table j ↦ S(1,j;q) is one discrete Fourier
@@ -424,7 +611,7 @@ proves".
 
 **Fresh outputs and the pinned inputs.** `coefficients/data/` holds the three coefficient files read by `positivity/`.
 Their numerical content is that of the files consumed by the original certified runs; one metadata key was renamed
-before publication (Section 10). `coefficients/out/` holds the outputs of the fresh runs of this section and of Section 9. The pinned files come from the same computation, run before the scripts had their
+before publication (Section 14). `coefficients/out/` holds the outputs of the fresh runs of this section and of Section 13. The pinned files come from the same computation, run before the scripts had their
 present names, so their `meta` entries (script names and hashes) differ. `compare_outputs.py` compares every certified
 ball of the three fresh files with the pinned ones:
 
@@ -432,11 +619,11 @@ ball of the three fresh files with the pinned ones:
 ./runlog.sh coefficients/logs/compare_outputs.log "$PY" coefficients/compare_outputs.py
 ```
 
-Result (`coefficients/logs/compare_outputs.log`, run after Section 9): every non-meta entry of the three fresh files equals
+Result (`coefficients/logs/compare_outputs.log`, run after Section 13): every non-meta entry of the three fresh files equals
 the pinned one. These are 7986 balls with the same midpoint string and the same radius (420 in `an_small_X1e4.json`, 7560
 in `an_cert_X1e4.json`, 6 in `extra_smalln_X3e5.json`) and the 1500 cutoffs of `an_cert_X1e4.json`.
 `extra_smalln_X3e5.json` has no `meta` entry and is byte-identical to the pinned file. The second line below is the
-cross-check of Section 9:
+cross-check of Section 13:
 - `DECISIVE: every certified ball of the fresh run is identical to (same midpoint string and radius) or overlaps the pinned ball (7986 balls: 7986 identical, 0 overlapping only) and all other entries agree: True`
 - `DECISIVE: the eta1 = 1.25 cross-check of cert_H0.py overlaps the eta1 = 1 run in all 7 split-independent values: True`
 
@@ -470,14 +657,15 @@ Runtime: 0.7 s.
 
 Runtime: 0.6 s.
 
-## 9. Normalising constant and cross-check (`coefficients/cert_H0.py`, `coefficients/cert_Ht.py`)
+## 13. Normalising constant and cross-check (`coefficients/cert_H0.py`, `coefficients/cert_Ht.py`)
 
 **What it proves** (Proposition 6.4 of the paper). Let Ĝ_raw(x) = sin²(πx)√x Σ_{n≥1} a_n K₀(4π√(nx)) for x > 1, continued
 analytically to x > 0, and g_raw = Ĝ_raw/(2π√x). With γ_∞(0)² = π^{−1/2}Γ(1/4)²/64,
 
   H_raw(0) = M\[g_raw](1/2)/γ_∞(0)² = 0.0011355097904015565 ± 1.854·10⁻⁹ > 0,  M\[g](s) = ∫₀^∞ g(x)x^{s−1} dx.
 
-Hence C := 1/H_raw(0) = 880.6617155075 ± 1.442·10⁻³ > 0 (sign coherence), and C/(32π²) = 2.7884277347 ± 4.6·10⁻⁶. The
+Hence C := 1/H_raw(0) = 880.6617155075 ± 1.442·10⁻³ > 0 (sign coherence; the paper also proves C > 0 without computation,
+Proposition 6.5), and C/(32π²) = 2.7884277347 ± 4.6·10⁻⁶. The value of C enters Theorem 4(b) and Table 1 of the paper. The
 script also prints b₁ = C·a₁ and A = C/(32π⁴).
 
 **Method** (Arb at 160 bits; the formula and the two end bounds are proved in Appendix A of the paper).
@@ -488,7 +676,7 @@ script also prints b₁ = C·a₁ and A = C/(32π⁴).
 - **Density.** On (0, 1], d_rest = d − d_grow, with the cusp-0 density d(η) = η^{−5/2} Σ_n 2n a_n K₀(2πn/η) and
   d_grow(η) = √η I₀(2πη)/(8π²) + η^{3/2}I₁(2πη)/(2π). On [1, 8], d_rest comes from its expansion at the cusp ∞, with the
   coefficients α_n = A_n(1) and A_n′(1) = 4S_n.
-- **Coefficients.** The balls of Section 8, read from `coefficients/out/`: n ≤ 60 from c ≤ 10⁴, replaced by the c ≤ 3·10⁵
+- **Coefficients.** The balls of Section 12, read from `coefficients/out/`: n ≤ 60 from c ≤ 10⁴, replaced by the c ≤ 3·10⁵
   balls for n ≤ 6 and the c ≤ 6·10⁵ balls for n ≤ 2 (balls for the same n must overlap, which is checked). For n > 60
   (cusp 0) and n > 30 (cusp ∞), the bounds a_n ≤ A0(n), |A_n′(1)| ≤ 4A0(n)/n (Theorem 6.2) and |α_n| ≤ 2.33·e^z/√(2πz),
   z = 4π√n (proved in the paper), enter as ball radii.
@@ -515,20 +703,20 @@ script also prints b₁ = C·a₁ and A = C/(32π⁴).
   Every piece is complex, and the script certifies that the imaginary part of H_raw(t) contains 0. At t = 0 it reproduces
   `cert_H0.py`, and H(0) = C·H_raw(0) contains 1.
 - **Comparison with the window certificate** (`compare_window.py`; Appendix A.2 of the paper). It compares
-  R(t) = 2π²(t² + 1/4)²H_raw(t) from `cert_Ht.py` with R(t_c) of the window certificate (Theorem 7.10 of the paper;
-  Section 3 here; `positivity/out/window_0_40.json`). The points are the 16 cell centres t_c = 0.25, 0.75, …, 7.75 and t_c = 10.25,
+  R(t) = 2π²(t² + 1/4)²H_raw(t) from `cert_Ht.py` with R(t_c) of the window certificate (Theorem 7.13 of the paper;
+  Section 7 here; `positivity/out/window_0_40.json`). The points are the 16 cell centres t_c = 0.25, 0.75, …, 7.75 and t_c = 10.25,
   15.25, 20.25, 30.25, 39.75, and all 21 pairs of balls overlap. The two routes share only the coefficient balls. The
   relative radius of the density route grows roughly like e^{2√(2πt)}: about 10⁻⁸ up to t ≈ 8, 3·10⁻⁵ at t = 20,
   1.3·10⁻² at t = 30 and 0.85 at t = 39.75.
 
 **Inputs.** `coefficients/out/an_small_X1e4.json`, `coefficients/out/an_smalln_X3e5.json` and
-`coefficients/out/an_smalln_X6e5.json` (Section 8; full hashes in `SHA256SUMS`). `cert_Ht.py` also reads C from
+`coefficients/out/an_smalln_X6e5.json` (Section 12; full hashes in `SHA256SUMS`). `cert_Ht.py` also reads C from
 `coefficients/out/H0_cert.json`, and `compare_window.py` reads `positivity/out/window_0_40.json`. Scripts
 `coefficients/cert_H0.py`, `coefficients/cert_Ht.py`, `coefficients/coefflib.py` (for K₀, K₁),
 `coefficients/fix_json_radii.py`, `coefficients/compare_window.py` and `lib/besselk.py`. The logs print the hash prefixes
 of the script and of the input files.
 
-**Commands** (from this directory, after those of Section 8):
+**Commands** (from this directory, after those of Section 12):
 
 ```sh
 ./runlog.sh coefficients/logs/cert_H0.log "$PY" -u coefficients/cert_H0.py 1 8
@@ -557,23 +745,24 @@ takes t (optionally followed by η₁ and η₂).
   - `DECISIVE: H_raw(t=0) = [0.00113551 +/- 2.07e-9] + [+/- 4.36e-13]j   (imag part should contain 0: True)`
   - `H(t) = C H_raw(t), C from H0_cert.json`, ending in `[880.66 +/- 3.16e-3]:  [1.0000 +/- 3.27e-6]`
 - `coefficients/logs/compare_window.log`: `DECISIVE: 21/21 compared points overlap: True`
-- `coefficients/logs/compare_outputs.log`: the two `DECISIVE` lines quoted in Section 8.
+- `coefficients/logs/compare_outputs.log`: the two `DECISIVE` lines quoted in Section 12.
 
 **Runtime** (one core per run). `cert_H0.py`: 88 s and 91 s. `cert_Ht.py`: 88–104 s per value of t; the 22 values took
 4.8 minutes on 8 cores. `compare_window.py` and `compare_outputs.py`: under 1 s each.
 
-## 10. Input files with SHA-256
+## 14. Input files with SHA-256
 
 | File | Content | SHA-256 |
 |---|---|---|
 | `coefficients/data/an_small_X1e4.json` | certified balls for a_n, n ≤ 60 (Kloosterman sums with c ≤ 10⁴ plus a tail bound); key `a_mid_rad` = [decimal midpoint, radius] | `59fe6e24647252db6cfa4e673b5ba89e741ed5c0b34b56e2db5cfe0c97aa546a` |
-| `coefficients/data/an_cert_X1e4.json` | certified balls for a_n, n ≤ 1500 (key `a`), and the c = 1 terms (key `T1`, used only by the negative control) | `59d50f17db2199b1e9a039a616f1a9de51bfdf642549b25097c341e5e077b577` |
+| `coefficients/data/an_cert_X1e4.json` | certified balls for a_n, n ≤ 1500 (key `a`), and the c = 1 terms (key `T1`, used for the trivial-bound box of Sections 3, 4 and 6 and by the negative control) | `59d50f17db2199b1e9a039a616f1a9de51bfdf642549b25097c341e5e077b577` |
 | `coefficients/data/extra_smalln_X3e5.json` | sharper certified balls for a_n, n ≤ 6 (Kloosterman sums with c ≤ 3·10⁵ plus a tail bound), {n: [midpoint, radius]} | `ff4b86318eed86f1badcde7e53c0c80f859f2cbee74a287d9493b2643d173e76` |
 | `lib/besselk.py` | Part I library (byte-identical) | `3d3fd6601742c49b17fc355a0d9310474704ad480508010f91ae92615131501a` |
 | `lib/common.py` | Part I library (byte-identical) | `d8e3056e04fdb144a8706bbc31ef0d3028860f21bd5dc09e0db9ee65aa14242a` |
 | `lib/__init__.py` | Part I library (byte-identical, empty) | `e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855` |
-| `positivity/out/window_0_40.json` | per-cell output of the window run (Section 3) | `SHA256SUMS` |
-| `coefficients/out/*.json` | outputs of the fresh runs of Sections 8 and 9; `an_small_X1e4.json`, `an_smalln_X3e5.json`, `an_smalln_X6e5.json` and `H0_cert.json` are read by `cert_H0.py` and `cert_Ht.py` | `SHA256SUMS` |
+| `positivity/out/window_0_40.json` | per-cell output of the window run (Section 7) | `SHA256SUMS` |
+| `positivity/out/moments_true_N1500_p128.json` | the moments of Section 5 (Arb balls as strings; no timings) | `SHA256SUMS` |
+| `coefficients/out/*.json` | outputs of the fresh runs of Sections 12 and 13; `an_small_X1e4.json`, `an_smalln_X3e5.json`, `an_smalln_X6e5.json` and `H0_cert.json` are read by `cert_H0.py` and `cert_Ht.py` | `SHA256SUMS` |
 
 How the scripts read the coefficient files:
 - Provenance. The numerical content of the three coefficient files is identical to that of the files consumed by the
@@ -585,8 +774,8 @@ How the scripts read the coefficient files:
   `59fe6e24647252db6cfa4e673b5ba89e741ed5c0b34b56e2db5cfe0c97aa546a`; `an_cert_X1e4.json`
   `6ba6a52d9ae9e6291ebe6c2670f9513a7189809dace58ee520ea42fc15102555` →
   `59d50f17db2199b1e9a039a616f1a9de51bfdf642549b25097c341e5e077b577`; `extra_smalln_X3e5.json` is unchanged.
-- Every consumer was re-run on the renamed files: Sections 3–7, `compare_outputs.py`, `compare_window.py` and Figure 1
-  (Section 13). Every decisive line and every certified number is unchanged (`tools/logdiff.py` against the logs of the
+- Every consumer was re-run on the renamed files: Sections 7–11, `compare_outputs.py`, `compare_window.py` and Figure 1
+  (Section 17). Every decisive line and every certified number is unchanged (`tools/logdiff.py` against the logs of the
   original runs reports differences only in the lines that print the input hashes, and the window JSON is identical up
   to timings); the Figure 1 files are reproduced byte for byte. The shipped logs are those of these re-runs.
 - The `meta` fields record the SHA-256 prefixes of the original versions of the producing scripts, and write `Kc_n` for
@@ -595,17 +784,24 @@ How the scripts read the coefficient files:
   radius·(1 + 10⁻⁹) + |midpoint|·10⁻³⁰ and add the decimal-to-binary conversion error.
 - For each n the sharpest of the available balls is used. Balls for the same n from different files must overlap,
   which is checked.
-- Only n ≤ 300 are used; larger n go through the bound A0(n).
+- Sections 7–11 use n ≤ 300, and larger n go through the bound A0(n). Section 5 uses n ≤ 1500 and the bracket of
+  Theorem 6.1 beyond. The trivial-bound box (Sections 3, 4 and 6) uses only the `T1` entries, read as Arb balls with
+  their printed radius doubled.
 
-The coefficient balls themselves are certified in Section 8, where `compare_outputs.py` also checks, ball by ball, that a
+The coefficient balls themselves are certified in Section 12, where `compare_outputs.py` also checks, ball by ball, that a
 fresh run reproduces the three pinned files.
 
-## 11. Re-running and comparing with the shipped logs
+## 15. Re-running and comparing with the shipped logs
 
 From this directory, with `PY` set to a Python that has python-flint 0.9.0 (and numpy, for `coefficients/`):
 
 ```sh
 export PY=python3
+./runlog.sh positivity/logs/cert_moments_box.log "$PY" positivity/cert_moments_box.py 60 8 15 12 9 64 6
+./runlog.sh positivity/logs/cert_large_t_T9_box.log "$PY" positivity/run_on_box.py large_t 9 0.5 1 0.90 4 2000 8000
+./runlog.sh positivity/logs/cert_gtail_box.log "$PY" positivity/run_on_box.py gtail
+./runlog.sh positivity/logs/cert_moments_true.log "$PY" positivity/cert_moments.py true 1500 15 12 9 128 6
+./runlog.sh positivity/logs/cert_elementary.log "$PY" positivity/cert_elementary.py 1.3 30
 COEFF_EXTRA=coefficients/data/extra_smalln_X3e5.json ./runlog.sh positivity/logs/window_0_40.log "$PY" positivity/run_window.py 0 40 0.25 20 1 0_40
 COEFF_EXTRA=coefficients/data/extra_smalln_X3e5.json ./runlog.sh positivity/logs/cert_large_t_T8.log "$PY" positivity/cert_large_t.py 8 0.5 1 0.87 4 2000 8000
 COEFF_EXTRA=coefficients/data/extra_smalln_X3e5.json ./runlog.sh positivity/logs/cert_gtail.log "$PY" positivity/cert_gtail.py
@@ -614,9 +810,11 @@ COEFF_EXTRA=coefficients/data/extra_smalln_X3e5.json ./runlog.sh positivity/logs
 ```
 
 These commands are those recorded in the first two lines (`# command`, `# env`) of the shipped logs. In total they take
-about 3.5 minutes of wall time, most of it in `cert_large_t.py`; the window run uses 8 worker processes.
+about 7 minutes of wall time, most of it in the two runs of `cert_large_t.py`; the moment certificates use 6 worker
+processes and the window run 8. The first three commands are those of the proofs (Sections 3 and 4) and take about
+2.5 minutes.
 
-The coefficient certificates (Sections 8 and 9) are re-run with the commands of those sections, in this order:
+The coefficient certificates (Sections 12 and 13) are re-run with the commands of those sections, in this order:
 
 ```sh
 ./runlog.sh coefficients/logs/cert_an_X1e4.log "$PY" -u coefficients/cert_an.py 60 10000 1500 600 X1e4
@@ -634,7 +832,7 @@ done
 ./runlog.sh coefficients/logs/compare_outputs.log "$PY" coefficients/compare_outputs.py
 ```
 
-Figure 1 (Section 13) is regenerated with `./runlog.sh figures/logs/make_figure1.log "$PY" figures/make_figure1.py`; this
+Figure 1 (Section 17) is regenerated with `./runlog.sh figures/logs/make_figure1.log "$PY" figures/make_figure1.py`; this
 needs numpy, scipy and matplotlib in addition, and takes a few seconds.
 
 These runs are long:
@@ -649,10 +847,11 @@ These runs are long:
   the window run is repeated first in the same copy; `tools/logdiff.py` then reports this one line as different. Every
   other log of `coefficients/` should be `IDENTICAL` if `coefficients/cache/` is absent at the start.
 
-The shipped runs were pinned with `taskset`: 8 cores for the window run and one core each for the others. Pinning,
+The shipped runs were pinned with `taskset`: 8 cores for the window run, 6 for the moment certificates and one core each
+for the others. Pinning,
 precision and the number of workers affect only the running time, not the validity of a successful run.
 
-A re-run overwrites `positivity/logs/*.log`, `positivity/out/window_0_40.json`, `coefficients/logs/*.log` and
+A re-run overwrites `positivity/logs/*.log`, `positivity/out/*.json`, `coefficients/logs/*.log` and
 `coefficients/out/*.json`. Run it on a copy of this directory (the first command is run from the parent directory) and
 compare:
 
@@ -665,7 +864,8 @@ cp -r anc anc-rerun && cd anc-rerun && export PY=python3      # then the command
 
 The window JSON records per-cell timings (`secs`), so a re-run changes its SHA-256, and `sha256sum -c SHA256SUMS` then
 reports it as `FAILED`. `tools/logdiff.py` ignores the `secs` fields. Every other shipped file is unchanged by a re-run;
-the files in `coefficients/out/` contain no timings and are reproduced byte for byte.
+`positivity/out/moments_true_N1500_p128.json` and the files in `coefficients/out/` contain no timings and are reproduced
+byte for byte.
 
 **SHA256SUMS policy.** `SHA256SUMS` lists the full SHA-256 of every shipped file except the logs (`*/logs/*`), this
 README and `lean/`, as `<hash>  ./relative/path` sorted by path, so that `sha256sum -c SHA256SUMS` works from this
@@ -675,7 +875,7 @@ directory. The cache `coefficients/cache/` is not shipped and not listed. `SHA25
 find . -type f ! -path './lean/*' ! -path '*/logs/*' ! -path '*/__pycache__/*' ! -path './coefficients/cache/*' ! -name README.md ! -name SHA256SUMS -print0 | LC_ALL=C sort -z | xargs -0 sha256sum > SHA256SUMS
 ```
 
-## 12. Software and hardware
+## 16. Software and hardware
 
 - Python 3.10.12; python-flint 0.9.0, built on FLINT 3.6.0, which contains Arb. The header of every log records the
   versions actually used. The scripts of `coefficients/` also used numpy 2.2.6, which the log headers do not record.
@@ -685,14 +885,14 @@ find . -type f ! -path './lean/*' ! -path '*/logs/*' ! -path '*/__pycache__/*' !
   for any order of summation, so `compare_outputs.py` would then report overlapping rather than identical balls.
 - Runtimes are wall times on an Intel Xeon Platinum 8362 (2.8 GHz) shared with other jobs.
 
-## 13. Figure 1 of the paper (`figures/make_figure1.py`; an illustration, not a certificate)
+## 17. Figure 1 of the paper (`figures/make_figure1.py`; an illustration, not a certificate)
 
 **What it shows.** Panel (a): H(t) for 0 ≤ t ≤ 40 on a logarithmic scale, where H(t) = R(t)/(16(t² + 1/4)² R(0)). The
 curve joins H(0) = 1 and the values at the 80 cell centres of certificate W, computed from the quadrature values R(t_c)
 in `positivity/out/window_0_40.json` (without error terms). The steps are lower bounds for H on each cell, formed from
-the certified cell lower bounds of the same file and the upper end of the certified enclosure of R(0) (Section 6), with
+the certified cell lower bounds of the same file and the upper end of the certified enclosure of R(0) (Section 10), with
 (t² + 1/4)² taken at the right end of the cell. The dashed curve is the bound R(t) ≥ 0.2554 e^{0.6435 t} of Theorem L
-(Section 4), converted in the same way. Panel (b): e^{4π√x} Ĝ_H(x)/10⁶ for 1 ≤ x ≤ 6, where
+(Section 8), converted in the same way. Panel (b): e^{4π√x} Ĝ_H(x)/10⁶ for 1 ≤ x ≤ 6, where
 Ĝ_H(x) = C sin²(πx) √x Σ_n a_n K₀(4π√(nx)) (Theorem 4 of the paper), in binary64 from the coefficient midpoints
 (`coefficients/data/extra_smalln_X3e5.json` for n ≤ 6 and `coefficients/data/an_cert_X1e4.json` for n ≤ 1500; for
 n > 1500 the term c = 1 of the Kloosterman series, whose relative error is far below binary64 precision) and the midpoint
@@ -704,7 +904,7 @@ x = 1.004 is consistent with the value at x = 1; and the plotted values are non-
 
 **Inputs.** `positivity/out/window_0_40.json`, `coefficients/data/an_cert_X1e4.json` (`59d50f17db2199b1`),
 `coefficients/data/extra_smalln_X3e5.json` (`ff4b86318eed86f1`), `coefficients/out/H0_cert.json`; the enclosure of R(0)
-is a constant in the script (Section 6).
+is a constant in the script (Section 10).
 
 **Command** (from this directory; needs numpy, scipy and matplotlib):
 

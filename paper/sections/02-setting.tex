@@ -2,21 +2,21 @@
 \section{The setting, and the results of Part I that are used}\label{sec:setting}
 %======================================================================
 
-This section recalls, with full statements, the framework of Part~I \cite{Joh26} and the results of Part~I on which the proof rests: the
-explicit formula (Lemma~\ref{lem:I-EF}), the a priori bounds (Lemma~\ref{lem:I-apriori}), duality and the logic of the conjectures
-(Theorems~\ref{thm:I-duality} and~\ref{thm:I-logic}), complementary slackness and the zero-side support theorem with its corollary
-(Lemma~\ref{lem:I-compslack}, Theorem~\ref{thm:I-zerosupport}, Corollary~\ref{cor:I-magic}), and the explicit formula for zero-killing
-functions with the bound it needs (Lemma~\ref{lem:I-XB}, Corollary~\ref{cor:I-zerokilling}). A result restated from Part~I keeps its number
+This section restates, with full statements, the framework of Part~I \cite{Joh26} and the results of Part~I on which the proofs rest. A
+result restated from Part~I keeps its number
 there, with the prefix~I: Theorem~I.3.6 below is Theorem~3.6 of Part~I. These numbers, and references of the form ``Part~I, Theorem~2.7'', are to
 version~1.3 of \cite{Joh26} (Zenodo, \texttt{doi:10.5281/zenodo.23217537}; the concept DOI \texttt{10.5281/zenodo.23197915} resolves to the latest
 version).
 
 \emph{What is reproduced, and what is not.} The proofs of Lemmas~\ref{lem:I-decay}, \ref{lem:I-apriori} and~\ref{lem:I-compslack}, of
 Corollaries~\ref{cor:I-magic} and~\ref{cor:I-zerokilling}, and of the easy implications of Theorems~\ref{thm:I-duality} and~\ref{thm:I-logic}
-are given below. The following proofs and inputs are \emph{not} reproduced; for each we give the exact reference and the idea:
+are given below, and Appendix~\ref{app:gap} proves the hard implication of Theorem~\ref{thm:I-duality}, at an arbitrary gap, up to the two
+steps in (P2). The following proofs and inputs are \emph{not} reproduced; for each we give the exact reference and the idea:
 \begin{enumerate}[label=(P\arabic*),leftmargin=*]
 \item the explicit formula on $\Tc$ (Lemma~\ref{lem:I-EF}) and the bound \eqref{eq:XB} (Lemma~\ref{lem:I-XB}), which are classical;
-\item the implication (ii)$\Rightarrow$(i) of the duality theorem (Theorem~\ref{thm:I-duality}; Part~I, Appendix~B.1.1);
+\item two steps of the proof of the implication (ii)$\Rightarrow$(i) of the duality theorem (Theorem~\ref{thm:I-duality}; Part~I,
+Appendix~B.1.1), namely its approximation step and the convergence of two auxiliary series; the rest of that proof is given, at an arbitrary
+gap, in Appendix~\ref{app:gap} (Proposition~\ref{prop:gap-duality});
 \item part (b) of the logic theorem (Theorem~\ref{thm:I-logic}(b); Part~I, Appendix~B.1.2);
 \item the zero-side support theorem (Theorem~\ref{thm:I-zerosupport}; Part~I, Appendix~B.1.4), whose proof uses Lemma~\ref{lem:I-apriori},
 Theorem~\ref{thm:I-logic}(b), \cite[Theorem~1.1, \S\S4.2--4.3 and (3.12), (3.16), (3.17)]{BRS} (numbered as in arXiv:2005.02996v3),
@@ -27,14 +27,14 @@ strips, and that this decay is uniform on every closed strip $|\Im z|\le\frac12+
 Definition~3.4), which this paper does not re-verify.
 \end{enumerate}
 Accordingly, Theorem~\ref{thm:main-S} uses from Part~I only definitions and the classical facts (P1), and does not depend on (P2)--(P5);
-Theorem~\ref{thm:main-U} rests in addition on (P3), (P4) and (P5); and Corollary~\ref{cor:main-RH} rests on (P1)--(P5). Part~I's Propositions~2.8 and~2.10 are mentioned below only for
+Theorem~\ref{thm:main-U} rests in addition on (P3), (P4) and (P5); and Corollaries~\ref{cor:main-RH} and~\ref{cor:nogap} rest on (P1)--(P5). Part~I's Propositions~2.8 and~2.10 are mentioned below only for
 interpretation and, in Appendix~\ref{app:lean}, for the Lean formalisation; no proof in this paper depends on them.
 
 \subsection{Notation}\label{ssec:notation}
 
 We write $\hF(\xi)=\int_\RR F(t)e^{-2\pi i\xi t}\dd t$, $\xin n=\log n/(2\pi)$ for real $n>0$, and $\xin2=\log2/(2\pi)$ for the
-\emph{gap}. The multiplicative coordinate is $x=e^{2\pi\xi}$: the node $\xin n$ corresponds to $x=n$ and the gap $[\xin2,\infty)$ to
-$x\ge2$. $\GR(s)=\pi^{-s/2}\Gamma(s/2)$, $\xi(s)=\frac12s(s-1)\GR(s)\zeta(s)$, $\Xi(t)=\xi(\frac12+it)$, and
+\emph{gap}. The multiplicative coordinate is $x=e^{2\pi\xi}$: the node $\xin n$ corresponds to $x=n$ and the half-line $[\xin2,\infty)$
+beyond the gap to $x\ge2$. $\GR(s)=\pi^{-s/2}\Gamma(s/2)$, $\xi(s)=\frac12s(s-1)\GR(s)\zeta(s)$, $\Xi(t)=\xi(\frac12+it)$, and
 \begin{equation}\label{eq:gi}
 \gi(t):=\tfrac12s(s-1)\GR(s)\Big|_{s=\frac12+it},\qquad\text{so that}\qquad \Xi(t)=\gi(t)\,\zeta(\tfrac12+it).
 \end{equation}
@@ -112,12 +112,12 @@ best lower bound for the conductor that the explicit formula gives, over test fu
 $\qmin\ge1$. The cone $\ConeOPS$ is the classical cone of Odlyzko, Poitou and Serre \cite{Odl90,Poi77,Ser75,Sta74}, and $\kOPS$ gives the
 corresponding classical bound.
 
-\begin{lconj}{U}[Part~I, Conjecture~U]\label{conj:U}
-Every admissible pair, if there is one, is $\zeta$'s pair: $\Kad\subseteq\{\pz\}$.
-\end{lconj}
-
 \begin{lconj}{S}[Part~I, Conjecture~S]\label{conj:S}
 $\kstar\le0$. Equivalently, $\qmin\ge1$.
+\end{lconj}
+
+\begin{lconj}{U}[Part~I, Conjecture~U]\label{conj:U}
+Every admissible pair, if there is one, is $\zeta$'s pair: $\Kad\subseteq\{\pz\}$.
 \end{lconj}
 
 \begin{Idefinition}{2.11}\label{def:magic}
@@ -125,7 +125,7 @@ An \emph{exact magic function} is an $F\in\Cone$ with $\int F>0$ and $\Arch(F)=0
 $Z(F):=F^{-1}(0)\cap\RR$ and $\widehat Z(F):=\hF^{-1}(0)\cap[\xin2,\infty)$.
 \end{Idefinition}
 
-If $F$ is an exact magic function, then $F/\int F$ is admissible in the definition of $\kstar$, so $\kstar\le0$.
+If $F$ is an exact magic function, then $F/\int F$ is feasible for $\kstar$, with value $0$; so $\kstar\le0$.
 
 \subsection{The results of Part I that are used}\label{ssec:I-results}
 
@@ -138,9 +138,10 @@ In particular, if $\nu^\sharp$ denotes the image of $\nu$ under $\xi\mapsto e^{2
 \end{Ilemma}
 
 \begin{proof}
-This is the proof of Part~I, Appendix~B.1.2. Let $g(t)=e^{-\pi t^2}$, so that $\widehat g=g$, and put $A_T:=g(\cdot-T)+2g+g(\cdot+T)$ and
-$B_X(t):=2g(t)(1+\cos2\pi Xt)$. Both are even, lie in $\Tc$ and are non-negative on $\RR$, and $\widehat{A_T}(\xi)=2g(\xi)(1+\cos2\pi T\xi)\ge0$,
-$\widehat{B_X}=2g+g(\cdot-X)+g(\cdot+X)\ge0$; so both lie in $\Cone$. As $A_T\ge e^{-\pi}$ on $[T-1,T+1]$ and $\widehat{B_X}\ge e^{-\pi}$ on
+This is the proof of Part~I, Appendix~B.1.2. Let $\mathsf g(t)=e^{-\pi t^2}$, so that $\widehat{\mathsf g}=\mathsf g$, and put
+$A_T:=\mathsf g(\cdot-T)+2\mathsf g+\mathsf g(\cdot+T)$ and $B_X(t):=2\mathsf g(t)(1+\cos2\pi Xt)$. Both are even, lie in $\Tc$ and are
+non-negative on $\RR$, and $\widehat{A_T}(\xi)=2\mathsf g(\xi)(1+\cos2\pi T\xi)\ge0$, $\widehat{B_X}=2\mathsf g+\mathsf g(\cdot-X)+\mathsf g(\cdot+X)\ge0$;
+so both lie in $\ConeOPS\subseteq\Cone$. As $A_T\ge e^{-\pi}$ on $[T-1,T+1]$ and $\widehat{B_X}\ge e^{-\pi}$ on
 $[X-1,X+1]$, and both integrands in Definition~\ref{def:admissible} are non-negative where the measures live, $\mu([T-1,T+1])\le
 e^\pi\Arch(A_T)$ and $\nu([X-1,X+1])\le\pi e^\pi\Arch(B_X)$. Finally $|A_T(\pm\frac i2)|\le4e^{\pi/4}$, $B_X(\pm\frac i2)=2e^{\pi/4}(1+\cosh\pi X)$
 and $|\Oinf(t)|\le C\log(2+|t|)$ give $\Arch(A_T)\le C\log(3+|T|)$ and $\Arch(B_X)\le C(1+\cosh\pi X)$; for $X<-1$ the left side of the second
@@ -157,9 +158,10 @@ Part~I's statement also lists, as its condition (iii), condition (ii) for the ev
 (iii) is its (iv). The
 implication (i)$\Rightarrow$(ii) is weak duality: for $(\mu,\nu)\in\Kad$ and $F\in\Cone$ both integrals in Definition~\ref{def:admissible}
 are non-negative. (ii)$\Leftrightarrow$(iii) is homogeneity (an $F\in\Cone$ with $\int F=0$ vanishes identically). The implication
-(ii)$\Rightarrow$(i) is conic linear-programming duality and is not reproduced here: Part~I, Appendix~B.1.1, proves it with
-Carath\'eodory's theorem in finite-dimensional subspaces of Gaussian wave packets, uniform bounds for positive solutions obtained as in the
-proof of Lemma~\ref{lem:I-apriori}, and Helly's selection theorem.
+(ii)$\Rightarrow$(i) is conic linear-programming duality: Part~I, Appendix~B.1.1, proves it with Carath\'eodory's theorem in
+finite-dimensional subspaces of Gaussian wave packets, uniform bounds for positive solutions obtained as in the proof of
+Lemma~\ref{lem:I-apriori}, and Helly's selection theorem. Appendix~\ref{app:gap} repeats that proof at an arbitrary prime-side gap
+(Proposition~\ref{prop:gap-duality}).
 
 \begin{Itheorem}{2.9}[Logic; parts (a)--(c)]\label{thm:I-logic}
 \begin{enumerate}[label=\textup{(\alph*)}]
@@ -197,7 +199,7 @@ Schwartz functions. Testing admissibility on the basis functions $U_m$ of \cite{
 functions by (P5), computes $L$ on
 the Radchenko--Viazovska basis; by Schwartz convergence of their interpolation series this gives, for every even self-dual Schwartz $f$ with
 $f(0)=0$, $L(f)=\sum_{n\ge2}(\log n)f(n)-\frac12\mu(\{0\})\zeta(\frac12)\int_0^\infty f(x)x^{-1/2}\dd x$. A limiting test with
-$g(t)=\sin^2(\pi t)/(\pi^2(t^2-1))$, which vanishes at the integers and is positive at all other points of $(1,\infty)$, and with its
+$h(t)=\sin^2(\pi t)/(\pi^2(t^2-1))$, which vanishes at the integers and is positive at all other points of $(1,\infty)$, and with its
 transform, forces $\mu(\{0\})=0$ and puts $\nu^\sharp$ on the integers $n\ge2$; M\"obius inversion then gives $\nu=\nuz$, and
 Theorem~\ref{thm:I-logic}(b) gives RH and $\mu=\muz$.
 

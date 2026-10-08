@@ -29,9 +29,16 @@ its status, and `LEDGER.md` describes the axioms.
 | | `corollary3_notRH` | `¬RH → kappaStar < 0 ∧ K = ∅` |
 | | `corollary_minimiser` | `F/∫F` is a minimiser for `κ*` iff RH; under RH also for `κ*_OPS`; unconditionally `κ* ≤ κ*_OPS ≤ 𝒜(F)/∫F = 0` |
 | Proposition `prop:reduction` | `reduction`, `reduction_OPS` | `H ∈ 𝒲_δ`, `H ≢ 0`, (C2)–(C4) ⇒ `F ∈ 𝒞`, `F̂(ξ_n) = 0`, `∫F = F̂(0) = Ĝ_H(0) > 0`, `𝒜(F) = 0`, exact magic, `κ* ≤ 0`; with `Ĝ_H ≥ 0` on `[0, ∞)`: `F ∈ 𝒞_OPS`, `κ*_OPS ≤ 0` |
+| Corollary 8.2 (`cor:nogap`, "The classical cone"), last sentence | `rh_iff_kappaOPS_zero` | `(RH ↔ ∀ F ∈ ConeOPS, 0 ≤ Arch F) ∧ (RH ↔ 0 ≤ kappaOPS) ∧ (RH ↔ kappaOPS = 0) ∧ (¬RH → kappaStar ≤ kappaOPS ∧ kappaOPS < 0)` |
+| Corollary 8.2 (c), (d), every gap `0 ≤ ℓ ≤ ξ₂` | `corollary8_2` | RH ⟺ `𝒦_ℓ ≠ ∅` ⟺ `𝒜 ≥ 0` on `𝒞_ℓ` ⟺ `κ*_ℓ ≥ 0` ⟺ `κ*_ℓ = 0`; under RH `𝒦_ℓ = {p_ζ}`; under ¬RH `𝒦_ℓ = ∅` and `κ* ≤ κ*_ℓ ≤ κ*_OPS < 0` (clause (iv), on `𝒞_ℓ ∩ 𝒢`, not formalised) |
+| Corollary 8.2 (b) | `corollary8_2_b` | `Kset Arch ℓ = K` for `0 ≤ ℓ ≤ ξ₂` (`𝒦_ℓ = 𝒦`, no hypothesis on the zeros) |
+| Corollary 8.2 (a) | `FT_window` | `F̂ ≥ Ĝ_H > 0` on `[0, ξ₂)`, so `F̂ > 0` on `(−ξ₂, ξ₂)` (the zero set of `F̂` not formalised) |
+| (by-product, unconditional) | `kappaStar_nonneg_iff_kappaOPS_nonneg` | `0 ≤ kappaStar ↔ 0 ≤ kappaOPS`, without Theorem U or the duality theorem |
+| Lemma C.1 "Transfer across the gap" (`lem:transfer`) | `transfer` | for every `L` additive on `𝒯` and homogeneous: `Θ ∈ 𝒞_OPS`, `Re Θ̂ > 0` on `[0, ℓ₁)`, `L(Θ) ≤ 0`, `L ≥ 0` on `𝒞_OPS` ⇒ `L ≥ 0` on `𝒞_{ℓ₁}` — proved with no ledger axiom |
 
 Theorem S says `κ* ≤ κ*_OPS ≤ 0`; it does not say that `κ*` is attained (it is attained, by `F/∫F`, exactly under RH:
-`corollary_minimiser`). The Corollary does not claim `κ*_OPS = 0 ⇒ RH`.
+`corollary_minimiser`). Corollary 3 gives `RH ⇒ κ*_OPS = 0`; the converse is Corollary 8.2 (`rh_iff_kappaOPS_zero`), which
+also covers every gap `ℓ ∈ [0, ξ₂]`.
 
 ## Status
 
@@ -42,12 +49,18 @@ Theorem S says `κ* ≤ κ*_OPS ≤ 0`; it does not say that `κ*` is attained (
     `H ∈ 𝒲_δ`, `δ < 1/2`: `G_H = γ_∞² H ∈ L¹(ℝ)` and `F̂(ξ) = Σ_{m ≥ 1} d(m) m^{−1/2} Ĝ_H(ξ + ξ_m)`;
   * `exists_integer_critical_object` [paper + certificate + classical] — Theorem "The object" (`thm:main-object`)
     with Corollary `cor:Pi-positive`: there is `H ∈ 𝒲_δ` (some `δ < 1/2`) with (C3) `Ĝ_H(ξ_k) = 0` for every integer
-    `k ≥ 2`, `Ĝ_H ≥ 0` on `[0, ∞)`, and `H > 0` on `ℝ`. Its docstring cites, property by property, the statements of
-    Part II behind it and quotes the decisive lines of the certificates (the window `Π > 0` on `[0, 40]`, the numbers of
-    Theorem L at `T₀ = 8`, `ρ̄(4) < 1`) from the logs shipped in the ancillary directory.
+    `k ≥ 2`, `Ĝ_H ≥ 0` on `[0, ∞)` and `Ĝ_H > 0` on the window `[0, ξ₂)`, and `H > 0` on `ℝ`. Its docstring cites, property by property, the statements of
+    Part II behind it and quotes the decisive lines of the certificates of Corollary 7.12 (Certificate M-box,
+    Theorem 6.8: `H_raw > 0` for `|t| ≤ 10.355`; the large-`|t|` numbers at `T₀ = 9` on the trivial-bound box,
+    Proposition 7.10 and Theorem 7.11; `ρ̄(4) < 1`), and, as independent checks, those of Certificate W (Theorem 7.13)
+    and of `T₀ = 8` with the certified coefficients (Theorem 7.4), from the logs shipped in the ancillary directory.
 * **6 axioms of Part I's ledger are used**: `explicit_formula`, `xi_decay` (Theorem S); `zero_support_rigidity`,
-  `logic_b` (Theorem U); `duality_no_gap` (the Corollary); `floor_bound` (only for `theorem1_finite`, the finiteness of
+  `logic_b` (Theorem U); `duality_no_gap` (Corollary 3); `floor_bound` (only for `theorem1_finite`, the finiteness of
   `κ*` and `κ*_OPS`).
+* **Corollary 8.2** (`cor:nogap`, RH ⟺ `κ*_OPS = 0`) is formalised (`NoGap.lean`), except for the zero set in its part (a)
+  and its clause (c)(iv). It uses exactly the axioms of Corollary 3; the transfer lemma (Lemma C.1) is proved with no
+  ledger axiom. For it, the object axiom gained one conjunct, `Ĝ_H > 0` on `[0, ξ₂)` (the strict positivity proved in
+  Corollary 8.2(a)); the number of axioms is unchanged.
 * `#print axioms` of every formalised statement lists only these axioms and `propext`, `Classical.choice`,
   `Quot.sound` (`axioms.log`).
 * `scripts/audit.sh` passes (`AUDIT PASSED`): see "The audit" below.
@@ -120,7 +133,8 @@ imported Zeta23 modules from source and takes hours on the 4-core runner; later 
 | `Faithful.lean` | `γ_∞ = ½ s(s−1) Γ_ℝ`, `γ_∞(0) = −1`, `Ξ = γ_∞ ζ` on `ℝ`; `1 ∈ 𝒲_δ`; scaling; the identity theorem for `𝒲_δ`; the indexing of the Voronoi series; derivatives at zeros of a non-negative function (all without ledger axioms) |
 | `Reduction.lean` | Lemma `lem:voronoi`(a) (`classW_inTδ`); the positivity and vanishing transfer through the Voronoi series; Part I's Corollary 4.4 gives `𝒜(F) = 0`; `∫ F > 0`; **Proposition `prop:reduction`** (`reduction`, `reduction_OPS`, `condC5_of`) |
 | `Object.lean` | The normalised object (`exists_object`) and **Theorem S, first part** (`theorem1_object`) |
-| `Main.lean` | **Theorem S** (`theorem1`, `theorem1_conductor`, `theorem1_finite`), **Theorem U** (`theorem2`, `theorem2_condU`), **the Corollary** (`corollary3`, `corollary3_RH`, `corollary3_notRH`, `corollary_minimiser`), `main_summary` |
+| `Main.lean` | **Theorem S** (`theorem1`, `theorem1_conductor`, `theorem1_finite`), **Theorem U** (`theorem2`, `theorem2_condU`), **Corollary 3** (`corollary3`, `corollary3_RH`, `corollary3_notRH`, `corollary_minimiser`), `main_summary` |
+| `NoGap.lean` | **Corollary 8.2** (`rh_iff_kappaOPS_zero`, `corollary8_2`, `corollary8_2_b`, `FT_window`), **Lemma C.1** (`transfer`, `transfer_Arch`); `𝒜` additive on `𝒯` (`Arch_add`, via Zeta23's bound for `Ω_∞`), `𝒯` closed under addition, `𝒞_0 = 𝒞_OPS`, `κ* ≥ 0 ⟺ κ*_OPS ≥ 0` |
 
 ## The audit
 
@@ -130,11 +144,11 @@ imported Zeta23 modules from source and takes hours on the 4-core runner; later 
 |---|---|
 | (0) | `lake build --no-build PositivityRigidityII` succeeds: the audited `.olean` files are those of the current sources |
 | (a) | no `sorry`, `admit` or `native_decide` token in any Lean file of the project (comments and strings stripped) |
-| (b) | no `axiom` declaration outside `PositivityRigidityII/Ledger.lean` (textually, and in the environment: `scripts/Audit.lean`); the number of ledger axioms equals the total in `LEDGER.md`, which names each of them and each Part I axiom used; no declaration depends on an axiom other than `propext`, `Classical.choice`, `Quot.sound` and the ledger axioms of Parts I and II (so no `sorryAx`, no `Lean.ofReduceBool`); the 13 headline theorems exist |
+| (b) | no `axiom` declaration outside `PositivityRigidityII/Ledger.lean` (textually, and in the environment: `scripts/Audit.lean`); the number of ledger axioms equals the total in `LEDGER.md`, which names each of them and each Part I axiom used; no declaration depends on an axiom other than `propext`, `Classical.choice`, `Quot.sound` and the ledger axioms of Parts I and II (so no `sorryAx`, no `Lean.ofReduceBool`); the 19 headline theorems exist |
 | (c) | the output of `scripts/print_axioms.lean` (`#print axioms` for every formalised statement) equals `axioms.log` (its `# ` header lines excepted) exactly |
-| (d) | statement pin: the output of `scripts/Statements.lean` — the types of the 13 headline theorems, of the 2 ledger axioms and of the 6 Part I axioms they use, and the types and bodies of every definition of Part I or Part II they unfold to, with structural hashes — equals `scripts/Statements.baseline.txt` exactly (so a change of Part I's spine that changes the meaning of a statement of Part II fails the audit) |
+| (d) | statement pin: the output of `scripts/Statements.lean` — the types of the 19 headline theorems, of the 2 ledger axioms and of the 6 Part I axioms they use, and the types and bodies of every definition of Part I or Part II they unfold to, with structural hashes — equals `scripts/Statements.baseline.txt` exactly (so a change of Part I's spine that changes the meaning of a statement of Part II fails the audit) |
 | (e) | provenance (`scripts/check_provenance.py`): every SHA-256 cited in `Ledger.lean` matches the cited file of the ancillary directory (`..`), and every log line quoted there occurs in the cited shipped log; SKIPPED (not a failure) if the ancillary directory is absent |
-| (f) | non-vacuity: `scripts/NonVacuity.lean` compiles, and each of its 10 theorems uses only `propext`, `Classical.choice`, `Quot.sound` (`FAITHFUL.md`, "Non-vacuity") |
+| (f) | non-vacuity: `scripts/NonVacuity.lean` compiles, and each of its 13 theorems uses only `propext`, `Classical.choice`, `Quot.sound` (`FAITHFUL.md`, "Non-vacuity") |
 | (g) | hygiene (`scripts/check_hygiene.py`): no absolute path in the files of the project; and, when the maintainers' list of names that must not be published is present (`HYGIENE_PATTERNS`, by default a file in a directory next to `paper/` that is not published), none of those names either. In the public repository the list is absent and that part is reported as skipped |
 
 `CORES` (default `0-3`) is the CPU list for `taskset` (`CORES=` disables pinning), `LEAN_NUM_THREADS` defaults to 4,

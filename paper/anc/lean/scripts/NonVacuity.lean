@@ -22,7 +22,10 @@ the end are checked by `scripts/audit.sh`.
   positivity);
 * `identity_theorem`: "`H ≢ 0`" in Proposition `prop:reduction` gives a real point with `H(t) ≠ 0`;
 * `deriv_at_zero_of_nonneg`: a non-negative real-valued function has derivative `0` (if any) at its zeros (how
-  Theorem S(b) passes from `F̂(ξ_n) = 0` to `F̂'(ξ_n) = 0`).
+  Theorem S(b) passes from `F̂(ξ_n) = 0` to `F̂'(ξ_n) = 0`);
+* `transfer_lemma`: Lemma C.1 (the transfer lemma of Corollary 8.2) for `𝒜` needs no axiom;
+* `arch_additive`: `𝒜` is additive on `𝒯`, and `𝒯` is closed under addition;
+* `classical_cone_zero`: `𝒞_0 = 𝒞_OPS`, so Corollary 8.2 at the gap `0` is about the classical cone.
 -/
 import PositivityRigidityII
 
@@ -96,6 +99,23 @@ theorem deriv_at_zero_of_nonneg {f : ℝ → ℂ} {x₀ : ℝ} (hnn : ∀ x, 0 �
     (hD : HasDerivAt f D x₀) : D = 0 :=
   hasDerivAt_eq_zero_of_nonneg hnn h0 hD
 
+/-- Lemma C.1 "Transfer across the gap" (`lem:transfer`), for `L = 𝒜`, uses no axiom: if `Θ ∈ 𝒞_OPS` has `Re Θ̂ > 0` on `[0, ℓ₁)` and
+`𝒜(Θ) ≤ 0`, then `𝒜 ≥ 0` on `𝒞_OPS` implies `𝒜 ≥ 0` on `𝒞_{ℓ₁}`.  (Only the window positivity of the object, which is
+an input, enters Corollary 8.2 through the ledger.) -/
+theorem transfer_lemma {ℓ₁ : ℝ} {Θ : ℂ → ℂ} (hΘ : Θ ∈ ConeOPS)
+    (hΘpos : ∀ ξ : ℝ, 0 ≤ ξ → ξ < ℓ₁ → 0 < (FT Θ ξ).re) (hAΘ : Arch Θ ≤ 0)
+    (hA : ∀ F ∈ ConeOPS, 0 ≤ Arch F) : ∀ F ∈ ConeG ℓ₁, 0 ≤ Arch F :=
+  transfer_Arch hΘ hΘpos hAΘ hA
+
+/-- `𝒜` is additive on `𝒯` (the archimedean integral converges absolutely on `𝒯`, by Zeta23's bound for `Ω_∞`). -/
+theorem arch_additive {F G : ℂ → ℂ} (hF : F ∈ TestClass) (hG : G ∈ TestClass) :
+    Arch (fun z => F z + G z) = Arch F + Arch G ∧ (fun z => F z + G z) ∈ TestClass :=
+  ⟨Arch_add hF hG, TestClass.add hF hG⟩
+
+/-- At the gap `0` the cone is the classical one: `𝒞_0 = 𝒞_OPS`. -/
+theorem classical_cone_zero : ConeG 0 = ConeOPS :=
+  ConeG_zero_eq
+
 end PosRigII.NonVacuity
 
 #print axioms PosRigII.NonVacuity.classW_nonempty
@@ -108,3 +128,6 @@ end PosRigII.NonVacuity
 #print axioms PosRigII.NonVacuity.zero_set_of_strict
 #print axioms PosRigII.NonVacuity.identity_theorem
 #print axioms PosRigII.NonVacuity.deriv_at_zero_of_nonneg
+#print axioms PosRigII.NonVacuity.transfer_lemma
+#print axioms PosRigII.NonVacuity.arch_additive
+#print axioms PosRigII.NonVacuity.classical_cone_zero

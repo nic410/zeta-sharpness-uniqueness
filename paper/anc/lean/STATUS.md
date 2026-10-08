@@ -22,6 +22,7 @@ listed here (README, "The audit").
 | Theorem U (`thm:main-U`) | `theorem2`, `theorem2_condU` | proved from axioms [as Theorem S, plus `PosRig.zero_support_rigidity`, `PosRig.logic_b`] |
 | Corollary (`cor:main-RH`) | `corollary3`, `corollary3_RH`, `corollary3_notRH`, `corollary_minimiser`; `main_summary` | proved from axioms [as Theorem U, plus `PosRig.duality_no_gap`] |
 | Theorem "The object" (`thm:main-object`) | — | not formalised (Kloosterman sums, order derivatives of Bessel functions, `K₀`: not in Mathlib). The properties of the object that the proofs use are the **ledger axiom** `exists_integer_critical_object` |
+| Remark 1.1 (`rem:intro-classical`, preview of Corollary 8.2) | `rh_iff_kappaOPS_zero` | its statement is the last sentence of Corollary 8.2: proved from axioms (see §8) |
 
 ## §2 The setting, and the results of Part I that are used
 
@@ -70,15 +71,19 @@ listed here (README, "The audit").
 
 | Statement | Status |
 |---|---|
-| Theorem "Positivity of the coefficients" (`thm:an-positive`); Theorem "Two-sided bounds" (`thm:an-bounds`); Remark "The Weil bound is not needed" | not formalised; `a_n > 0` enters through property 3 of `exists_integer_critical_object` (`Ĝ_H ≥ 0` on `[0, ∞)`) |
-| Proposition "Computer-assisted" (`prop:C`); Remark "Sign coherence three times" (`rem:sign`) | not formalised and not used by the spine (the sign of the normalisation is automatic: `exists_object` normalises by `H_raw(0) > 0`, which property 4 gives) |
+| Theorem 6.1 "Positivity of the coefficients" (`thm:an-positive`); Theorem 6.2 "Two-sided bounds" (`thm:an-bounds`); Remark 6.3 "The Weil bound is not needed"; the trivial-bound box `TB`, (6.1) (`eq:box`) | not formalised; `a_n > 0` enters through property 3 of `exists_integer_critical_object` (`Ĝ_H ≥ 0` on `[0, ∞)`, `> 0` on `[0, ξ₂)`), and `TB` through property 4 (the certificates of Theorems 6.8 and 7.11 hold uniformly on `TB`) |
+| Proposition 6.4 "Computer-assisted" (`prop:C`); Proposition 6.5 "Positive definiteness" (`prop:posdef`); Remark 6.6 "Checks of the normalising constant" (`rem:sign`) | not formalised. Proposition 6.5 is an input of Theorem 6.8 (property 4 of the ledger axiom); its first display, `F̂_raw = Σ d(m) m^{−1/2} Ĝ_raw(· + ξ_m) ≥ 0` on `[0, ∞)`, is what the spine proves in Lean from the Voronoi identity (`FT_nonneg_of_voronoi`, `reduction_OPS`). The sign of the normalisation needs no computation in the spine either: `exists_object` divides by `H_raw(0) > 0`, which property 4 gives |
+| Lemma 6.7 "Moment minorant" (`lem:moments`); Theorem 6.8 "Moment certificate; computer-assisted" (`thm:moments`, Certificate M-box); Remark 6.9 "Conditioning, and the elementary range" (`rem:moments`) | not formalised; Theorem 6.8 (`H_raw > 0` for `|t| ≤ 10.355`, uniformly on `TB`) is part of property 4 of the **ledger axiom** `exists_integer_critical_object`, whose docstring quotes the decisive lines of `positivity/logs/cert_moments_box.log` (checked by `scripts/check_provenance.py`) |
 
 ## §7 Positivity on the physical side
 
 | Statement | Status |
 |---|---|
-| Lemma "Closed form of the kernel" (`lem:conical`); Theorem "Positivity of the kernel" (`thm:kernel-pos`); Theorem "The physical-side formula" (`thm:F`); Theorem "Large `|t|`" (`thm:large-t`); Lemmas "Stirling bracket" (`lem:stirling`), "Kernel bounds" (`lem:kernel-bounds`), "Signs of `B`" (`lem:B-sign`), `lem:comparison`; Proposition "Computer-assisted" (`prop:L-numbers`); Theorem "Window; computer-assisted" (`thm:window`); Corollary `cor:Pi-positive` | not formalised; `cor:Pi-positive` (`H_raw > 0` on `ℝ`) is property 4 of the **ledger axiom** `exists_integer_critical_object`, whose docstring quotes the decisive lines of the window certificate, of the numbers of `prop:L-numbers` at `T₀ = 8` and of `ρ̄(4) < 1`, checked against the shipped logs by `scripts/check_provenance.py` |
-| Remark "The certificate is sharp at small `t`" (`rem:negctl`) | not formalised (a control, not used) |
+| Lemma 7.1 "Closed form of the kernel" (`lem:conical`); Theorem 7.2 "Positivity of the kernel" (`thm:kernel-pos`); Theorem 7.3 "The physical-side formula" (`thm:F`) | not formalised; inputs of property 4 of `exists_integer_critical_object` (the sign transfer between `Π` and `H_raw`) |
+| Lemmas 7.5 "Stirling bracket" (`lem:stirling`), 7.6 "Kernel bounds" (`lem:kernel-bounds`), 7.7 "Signs of `B`" (`lem:B-sign`), 7.8 (`lem:comparison`); Proposition 7.10 "Computer-assisted; trivial-bound box" (`prop:L-numbers-box`); Theorem 7.11 "Large `|t|` from the trivial bound" (`thm:large-t-box`) | not formalised; Theorem 7.11 (`Π > 0` for `|t| ≥ 9`, uniformly on `TB`) is part of property 4 of the **ledger axiom**, whose docstring quotes the decisive lines of `positivity/logs/cert_large_t_T9_box.log` and `positivity/logs/cert_gtail_box.log` (checked by `scripts/check_provenance.py`) |
+| Corollary 7.12 (`cor:Pi-positive`): `Π > 0`, hence `H_raw > 0`, on `ℝ` | property 4 of the **ledger axiom** `exists_integer_critical_object` (from Theorems 6.8, 7.11 and 7.3). The explicit lower bound for `|t| ≥ 9` in its statement (from Theorem 7.11, constant `0.9659`) is not part of the axiom |
+| Theorem 7.4 "Large `|t|`" (`thm:large-t`, `T₀ = 8`, certified coefficients); Proposition 7.9 "Computer-assisted" (`prop:L-numbers`); Theorem 7.13 "Window; computer-assisted" (`thm:window`, Certificate W) | not formalised and not used by the proof of Corollary 7.12: independent checks, whose decisive lines are also quoted in the docstring of the ledger axiom (and checked) |
+| Remarks 7.14 "Conditioning, not arithmetic" (`rem:negctl`) and 7.15 "Conditioning of `Π(0)` in the coefficients" (`rem:conditioning`) | not formalised (remarks) |
 
 ## §8 Proofs of the main results
 
@@ -89,14 +94,34 @@ listed here (README, "The audit").
 | Proof of Theorem `thm:main-U` | `ZF_Xi_sq_mul`, `theorem2` | proved from axioms |
 | Proof of Corollary `cor:main-RH` | `corollary3`, `corollary3_RH`, `corollary3_notRH`, `corollary_minimiser` | proved from axioms |
 | Remark "Where each input enters" (`rem:inputs`) | `axioms.log` | confirmed: Theorem S uses Part I only through `PosRig.explicit_formula` and `PosRig.xi_decay` (and the definitions); Theorem U adds `PosRig.zero_support_rigidity`, `PosRig.logic_b`; the Corollary adds `PosRig.duality_no_gap` |
+| Corollary 8.2 (`cor:nogap`, subsection "The classical cone"), last sentence: RH ⟺ `𝒜 ≥ 0` on `𝒞_OPS` ⟺ `κ*_OPS = 0` | `rh_iff_kappaOPS_zero` | proved from axioms [those of Corollary 3: `voronoi_decoupling`, `exists_integer_critical_object` (with its window clause), `PosRig.explicit_formula`, `PosRig.xi_decay`, `PosRig.zero_support_rigidity`, `PosRig.logic_b`, `PosRig.duality_no_gap`]; also states `κ*_OPS ≥ 0` and, under ¬RH, `κ* ≤ κ*_OPS < 0` |
+| Corollary 8.2 (a) | `FT_window` | `F̂₀ ≥ Ĝ_H > 0` on `[0, ξ₂)` and `F̂₀ > 0` on `(−ξ₂, ξ₂)`: proved from axioms [as Theorem S; `Ĝ_H > 0` on `[0, ξ₂)` is the window clause of `exists_integer_critical_object`]. The zero set `{±ξ_n : n ≥ 2}` of `F̂₀` is not formalised (it needs `Ĝ_H > 0` at every non-integer `x ≥ 1`) |
+| Corollary 8.2 (b), `0 ≤ ℓ ≤ ξ₂` | `corollary8_2_b` | `𝒦_ℓ = 𝒦` (`Kset Arch ℓ = K`): proved from axioms [as Theorem S] (complementary slackness at the gap `ℓ`, Part I's `comp_slackness_gen`) |
+| Corollary 8.2 (c), (d), `0 ≤ ℓ ≤ ξ₂` | `corollary8_2` | (i) ⟺ (ii) ⟺ (iii) ⟺ (v) ⟺ (vi) and (d): proved from axioms [as Corollary 3]; `κ*_ℓ` is Part I's `slack Arch (ConeG ℓ)`, and `ConeG_zero_eq : 𝒞_0 = 𝒞_OPS`. Clause (iv) (`𝒜 ≥ 0` on `𝒞_ℓ ∩ 𝒢`) is not formalised: it uses Proposition C.2 |
+| By-product: `κ* ≥ 0` ⟺ `κ*_OPS ≥ 0` (and `𝒜 ≥ 0` on `𝒞` ⟺ on `𝒞_OPS`), unconditionally | `kappaStar_nonneg_iff_kappaOPS_nonneg`, `arch_nonneg_Cone_iff_ConeOPS` | proved from axioms [as Theorem S]: no Theorem U and no duality theorem |
+| Remark 8.3 (`rem:nogap`) | — | not formalised (remarks: inputs, the role of the gap, size, larger gaps, what is not claimed) |
+
+## Appendix C (`app:gap`): duality at an arbitrary gap
+
+| Statement | Lean | Status |
+|---|---|---|
+| Lemma C.1 "Transfer across the gap" (`lem:transfer`; test function `Θ`) | `transfer` (any `L` additive on `𝒯` and homogeneous), `transfer_Arch` | **proved, with no ledger axiom** (Mathlib and Zeta23: the additivity of `𝒜` on `𝒯`, `Arch_add`, uses Zeta23's bound `|Ω_∞(t)| ≤ K(1+|t|)^{1/2}`); the margin near `ℓ₁` uses the compactness of `{ξ ∈ [0, ℓ₁] : Re F̂₁(ξ) ≤ 0}` |
+| Proposition C.2 "Duality at an arbitrary gap" (`prop:gap-duality`) | — | not formalised (Part I's duality proof at the gap `ℓ`; Corollary 8.2 uses it only for clause (c)(iv), which is not formalised either) |
+| Remarks C.3 (`rem:gap-uses`), C.4 (`rem:xi0`) | — | not formalised (remarks) |
 
 ## §9 and the appendices
 
 | Statement | Status |
 |---|---|
 | §9 (remarks and open questions) | not formalised (remarks) |
-| Appendix A (certificates): Lemmas `lem:bracket`, `lem:gauss`, `lem:D-infinity` | not formalised (inside the certificates) |
+| Appendix A (certificates: A.1 coefficient enclosures, A.2 window, A.3 moment certificate, A.4 large `|t|`, A.5 normalising constant, A.6 constants of Section 6, A.7 the Lean formalisation `app:lean`): Lemmas A.1 (`lem:bracket`), A.2 (`lem:gauss`), A.3 (`lem:D-infinity`) | not formalised (inside the certificates); A.7 describes this project |
 | Appendix B (Bessel estimates): Lemmas "Ascending series" (`lem:dot-series`), "Small argument" (`lem:small-w`), "Uniform bounds" (`lem:dotbounds`), "Inequalities for `I₀, I₁, K₂`" (`lem:IK`), "The order derivative `İ`" (`lem:Idot`), "The coefficients at `ν = 1`" (`lem:alpha`) | not formalised (inside §§4–6) |
+
+## Coverage (Corollary 8.2)
+
+Corollary 8.2 is formalised except for the zero set in (a) and clause (c)(iv): its last sentence is
+`rh_iff_kappaOPS_zero`, and (a)–(d) are `FT_window`, `corollary8_2_b`, `corollary8_2`. Lemma C.1 is proved with no ledger
+axiom; Proposition C.2 is not formalised.
 
 ## Coverage
 

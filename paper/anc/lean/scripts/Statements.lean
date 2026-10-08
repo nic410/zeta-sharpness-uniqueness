@@ -36,7 +36,9 @@ def theoremRoots : List Name :=
   [``PosRigII.theorem1, ``PosRigII.theorem1_conductor, ``PosRigII.theorem1_finite,
    ``PosRigII.theorem1_object, ``PosRigII.theorem2, ``PosRigII.theorem2_condU, ``PosRigII.corollary3,
    ``PosRigII.corollary3_RH, ``PosRigII.corollary3_notRH, ``PosRigII.corollary_minimiser,
-   ``PosRigII.main_summary, ``PosRigII.reduction, ``PosRigII.reduction_OPS]
+   ``PosRigII.main_summary, ``PosRigII.reduction, ``PosRigII.reduction_OPS,
+   ``PosRigII.rh_iff_kappaOPS_zero, ``PosRigII.corollary8_2, ``PosRigII.corollary8_2_b,
+   ``PosRigII.FT_window, ``PosRigII.kappaStar_nonneg_iff_kappaOPS_nonneg, ``PosRigII.transfer]
 
 /-- The axioms declared in module `m`. -/
 def axiomsOfModule (env : Environment) (m : Name) : List Name := Id.run do

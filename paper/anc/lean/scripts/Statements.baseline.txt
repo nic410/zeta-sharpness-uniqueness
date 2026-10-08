@@ -1,4 +1,4 @@
-== statement pin: 74 declarations (closure of 13 theorems, 2 ledger axioms of Part II and 6 ledger axioms of Part I) ==
+== statement pin: 81 declarations (closure of 19 theorems, 2 ledger axioms of Part II and 6 ledger axioms of Part I) ==
 
 def PosRig.Admissible
   : ((ℂ → ℂ) → ℝ) → ℝ → PosRig.Pair → Prop
@@ -301,6 +301,25 @@ def PosRigII.CondC4Zero
   := fun (H : ℂ → ℂ) ↦ ∀ (ξ : ℝ), (0 : ℝ) ≤ ξ → (0 : ℂ) ≤ PosRigII.GammaFT H ξ
   hash 10787059242611824596
 
+def PosRigII.CondWindow
+  : (ℂ → ℂ) → Prop
+  := fun (H : ℂ → ℂ) ↦ ∀ (ξ : ℝ), (0 : ℝ) ≤ ξ → ξ < PosRig.xi2 → (0 : ℂ) < PosRigII.GammaFT H ξ
+  hash 2547748244298492911
+
+theorem PosRigII.FT_window
+  : ∃ (H : ℂ → ℂ),
+  (∃ δ < (1 / 2 : ℝ), PosRigII.IntegerCritical δ H) ∧
+    PosRigII.CondC2Strict H ∧
+      (fun (z : ℂ) ↦ PosRig.Xi z ^ (2 : ℕ) * H z) ∈ PosRig.ConeOPS ∧
+        (PosRig.Arch fun (z : ℂ) ↦ PosRig.Xi z ^ (2 : ℕ) * H z) = (0 : ℝ) ∧
+          (∀ (ξ : ℝ),
+              (0 : ℝ) ≤ ξ →
+                ξ < PosRig.xi2 →
+                  PosRigII.GammaFT H ξ ≤ PosRig.FT (fun (z : ℂ) ↦ PosRig.Xi z ^ (2 : ℕ) * H z) ξ ∧
+                    (0 : ℂ) < PosRigII.GammaFT H ξ) ∧
+            ∀ (ξ : ℝ), |ξ| < PosRig.xi2 → (0 : ℂ) < PosRig.FT (fun (z : ℂ) ↦ PosRig.Xi z ^ (2 : ℕ) * H z) ξ
+  hash 858655670
+
 def PosRigII.GammaFT
   : (ℂ → ℂ) → ℝ → ℂ
   := fun (H : ℂ → ℂ) ↦ PosRig.FT (PosRigII.GammaOnly H)
@@ -341,6 +360,25 @@ theorem PosRigII.corollary3_notRH
   : ¬RiemannHypothesis → PosRig.kappaStar < (0 : EReal) ∧ PosRig.K = ∅
   hash 19159090
 
+theorem PosRigII.corollary8_2
+  : ∀ {ℓ : ℝ},
+  (0 : ℝ) ≤ ℓ →
+    ℓ ≤ PosRig.xi2 →
+      (RiemannHypothesis ↔ Set.Nonempty (PosRig.Kset PosRig.Arch ℓ)) ∧
+        (RiemannHypothesis ↔ ∀ F ∈ PosRig.ConeG ℓ, (0 : ℝ) ≤ PosRig.Arch F) ∧
+          (RiemannHypothesis ↔ (0 : EReal) ≤ PosRig.slack PosRig.Arch (PosRig.ConeG ℓ)) ∧
+            (RiemannHypothesis ↔ PosRig.slack PosRig.Arch (PosRig.ConeG ℓ) = (0 : EReal)) ∧
+              (RiemannHypothesis → PosRig.Kset PosRig.Arch ℓ = {PosRig.pZeta}) ∧
+                (¬RiemannHypothesis →
+                  PosRig.Kset PosRig.Arch ℓ = ∅ ∧
+                    PosRig.kappaStar ≤ PosRig.slack PosRig.Arch (PosRig.ConeG ℓ) ∧
+                      PosRig.slack PosRig.Arch (PosRig.ConeG ℓ) ≤ PosRig.kappaOPS ∧ PosRig.kappaOPS < (0 : EReal))
+  hash 3192504935
+
+theorem PosRigII.corollary8_2_b
+  : ∀ {ℓ : ℝ}, (0 : ℝ) ≤ ℓ → ℓ ≤ PosRig.xi2 → PosRig.Kset PosRig.Arch ℓ = PosRig.K
+  hash 4185876672
+
 theorem PosRigII.corollary_minimiser
   : ∃ (H : ℂ → ℂ),
   (∃ δ < (1 / 2 : ℝ), PosRigII.IntegerCritical δ H) ∧
@@ -363,13 +401,18 @@ theorem PosRigII.corollary_minimiser
 
 axiom PosRigII.exists_integer_critical_object
   : ∃ (H : ℂ → ℂ),
-  (∃ δ < (1 / 2 : ℝ), PosRigII.ClassW δ H) ∧ PosRigII.CondC3 H ∧ PosRigII.CondC4Zero H ∧ PosRigII.CondC2Strict H
-  hash 1474173566
+  (∃ δ < (1 / 2 : ℝ), PosRigII.ClassW δ H) ∧
+    PosRigII.CondC3 H ∧ PosRigII.CondC4Zero H ∧ PosRigII.CondWindow H ∧ PosRigII.CondC2Strict H
+  hash 3062286990
 
 def PosRigII.gammaInf
   : ℂ → ℂ
   := fun (s : ℂ) ↦ (s - (1 : ℂ)) * ↑Real.pi ^ (-s / (2 : ℂ)) * Complex.Gamma (s / (2 : ℂ) + (1 : ℂ))
   hash 14107649893857527179
+
+theorem PosRigII.kappaStar_nonneg_iff_kappaOPS_nonneg
+  : (0 : EReal) ≤ PosRig.kappaStar ↔ (0 : EReal) ≤ PosRig.kappaOPS
+  hash 2747683548
 
 theorem PosRigII.main_summary
   : PosRig.CondS ∧ PosRig.CondU ∧ (RiemannHypothesis ↔ PosRig.CondE) ∧ (PosRig.CondE ↔ PosRig.kappaStar = (0 : EReal))
@@ -405,6 +448,13 @@ theorem PosRigII.reduction_OPS
             PosRigII.CondC4Zero H →
               (fun (z : ℂ) ↦ PosRig.Xi z ^ (2 : ℕ) * H z) ∈ PosRig.ConeOPS ∧ PosRig.kappaOPS ≤ (0 : EReal)
   hash 1287356497
+
+theorem PosRigII.rh_iff_kappaOPS_zero
+  : (RiemannHypothesis ↔ ∀ F ∈ PosRig.ConeOPS, (0 : ℝ) ≤ PosRig.Arch F) ∧
+  (RiemannHypothesis ↔ (0 : EReal) ≤ PosRig.kappaOPS) ∧
+    (RiemannHypothesis ↔ PosRig.kappaOPS = (0 : EReal)) ∧
+      (¬RiemannHypothesis → PosRig.kappaStar ≤ PosRig.kappaOPS ∧ PosRig.kappaOPS < (0 : EReal))
+  hash 1200803226
 
 theorem PosRigII.theorem1
   : PosRig.kappaStar ≤ PosRig.kappaOPS ∧ PosRig.kappaOPS ≤ (0 : EReal)
@@ -445,6 +495,16 @@ theorem PosRigII.theorem2
 theorem PosRigII.theorem2_condU
   : PosRig.CondU
   hash 2531135648
+
+theorem PosRigII.transfer
+  : ∀ {L : (ℂ → ℂ) → ℝ},
+  (∀ (F G : ℂ → ℂ), F ∈ PosRig.TestClass → G ∈ PosRig.TestClass → (L fun (z : ℂ) ↦ F z + G z) = L F + L G) →
+    (∀ (F : ℂ → ℂ) (c : ℝ), (L fun (z : ℂ) ↦ ↑c * F z) = c * L F) →
+      ∀ {ℓ₁ : ℝ} {Θ : ℂ → ℂ},
+        Θ ∈ PosRig.ConeOPS →
+          (∀ (ξ : ℝ), (0 : ℝ) ≤ ξ → ξ < ℓ₁ → (0 : ℝ) < Complex.re (PosRig.FT Θ ξ)) →
+            L Θ ≤ (0 : ℝ) → (∀ F ∈ PosRig.ConeOPS, (0 : ℝ) ≤ L F) → ∀ F ∈ PosRig.ConeG ℓ₁, (0 : ℝ) ≤ L F
+  hash 339600130
 
 def PosRigII.voronoiTerm
   : (ℂ → ℂ) → ℝ → ℕ → ℂ
