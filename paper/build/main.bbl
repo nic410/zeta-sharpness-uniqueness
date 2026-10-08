@@ -13,6 +13,9 @@ Claudia Alfes, Igor Burban, and Martin Raum, \emph{A classification of polyharmo
 \bibitem{ALR18}
 Nickolas Andersen, Jeffrey~C. Lagarias, and Robert~C. Rhoades, \emph{Shifted polyharmonic {M}aass forms for {$\mathrm{PSL}(2,\mathbb{Z})$}}, Acta Arith. \textbf{185} (2018), no.~1, 39--79, arXiv:1708.01278, \href{https://doi.org/10.4064/aa170905-7-3}{doi:10.4064/aa170905-7-3}.
 
+\bibitem{BeCh22}
+Nathan Benjamin and Cyuan-Han Chang, \emph{Scalar modular bootstrap and zeros of the {R}iemann zeta function}, J. High Energy Phys. \textbf{2022} (2022), no.~11, 143, arXiv:2208.02259, \href{https://doi.org/10.1007/JHEP11(2022)143}{doi:10.1007/JHEP11(2022)143}.
+
 \bibitem{BDRZ17}
 Bruce~C. Berndt, Atul Dixit, Arindam Roy, and Alexandru Zaharescu, \emph{New pathways and connections in number theory and analysis motivated by two incorrect claims of {R}amanujan}, Adv. Math. \textbf{304} (2017), 809--929, arXiv:1608.03670, \href{https://doi.org/10.1016/j.aim.2016.08.011}{doi:10.1016/j.aim.2016.08.011}.
 
@@ -49,6 +52,9 @@ Henry Cohn, Abhinav Kumar, Stephen~D. Miller, Danylo Radchenko, and Maryna Viazo
 \bibitem{CKMRV22}
 \bysame, \emph{Universal optimality of the {$E_8$} and {L}eech lattices and interpolation formulas}, Ann. of Math. (2) \textbf{196} (2022), no.~3, 983--1082, arXiv:1902.05438, \href{https://doi.org/10.4007/annals.2022.196.3.3}{doi:10.4007/annals.2022.196.3.3}.
 
+\bibitem{CC23}
+Alain Connes and Caterina Consani, \emph{Spectral triples and {$\zeta$}-cycles}, Enseign. Math. \textbf{69} (2023), no.~1, 93--148, arXiv:2106.01715, \href{https://doi.org/10.4171/LEM/1049}{doi:10.4171/LEM/1049}.
+
 \bibitem{Dix12}
 Atul Dixit, \emph{Character analogues of {R}amanujan-type integrals involving the {R}iemann {$\Xi$}-function}, Pacific J. Math. \textbf{255} (2012), no.~2, 317--348, arXiv:1102.2680, \href{https://doi.org/10.2140/pjm.2012.255.317}{doi:10.2140/pjm.2012.255.317}.
 
@@ -79,6 +85,9 @@ I.~S. Gradshteyn and I.~M. Ryzhik, \emph{Table of integrals, series, and product
 \bibitem{Gui48}
 A.~P. Guinand, \emph{A summation formula in the theory of prime numbers}, Proc. London Math. Soc. (2) \textbf{50} (1948), 107--119, \href{https://doi.org/10.1112/plms/s2-50.2.107}{doi:10.1112/plms/s2-50.2.107}.
 
+\bibitem{HMR19}
+Thomas Hartman, Dalimil Maz{\'a}{\v{c}}, and Leonardo Rastelli, \emph{Sphere packing and quantum gravity}, J. High Energy Phys. \textbf{2019} (2019), no.~12, 048, arXiv:1905.01319, \href{https://doi.org/10.1007/JHEP12(2019)048}{doi:10.1007/JHEP12(2019)048}.
+
 \bibitem{Hig02}
 Nicholas~J. Higham, \emph{Accuracy and stability of numerical algorithms}, second ed., Society for Industrial and Applied Mathematics (SIAM), Philadelphia, PA, 2002, \href{https://doi.org/10.1137/1.9780898718027}{doi:10.1137/1.9780898718027}.
 
@@ -106,6 +115,9 @@ J.~Lewis and D.~Zagier, \emph{Period functions for {M}aass wave forms. {I}}, Ann
 \bibitem{Mat20}
 Toshiki Matsusaka, \emph{Polyharmonic weak {M}aass forms of higher depth for {$\mathrm{SL}_2(\mathbb{Z})$}}, Ramanujan J. \textbf{51} (2020), no.~1, 19--42, arXiv:1801.02146, \href{https://doi.org/10.1007/s11139-018-0057-0}{doi:10.1007/s11139-018-0057-0}.
 
+\bibitem{Maz17}
+Dalimil Maz{\'a}{\v{c}}, \emph{Analytic bounds and emergence of {$\mathrm{AdS}_2$} physics from the conformal bootstrap}, J. High Energy Phys. \textbf{2017} (2017), no.~4, 146, arXiv:1611.10060, \href{https://doi.org/10.1007/JHEP04(2017)146}{doi:10.1007/JHEP04(2017)146}.
+
 \bibitem{Nie73}
 Douglas Niebur, \emph{A class of nonanalytic automorphic functions}, Nagoya Math. J. \textbf{52} (1973), 133--145, \href{https://doi.org/10.1017/S0027763000015932}{doi:10.1017/S0027763000015932}.
 
@@ -126,6 +138,9 @@ Danylo Radchenko and Maryna Viazovska, \emph{Fourier interpolation on the real l
 
 \bibitem{Ser75}
 Jean-Pierre Serre, \emph{Minorations de discriminants}, {\OE}uvres. {C}ollected Papers. {V}ol. {III} (1972--1984), Springer-Verlag, Berlin, 1986, No.~106; note of October 1975, pp.~240--243.
+
+\bibitem{She26}
+Dav Shen, \emph{One {G}aussian identity: sphere packing, {G}abor frames, and the {R}iemann {$\xi$}-function}, Preprint, Zenodo, 2026, Unrefereed, \href{https://doi.org/10.5281/zenodo.22882783}{doi:10.5281/zenodo.22882783}.
 
 \bibitem{Sta74}
 H.~M. Stark, \emph{Some effective cases of the {B}rauer--{S}iegel theorem}, Invent. Math. \textbf{23} (1974), no.~2, 135--152, \href{https://doi.org/10.1007/BF01405166}{doi:10.1007/BF01405166}.

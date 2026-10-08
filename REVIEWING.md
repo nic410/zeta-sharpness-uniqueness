@@ -1,7 +1,7 @@
 # Reviewing guide
 
 This guide is for specialists who want to check one part of the paper in a few hours. The paper is
-[`paper/build/main.pdf`](paper/build/main.pdf) (39 pages); all numbers below are as printed there. No human expert has
+[`paper/build/main.pdf`](paper/build/main.pdf) (40 pages); all numbers below are as printed there. No human expert has
 checked the proofs yet. The paper splits into three slices that can be checked independently: each slice may assume the
 interface statements listed for it, which the other slices prove.
 
@@ -28,7 +28,7 @@ These are the places where a wrong sign or constant would break the proof. Each 
 10. **Strict positivity H > 0 on ℝ** (Corollary 7.11) is what Theorem 2 needs: it makes the real zeros of F = Ξ²H exactly
     the zeros of ζ, so that the zero-side support theorem (Theorem I.3.6) applies.
 
-## Slice A: framework, reduction and assembly (§§1–3 and §8; pages 1–12 and 30–31)
+## Slice A: framework, reduction and assembly (§§1–3 and §8; pages 1–13 and 31–32)
 
 **May assume.** The properties of H proved in §§4–7, which are the hypotheses of Proposition 3.3: (C1) (Proposition 5.9),
 (C2) H > 0 (Corollary 7.11), (C3) the integer zeros (Proposition 5.11), (C4) Ĝ_H ≥ 0 on [0, ∞) (Theorem 4(b) with
@@ -42,7 +42,7 @@ the Part I proofs and inputs that are not reproduced.
 - §8: the argument that F̂′(ξ_n) = 0 (tF ∈ L¹); Theorem 2 from Corollary I.3.9(a); the logic of Corollary 3.
 - §2: the restatements against Part I.
 
-## Slice B: the automorphic object and the Green-flux lift (§§4–5; pages 13–24)
+## Slice B: the automorphic object and the Green-flux lift (§§4–5; pages 14–25)
 
 **May assume.** Standard facts on Bessel functions (DLMF) and Kloosterman sums; the bounds of Appendix B.
 
@@ -66,7 +66,7 @@ the Part I proofs and inputs that are not reproduced.
 expansion at the cusp ∞ (Lemma A.3). They must agree. This one test checks the constant 2, the ¼, the sign of (4.1) and
 the Kloosterman conventions together.
 
-## Slice C: positivity and certificates (§§6–7, Appendices A–B; pages 24–30 and 32–37)
+## Slice C: positivity and certificates (§§6–7, Appendices A–B; pages 25–31 and 33–38)
 
 **May assume.** Theorem 4 (the coefficients a_n and the Γ-only transform), Definition 5.8, Lemma 5.1 and Theorem 5.4(e)
 (the four-path functional applied to the kernel), all from Slice B.

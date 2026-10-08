@@ -2,7 +2,7 @@
 
 [![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.23238100.svg)](https://doi.org/10.5281/zenodo.23238100) [![Lean](https://github.com/nic410/zeta-sharpness-uniqueness/actions/workflows/lean.yml/badge.svg)](https://github.com/nic410/zeta-sharpness-uniqueness/actions/workflows/lean.yml)
 
-**Status: preprint, version 1.0 (October 2026); not peer-reviewed.** This paper was produced by AI agents,
+**Status: preprint, version 1.1 (October 2026); not peer-reviewed.** This paper was produced by AI agents,
 mainly Anthropic's Claude with supplementary assistance from OpenAI's Astra, under the author's direction; it has not yet
 been checked by a human expert. Author: Nic Johns. Licences: the paper and documentation are CC BY 4.0; the code, data
 and Lean formalisation are Apache-2.0 (see [Licence](#licence)).
@@ -41,8 +41,9 @@ The proof constructs an explicit "magic function" F = Ξ²H: a test function tha
 sphere-packing bounds of Cohn–Elkies and Viazovska. F and its Fourier transform are non-negative, the transform vanishes
 at log n/2π for every integer n ≥ 2, and the archimedean side of the formula vanishes on F. The function H comes from an
 eigenfunction of the hyperbolic Laplacian with eigenvalue ¼, a spectral derivative of an odd Niebur–Poincaré series made
-into an exact eigenfunction by a first-order operator at a double root. A contour argument of Viazovska's type, with
-Green's identity in place of Cauchy's theorem, then produces F. Figure 1 of the paper plots H and the transform, and
+into an exact eigenfunction by a first-order operator at a double root. A contour argument that follows the architecture
+of Viazovska's sphere-packing construction, with Green's identity in place of Cauchy's theorem and this non-holomorphic
+function as its new input, then produces F. Figure 1 of the paper plots H and the transform, and
 Table 1 lists the first coefficients.
 
 ## How the claims are supported
@@ -77,6 +78,15 @@ No human mathematician has yet checked the proofs line by line.
 - **Figure 1:** numpy, scipy and matplotlib; see `paper/anc/README.md`.
 - **Lean:** run `lake build` and `scripts/audit.sh` in `paper/anc/lean/` (toolchain and pins as in Part I).
 - **PDF:** run pdflatex, then bibtex, then pdflatex until stable, from `paper/`.
+
+## Version notes
+
+- **v1.1** (October 2026; no DOI yet): attributions and citations only. The architecture of Sections 4–5 is credited to
+  Viazovska's construction; Remark 4.11 cites the Laplacian lemma of Alfes, Burban and Raum; the history of how the input
+  was found is told in full; Odlyzko's Open Problem 2.2 is cited; and related work on exact bootstrap functionals,
+  zero-killing devices and compactly supported test functions is added. The mathematics, the theorem statements, the
+  labels and the certificates are unchanged.
+- **v1.0** (October 2026): first public version (doi:10.5281/zenodo.23238101).
 
 ## Citing
 

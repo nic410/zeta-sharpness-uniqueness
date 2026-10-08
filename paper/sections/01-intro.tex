@@ -66,7 +66,9 @@ Consequently $\kstar\le\kOPS\le0$. In particular Conjecture~S holds, and $\qmin\
 So $F/\int F$ is an exact magic function: it is admissible in the definition of $\kstar$ with value $0$. In the language of conductors,
 Theorem~\ref{thm:main-S} says that the method of Odlyzko, Poitou and Serre is sharp for the data of $\zeta$, already in the classical cone: the
 explicit function $F$ proves the bound $1$, the conductor of $\zeta$, where numerical optimisation had given $0.997$; under RH no test function
-does better (Corollary~\ref{cor:main-RH}). We do not claim that $\kstar$ is attained, or that $\kstar=0$: by duality $\kstar=0$ holds if and only
+does better (Corollary~\ref{cor:main-RH}). This answers the degree-one case, that of $\QQ$ and so of $\zeta$ itself, of Odlyzko's Open
+Problem~2.2 \cite[p.~123]{Odl90}: ``What functions $F(x)$ give the best GRH bounds for discriminants?'' Under RH, $F$ gives the best possible
+bound in degree one. We do not address the unconditional Open Problem~2.1 of \cite{Odl90}, or higher degrees. We do not claim that $\kstar$ is attained, or that $\kstar=0$: by duality $\kstar=0$ holds if and only
 if admissible pairs exist (Corollary~\ref{cor:main-RH}). What holds unconditionally is $\kstar\le0=\Arch(F)/\int F$; and among the cone members of
 the form $\Xi^2H$ with $H$ analytic on a strip $|\Im t|\le\frac12+\delta$, which all have $\Arch\ge0$ by Corollary~\ref{cor:I-zerokilling}, $F$
 realises the least value $0$ of $\Arch/\!\int$.
@@ -247,12 +249,24 @@ extensions \cite{CKMRV17,CKMRV22} construct extremal functions for the linear pr
 Laplace transforms of modular forms, through contour integrals; Cohn and Gon\c{c}alves \cite{CG19} gave a sign-uncertainty analogue, and
 Feigenbaum, Grabner and Hardin \cite{FGH21} studied the Fourier eigenfunctions of this type with prescribed zeros. In those settings positivity
 is either visible or certified by interval arithmetic; Lee \cite{Lee26} proves algebraically the positivity, on the imaginary axis, of a family of
-quasimodular forms that gives sign-uncertainty eigenfunctions of this type. Our
-input is a non-holomorphic eigenfunction of the Laplacian, with eigenvalue $\frac14$ and with its symmetric-square partners, rather than a
-holomorphic modular form, and Green's identity replaces Cauchy's theorem. Radchenko and Sun
-\cite{RS25} continue a Maass--Poincar\'e series in its spectral parameter to build Fourier interpolation bases; the Fourier interpolation basis of
-Bondarenko, Radchenko and Seip \cite{BRS} and the interpolation theorem of Radchenko and Viazovska \cite{RV19} are the analytic input of
-Theorem~\ref{thm:I-zerosupport}. Extremal problems of Fourier analysis attached to the explicit formula, mostly over band-limited test
+quasimodular forms that gives sign-uncertainty eigenfunctions of this type. Sections~\ref{sec:automorphic}--\ref{sec:lift} follow the
+architecture of Viazovska's construction \cite{Via17}: $\Pt$ and $\Phi$ play the role of the depth-$2$ quasimodular form $\varphi_0$ and its
+$S$-transform, the four paths and (up to a common factor) their weights are hers, and Green's identity replaces Cauchy's theorem. What is new
+is the input: an exact eigenfunction of eigenvalue $\frac14$ that decays at the cusp $\infty$ and is a component of a $\mathrm{Sym}^2$-equivariant
+function, built from the odd Niebur--Poincar\'e series. There are partial precedents for non-holomorphic input: the closed Green form and the
+deformation of paths between cusps of Lewis and Zagier \cite{LZ01}, and the Maass--Poincar\'e series that Radchenko and Sun \cite{RS25} continue
+in the spectral parameter to build Fourier interpolation bases. The Fourier interpolation basis of Bondarenko, Radchenko and Seip \cite{BRS}
+and the interpolation theorem of Radchenko and Viazovska \cite{RV19} are the analytic input of Theorem~\ref{thm:I-zerosupport}.
+
+\emph{Exact functionals and zero-killing devices elsewhere.} Exact extremal functionals with double zeros at the expected spectrum also occur
+outside modular forms, in the conformal bootstrap: Maz\'a\v{c} \cite{Maz17} constructs them for the one-dimensional bootstrap, and Hartman, Maz\'a\v{c}
+and Rastelli \cite{HMR19} adapt such functionals to the modular bootstrap, where they reproduce the magic functions of dimensions $8$ and $24$.
+Devices that remove the zeros of $\zeta$ also appear elsewhere: Connes and Consani \cite{CC23} note that the map
+$\mathcal E(f)(x)=x^{1/2}\sum_{n\ge1}f(nx)$, on even Schwartz functions with $f(0)=\widehat f(0)=0$, takes values in the radical of the Weil
+quadratic form, and Benjamin and Chang \cite{BeCh22} remove the contributions of the zeros from a crossing equation of the modular bootstrap
+with functionals whose Mellin symbol carries the factor $\zeta(s)$. Shen \cite{She26}, in an unrefereed preprint, sets out the dictionary between
+the Cohn--Elkies bound and Weil's positivity criterion and shows that no compactly supported test function can play, for $\zeta$, the role of
+the Cohn--Elkies magic function; the function $F$ of Theorem~\ref{thm:main-S} is not compactly supported. Extremal problems of Fourier analysis attached to the explicit formula, mostly over band-limited test
 functions, are studied by Carneiro and coauthors, for instance for gaps between primes \cite{CMS19} and for the pair correlation of zeros
 \cite{CCLM17}.
 
@@ -263,21 +277,28 @@ sesquiharmonic Maass forms: Andersen, Lagarias and Rhoades \cite[Theorem~1.1]{AL
 Diamantis and Raum \cite{BDR13} and Matsusaka \cite{Mat20} differentiate Poincar\'e series at harmonic points, and Alfes, Burban and Raum
 \cite{ABR25} combine symmetric powers with spectral derivatives, in the framework of Bernstein and Gelfand \cite{BG80}, at eigenvalue $0$.
 
-\emph{Period functions and self-reciprocity.} The closed Green form, the deformation of paths between cusps, and the Ferrar-type kernels of
-eigenvalue-$\frac14$ forms go back to Lewis and Zagier \cite{LZ01}; Bettin and Conrey \cite{BC13} treat the period function of the Eisenstein
+\emph{Period functions and self-reciprocity.} Lewis and Zagier \cite{LZ01} also introduced the Ferrar-type kernels of
+eigenvalue-$\frac14$ forms; Bettin and Conrey \cite{BC13} treat the period function of the Eisenstein
 series at $s=\frac12$, whose Voronoi kernel is $4K_0-2\pi Y_0$. The self-reciprocity of our $\Gamma$-only function under the Koshliakov kernel,
 equivalent to the evenness of $H$, is the classical Mellin mechanism of Koshliakov, Dixit and others \cite{Kos29,Dix12,DM15,BDRZ17,DRRZ16}.
 
 \emph{What is new.} We have not found the following in the literature we searched: the function of
 Theorem~\ref{thm:main-object} and its coefficients; the double-root lift of a spectral derivative of a Niebur--Poincar\'e series to an exact
-eigenfunction of eigenvalue $\frac14$, with its symmetric-square partner; the Green-flux contour lift with this non-holomorphic input; the positivity of the
-$a_n$ and of $H$; and the resulting exact magic function for the explicit formula, which gives the bound $\kstar\le\kOPS\le0$. Each ingredient
+eigenfunction of eigenvalue $\frac14$, with its symmetric-square partner; Viazovska's contour lift run with Green's identity on this
+non-holomorphic input; the positivity of the $a_n$, which follows from the standard dominance of the term $c=1$, and the positivity of $H$;
+and the resulting exact magic function for the explicit formula, which gives the bound $\kstar\le\kOPS\le0$. Each ingredient
 has the precedents just listed, and the search covered only literature reachable through standard bibliographic databases.
 
-\emph{History.} The function was found in two steps. Numerical interpolation at the integer nodes suggested that a $\Gamma$-only
-integer-critical function exists, with Fourier side of the form $\sin^2(\pi x)\sqrt x\sum_nb_nK_0(4\pi\sqrt{nx})$; the canonical interpolants only
-semi-converge, so they do not define it. The coefficients were then recognised, numerically, as those of the eigenvalue-$\frac14$
-eigenfunction of Section~\ref{sec:automorphic}, and the proofs below were written for that function. No step of the proofs uses these computations.
+\emph{History.} The input was found by analogy with a holomorphic model case. For a model problem whose kernel is $K_1$ instead of $K_0$,
+Viazovska's contour argument with the depth-$2$ quasimodular form $E_4-E_2^2=288\sum_nn\sigma_1(n)q^n$ gives, up to a constant factor, the
+function $\sin^2(\pi x)\sum_n\sigma_1(n)\sqrt{nx}\,K_1(4\pi\sqrt{nx})$, which is positive off the integers and vanishes doubly at the positive integers;
+it is an object of the type studied by Feigenbaum, Grabner and Hardin, formally the case $d=0$ of their family \cite{FGH21}. Its Eisenstein
+analogue, built from the completed Eisenstein series $E^*(\tau,\frac12)$, is $\sin^2(\pi x)\sum_nn\,d(n)K_0(4\pi\sqrt{nx})$: it has the right
+kernel, but the constant term of the Eisenstein series makes the corresponding $H$ singular at $t=\pm\frac i2$ (compare the remark after
+Lemma~\ref{lem:small-x}). Numerical interpolation at the integer nodes, whose canonical interpolants only semi-converge, and a numerical
+construction of $\mathrm{Sym}^2$-equivariant eigenvalue-$\frac14$ functions without constant terms then singled out one candidate, which was
+recognised, first numerically and then in closed form, as the spectral derivative of Section~\ref{sec:automorphic}. The proofs below were
+written for that function, and no step of them uses these computations.
 
 \subsection{Organisation and notation}
 
