@@ -81,7 +81,7 @@ No human mathematician has yet checked the proofs line by line.
 
 ## Version notes
 
-- **v1.1** (October 2026; no DOI yet): attributions and citations only. The architecture of Sections 4–5 is credited to
+- **v1.1** (October 2026; doi:10.5281/zenodo.23239278): attributions and citations only. The architecture of Sections 4–5 is credited to
   Viazovska's construction; Remark 4.11 cites the Laplacian lemma of Alfes, Burban and Raum; the history of how the input
   was found is told in full; Odlyzko's Open Problem 2.2 is cited; and related work on exact bootstrap functionals,
   zero-killing devices and compactly supported test functions is added. The mathematics, the theorem statements, the
@@ -101,7 +101,7 @@ No human mathematician has yet checked the proofs line by line.
 ```
 
 The DOI above is the concept DOI, which always resolves to the latest archived version; each release also has its own
-version DOI on [Zenodo](https://doi.org/10.5281/zenodo.23238100) (v1.0: 10.5281/zenodo.23238101). GitHub's "Cite this
+version DOI on [Zenodo](https://doi.org/10.5281/zenodo.23238100) (v1.0: 10.5281/zenodo.23238101; v1.1: 10.5281/zenodo.23239278). GitHub's "Cite this
 repository" button (generated from `CITATION.cff`) gives the same reference in other formats.
 
 Part I: N. Johns, *Positive solutions of the explicit formula for ζ(s): near-criticality and uniqueness*,
