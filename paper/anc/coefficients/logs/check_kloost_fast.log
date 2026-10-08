@@ -1,0 +1,16 @@
+# command : python coefficients/check_kloost_fast.py
+# env     : (COEFF_DATA, COEFF_EXTRA, NGL, NSUB not set)
+# date    : 2026-10-07T21:36:34Z
+# system  : Linux x86_64, 1 visible cores
+# python  : 3.10.12 | python-flint 0.9.0 | mpmath 1.3.0
+check_kloost_fast.py sha c34961b361481193
+cos_table_rig: max |C[k] - cos(2 pi k/q)| over samples = 1.50e-16  (EPS_TAB = 1e-14)
+q=     7: max |fast - DFT table| = 4.44e-16 ; proved error bound 6.33e-14 + table err 9.99e-16
+q=    97: max |fast - DFT table| = 4.44e-15 ; proved error bound 1.97e-12 + table err 4.14e-15
+q=  1009: max |fast - DFT table| = 1.42e-14 ; proved error bound 1.23e-10 + table err 1.40e-14
+q=   243: max |fast - DFT table| = 7.11e-15 ; proved error bound 4.52e-12 + table err 6.93e-15
+q=   128: max |fast - DFT table| = 3.55e-15 ; proved error bound 1.09e-12 + table err 7.08e-15
+q=   625: max |fast - DFT table| = 1.07e-14 ; proved error bound 3.27e-11 + table err 1.11e-14
+q= 10007: max |fast - DFT table| = 5.68e-14 ; proved error bound 1.12e-08 + table err 4.46e-14
+q=199999: setup 0.01s, 40 sums 0.07s
+# exit code 0; wall time 0.6 s

@@ -1,0 +1,151 @@
+\providecommand{\bysame}{\leavevmode\hbox to3em{\hrulefill}\thinspace}
+\providecommand{\MR}{\relax\ifhmode\unskip\space\fi MR }
+% \MRhref is called by the amsart/book/proc definition of \MR.
+\providecommand{\MRhref}[2]{%
+  \href{http://www.ams.org/mathscinet-getitem?mr=#1}{#2}
+}
+\providecommand{\href}[2]{#2}
+\begin{thebibliography}{10}
+
+\bibitem{ABR25}
+Claudia Alfes, Igor Burban, and Martin Raum, \emph{A classification of polyharmonic {M}aa{\ss} forms via quiver representations}, J. Algebra \textbf{661} (2025), 713--756, arXiv:2207.02278, \href{https://doi.org/10.1016/j.jalgebra.2024.07.033}{doi:10.1016/j.jalgebra.2024.07.033}.
+
+\bibitem{ALR18}
+Nickolas Andersen, Jeffrey~C. Lagarias, and Robert~C. Rhoades, \emph{Shifted polyharmonic {M}aass forms for {$\mathrm{PSL}(2,\mathbb{Z})$}}, Acta Arith. \textbf{185} (2018), no.~1, 39--79, arXiv:1708.01278, \href{https://doi.org/10.4064/aa170905-7-3}{doi:10.4064/aa170905-7-3}.
+
+\bibitem{BDRZ17}
+Bruce~C. Berndt, Atul Dixit, Arindam Roy, and Alexandru Zaharescu, \emph{New pathways and connections in number theory and analysis motivated by two incorrect claims of {R}amanujan}, Adv. Math. \textbf{304} (2017), 809--929, arXiv:1608.03670, \href{https://doi.org/10.1016/j.aim.2016.08.011}{doi:10.1016/j.aim.2016.08.011}.
+
+\bibitem{BG80}
+Joseph~N. Bernstein and Sergei~I. Gelfand, \emph{Tensor products of finite and infinite dimensional representations of semisimple {L}ie algebras}, Compositio Math. \textbf{41} (1980), no.~2, 245--285.
+
+\bibitem{BC13}
+Sandro Bettin and J.~Brian Conrey, \emph{Period functions and cotangent sums}, Algebra Number Theory \textbf{7} (2013), no.~1, 215--242, arXiv:1111.0931, \href{https://doi.org/10.2140/ant.2013.7.215}{doi:10.2140/ant.2013.7.215}.
+
+\bibitem{BRS}
+Andriy Bondarenko, Danylo Radchenko, and Kristian Seip, \emph{Fourier interpolation with zeros of zeta and {$L$}-functions}, Constr. Approx. \textbf{57} (2023), no.~2, 405--461, arXiv:2005.02996, \href{https://doi.org/10.1007/s00365-022-09599-w}{doi:10.1007/s00365-022-09599-w}.
+
+\bibitem{BDR13}
+Kathrin Bringmann, Nikolaos Diamantis, and Martin Raum, \emph{Mock period functions, sesquiharmonic {M}aass forms, and non-critical values of {$L$}-functions}, Adv. Math. \textbf{233} (2013), no.~1, 115--134, arXiv:1107.0573, \href{https://doi.org/10.1016/j.aim.2012.09.025}{doi:10.1016/j.aim.2012.09.025}.
+
+\bibitem{BJS25}
+Kathrin Bringmann, Jay Jorgenson, and Lejla Smajlovi{\'c}, \emph{On a generating function of {N}iebur--{P}oincar{\'e} series}, 2025, arXiv:2512.13167v1.
+
+\bibitem{CCLM17}
+Emanuel Carneiro, Vorrapan Chandee, Friedrich Littmann, and Micah~B. Milinovich, \emph{Hilbert spaces and the pair correlation of zeros of the {R}iemann zeta-function}, J. Reine Angew. Math. \textbf{725} (2017), 143--182, arXiv:1406.5462, \href{https://doi.org/10.1515/crelle-2014-0078}{doi:10.1515/crelle-2014-0078}.
+
+\bibitem{CMS19}
+Emanuel Carneiro, Micah~B. Milinovich, and Kannan Soundararajan, \emph{Fourier optimization and prime gaps}, Comment. Math. Helv. \textbf{94} (2019), no.~3, 533--568, arXiv:1708.04122, \href{https://doi.org/10.4171/CMH/467}{doi:10.4171/CMH/467}.
+
+\bibitem{CE03}
+Henry Cohn and Noam Elkies, \emph{New upper bounds on sphere packings {I}}, Ann. of Math. (2) \textbf{157} (2003), no.~2, 689--714, arXiv:math/0110009, \href{https://doi.org/10.4007/annals.2003.157.689}{doi:10.4007/annals.2003.157.689}.
+
+\bibitem{CG19}
+Henry Cohn and Felipe Gon{\c{c}}alves, \emph{An optimal uncertainty principle in twelve dimensions via modular forms}, Invent. Math. \textbf{217} (2019), no.~3, 799--831, arXiv:1712.04438, \href{https://doi.org/10.1007/s00222-019-00875-4}{doi:10.1007/s00222-019-00875-4}.
+
+\bibitem{CKMRV17}
+Henry Cohn, Abhinav Kumar, Stephen~D. Miller, Danylo Radchenko, and Maryna Viazovska, \emph{The sphere packing problem in dimension 24}, Ann. of Math. (2) \textbf{185} (2017), no.~3, 1017--1033, arXiv:1603.06518, \href{https://doi.org/10.4007/annals.2017.185.3.8}{doi:10.4007/annals.2017.185.3.8}.
+
+\bibitem{CKMRV22}
+\bysame, \emph{Universal optimality of the {$E_8$} and {L}eech lattices and interpolation formulas}, Ann. of Math. (2) \textbf{196} (2022), no.~3, 983--1082, arXiv:1902.05438, \href{https://doi.org/10.4007/annals.2022.196.3.3}{doi:10.4007/annals.2022.196.3.3}.
+
+\bibitem{Dix12}
+Atul Dixit, \emph{Character analogues of {R}amanujan-type integrals involving the {R}iemann {$\Xi$}-function}, Pacific J. Math. \textbf{255} (2012), no.~2, 317--348, arXiv:1102.2680, \href{https://doi.org/10.2140/pjm.2012.255.317}{doi:10.2140/pjm.2012.255.317}.
+
+\bibitem{DM15}
+Atul Dixit and Victor~H. Moll, \emph{Self-reciprocal functions, powers of the {R}iemann zeta function and modular-type transformations}, J. Number Theory \textbf{147} (2015), 211--249, arXiv:1312.1232, \href{https://doi.org/10.1016/j.jnt.2014.06.017}{doi:10.1016/j.jnt.2014.06.017}.
+
+\bibitem{DRRZ16}
+Atul Dixit, Nicolas Robles, Arindam Roy, and Alexandru Zaharescu, \emph{Koshliakov kernel and identities involving the {R}iemann zeta function}, J. Math. Anal. Appl. \textbf{435} (2016), no.~2, 1107--1128, arXiv:1505.01552, \href{https://doi.org/10.1016/j.jmaa.2015.11.007}{doi:10.1016/j.jmaa.2015.11.007}.
+
+\bibitem{DLMF}
+\emph{{\it NIST Digital Library of Mathematical Functions}}, \url{https://dlmf.nist.gov/}, Release 1.2.8 of 2026-09-15, 2026, F.~W.~J. Olver, A.~B. {Olde Daalhuis}, D.~W. Lozier, B.~I. Schneider, R.~F. Boisvert, C.~W. Clark, B.~R. Miller, B.~V. Saunders, H.~S. Cohl, and M.~A. McClain, eds.
+
+\bibitem{Est61}
+T.~Estermann, \emph{On {K}loosterman's sum}, Mathematika \textbf{8} (1961), no.~1, 83--86, \href{https://doi.org/10.1112/S0025579300002187}{doi:10.1112/S0025579300002187}.
+
+\bibitem{Fay77}
+John~D. Fay, \emph{Fourier coefficients of the resolvent for a {F}uchsian group}, J. Reine Angew. Math. \textbf{293/294} (1977), 143--203, \href{https://doi.org/10.1515/crll.1977.293-294.143}{doi:10.1515/crll.1977.293-294.143}.
+
+\bibitem{FGH21}
+Ahram~S. Feigenbaum, Peter~J. Grabner, and Douglas~P. Hardin, \emph{Eigenfunctions of the {F}ourier transform with specified zeros}, Math. Proc. Cambridge Philos. Soc. \textbf{171} (2021), no.~2, 329--367, arXiv:1907.08558, \href{https://doi.org/10.1017/S0305004120000249}{doi:10.1017/S0305004120000249}.
+
+\bibitem{GT01}
+David Gilbarg and Neil~S. Trudinger, \emph{Elliptic partial differential equations of second order}, Classics in Mathematics, Springer-Verlag, Berlin, 2001, Reprint of the 1998 edition, \href{https://doi.org/10.1007/978-3-642-61798-0}{doi:10.1007/978-3-642-61798-0}.
+
+\bibitem{GR15}
+I.~S. Gradshteyn and I.~M. Ryzhik, \emph{Table of integrals, series, and products}, eighth ed., Elsevier/Academic Press, 2015, Edited by Daniel Zwillinger and Victor Moll, \href{https://doi.org/10.1016/C2010-0-64839-5}{doi:10.1016/C2010-0-64839-5}.
+
+\bibitem{Gui48}
+A.~P. Guinand, \emph{A summation formula in the theory of prime numbers}, Proc. London Math. Soc. (2) \textbf{50} (1948), 107--119, \href{https://doi.org/10.1112/plms/s2-50.2.107}{doi:10.1112/plms/s2-50.2.107}.
+
+\bibitem{Hig02}
+Nicholas~J. Higham, \emph{Accuracy and stability of numerical algorithms}, second ed., Society for Industrial and Applied Mathematics (SIAM), Philadelphia, PA, 2002, \href{https://doi.org/10.1137/1.9780898718027}{doi:10.1137/1.9780898718027}.
+
+\bibitem{Iwa02}
+Henryk Iwaniec, \emph{Spectral methods of automorphic forms}, second ed., Graduate Studies in Mathematics, vol.~53, American Mathematical Society, Providence, RI, 2002, \href{https://doi.org/10.1090/gsm/053}{doi:10.1090/gsm/053}.
+
+\bibitem{IK04}
+Henryk Iwaniec and Emmanuel Kowalski, \emph{Analytic number theory}, American Mathematical Society Colloquium Publications, vol.~53, American Mathematical Society, Providence, RI, 2004, \href{https://doi.org/10.1090/coll/053}{doi:10.1090/coll/053}.
+
+\bibitem{Joh17}
+Fredrik Johansson, \emph{Arb: efficient arbitrary-precision midpoint-radius interval arithmetic}, IEEE Trans. Comput. \textbf{66} (2017), no.~8, 1281--1292, \href{https://doi.org/10.1109/TC.2017.2690633}{doi:10.1109/TC.2017.2690633}.
+
+\bibitem{Joh26}
+Nic Johns, \emph{Positive solutions of the explicit formula for {$\zeta(s)$}: near-criticality and uniqueness}, Preprint, version 1.3, Zenodo, 2026, Concept DOI 10.5281/zenodo.23197915, \href{https://doi.org/10.5281/zenodo.23217537}{doi:10.5281/zenodo.23217537}.
+
+\bibitem{Kos29}
+N.~S. Koshliakov, \emph{On {V}orono{\"\i}'s sum-formula}, Messenger Math. \textbf{58} (1929), 30--32.
+
+\bibitem{Lee26}
+Seewoo Lee, \emph{Positive quasimodular forms and the sign uncertainty principle}, 2026, arXiv:2608.15415v2.
+
+\bibitem{LZ01}
+J.~Lewis and D.~Zagier, \emph{Period functions for {M}aass wave forms. {I}}, Ann. of Math. (2) \textbf{153} (2001), no.~1, 191--258, arXiv:math/0101270, \href{https://doi.org/10.2307/2661374}{doi:10.2307/2661374}.
+
+\bibitem{Mat20}
+Toshiki Matsusaka, \emph{Polyharmonic weak {M}aass forms of higher depth for {$\mathrm{SL}_2(\mathbb{Z})$}}, Ramanujan J. \textbf{51} (2020), no.~1, 19--42, arXiv:1801.02146, \href{https://doi.org/10.1007/s11139-018-0057-0}{doi:10.1007/s11139-018-0057-0}.
+
+\bibitem{Nie73}
+Douglas Niebur, \emph{A class of nonanalytic automorphic functions}, Nagoya Math. J. \textbf{52} (1973), 133--145, \href{https://doi.org/10.1017/S0027763000015932}{doi:10.1017/S0027763000015932}.
+
+\bibitem{Odl76}
+A.~M. Odlyzko, \emph{Discriminant bounds}, Unpublished tables, dated 29 November 1976; available at \url{https://www-users.cse.umn.edu/~odlyzko/unpublished/index.html}, 1976.
+
+\bibitem{Odl90}
+\bysame, \emph{Bounds for discriminants and related estimates for class numbers, regulators and zeros of zeta functions: a survey of recent results}, S{\'e}m. Th{\'e}or. Nombres Bordeaux (2) \textbf{2} (1990), no.~1, 119--141, \href{https://doi.org/10.5802/jtnb.22}{doi:10.5802/jtnb.22}.
+
+\bibitem{Poi77}
+Georges Poitou, \emph{Sur les petits discriminants}, S{\'e}minaire {D}elange--{P}isot--{P}oitou, 18e ann{\'e}e: 1976/77, {T}h{\'e}orie des nombres, {F}asc. 1, Secr{\'e}tariat Math., Paris, 1977, pp.~Exp. No. 6, 1--17.
+
+\bibitem{RS25}
+Danylo Radchenko and Qihang Sun, \emph{Fourier interpolation in dimensions 3 and 4 and real-variable {K}loosterman sums}, 2025, arXiv:2510.04873v2.
+
+\bibitem{RV19}
+Danylo Radchenko and Maryna Viazovska, \emph{Fourier interpolation on the real line}, Publ. Math. Inst. Hautes {\'E}tudes Sci. \textbf{129} (2019), 51--81, arXiv:1701.00265, \href{https://doi.org/10.1007/s10240-018-0101-z}{doi:10.1007/s10240-018-0101-z}.
+
+\bibitem{Ser75}
+Jean-Pierre Serre, \emph{Minorations de discriminants}, {\OE}uvres. {C}ollected Papers. {V}ol. {III} (1972--1984), Springer-Verlag, Berlin, 1986, No.~106; note of October 1975, pp.~240--243.
+
+\bibitem{Sta74}
+H.~M. Stark, \emph{Some effective cases of the {B}rauer--{S}iegel theorem}, Invent. Math. \textbf{23} (1974), no.~2, 135--152, \href{https://doi.org/10.1007/BF01405166}{doi:10.1007/BF01405166}.
+
+\bibitem{FLINT}
+{The FLINT team}, \emph{{FLINT}: {F}ast {L}ibrary for {N}umber {T}heory}, 2026, Version 3.6.0, \url{https://flintlib.org}.
+
+\bibitem{Tit86}
+E.~C. Titchmarsh, \emph{The theory of the {R}iemann zeta-function}, second ed., Clarendon Press, Oxford, 1986, Revised by D. R. Heath-Brown.
+
+\bibitem{Tre13}
+Lloyd~N. Trefethen, \emph{Approximation theory and approximation practice}, extended ed., Society for Industrial and Applied Mathematics (SIAM), Philadelphia, PA, 2019, \href{https://doi.org/10.1137/1.9781611975949}{doi:10.1137/1.9781611975949}.
+
+\bibitem{Via17}
+Maryna~S. Viazovska, \emph{The sphere packing problem in dimension 8}, Ann. of Math. (2) \textbf{185} (2017), no.~3, 991--1015, arXiv:1603.04246, \href{https://doi.org/10.4007/annals.2017.185.3.7}{doi:10.4007/annals.2017.185.3.7}.
+
+\bibitem{Wei48}
+Andr{\'e} Weil, \emph{On some exponential sums}, Proc. Nat. Acad. Sci. U.S.A. \textbf{34} (1948), no.~5, 204--207, \href{https://doi.org/10.1073/pnas.34.5.204}{doi:10.1073/pnas.34.5.204}.
+
+\bibitem{Wei52}
+\bysame, \emph{Sur les ``formules explicites'' de la th{\'e}orie des nombres premiers}, Comm. S{\'e}m. Math. Univ. Lund [Medd. Lunds Univ. Mat. Sem.] \textbf{Tome suppl{\'e}mentaire} (1952), 252--265.
+
+\end{thebibliography}

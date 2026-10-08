@@ -1,0 +1,237 @@
+%======================================================================
+\section{The setting, and the results of Part I that are used}\label{sec:setting}
+%======================================================================
+
+This section recalls, with full statements, the framework of Part~I \cite{Joh26} and the results of Part~I on which the proof rests: the
+explicit formula (Lemma~\ref{lem:I-EF}), the a priori bounds (Lemma~\ref{lem:I-apriori}), duality and the logic of the conjectures
+(Theorems~\ref{thm:I-duality} and~\ref{thm:I-logic}), complementary slackness and the zero-side support theorem with its corollary
+(Lemma~\ref{lem:I-compslack}, Theorem~\ref{thm:I-zerosupport}, Corollary~\ref{cor:I-magic}), and the explicit formula for zero-killing
+functions with the bound it needs (Lemma~\ref{lem:I-XB}, Corollary~\ref{cor:I-zerokilling}). A result restated from Part~I keeps its number
+there, with the prefix~I: Theorem~I.3.6 below is Theorem~3.6 of Part~I. These numbers, and references of the form ``Part~I, Theorem~2.7'', are to
+version~1.3 of \cite{Joh26} (Zenodo, \texttt{doi:10.5281/zenodo.23217537}; the concept DOI \texttt{10.5281/zenodo.23197915} resolves to the latest
+version).
+
+\emph{What is reproduced, and what is not.} The proofs of Lemmas~\ref{lem:I-decay}, \ref{lem:I-apriori} and~\ref{lem:I-compslack}, of
+Corollaries~\ref{cor:I-magic} and~\ref{cor:I-zerokilling}, and of the easy implications of Theorems~\ref{thm:I-duality} and~\ref{thm:I-logic}
+are given below. The following proofs and inputs are \emph{not} reproduced; for each we give the exact reference and the idea:
+\begin{enumerate}[label=(P\arabic*),leftmargin=*]
+\item the explicit formula on $\Tc$ (Lemma~\ref{lem:I-EF}) and the bound \eqref{eq:XB} (Lemma~\ref{lem:I-XB}), which are classical;
+\item the implication (ii)$\Rightarrow$(i) of the duality theorem (Theorem~\ref{thm:I-duality}; Part~I, Appendix~B.1.1);
+\item part (b) of the logic theorem (Theorem~\ref{thm:I-logic}(b); Part~I, Appendix~B.1.2);
+\item the zero-side support theorem (Theorem~\ref{thm:I-zerosupport}; Part~I, Appendix~B.1.4), whose proof uses Lemma~\ref{lem:I-apriori},
+Theorem~\ref{thm:I-logic}(b), \cite[Theorem~1.1]{BRS}, \cite{RV19} and (P5);
+\item the membership in $\Tc$ of the basis functions $U_m$ of \cite[Theorem~1.1]{BRS} (more precisely, of their real and imaginary parts),
+on which the proof of Theorem~\ref{thm:I-zerosupport} tests admissibility: Bondarenko, Radchenko and Seip state rapid decay in vertical
+strips, and that this decay is uniform on every closed strip $|\Im z|\le\frac12+\delta$ is Part~I's reading of \cite[\S4.3]{BRS} (Part~I,
+Definition~3.4), which this paper does not re-verify.
+\end{enumerate}
+Accordingly, Theorem~\ref{thm:main-S} uses from Part~I only definitions and the classical facts (P1), and does not depend on (P2)--(P5);
+Theorem~\ref{thm:main-U} rests in addition on (P3), (P4) and (P5); and Corollary~\ref{cor:main-RH} rests on (P1)--(P5). Part~I's Propositions~2.8 and~2.10 are mentioned below only for
+interpretation and, in Appendix~\ref{app:lean}, for the Lean formalisation; no proof in this paper depends on them.
+
+\subsection{Notation}\label{ssec:notation}
+
+We write $\hF(\xi)=\int_\RR F(t)e^{-2\pi i\xi t}\dd t$, $\xin n=\log n/(2\pi)$ for real $n>0$, and $\xin2=\log2/(2\pi)$ for the
+\emph{gap}. The multiplicative coordinate is $x=e^{2\pi\xi}$: the node $\xin n$ corresponds to $x=n$ and the gap $[\xin2,\infty)$ to
+$x\ge2$. $\GR(s)=\pi^{-s/2}\Gamma(s/2)$, $\xi(s)=\frac12s(s-1)\GR(s)\zeta(s)$, $\Xi(t)=\xi(\frac12+it)$, and
+\begin{equation}\label{eq:gi}
+\gi(t):=\tfrac12s(s-1)\GR(s)\Big|_{s=\frac12+it},\qquad\text{so that}\qquad \Xi(t)=\gi(t)\,\zeta(\tfrac12+it).
+\end{equation}
+$\Xi$ is entire, even and real on $\RR$; $\gi$ is analytic for $\Im t<\frac52$ (its poles are at $t=i(2k+\frac12)$, $k\ge1$), has no
+zeros there except $t=-\frac i2$ ($s=1$), and $\gi(-t)=\overline{\gi(t)}$ for real $t$. $\Zz=\{\gamma\in\RR:\zeta(\frac12+i\gamma)=0\}$, and
+for a non-trivial zero $\rho$ we put $t_\rho:=-i(\rho-\frac12)$, so that $t_\rho$ is real exactly when $\rho$ is on the critical line.
+$\Lambda$ is von Mangoldt's function, $d(m)$ the number of divisors of $m$, and $\PP$ the set of prime powers.
+
+\subsection{The test class and the explicit formula}
+
+The archimedean data of $\zeta$ are the density and the functional
+\begin{equation}\label{eq:Arch}
+\Oinf(t):=\frac1{2\pi}\Big(\Re\psi\big(\tfrac14+\tfrac{it}2\big)-\log\pi\Big),\qquad
+\Arch(F):=F\big(\tfrac i2\big)+F\big(-\tfrac i2\big)+\int_\RR F(t)\Oinf(t)\dd t,
+\end{equation}
+where $\psi=\Gamma'/\Gamma$; $\Oinf$ is even, increasing in $|t|$, and $|\Oinf(t)|\le C\log(2+|t|)$.
+
+\begin{Idefinition}{2.1}[Test class]\label{def:testclass}
+For $0<\delta<\frac12$ let $\Tc_\delta$ be the set of even functions $F$, real on $\RR$, analytic in a neighbourhood of the closed strip
+$\Strip_\delta:=\{|\Im z|\le\frac12+\delta\}$, with $\|F\|_\delta:=\sup_{\Strip_\delta}(1+|z|)^2|F(z)|<\infty$. Put $\Tc:=\bigcup_{\delta>0}\Tc_\delta$.
+\end{Idefinition}
+
+\begin{Ilemma}{2.2(a)}\label{lem:I-decay}
+If $F\in\Tc_\delta$, then $\hF$ is real and even, and $|\hF(\xi)|\le\pi\|F\|_\delta\,e^{-\pi(1+2\delta)|\xi|}$ for all real $\xi$.
+\end{Ilemma}
+
+\begin{proof}
+Let $\xi>0$ and $c=\frac12+\delta$. By Cauchy's theorem (the vertical connectors vanish because $|F(z)|\le\|F\|_\delta(1+|z|)^{-2}$),
+$\hF(\xi)=e^{-2\pi c\xi}\int_\RR F(t-ic)e^{-2\pi i\xi t}\dd t$, and the integral is at most $\|F\|_\delta\int(1+t^2)^{-1}\dd t=\pi\|F\|_\delta$ in
+absolute value. For $\xi<0$ shift to $\Im t=+c$. Reality and evenness follow from $F$ being even and real on $\RR$.
+\end{proof}
+
+\begin{Ilemma}{2.3}[Explicit formula on $\Tc$; \cite{Wei52}, {\cite[(1.1)]{BRS}}]\label{lem:I-EF}
+For every $F\in\Tc$,
+\begin{equation}\label{eq:EF}
+\Arch(F)=\sum_\rho F(t_\rho)+\frac1\pi\sum_{n\ge2}\frac{\Lambda(n)}{\sqrt n}\,\hF(\xin n),
+\end{equation}
+where $\rho$ runs over the non-trivial zeros of $\zeta$, counted with multiplicity. Both series converge absolutely. No hypothesis on the zeros
+is made.
+\end{Ilemma}
+
+This is formula (1.1) of \cite{BRS}, which holds for functions analytic in $|\Im z|<\frac12+\eps$ with $|f(z)|\ll(1+|z|)^{-1-\eta}$ for some
+$\eps,\eta>0$, a class that contains $\Tc$. There the archimedean integral carries $\psi(\frac14+\frac{it}2)$ and the prime sum carries
+$\frac1{2\pi}(\hF(\xin n)+\hF(-\xin n))$; for even $F$, real on $\RR$, these reduce to $\Re\psi$ and to $\frac1\pi\hF(\xin n)$. Absolute convergence
+follows from $|F(t_\rho)|\le\|F\|_\delta(1+|\Im\rho|)^{-2}$, the bound $O(T\log T)$ for the number of zeros up to height $T$, and
+Lemma~\ref{lem:I-decay}.
+
+\subsection{Admissible pairs, the slack and the conjectures}
+
+\begin{Idefinition}{2.4}[Admissible pairs, cones, slack]\label{def:admissible}
+An \emph{admissible pair} is a pair $(\mu,\nu)$ of positive Radon measures, $\mu$ even on $\RR$ and $\nu$ on $[\xin2,\infty)$, such that for
+every $F\in\Tc$ the integrals $\int F\dd\mu$ and $\int\hF\dd\nu$ converge absolutely and
+\[
+\Arch(F)=\int_\RR F\dd\mu+\frac1\pi\int_{[\xin2,\infty)}\hF\dd\nu .
+\]
+$\Kad$ denotes the set of admissible pairs, and $\pz:=(\muz,\nuz)$ with $\muz:=\sum_{\gamma\in\Zz}m_\gamma\delta_\gamma$ ($m_\gamma$ the multiplicity)
+and $\nuz:=\sum_{n\ge2}\Lambda(n)n^{-1/2}\delta_{\xin n}$. Put
+\[
+\Cone:=\{F\in\Tc: F\ge0\text{ on }\RR,\ \hF\ge0\text{ on }[\xin2,\infty)\},\qquad
+\ConeOPS:=\{F\in\Tc:F\ge0\text{ and }\hF\ge0\text{ on }\RR\},
+\]
+\[
+\kstar:=\inf\Big\{\Arch(F):F\in\Cone,\ \int F=1\Big\},\qquad \kOPS:=\inf\Big\{\Arch(F):F\in\ConeOPS,\ \int F=1\Big\}.
+\]
+Since $\ConeOPS\subseteq\Cone$, $\kstar\le\kOPS$. We consider the statements
+\[
+\condE:\ \Kad\ne\emptyset,\qquad \condU:\ \Kad\subseteq\{\pz\},\qquad \condS:\ \kstar\le0 .
+\]
+\end{Idefinition}
+
+By the explicit formula, $\pz$ is admissible if and only if RH holds (Theorem~\ref{thm:I-logic}). For $q>0$ let
+$\Arch_q(F):=\Arch(F)+\frac{\log q}{2\pi}\int F$, the archimedean functional of data with Gamma factor $\GR$, one simple pole at $s=1$ and
+conductor $q$. By Part~I, Proposition~2.10, admissible pairs for $\Arch_q$ exist if and only if $q\ge\qmin:=e^{-2\pi\kstar}$; so $\qmin$ is the
+best lower bound for the conductor that the explicit formula gives, over test functions in $\Cone$, from these data, and \condS\ says
+$\qmin\ge1$. The cone $\ConeOPS$ is the classical cone of Odlyzko, Poitou and Serre \cite{Odl90,Poi77,Ser75,Sta74}, and $\kOPS$ gives the
+corresponding classical bound.
+
+\begin{lconj}{U}[Part~I, Conjecture~U]\label{conj:U}
+Every admissible pair, if there is one, is $\zeta$'s pair: $\Kad\subseteq\{\pz\}$.
+\end{lconj}
+
+\begin{lconj}{S}[Part~I, Conjecture~S]\label{conj:S}
+$\kstar\le0$. Equivalently, $\qmin\ge1$.
+\end{lconj}
+
+\begin{Idefinition}{2.11}\label{def:magic}
+An \emph{exact magic function} is an $F\in\Cone$ with $\int F>0$ and $\Arch(F)=0$. For a function $F$ on $\RR$ with transform $\hF$ we write
+$Z(F):=F^{-1}(0)\cap\RR$ and $\widehat Z(F):=\hF^{-1}(0)\cap[\xin2,\infty)$.
+\end{Idefinition}
+
+If $F$ is an exact magic function, then $F/\int F$ is admissible in the definition of $\kstar$, so $\kstar\le0$.
+
+\subsection{The results of Part I that are used}\label{ssec:I-results}
+
+\begin{Ilemma}{2.6}[A priori bounds]\label{lem:I-apriori}
+There is an absolute constant $C$ such that every $(\mu,\nu)\in\Kad$ satisfies
+\[
+\mu([T-1,T+1])\le C\log(3+|T|)\quad(T\in\RR),\qquad \nu([X-1,X+1])\le Ce^{\pi X}\quad(X\in\RR).
+\]
+In particular, if $\nu^\sharp$ denotes the image of $\nu$ under $\xi\mapsto e^{2\pi\xi}$, then $\nu^\sharp([R,2R])\le CR^{1/2}$ for every $R>0$.
+\end{Ilemma}
+
+\begin{proof}
+This is the proof of Part~I, Appendix~B.1.2. Let $g(t)=e^{-\pi t^2}$, so that $\widehat g=g$, and put $A_T:=g(\cdot-T)+2g+g(\cdot+T)$ and
+$B_X(t):=2g(t)(1+\cos2\pi Xt)$. Both are even, lie in $\Tc$ and are non-negative on $\RR$, and $\widehat{A_T}(\xi)=2g(\xi)(1+\cos2\pi T\xi)\ge0$,
+$\widehat{B_X}=2g+g(\cdot-X)+g(\cdot+X)\ge0$; so both lie in $\Cone$. As $A_T\ge e^{-\pi}$ on $[T-1,T+1]$ and $\widehat{B_X}\ge e^{-\pi}$ on
+$[X-1,X+1]$, and both integrands in Definition~\ref{def:admissible} are non-negative where the measures live, $\mu([T-1,T+1])\le
+e^\pi\Arch(A_T)$ and $\nu([X-1,X+1])\le\pi e^\pi\Arch(B_X)$. Finally $|A_T(\pm\frac i2)|\le4e^{\pi/4}$, $B_X(\pm\frac i2)=2e^{\pi/4}(1+\cosh\pi X)$
+and $|\Oinf(t)|\le C\log(2+|t|)$ give $\Arch(A_T)\le C\log(3+|T|)$ and $\Arch(B_X)\le C(1+\cosh\pi X)$; for $X<-1$ the left side of the second
+bound vanishes, since $\nu$ lives on $[\xin2,\infty)$. The last claim follows, as $[R,2R]$ corresponds to an interval of length
+$\log2/2\pi<1$ starting at $X=\log R/2\pi$.
+\end{proof}
+
+\begin{Itheorem}{2.7(a)}[Duality]\label{thm:I-duality}
+The following are equivalent: \textup{(i)} $\Kad\ne\emptyset$; \textup{(ii)} $\Arch(F)\ge0$ for every $F\in\Cone$; \textup{(iii)}
+$\kstar\ge0$.
+\end{Itheorem}
+
+Part~I's statement also lists, as its condition (iii), condition (ii) for the even real combinations of Gaussian wave packets only; our
+(iii) is its (iv). The
+implication (i)$\Rightarrow$(ii) is weak duality: for $(\mu,\nu)\in\Kad$ and $F\in\Cone$ both integrals in Definition~\ref{def:admissible}
+are non-negative. (ii)$\Leftrightarrow$(iii) is homogeneity (an $F\in\Cone$ with $\int F=0$ vanishes identically). The implication
+(ii)$\Rightarrow$(i) is conic linear-programming duality and is not reproduced here: Part~I, Appendix~B.1.1, proves it with
+Carath\'eodory's theorem in finite-dimensional subspaces of Gaussian wave packets, uniform bounds for positive solutions obtained as in the
+proof of Lemma~\ref{lem:I-apriori}, and Helly's selection theorem.
+
+\begin{Itheorem}{2.9}[Logic; parts (a)--(c)]\label{thm:I-logic}
+\begin{enumerate}[label=\textup{(\alph*)}]
+\item RH implies $\pz\in\Kad$; hence RH implies \condE.
+\item If $(\mu,\nuz)\in\Kad$ for some $\mu$, then RH holds and $\mu=\muz$.
+\item \condU\ holds if and only if both \textup{[}\condE$\Rightarrow$RH\textup{]} and \textup{[}RH$\Rightarrow\Kad=\{\pz\}$\textup{]} hold. In
+particular \condU\ implies RH$\Leftrightarrow$\condE$\Leftrightarrow\kstar\ge0$.
+\end{enumerate}
+\end{Itheorem}
+
+Part (a) is Lemma~\ref{lem:I-EF}: under RH every $t_\rho$ is real. Part (b) is not reproduced here; it is proved in Part~I,
+Appendix~B.1.2: if a zero
+$\rho_0=\beta_0+i\gamma_0$ were off the line, the Gaussians $g_u(t-\gamma_0)+g_u(t+\gamma_0)$, $g_u(t)=e^{-\pi ut^2}$, would make
+$\sum_\rho F(t_\rho)$ grow like $e^{\pi u(\beta_0-\frac12)^2}$ along a sequence $u\to\infty$, while $\int F\dd\mu$ stays bounded. Part (c)
+follows from (a), (b) and Theorem~\ref{thm:I-duality}: under \condU\ and \condE\ the unique pair is $\pz$, hence RH by (b); under \condU\ and RH,
+$\Kad=\{\pz\}$ by (a); and conversely the two implications give $\Kad=\{\pz\}$ under RH and $\Kad=\emptyset$ under $\neg$RH.
+
+\begin{Ilemma}{2.13}[Complementary slackness]\label{lem:I-compslack}
+If $F\in\Cone$ and $\Arch(F)=0$, then every $(\mu,\nu)\in\Kad$ has $\mu$ carried by $Z(F)$ and $\nu$ carried by $\widehat Z(F)$.
+\end{Ilemma}
+
+\begin{proof}
+$0=\Arch(F)=\int F\dd\mu+\frac1\pi\int\hF\dd\nu$, with continuous integrands that are non-negative where the measures live.
+\end{proof}
+
+\begin{Itheorem}{3.6}[Zero-side support]\label{thm:I-zerosupport}
+Let $(\mu,\nu)\in\Kad$, and assume that $\mu$ is carried by $\Zz\cup\{0\}$. Then RH holds and $(\mu,\nu)=\pz$.
+\end{Itheorem}
+
+No hypothesis on $\nu$ is made beyond admissibility. The proof is in Part~I, Appendix~B.1.4, and is not reproduced here. \emph{Idea.} The input is the Fourier
+interpolation basis of Bondarenko, Radchenko and Seip \cite[Theorem~1.1]{BRS}, which assumes neither RH nor simplicity of the zeros, and
+the interpolation theorem of Radchenko and Viazovska \cite{RV19}. With $\nu^\sharp$ as in Lemma~\ref{lem:I-apriori}, the
+a priori bound $\nu^\sharp([R,2R])\le CR^{1/2}$ makes $L(f):=\int\sqrt x\sum_{k\ge1}f(kx)\dd\nu^\sharp(x)$ continuous on even
+Schwartz functions. Testing admissibility on the basis functions $U_m$ of \cite{BRS}, which vanish at every zero of $\zeta$ and are test
+functions by (P5), computes $L$ on
+the Radchenko--Viazovska basis; by Schwartz convergence of their interpolation series this gives, for every even self-dual Schwartz $f$ with
+$f(0)=0$, $L(f)=\sum_{n\ge2}(\log n)f(n)-\frac12\mu(\{0\})\zeta(\frac12)\int_0^\infty f(x)x^{-1/2}\dd x$. A limiting test with
+$g(t)=\sin^2(\pi t)/(\pi^2(t^2-1))$, which vanishes at the integers and is positive at all other points of $(1,\infty)$, and with its
+transform, forces $\mu(\{0\})=0$ and puts $\nu^\sharp$ on the integers $n\ge2$; M\"obius inversion then gives $\nu=\nuz$, and
+Theorem~\ref{thm:I-logic}(b) gives RH and $\mu=\muz$.
+
+\begin{Icorollary}{3.9(a)}[Magic-function principle]\label{cor:I-magic}
+Let $F\in\Cone$ with $\Arch(F)=0$, and assume $Z(F)\subseteq\Zz\cup\{0\}$. Then \condU\ holds. If \condE\ holds as well, then RH holds and
+$\Kad=\{\pz\}$.
+\end{Icorollary}
+
+\begin{proof}
+Let $(\mu,\nu)\in\Kad$. By Lemma~\ref{lem:I-compslack}, $\mu$ is carried by $Z(F)\subseteq\Zz\cup\{0\}$, and Theorem~\ref{thm:I-zerosupport}
+gives RH and $(\mu,\nu)=\pz$. So $\Kad\subseteq\{\pz\}$; if moreover $\Kad\ne\emptyset$, then RH holds and $\Kad=\{\pz\}$.
+\end{proof}
+
+No condition on the zeros of $\hF$ is needed.
+
+The last two inputs concern functions of the form $\Xi^2H$, which vanish at every non-trivial zero of $\zeta$, on or off the critical line.
+
+\begin{lemma}[The bound (4.1) of Part~I; \cite{Tit86}]\label{lem:I-XB}
+For every $b\in(0,1]$ there is $C_b$ with
+\begin{equation}\label{eq:XB}
+|\Xi(t)|\le C_b(1+|\Re t|)^3e^{-\pi|\Re t|/4}\qquad(|\Im t|\le b).
+\end{equation}
+\end{lemma}
+
+This follows from Stirling's formula for $\GR$ and the convexity bound for $\zeta$ on $-\frac12\le\Re s\le\frac32$.
+
+\begin{Icorollary}{4.4}[The explicit formula for zero-killing functions]\label{cor:I-zerokilling}
+Let $F=\Xi^2H$ with $H$ analytic on $|\Im t|\le\frac12+\delta$, and assume $F\in\Tc$. Then
+\[
+\Arch(F)=\frac1\pi\sum_{n\in\PP}\Lambda(n)n^{-1/2}\hF(\xin n).
+\]
+No hypothesis on the zeros of $\zeta$, on the growth of $H$, or on entireness is used.
+\end{Icorollary}
+
+\begin{proof}
+Apply Lemma~\ref{lem:I-EF}. Every non-trivial zero $\rho$ has $|\Im t_\rho|<\frac12$ and $\Xi(t_\rho)=\xi(\rho)=0$, so $F(t_\rho)=0$ and the
+zero side vanishes.
+\end{proof}

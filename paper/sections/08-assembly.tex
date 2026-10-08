@@ -1,0 +1,62 @@
+%======================================================================
+\section{Proofs of the main results}\label{sec:assembly}
+%======================================================================
+
+\emph{The object.} By Corollary~\ref{cor:Pi-positive}, $H_{\rm raw}(t)>0$ for every real $t$; in particular $H_{\rm raw}(0)>0$. Put
+\[
+C:=\frac1{H_{\rm raw}(0)}>0,\qquad H:=C\,H_{\rm raw},\qquad F:=\Xi^2H .
+\]
+By Proposition~\ref{prop:Hraw}(c) and \eqref{eq:Graw}, the $\Gamma$-only transform of $H$ in the sense of \eqref{eq:GH} is
+$\Gh_H=C\,\Gh_{\rm raw}=-C\GO/(16\pi^2)$, an analytic function of $x$ on $\Re x>0$.
+
+\begin{proof}[Proof of Theorem~\textup{\ref{thm:main-object}}]
+(a) is Theorems~\ref{thm:an-positive} and~\ref{thm:an-bounds}, with Theorem~\ref{thm:niebur-fourier} for the convergence of the series.
+(b) For $x>1$, $\Gh_H(x)=C\sin^2(\pi x)\sqrt x\sum_na_nK_0(4\pi\sqrt{nx})$ by Theorem~\ref{thm:lift}(c), and $\Gh_H=C/(32\pi^2)$ at $x=1$ by
+Theorem~\ref{thm:lift}(d). The value of $C$ is Proposition~\ref{prop:C}, and the bounds for $b_n=Ca_n$ follow from (a) and
+$C/(4\sqrt2\pi^2)\in[15.77370,15.77376]$. (c) is Theorem~\ref{thm:lift}(a),(d) and Theorem~\ref{thm:F}.
+\end{proof}
+
+\begin{proof}[Proof of Theorem~\textup{\ref{thm:main-S}}]
+$H$ is entire, even and real on $\RR$ (Proposition~\ref{prop:Hraw}(a)), $H(0)=1$ and $H>0$ on $\RR$ (Corollary~\ref{cor:Pi-positive}), and
+\eqref{eq:intro-C1} holds for every $\delta\in(0,1)$ (Proposition~\ref{prop:Hraw}(b)). In particular $H\in\Wc_\delta$ for every $\delta\in(0,1)$.
+Fix $\delta\in(0,\frac12)$ and check the hypotheses of Proposition~\ref{prop:reduction}:
+\begin{itemize}
+\item (C2): $H>0$ on $\RR$.
+\item (C3): $\Gh_H(\xin k)=C\,\Gh_{\rm raw}(\xin k)=0$ for every integer $k\ge2$ (Proposition~\ref{prop:C3}(a)).
+\item (C4), indeed $\Gh_H\ge0$ on $[0,\infty)$: for $x>1$, $\Gh_H(x)=C\sin^2(\pi x)\sqrt x\sum_na_nK_0(4\pi\sqrt{nx})\ge0$, since $C>0$, every
+$a_n>0$ (Theorem~\ref{thm:an-positive}) and $K_0>0$; and $\Gh_H=C/(32\pi^2)>0$ at $x=1$.
+\end{itemize}
+Proposition~\ref{prop:reduction} gives $F\in\ConeOPS$, $\hF(\xin n)=0$ for $n\ge2$, $\int F=\hF(0)=\Gh_H(0)>0$, $\Arch(F)=0$, and
+$\kstar\le\kOPS\le0$; the first inequality holds because $\ConeOPS\subseteq\Cone$. For the derivatives: by \eqref{eq:XB} and
+\eqref{eq:intro-C1} on the real line, $|F(t)|\le C'(1+|t|)^{6-9+\delta}$, so $tF\in L^1(\RR)$ for $\delta<1$ and $\hF$ is $C^1$; as $\hF\ge0$ on $\RR$,
+each zero $\xin n$ is a minimum, and $\hF'(\xin n)=0$. Finally $\qmin=e^{-2\pi\kstar}\ge1$, and likewise for the classical cone.
+\end{proof}
+
+\begin{proof}[Proof of Theorem~\textup{\ref{thm:main-U}}]
+By Theorem~\ref{thm:main-S}, $F\in\Cone$ and $\Arch(F)=0$. For real $t$, $\Xi(t)=\gi(t)\zeta(\frac12+it)$ and $\gi(t)\ne0$, so the real zeros of
+$\Xi$ are exactly $\Zz$; and $H$ has no real zeros. Hence $Z(F)=\Zz\subseteq\Zz\cup\{0\}$, and Corollary~\ref{cor:I-magic}, which rests
+on Theorem~\ref{thm:I-zerosupport}, gives $\Kad\subseteq\{\pz\}$.
+\end{proof}
+
+No condition on the zeros of $\hF$ or of $\Gh_H$ is needed here, and strict positivity of $H$ on $\RR$ is used only to place $Z(F)$ inside
+$\Zz\cup\{0\}$.
+
+\begin{proof}[Proof of Corollary~\textup{\ref{cor:main-RH}}]
+By Theorem~\ref{thm:main-U} and Theorem~\ref{thm:I-logic}(c), (i)$\Leftrightarrow$(ii)$\Leftrightarrow$(iii). By Theorem~\ref{thm:main-S},
+$\kstar\le0$, so (iii)$\Leftrightarrow$(iv). If they hold, then $\Kad=\{\pz\}$ by Corollary~\ref{cor:I-magic}; $0=\kstar\le\kOPS\le0$; and $F/\int F$,
+which lies in $\ConeOPS\subseteq\Cone$ and has $\Arch(F/\int F)=0$, is a minimiser for both. If RH fails, then $\kstar\ne0$ and $\kstar\le0$, so
+$\kstar<0$, and $\Kad=\emptyset$ by Theorem~\ref{thm:I-duality}.
+\end{proof}
+
+\begin{remark}[Where each input enters]\label{rem:inputs}
+Theorem~\ref{thm:main-S} uses Part~I only through Definitions~\ref{def:testclass} and~\ref{def:admissible}, Lemma~\ref{lem:I-EF} (in
+Corollary~\ref{cor:I-zerokilling}) and the bound \eqref{eq:XB}. Theorem~\ref{thm:main-U} uses in addition Lemma~\ref{lem:I-compslack} and
+Theorem~\ref{thm:I-zerosupport} (whose proof in Part~I uses Lemma~\ref{lem:I-apriori}, Theorem~\ref{thm:I-logic}(b) and the membership of the
+Bondarenko--Radchenko--Seip functions in $\Tc$, item (P5) of Section~\ref{sec:setting}), and
+Corollary~\ref{cor:main-RH} uses Theorems~\ref{thm:I-duality} and~\ref{thm:I-logic}; Section~\ref{sec:setting} lists which of these proofs are
+reproduced. Within this paper, the
+positivity of the $a_n$ enters through (C4) and through the positivity of $\Ax$ in Lemma~\ref{lem:comparison}(c); the upper bound $a_n\le\abar_n$
+of Theorem~\ref{thm:an-bounds} enters Lemma~\ref{lem:B-sign}(b) and the tail estimates of the certificates. The positivity of $H$ enters
+through (C2) and, for Theorem~\ref{thm:main-U}, through the location of the real zeros of $F$. The certified enclosures of the $a_n$ enter
+through the window, the numbers of Proposition~\ref{prop:L-numbers} and the value of $C$.
+\end{remark}

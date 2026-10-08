@@ -1,0 +1,289 @@
+%======================================================================
+\section{Introduction}\label{sec:intro}
+%======================================================================
+
+\subsection{Positive solutions of the explicit formula}
+
+Weil's explicit formula \cite{Wei52} (in Guinand's form \cite{Gui48} for $\zeta$) is a linear identity between a measure on the zeros of $\zeta$
+and a measure on the prime powers. For even test functions $F$ in a natural class $\Tc$ (Definition~\ref{def:testclass}), with
+$\hF(\xi)=\int F(t)e^{-2\pi i\xi t}\dd t$, it reads
+\begin{equation}\label{eq:intro-EF}
+\Arch(F)=\sum_\rho F\Big(\frac{\rho-\frac12}i\Big)+\frac1\pi\sum_{n\ge2}\frac{\Lambda(n)}{\sqrt n}\,\hF\Big(\frac{\log n}{2\pi}\Big),
+\end{equation}
+where the left side $\Arch(F)$ depends only on the archimedean data of $\zeta$: its Gamma factor and its pole at $s=1$. Under the Riemann
+hypothesis (RH) the right side is $\int F\dd\mu+\frac1\pi\int\hF\dd\nu$ for two positive measures, $\mu$ on the zero ordinates and $\nu$ on the
+points $\log n/2\pi$. We ask how much of this structure is forced by positivity and the archimedean data alone. Call a pair of positive
+measures, $\mu$ even on $\RR$ and $\nu$ on $[\log2/2\pi,\infty)$, that represents $\Arch$ on $\Tc$ an \emph{admissible pair}
+(Definition~\ref{def:admissible}); nothing is assumed about where the measures live or about integrality. Let $\Kad$ be the set of admissible
+pairs and $\pz$ the pair of $\zeta$, which is admissible exactly under RH. Two questions arise.
+
+\emph{Sharpness.} Testing \eqref{eq:intro-EF} against functions with $F\ge0$ and $\hF\ge0$ is the explicit-formula method of Stark, Odlyzko,
+Poitou and Serre \cite{Sta74,Odl76,Ser75,Poi77,Odl90} for lower bounds on conductors and discriminants. For the archimedean data of $\zeta$
+it leads to the linear programme
+\[
+\kstar=\inf\Big\{\Arch(F):F\in\Tc,\ F\ge0\text{ on }\RR,\ \hF\ge0\text{ on }[\tfrac{\log2}{2\pi},\infty),\ \int F=1\Big\}:
+\]
+a test function with $\Arch(F)=\kappa\int F$ proves the conductor bound $e^{-2\pi\kappa}$, and $\qmin=e^{-2\pi\kstar}$ is the best bound the
+method can give (Part~I, Proposition~2.10). Is the method sharp for $\zeta$ itself, that is, does it reach the conductor $1$ of $\zeta$?
+Odlyzko's numerical optimisation gave $0.997$ \cite[Table~4]{Odl90}. By linear-programming duality, admissible pairs exist if and only if
+$\kstar\ge0$ (Theorem~\ref{thm:I-duality}), a statement that involves neither zeros nor primes.
+
+\emph{Rigidity.} Do positivity and the archimedean data determine the solution, that is, is $\pz$ the only possible admissible pair?
+
+Part~I \cite{Joh26} set up this framework and posed the two questions as Conjecture~S, $\kstar\le0$, and Conjecture~U, $\Kad\subseteq\{\pz\}$
+(Section~\ref{sec:setting}).
+
+\subsection{Main results}
+
+We answer both questions. The tool is an \emph{exact magic function}: a test function $F$ in the cone of the linear programme with $\int F>0$
+and $\Arch(F)=0$, which shows that the value $0$ is reached by an explicit function. (The term comes from the linear-programming bounds for
+sphere packing of Cohn and Elkies and of Viazovska \cite{CE03,Via17}, where such functions show that a bound is sharp.) We construct such a
+function.
+
+There is no circularity in building $F$ from $\zeta$ itself. The function $\Xi$ vanishes at every non-trivial zero of $\zeta$, on or off the
+critical line, so the factor $\Xi^2$ removes the zero side of \eqref{eq:intro-EF} without any information about where the zeros lie, and RH is
+assumed nowhere. The explicit formula enters only as an unconditional identity; in Theorem~\ref{thm:main-S} it evaluates $\Arch(F)$, which
+involves only the archimedean data. The difficulty is to keep $F$ and $\hF$ non-negative; by Section~\ref{sec:reduction}, this is a problem
+about the Gamma function and the integers alone.
+
+Recall $\Xi(t)=\xi(\frac12+it)$ with $\xi(s)=\frac12s(s-1)\pi^{-s/2}\Gamma(\frac s2)\zeta(s)$, $\xin n=\log n/2\pi$, and the classical cone $\ConeOPS$ of
+functions with $F\ge0$ and $\hF\ge0$ on all of $\RR$, with its slack $\kOPS\ge\kstar$.
+
+\begin{mainthm}\label{thm:main-S}
+There is an even entire function $H$, real on $\RR$, with $H(t)>0$ for every real $t$ and $H(0)=1$, such that for every $\delta\in(0,1)$
+\begin{equation}\label{eq:intro-C1}
+|H(z)|\le C_\delta\,(1+|z|)^{-9+\delta}\,e^{\pi|\Re z|/2}\qquad(|\Im z|\le\tfrac12+\delta),
+\end{equation}
+and such that $F:=\Xi^2H$ satisfies:
+\begin{enumerate}[label=\textup{(\alph*)}]
+\item $F\in\ConeOPS$: $F\ge0$ and $\hF\ge0$ on $\RR$;
+\item $\hF(\xin n)=\hF'(\xin n)=0$ for every integer $n\ge2$;
+\item $\int F=\hF(0)>0$ and $\Arch(F)=0$.
+\end{enumerate}
+Consequently $\kstar\le\kOPS\le0$. In particular Conjecture~S holds, and $\qmin\ge1$, already for the classical cone.
+\end{mainthm}
+
+So $F/\int F$ is an exact magic function: it is admissible in the definition of $\kstar$ with value $0$. In the language of conductors,
+Theorem~\ref{thm:main-S} says that the method of Odlyzko, Poitou and Serre is sharp for the data of $\zeta$, already in the classical cone: the
+explicit function $F$ proves the bound $1$, the conductor of $\zeta$, where numerical optimisation had given $0.997$; under RH no test function
+does better (Corollary~\ref{cor:main-RH}). We do not claim that $\kstar$ is attained, or that $\kstar=0$: by duality $\kstar=0$ holds if and only
+if admissible pairs exist (Corollary~\ref{cor:main-RH}). What holds unconditionally is $\kstar\le0=\Arch(F)/\int F$; and among the cone members of
+the form $\Xi^2H$ with $H$ analytic on a strip $|\Im t|\le\frac12+\delta$, which all have $\Arch\ge0$ by Corollary~\ref{cor:I-zerokilling}, $F$
+realises the least value $0$ of $\Arch/\!\int$.
+
+\begin{mainthm}\label{thm:main-U}
+Every admissible pair is $\zeta$'s pair: $\Kad\subseteq\{\pz\}$. That is, Conjecture~U holds.
+\end{mainthm}
+
+This is a rigidity statement: positivity and the archimedean data force any positive solution of \eqref{eq:intro-EF} to be carried by the zeros
+of $\zeta$ and by the prime powers, with their usual weights. It follows from Theorem~\ref{thm:main-S} by complementary slackness: every
+admissible pair is carried by the zeros of $F$ and of $\hF$ (Lemma~\ref{lem:I-compslack}), and, because $H>0$, the real zeros of $F$ are those
+of $\zeta$, so the zero-side support theorem of Part~I (Theorem~\ref{thm:I-zerosupport}) applies. The pattern is loosely that of the
+linear-programming approach to sphere packing, where a certificate vanishing on the expected support constrains every optimal configuration
+\cite{CE03,Via17}.
+
+\begin{maincor}\label{cor:main-RH}
+The following are equivalent: \textup{(i)} RH; \textup{(ii)} admissible pairs exist; \textup{(iii)} $\kstar\ge0$; \textup{(iv)} $\kstar=0$. If they
+hold, then $\Kad=\{\pz\}$, $\kOPS=0$, and $F/\int F$, with $F$ as in Theorem~\ref{thm:main-S}, is a minimiser for both $\kstar$ and $\kOPS$. If
+RH fails, then $\kstar<0$ and $\Kad=\emptyset$.
+\end{maincor}
+
+We do not prove RH: by Corollary~\ref{cor:main-RH} it is equivalent to the existence of an admissible pair, and to $\kstar=0$. We do not claim
+that $\kOPS=0$ implies RH: the duality theorem of Part~I concerns the cone $\Cone$ with the gap $\log2/2\pi$, not $\ConeOPS$. Under RH,
+Corollary~\ref{cor:main-RH} says that the fully optimised explicit-formula conductor bound for the data of $\zeta$, in either cone, is exactly $1$.
+
+Theorems~\ref{thm:main-S} and~\ref{thm:main-U} resolve Conjectures~S and~U of Part~I. There, Conjecture~U was proved under support conditions,
+for instance when the zero measure is carried by the zeros of $\zeta$ and the origin \cite[Theorem~3.6]{Joh26}; a magic-function principle
+\cite[Corollary~3.9]{Joh26} reduced Conjecture~U to the construction of a function as in Theorem~\ref{thm:main-S} whose real zeros are those of
+$\zeta$; and $\kstar\le1.43\cdot10^{-1060}$, a conductor bound $1-8.98\cdot10^{-1060}$, was certified numerically.
+
+The method does not prove too much. For the data of the Dedekind zeta functions of $\QQ(\sqrt5)$ and $\QQ(\sqrt{-3})$, Part~I certifies strictly
+positive slack, so no exact magic function exists for them, and no analogue of our construction can exist there (Section~\ref{sec:remarks}).
+The existence of $F$ is specific to the data of $\zeta$.
+
+The function $H$ is explicit. Let $S(m,n;c)$ be the Kloosterman sum, $\Jdot:=\partial_\mu J_\mu|_{\mu=2}$, $\Idot:=\partial_\mu I_\mu|_{\mu=2}$, and
+$\gi(t):=\frac12s(s-1)\pi^{-s/2}\Gamma(\frac s2)$ at $s=\frac12+it$, the archimedean factor of $\Xi$.
+
+\begin{mainthm}[The object]\label{thm:main-object}
+For $n\ge1$ put
+\[
+\Ss_n:=\sum_{c\ge1}\frac1c\Big[S(1,n;c)\,\Jdot\Big(\frac{4\pi\sqrt n}c\Big)-S(-1,n;c)\,\Idot\Big(\frac{4\pi\sqrt n}c\Big)\Big],\qquad
+a_n:=n\Ss_n+\tfrac14\delta_{n1}.
+\]
+\begin{enumerate}[label=\textup{(\alph*)}]
+\item The series converge absolutely, and with $z_n:=4\pi\sqrt n$ and $\abar_n:=n^{1/4}e^{4\pi\sqrt n}/(4\sqrt2\pi^2)$,
+\[
+\Big(1-\frac2{z_n}\Big)\abar_n\le a_n\le\abar_n\qquad(n\ge1);
+\]
+in particular every $a_n$ is positive.
+\item The function $H$ of Theorem~\ref{thm:main-S} can be taken such that, for $x>1$,
+\[
+\int_\RR\gi(t)^2H(t)\,x^{-it}\dd t=C\,\sin^2(\pi x)\,\sqrt x\sum_{n\ge1}a_nK_0(4\pi\sqrt{nx}),\qquad C=880.6617\pm0.0015,
+\]
+and the left side equals $C/(32\pi^2)$ at $x=1$. Thus $b_n:=Ca_n$ satisfy
+$(1-2/z_n)\cdot15.77370\,n^{1/4}e^{4\pi\sqrt n}\le b_n\le15.77376\,n^{1/4}e^{4\pi\sqrt n}$.
+\item The left side of \textup{(b)} is, for every $x>0$, equal to $-C/(16\pi^2)$ times the four-path function \eqref{eq:GO}, which is analytic
+on $\Re x>0$; and for real $t$, $H$ is given by the physical-side formula \eqref{eq:physical}: an integral of two $K_0$-series in the same
+coefficients $a_n$ against $\cos(t\log Y)$ and against the positive conical kernel $\ck_t$.
+\end{enumerate}
+\end{mainthm}
+
+The factor $\sin^2(\pi x)$ produces the double zeros at the integers; the sum $\sqrt x\sum_na_nK_0(4\pi\sqrt{nx})$ converges only for $x>1$, and
+has a double pole at $x=1$, so the continuation to $(0,1]$ in (c) is part of the content. In the variable $x$, the transform $\hF$ is the positive
+combination $\sum_md(m)m^{-1/2}\,\Gh_H(mx)$ of dilates of the function in (b) (Lemma~\ref{lem:voronoi}), so the integer zeros pass from the
+$\Gamma$-only function to $\hF$.
+
+Table~\ref{tab:coefficients} lists certified enclosures of the first coefficients and of $C$, for comparison with independent computations.
+Figure~\ref{fig:object} illustrates $H$ on $[0,40]$ and the function in (b) on $[1,6]$; it is not part of any proof.
+
+\begin{table}[b]
+\centering
+\small
+\begin{tabular}{@{}lll@{}}
+\toprule
+ & certified ball & source\\
+\midrule
+$a_1$ & $4581.370553\pm0.000028$ & Kloosterman terms $c\le6\cdot10^5$, and a tail bound\\
+$a_2$ & $1025727.23492\pm0.00011$ & Kloosterman terms $c\le6\cdot10^5$, and a tail bound\\
+$a_3$ & $62590223.68999\pm0.00060$ & Kloosterman terms $c\le3\cdot10^5$, and a tail bound\\
+$a_4$ & $1968035704.4549\pm0.0011$ & Kloosterman terms $c\le3\cdot10^5$, and a tail bound\\
+$a_5$ & $40671323483.6182\pm0.0017$ & Kloosterman terms $c\le3\cdot10^5$, and a tail bound\\
+$C$ & $880.6617\pm0.0015$ & Proposition~\ref{prop:C}\\
+\bottomrule
+\end{tabular}
+\caption{The coefficients $a_1,\dots,a_5$ and the constant $C$ of Theorem~\ref{thm:main-object}, as certified balls
+(Appendix~\ref{app:cert-coeffs} and Proposition~\ref{prop:C}). Each printed ball is rounded outward, so it contains the certified one.}
+\label{tab:coefficients}
+\end{table}
+
+\begin{figure}[t]
+\centering
+\includegraphics[width=\textwidth]{anc/figures/figure1.pdf}
+\caption{An illustration; it is not part of any proof. (a) $H(t)$ for $0\le t\le40$, on a logarithmic scale. The curve joins $H(0)=1$ and the
+values at the $80$ cell centres of the window certificate (Theorem~\ref{thm:window}), computed without error terms. The steps are lower
+bounds for $H$ on each cell, formed from the certified cell bounds and the certified enclosure of $\Pi(0)$. The dashed curve is the bound of
+Theorem~\ref{thm:large-t} for $t\ge8$. (b) $e^{4\pi\sqrt x}\,\Gh_H(x)/10^6$ for $1\le x\le6$, where $\Gh_H(x)$ is the left side of
+Theorem~\ref{thm:main-object}(b), computed in floating point from the coefficient midpoints; $\Gh_H$ vanishes doubly at $x=2,\dots,6$, and
+$\Gh_H(1)=C/(32\pi^2)$. Data and script: \ancf{figures/} in the ancillary files.}
+\label{fig:object}
+\end{figure}
+
+\subsection{The construction in outline}
+
+\emph{Reduction (Section~\ref{sec:reduction}).} For $F=\Xi^2H$ every zero of $\zeta$ is a zero of $F$, so $\Arch(F)$ is a sum over prime
+powers (Part~I, Corollary~4.4). On a line where the Dirichlet series of $\zeta^2$ converges absolutely, $\hF$ decouples into the positive
+combination above. So it suffices to find an even $H$ of growth \eqref{eq:intro-C1} with $H\ge0$, whose $\Gamma$-only transform
+$\Gh_H(x)=\int\gi^2Hx^{-it}\dd t$ vanishes at every integer $x\ge2$ and is non-negative for $x\ge2$: a \emph{$\Gamma$-only integer-critical
+function}. Arithmetic has disappeared from the problem; what remains is a question about the Gamma factor and the lattice $\ZZ$.
+
+\emph{Automorphic input (Section~\ref{sec:automorphic}).} The kernel $K_0(4\pi\sqrt{nx})$ arises by pairing the Whittaker function
+$\sqrt vK_0(2\pi nv)$, of eigenvalue $\frac14$ for $\Delta=-v^2(\partial_u^2+\partial_v^2)$ on the upper half-plane, with the family
+$\sqrt{xv}K_0(2\pi xv)$ (Lemma~\ref{lem:K0K0}), and $\sin^2(\pi x)$ is, up to the factor $-4$, the symbol of the second difference
+$g(\tau+1)-2g(\tau)+g(\tau-1)$ acting on that family. So we look for a $1$-periodic eigenfunction of $\Delta$ with eigenvalue $\frac14$,
+together with a partner whose second difference it is. We start from the odd Niebur--Poincar\'e series $P_\nu$ \cite{Nie73}, of eigenvalue $\frac14-\nu^2$,
+whose Fourier coefficients are Kloosterman sums of $J_{2\nu}$ and $I_{2\nu}$ with an explicit constant (Theorem~\ref{thm:niebur-fourier}). The
+first-order operator $2\partial_v+\nu^2/v$ maps eigenvalue $\frac14-\nu^2$ to $\frac14$ up to an error $(1-\nu^2)^2P_\nu/v$, which has a
+\emph{double} zero at $\nu=1$ (Lemma~\ref{lem:jordan}); so the spectral derivative $\Pt=\partial_\nu[(2\partial_v+\nu^2/v)P_\nu]_{\nu=1}$ is an exact
+eigenfunction with eigenvalue $\frac14$. It is $1$-periodic and odd, has no constant term, and decays exponentially at the cusp $\infty$, with
+Fourier coefficients $-16\pi a_n$. It is not invariant under $\mathrm{SL}_2(\ZZ)$, so it is not a Maass cusp form; it is
+the $Y^2$-component of a vector-valued function that is equivariant for the symmetric square of the standard representation, and its
+$X^2$-component $\Phi=\Pt\circ S$ satisfies $\Phi(\tau+1)-2\Phi(\tau)+\Phi(\tau-1)=2\Pt(\tau)$.
+
+\emph{Why eigenvalue $\frac14$, and why the symmetric square.} The eigenvalue $\frac14$ is that of $\zeta^2$: up to Gamma factors, $\zeta(s)^2$
+is the $L$-function of the completed Eisenstein series at the centre $s=\frac12$, whose non-constant Fourier terms are multiples of
+$d(|n|)\sqrt vK_0(2\pi|n|v)e(nu)$ (cf.~\cite{BC13}), and $d(m)$ is the weight in the decoupling of Section~\ref{sec:reduction}. The symmetric
+square supplies the first-order operator: heuristically (Remark~\ref{rem:rep}), tensoring with $\mathrm{Sym}^2$ shifts the spectral parameter,
+and the eigenvalue $(s-1)(2-s)$ of the shifted constituent is stationary at $s=\frac32$, where it equals $\frac14$; this stationary point is
+the double root of Lemma~\ref{lem:jordan}.
+
+\emph{The lift (Section~\ref{sec:lift}).} We integrate the closed Green form $\omega(\Phi_j,k_\tau(x))$ of the weights $\Phi_j$ and of the kernel
+$k_\tau(x)=\sqrt{xv}K_0(2\pi xv)\cos(2\pi ux)$ over four paths from the cusps to $i$. This is the analogue, for a non-holomorphic input, of the
+contour integrals of Viazovska and Cohn--Kumar--Miller--Radchenko--Viazovska \cite{Via17,CKMRV17,CKMRV22}; Green's identity replaces Cauchy's
+theorem, and every weight vanishes on its own path. The result $\GO(x)$ is analytic for $\Re x>0$, equals $-16\pi^2\sin^2(\pi x)\sqrt x\sum
+a_nK_0(4\pi\sqrt{nx})$ for $x>1$, and its Mellin transform, divided by the Gamma factor $\GR(w+\frac12)^2$, is even under $w\mapsto-w$ because the kernel intertwines $\tau\mapsto-1/\tau$ with
+$w\mapsto-w$. The absence of constant terms in the cusp expansions makes $\GO$ vanish to order $x^{5/2}$ at $0$, and this makes $H$ entire. The
+growth bound \eqref{eq:intro-C1} follows by integration by parts.
+
+\emph{Positivity (Sections~\ref{sec:fourier} and~\ref{sec:physical}).} On the Fourier side, every $a_n$ is positive because the term $c=1$
+dominates; the trivial bound $|S|\le c$ suffices for every $n$ (Theorem~\ref{thm:an-positive}). On the physical side, applying the four-path
+functional to the Mellin transform of the kernel gives
+\[
+H_{\rm raw}(t)=\frac1{2\pi^2(t^2+\frac14)^2}\Big[\int_1^\infty\Ax(Y)\cos(t\log Y)\dd Y+\frac12\int_{1/2}^\infty\Bx(Y)\,\ck_t(\theta(Y))\dd Y\Big],
+\]
+where $\Ax,\Bx$ are $K_0$-series in the $a_n$ and the kernel $\ck_t$, built from conical Legendre functions, is positive by Mehler--Dirichlet's
+formula (Theorems~\ref{thm:kernel-pos} and~\ref{thm:F}). An explicit lower bound for the kernel gives $H>0$ for $|t|\ge8$ (Theorem~\ref{thm:large-t}), and a certified
+computation covers $[0,40]$ (Theorem~\ref{thm:window}). Section~\ref{sec:assembly} assembles the proofs.
+
+\subsection{What is proved, what is computer-assisted, and what is not claimed}\label{ssec:claims}
+
+\emph{Computer-assisted parts.} Exactly four ingredients rest on computations in rigorous ball arithmetic, each with a script and log in the
+ancillary files (Appendix~\ref{app:cert}):
+\begin{enumerate}[label=(\arabic*),leftmargin=*]
+\item the window: $H>0$ on $[0,40]$ (Theorem~\ref{thm:window}), with continuum coverage by Taylor models in $t$;
+\item the numerical inputs of the large-$|t|$ theorem (Proposition~\ref{prop:L-numbers}): the sign of $\Bx$ on $[0.870,4]$, one tail constant
+$\bar\rho(4)<1$, and three integrals evaluated at $t=8$;
+\item the certified enclosures of the coefficients $a_n$, $n\le300$, used by (1), (2) and (4);
+\item the value of the normalising constant $C$ and its sign (Proposition~\ref{prop:C}); the sign also follows from (1).
+\end{enumerate}
+Everything else is analytic: the construction and class membership of $H$, its entireness and the growth bound \eqref{eq:intro-C1}, the
+positivity of every $a_n$ and the two-sided bounds (whose constants are elementary evaluations at the single point $z=4\pi$), the physical-side
+formula and the positivity of its kernel, the reduction, and the deduction of Theorems~\ref{thm:main-S}--\ref{thm:main-U} and
+Corollary~\ref{cor:main-RH} from Part~I. That deduction, from the inputs listed in Remark~\ref{rem:inputs}, is also checked in Lean~4
+(Appendix~\ref{app:lean}); the inputs themselves are not formalised.
+
+\emph{Growth.} One can show that $H$ is entire of order one but \emph{not} of exponential type: along the imaginary axis it grows like
+$e^{y\log(y/2\pi e)}$. We only sketch this (Remark~\ref{rem:infinite-type}), since nothing uses it. What we prove and use is the strip bound
+\eqref{eq:intro-C1}, which allows growth like $e^{\pi|\Re z|/2}$ along horizontal lines in the strip; no bound on the exponential type of $H$ is used or claimed.
+
+\emph{Not claimed.} We do not prove RH, nor that admissible pairs exist; by Corollary~\ref{cor:main-RH} each of these is equivalent to RH. We do
+not claim that $\kstar$ is attained or that $\kstar=0$ unconditionally, that $\kOPS=0$ implies RH, that the integer-critical function is
+unique, or anything about the convergence of the exact Hermite family of Part~I or of other interpolation schemes. The paper has not yet been
+checked by a human expert (see the note on the first page and the AI-use statement).
+
+\subsection{Related work}
+
+\emph{Magic functions and contour integrals.} Viazovska's solution of the sphere packing problem in dimension $8$ \cite{Via17} and its
+extensions \cite{CKMRV17,CKMRV22} construct extremal functions for the linear programming bounds of Cohn and Elkies \cite{CE03} as $\sin^2$ times
+Laplace transforms of modular forms, through contour integrals; Cohn and Gon\c{c}alves \cite{CG19} gave a sign-uncertainty analogue, and
+Feigenbaum, Grabner and Hardin \cite{FGH21} studied the Fourier eigenfunctions of this type with prescribed zeros. In those settings positivity
+is either visible or certified by interval arithmetic; Lee \cite{Lee26} proves algebraically the positivity, on the imaginary axis, of a family of
+quasimodular forms that gives sign-uncertainty eigenfunctions of this type. Our
+input is a non-holomorphic eigenfunction of the Laplacian, with eigenvalue $\frac14$ and with its symmetric-square partners, rather than a
+holomorphic modular form, and Green's identity replaces Cauchy's theorem. Radchenko and Sun
+\cite{RS25} continue a Maass--Poincar\'e series in its spectral parameter to build Fourier interpolation bases; the Fourier interpolation basis of
+Bondarenko, Radchenko and Seip \cite{BRS} and the interpolation theorem of Radchenko and Viazovska \cite{RV19} are the analytic input of
+Theorem~\ref{thm:I-zerosupport}. Extremal problems of Fourier analysis attached to the explicit formula, mostly over band-limited test
+functions, are studied by Carneiro and coauthors, for instance for gaps between primes \cite{CMS19} and for the pair correlation of zeros
+\cite{CCLM17}.
+
+\emph{Niebur--Poincar\'e series and spectral derivatives.} Niebur \cite{Nie73} and Fay \cite{Fay77} introduced and expanded the series we use; the
+expansion with the constant $2$ is stated by Bringmann, Jorgenson and Smajlovi\'c \cite[\S2.4]{BJS25}, and we prove it from scratch
+(Lemma~\ref{lem:weyl}). Spectral derivatives of Poincar\'e and Eisenstein series at degenerate points appear in the theory of polyharmonic and
+sesquiharmonic Maass forms: Andersen, Lagarias and Rhoades \cite[Theorem~1.1]{ALR18} describe the scalar critical point $s=\frac12$, Bringmann,
+Diamantis and Raum \cite{BDR13} and Matsusaka \cite{Mat20} differentiate Poincar\'e series at harmonic points, and Alfes, Burban and Raum
+\cite{ABR25} combine symmetric powers with spectral derivatives, in the framework of Bernstein and Gelfand \cite{BG80}, at eigenvalue $0$.
+
+\emph{Period functions and self-reciprocity.} The closed Green form, the deformation of paths between cusps, and the Ferrar-type kernels of
+eigenvalue-$\frac14$ forms go back to Lewis and Zagier \cite{LZ01}; Bettin and Conrey \cite{BC13} treat the period function of the Eisenstein
+series at $s=\frac12$, whose Voronoi kernel is $4K_0-2\pi Y_0$. The self-reciprocity of our $\Gamma$-only function under the Koshliakov kernel,
+equivalent to the evenness of $H$, is the classical Mellin mechanism of Koshliakov, Dixit and others \cite{Kos29,Dix12,DM15,BDRZ17,DRRZ16}.
+
+\emph{What is new.} We have not found the following in the literature we searched: the function of
+Theorem~\ref{thm:main-object} and its coefficients; the double-root lift of a spectral derivative of a Niebur--Poincar\'e series to an exact
+eigenfunction of eigenvalue $\frac14$, with its symmetric-square partner; the Green-flux contour lift with this non-holomorphic input; the positivity of the
+$a_n$ and of $H$; and the resulting exact magic function for the explicit formula, which gives the bound $\kstar\le\kOPS\le0$. Each ingredient
+has the precedents just listed, and the search covered only literature reachable through standard bibliographic databases.
+
+\emph{History.} The function was found in two steps. Numerical interpolation at the integer nodes suggested that a $\Gamma$-only
+integer-critical function exists, with Fourier side of the form $\sin^2(\pi x)\sqrt x\sum_nb_nK_0(4\pi\sqrt{nx})$; the canonical interpolants only
+semi-converge, so they do not define it. The coefficients were then recognised, numerically, as those of the eigenvalue-$\frac14$
+eigenfunction of Section~\ref{sec:automorphic}, and the proofs below were written for that function. No step of the proofs uses these computations.
+
+\subsection{Organisation and notation}
+
+Section~\ref{sec:setting} recalls the setting and the results of Part~I that are used, with full statements. Section~\ref{sec:reduction} proves
+the reduction, Section~\ref{sec:automorphic} constructs the automorphic input, Section~\ref{sec:lift} the lift, and Sections~\ref{sec:fourier}
+and~\ref{sec:physical} prove positivity. Section~\ref{sec:assembly} proves the main results, and Section~\ref{sec:remarks} discusses other
+archimedean data and open questions. Appendix~\ref{app:cert} describes the certificates and Appendix~\ref{app:bessel} the Bessel-function bounds.
+We use $x=e^{2\pi\xi}$ throughout, so that the node $\xin n=\log n/2\pi$ is $x=n$ and the gap $[\xin2,\infty)$ is $x\ge2$; $\tau=u+iv$ is the variable
+on the upper half-plane $\HH$; and $\GR(s)=\pi^{-s/2}\Gamma(s/2)$.

@@ -1,0 +1,40 @@
+%======================================================================
+\section{Remarks and open questions}\label{sec:remarks}
+%======================================================================
+
+\subsection{Other archimedean data}
+
+The reduction of Section~\ref{sec:reduction} uses only that the Dirichlet coefficients of $\zeta^2$ are non-negative and supported on the
+integers, a set closed under multiplication. The Dedekind zeta functions of $\QQ(\sqrt5)$ and $\QQ(\sqrt{-3})$, with the Gamma factors $\GR^2$ and
+$\GC$, share this property, so an analogue of the decoupling holds for their squares; we do not write it out. An analogue of the $\Gamma$-only
+integer-critical function for those data would then give an exact magic function, hence slack $\le0$. But Part~I, Proposition~5.11, certifies
+strictly positive slack for both fields, at the gap $\xin2$ and at their own gaps ($\kstar\ge1.64\cdot10^{-5}$ and $\kstar\ge1.50\cdot10^{-4}$). So,
+granted the decoupling, no such analogue exists for them, and the existence statement of this paper is specific to the data of $\zeta$. In the
+construction this specificity is visible in the fit between the Gamma factor $\GR$, the conductor $1$ and the lattice $\ZZ$: the kernel
+$K_0(4\pi\sqrt{nx})$ comes from Whittaker functions of eigenvalue $\frac14$ for $\mathrm{SL}_2(\ZZ)$, and $\sin^2(\pi x)$ from a second difference
+with step $1$.
+
+\subsection{Consequences for the questions of Part I}
+
+With Theorems~\ref{thm:main-S} and~\ref{thm:main-U}, the uniqueness questions left open in Part~I, \S6.3 (non-integer zero weights, extra
+prime-side mass together with extra zeros, infinitely many extra zeros without a summability condition) are settled, since every admissible pair
+is $\pz$. Part~I asked whether \condU\ forces an exact magic function without spurious zeros; the function $F$ of Theorem~\ref{thm:main-S} is one,
+with $Z(F)=\Zz$. The existence statement \condE\ without RH, the last question of Part~I, is equivalent to RH by Corollary~\ref{cor:main-RH}.
+Part~I, Corollary~3.12, characterised \condS\ by atomicity of the admissible zero measures; under RH there is now only one admissible pair.
+
+\subsection{What remains open}
+
+\begin{enumerate}[label=(\arabic*),leftmargin=*]
+\item \emph{RH}, equivalently \condE, equivalently $\kstar=0$ (Corollary~\ref{cor:main-RH}).
+\item \emph{Uniqueness of the integer-critical function.} We do not know whether $H$ is the only even function in $\Wc_\delta$, with $H(0)=1$, whose
+$\Gamma$-only transform vanishes at all integers $\ge2$ and is non-negative beyond the gap.
+\item \emph{The prime-power family of Part~I.} Whether the exact Hermite family $\Xi^2P_J(t^2)$ of Part~I converges, and to what, is open
+(Part~I, Conjecture~6.1). The transform $\hF$ of our function vanishes doubly at $\xin n$ for all integers $n\ge2$, not only at the prime powers, and $F$ is not obtained
+as a limit.
+Canonical polynomial interpolants at the integer nodes approach it numerically and then diverge.
+\item \emph{A conceptual proof of positivity.} The positivity of $H$ for $|t|<8$ rests on a certified computation, as did the original
+proofs of the corresponding statements for the magic functions of sphere packing \cite{Via17,CKMRV17,CKMRV22}. Remark~\ref{rem:negctl} shows that it depends on the
+arithmetic of the Kloosterman terms: it fails if only the term $c=1$ is kept. (This concerns the positivity of $H$; the positivity of the $a_n$
+holds for every $n$ by Theorem~\ref{thm:an-positive}.)
+\item \emph{Other Gamma factors and lattices.} Which archimedean data admit an exact magic function, and through which automorphic objects?
+\end{enumerate}

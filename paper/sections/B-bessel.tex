@@ -1,0 +1,112 @@
+%======================================================================
+\section{Bounds for Bessel functions and their order derivatives}\label{app:bessel}
+%======================================================================
+
+We collect the bounds for $\Idot=\partial_\mu I_\mu|_{\mu=2}$ and $\Jdot=\partial_\mu J_\mu|_{\mu=2}$ used in Sections~\ref{sec:automorphic}
+and~\ref{sec:fourier}. Throughout $w>0$, $\ee(w)=e^w/\sqrt{2\pi w}$, $\psi(3)=\frac32-\gamma_E=0.92278\ldots$, $\kappa_1=1+e/3$ and $\kappa_2=2e/9$.
+
+\begin{lemma}[Ascending series]\label{lem:dot-series}
+With $t_k(w):=(w/2)^{2k+2}/(k!\,(k+2)!)$,
+\[
+\Idot(w)=\sum_{k\ge0}t_k(w)\big[\log\tfrac w2-\psi(k+3)\big],\qquad \Jdot(w)=\sum_{k\ge0}(-1)^kt_k(w)\big[\log\tfrac w2-\psi(k+3)\big].
+\]
+\end{lemma}
+
+\begin{proof}
+Differentiate the series $I_\mu(w)=\sum_k(w/2)^{2k+\mu}/(k!\Gamma(k+\mu+1))$ and $J_\mu(w)=\sum_k(-1)^k(w/2)^{2k+\mu}/(k!\Gamma(k+\mu+1))$
+\cite[10.25.2, 10.2.2]{DLMF} termwise in $\mu$ (they converge locally uniformly in $\mu$), and put $\mu=2$.
+\end{proof}
+
+\begin{lemma}[Small argument]\label{lem:small-w}
+Let $0<w\le2$, $v:=w^2/4$ and $L:=\log(2/w)\ge0$. Then
+\begin{enumerate}[label=\textup{(\alph*)}]
+\item $\Idot(w)<0$ and $|\Idot(w)|\ge\frac{w^2}8(L+\psi(3))$;
+\item $|\Idot(w)|,|\Jdot(w)|\le B(w):=\frac{w^2}8\big[(L+\psi(3))(1+\frac v3e^v)+\frac v9(1+v)e^v\big]$;
+\item $B(w)\le\frac{w^2}8[\kappa_1(L+\psi(3))+\kappa_2]$.
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+Every term of the series for $\Idot$ is negative, since $\log\frac w2-\psi(k+3)=-(L+\psi(k+3))$; the term $k=0$ gives (a). Both series are bounded
+in absolute value by $\sum_kt_k(L+\psi(k+3))$, with $t_k=\frac v2\cdot\frac{2v^k}{k!(k+2)!}$. For $k\ge1$, $2/(k!(k+2)!)\le1/(3(k-1)!)$, so
+$\sum_k2v^k/(k!(k+2)!)\le1+\frac v3e^v$; and $\psi(k+3)-\psi(3)\le k/3$, so $\sum_k\frac{2v^k}{k!(k+2)!}(\psi(k+3)-\psi(3))\le\frac19\sum_{k\ge1}\frac{kv^k}{(k-1)!}=\frac v9(1+v)e^v$.
+This gives (b), and $v\le1$ gives (c).
+\end{proof}
+
+\begin{lemma}[Uniform bounds]\label{lem:dotbounds}\label{lem:Jdot-uniform}
+For every $w>0$:
+\begin{enumerate}[label=\textup{(\alph*)}]
+\item $|\Jdot(w)|\le\frac{\pi+1}2$;
+\item $|\Idot(w)|\le e^w+\frac12$;
+\item if $w\le2$, then $|\Idot(w)|,|\Jdot(w)|\le\frac{w^2}8e^{w^2/4}\big[\log\frac2w+\psi(3)+\frac{w^2}{12}\big]$.
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+(a) By Schl\"afli's integral \cite[10.9.6]{DLMF},
+\[
+J_\mu(w)=\frac1\pi\int_0^\pi\cos(\mu\theta-w\sin\theta)\dd\theta-\frac{\sin\mu\pi}\pi\int_0^\infty e^{-w\sinh t-\mu t}\dd t .
+\]
+Differentiating at $\mu=2$ (the integrands are $C^1$ in $\mu$ and dominated uniformly near $\mu=2$),
+$\Jdot(w)=-\frac1\pi\int_0^\pi\theta\sin(2\theta-w\sin\theta)\dd\theta-\int_0^\infty e^{-w\sinh t-2t}\dd t$, which is at most $\frac\pi2+\frac12$ in absolute value.
+(b) Likewise from
+\[
+I_\mu(w)=\frac1\pi\int_0^\pi e^{w\cos\theta}\cos\mu\theta\dd\theta-\frac{\sin\mu\pi}\pi\int_0^\infty e^{-w\cosh t-\mu t}\dd t
+\]
+\cite[10.32.4]{DLMF}:
+$|\Idot(w)|\le\frac{e^w}\pi\int_0^\pi\theta|\sin2\theta|\dd\theta+\frac12=e^w+\frac12$. (c) In the bound
+$\sum_kt_k(L+\psi(k+3))$ use $(k+2)!\ge2k!$, $\psi(k+3)\le\psi(3)+\frac k3$, $\sum_kv^k/k!^2\le e^v$ and $\sum_kkv^k/k!^2\le ve^v$.
+\end{proof}
+
+\begin{lemma}[Inequalities for $I_0,I_1,K_2$]\label{lem:IK}
+For $w>0$:
+\textup{(a)} $I_1(w)\le\ee(w)$;
+\textup{(b)} $I_1(w)\ge\ee(w)(1-\frac3{8w}-\frac{15}{32w^2})$;
+\textup{(c)} $0<I_0(w)-I_1(w)\le\frac{\pi^3}{16}\,\ee(w)/w$;
+\textup{(d)} $K_2(w)\le2/w^2$.
+\end{lemma}
+
+\begin{proof}
+(a), (b): by \cite[10.32.2]{DLMF}, $I_1(w)=\frac w\pi\int_{-1}^1\sqrt{1-t^2}e^{wt}\dd t$, and $t=1-s/w$ gives
+$I_1(w)=\frac{\sqrt2e^w}{\pi\sqrt w}\int_0^{2w}\sqrt s\sqrt{1-s/2w}\,e^{-s}\dd s$. For (a) use $\sqrt{1-x}\le1$ and $\int_0^\infty\sqrt se^{-s}\dd s=\frac{\sqrt\pi}2$.
+For (b), with $x=s/2w$, $\sqrt{1-x}\ge(1-x)(1+\frac x2)=1-\frac x2-\frac{x^2}2$ on $[0,1]$ (equivalent to $1-\frac34x^2-\frac14x^3\le1$), and
+the right side is $\le0$ for $x\ge1$; so extending the integral to $[0,\infty)$ only decreases it, and
+$\int_0^\infty\sqrt s(1-\frac s{4w}-\frac{s^2}{8w^2})e^{-s}\dd s=\frac{\sqrt\pi}2(1-\frac3{8w}-\frac{15}{32w^2})$.
+(c) By \cite[10.32.3]{DLMF}, $I_0-I_1=\frac1\pi\int_0^\pi e^{w\cos\theta}(1-\cos\theta)\dd\theta>0$; with $1-\cos\theta\le\theta^2/2$ and
+$\cos\theta\le1-2\theta^2/\pi^2$ on $[0,\pi]$, $I_0-I_1\le\frac{e^w}{2\pi}\int_0^\infty\theta^2e^{-2w\theta^2/\pi^2}\dd\theta=\frac{\pi^3}{16}\ee(w)/w$.
+(d) $(w^2K_2(w))'=-w^2K_1(w)<0$ and $w^2K_2(w)\to2$ as $w\to0^+$ \cite[10.29.4, 10.30.2]{DLMF}.
+\end{proof}
+
+\begin{lemma}[The order derivative $\Idot$]\label{lem:Idot}
+\begin{enumerate}[label=\textup{(\alph*)}]
+\item $-\Idot(w)=K_2(w)+\frac2wI_1(w)-\frac2{w^2}I_0(w)$.
+\item $-\Idot(w)>0$ for every $w>0$.
+\item For $w\ge1$: $\frac2w\ee(w)\lambda_0(w)\le-\Idot(w)\le\frac2{w^2}+\frac2w(1-\frac1w)\ee(w)$, with $\lambda_0$ as in Section~\ref{sec:fourier}.
+\item For $w\ge2$: $|\Idot(w)|\le\frac12+\frac2w\ee(w)$.
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+(a) is Lemma~\ref{lem:bessel-basic}(c). (b) For $w\le2$ use Lemma~\ref{lem:small-w}(a). For $w\ge2$, the series give
+$wI_1(w)-I_0(w)=-1+\sum_{j\ge1}(2j-1)v^j/j!^2\ge v-1\ge0$ with $v=w^2/4\ge1$, and $K_2>0$. (c) Write
+$-\Idot=K_2+\frac2w(1-\frac1w)I_1-\frac2{w^2}(I_0-I_1)$. For the upper bound use $K_2\le2/w^2$, $I_1\le\ee$ and $I_0-I_1>0$; for the lower bound
+drop $K_2>0$ and use Lemma~\ref{lem:IK}(b),(c), noting that $1-\frac3{8w}-\frac{15}{32w^2}>0$ for $w\ge1$. (d) follows from (b), (c) and
+$2/w^2\le\frac12$.
+\end{proof}
+
+\begin{lemma}[The coefficients at $\nu=1$]\label{lem:alpha}
+For every $n\ge1$, $1.610\,\ee(z_n)\le-A_n(1)\le2.325\,\ee(z_n)$, where $z_n=4\pi\sqrt n$.
+\end{lemma}
+
+\begin{proof}
+As in the proof of Theorem~\ref{thm:an-positive}, with $J_2$ and $I_2$ in place of $\Jdot$ and $\Idot$. The term $c=1$ of $-A_n(1)/2$ is
+$I_2(z)-J_2(z)$, and $|J_2|\le1$ \cite[10.14.1]{DLMF}, $0<I_2=I_0-\frac2wI_1\le I_0\le\ee(w)(1+\frac{\pi^3}{16w})$, and
+$I_2\ge(1-\frac2w)\ee(w)(1-\frac3{8w}-\frac{15}{32w^2})$ for $w\ge2$, by Lemma~\ref{lem:IK}. For $c=2$ and for $3\le c\le z/2$ we have
+$|J_2|+I_2\le1+(1+\frac{\pi^3}{32})\ee(w)$ with $w=z/c\ge2$, and for $c>z/2$, $|J_2(w)|+I_2(w)\le\kappa_1w^2/4$ (from the series, as in
+Lemma~\ref{lem:small-w}) together with $\sum_{c>z/2}(z/c)^2\le4+2z$. The resulting bound $|A_n(1)-2(J_2-I_2)(z)|\le2\ee(z)\varrho_\alpha(z)$, with
+$\varrho_\alpha(z):=[\frac12(1+(1+\frac{\pi^3}{32})\ee(\frac z2))+\frac z2(1+(1+\frac{\pi^3}{32})\ee(\frac z3))+\kappa_1(1+\frac z2)]/\ee(z)$ decreasing on
+$[4\pi,\infty)$, gives the claim after evaluating the monotone envelopes at $z=4\pi$ ($\varrho_\alpha(4\pi)=0.0082$).
+\end{proof}
+
+Lemma~\ref{lem:alpha} and $|A_n'(1)|=4\Ss_n\le4\abar_n/n$ (Theorem~\ref{thm:an-positive} and the proof of Theorem~\ref{thm:an-bounds}) are used only as tail bounds in the certificate for
+$C$ (Appendix~\ref{app:cert-C}).

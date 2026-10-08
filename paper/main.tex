@@ -1,0 +1,112 @@
+\documentclass[11pt]{amsart}
+\usepackage[margin=1.1in]{geometry}
+\usepackage{amsmath,amssymb,amsthm,mathtools}
+\usepackage{lmodern}
+\usepackage[mathscr]{eucal}
+\usepackage{booktabs,enumitem,xcolor,array,graphicx}
+\usepackage[colorlinks=true,linkcolor=blue!50!black,citecolor=green!40!black,urlcolor=blue!60!black]{hyperref}
+\hypersetup{
+  pdftitle={Sharpness and uniqueness for positive solutions of the explicit formula for the Riemann zeta function},
+  pdfauthor={Nic Johns},
+  pdfkeywords={Riemann zeta function, Weil explicit formula, positivity, linear programming, magic function, Maass forms, Niebur-Poincare series, Kloosterman sums, conical functions, computer-assisted proof}
+}
+
+\setlength{\emergencystretch}{2.5em}
+\input{macros}
+
+% ---------------------------------------------------------------- environments
+% theorem/proposition/lemma/corollary: proved in the paper (possibly computer-assisted, with the
+% computation and ancillary file named).  Results restated from Part I carry Part I's number (Itheorem etc. below).
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{corollary}[theorem]{Corollary}
+\newtheorem{conjecture}[theorem]{Conjecture}
+% Main results: Theorem 1, Theorem 2, Corollary 3, Theorem 4 (one counter).
+\newtheorem{mainthm}{Theorem}
+\newtheorem{maincor}[mainthm]{Corollary}
+% Lettered conjectures of Part I: \begin{lconj}{U} ... prints "Conjecture U".
+\newtheorem{lconjinner}{Conjecture}
+\newenvironment{lconj}[1]{\renewcommand{\thelconjinner}{#1}\begin{lconjinner}}{\end{lconjinner}}
+% Results restated from Part I keep Part I's number with the prefix I: \begin{Itheorem}{3.6}[Zero-side support]
+% prints "Theorem I.3.6 (Zero-side support)", and \ref prints "I.3.6".  One shared counter keeps the link anchors unique.
+\newtheorem{Ithminner}{Theorem}
+\newtheorem{Ileminner}[Ithminner]{Lemma}
+\newtheorem{Icorinner}[Ithminner]{Corollary}
+\newcommand{\Inumber}{}
+\renewcommand{\theIthminner}{\Inumber}
+\newenvironment{Itheorem}[1]{\renewcommand{\Inumber}{I.#1}\begin{Ithminner}}{\end{Ithminner}}
+\newenvironment{Ilemma}[1]{\renewcommand{\Inumber}{I.#1}\begin{Ileminner}}{\end{Ileminner}}
+\newenvironment{Icorollary}[1]{\renewcommand{\Inumber}{I.#1}\begin{Icorinner}}{\end{Icorinner}}
+\theoremstyle{definition}
+\newtheorem{definition}[theorem]{Definition}
+\newtheorem{Idefinner}[Ithminner]{Definition}
+\newenvironment{Idefinition}[1]{\renewcommand{\Inumber}{I.#1}\begin{Idefinner}}{\end{Idefinner}}
+\theoremstyle{remark}
+\newtheorem{remark}[theorem]{Remark}
+\numberwithin{equation}{section}
+
+% Section files; paths are relative to the top-level directory.
+\newcommand{\inputsection}[1]{\input{sections/#1}}
+
+\title[Sharpness and uniqueness for the explicit formula]{Sharpness and uniqueness for positive solutions\\ of the explicit formula
+for $\zeta(s)$}
+
+\author{Nic Johns}
+\email{njohns@gmail.com}
+
+\thanks{This is Part~II of a series. Part~I is \cite{Joh26}, \texttt{doi:10.5281/zenodo.23217537}; we refer to it as Part~I throughout.}
+
+\date{October 2026}
+
+\subjclass[2020]{Primary 11M26; Secondary 11F30, 11F72, 11L05, 33C10, 42A38, 65G20}
+\keywords{Riemann zeta function, Weil explicit formula, positivity, linear programming, magic function, Maass forms, Niebur--Poincar\'e series, Kloosterman sums, conical functions, computer-assisted proof}
+
+\begin{document}
+
+\begin{abstract}
+Weil's explicit formula for $\zeta(s)$ equates a functional $\Arch(F)$, which depends only on the archimedean data of $\zeta$, with sums over
+the zeros and over the prime powers. We construct an explicit even function $F=\Xi^2H$, with $H$ entire and positive on $\RR$, such that
+$F\ge0$ and $\hF\ge0$ on $\RR$, $\hF$ vanishes at $\log n/2\pi$ for every integer $n\ge2$, and $\Arch(F)=0$. Since $\Xi$ vanishes at every
+non-trivial zero, on or off the critical line, no information about the zeros is used. $F$ is an exact magic function, in the sense of the
+sphere-packing bounds of Cohn--Elkies and Viazovska, for the linear programme of Odlyzko, Poitou and Serre: for the data of $\zeta$ the
+programme has no positive slack, so the method is sharp, and $F$ is a minimiser under RH. With a support theorem of Part~I, every pair of
+positive measures satisfying the formula, on the zero side and on the prime side beyond $\log2/2\pi$, is then $\zeta$'s own. This resolves
+Conjectures~S and~U of Part~I. $H$ comes from an eigenvalue-$\frac14$ eigenfunction of the hyperbolic Laplacian through a contour argument of
+Viazovska's type, with Green's identity in place of Cauchy's theorem; its positivity is partly computer-assisted. We do not prove RH; by
+these results it is equivalent to the existence of such a pair.
+\end{abstract}
+
+\maketitle
+
+\begin{center}
+\begin{minipage}{0.86\textwidth}
+\small\itshape This paper was produced by AI agents, mainly Anthropic's Claude with supplementary assistance from OpenAI's Astra, under the
+author's direction; it has not yet been checked by a human expert.
+\end{minipage}
+\end{center}
+
+\setcounter{tocdepth}{1}
+\tableofcontents
+
+\inputsection{01-intro}
+\inputsection{02-setting}
+\inputsection{03-reduction}
+\inputsection{04-automorphic}
+\inputsection{05-lift}
+\inputsection{06-fourier}
+\inputsection{07-physical}
+\inputsection{08-assembly}
+\inputsection{09-remarks}
+
+\section*{AI-use statement}
+\inputsection{ai-statement}
+
+\appendix
+\inputsection{A-certificates}
+\inputsection{B-bessel}
+
+\bibliographystyle{production/amsplain-doi}
+\bibliography{refs}
+
+\end{document}

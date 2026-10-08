@@ -1,0 +1,338 @@
+%======================================================================
+\section{The Green-flux lift}\label{sec:lift}
+%======================================================================
+
+In this section $\Pt$, $\Phi=\Pt\circ S$ and $D$ are as in Section~\ref{sec:automorphic}, and
+\begin{equation}\label{eq:f}
+f:=\partial_u\Pt,\qquad f(u+iv)=\sum_{n\ge1}2\pi n\beta_n\sqrt vK_0(2\pi nv)\cos(2\pi nu).
+\end{equation}
+By Proposition~\ref{prop:Pt}, $f$ is even in $u$, $1$-periodic, and $|\Pt(u+iv)|+|\nabla\Pt(u+iv)|+|f(u+iv)|\le C_0e^{-2\pi v}$ for $v\ge\frac12$;
+by \eqref{eq:D-cusp0}, $D(v)=v^{-2}f(i/v)$. We lift $\Pt$ to a function of $x>0$ by integrating a Green form against a family of Whittaker
+functions, in the manner of the contour integrals of Viazovska \cite{Via17}, Cohn--Kumar--Miller--Radchenko--Viazovska \cite{CKMRV17,CKMRV22}
+and Cohn--Gon\c{c}alves \cite{CG19}; since $\Pt$ is not holomorphic, Green's identity replaces Cauchy's theorem.
+
+\subsection{The kernel}
+
+For $\tau=u+iv\in\HH$ and $\Re x>0$ (principal square root) put
+\begin{equation}\label{eq:kernel}
+k_\tau(x):=\sqrt{xv}\,K_0(2\pi xv)\cos(2\pi ux).
+\end{equation}
+\begin{enumerate}[label=\textup{(K\arabic*)}]
+\item For fixed $x$, $\Delta_\tau k_\tau(x)=\frac14k_\tau(x)$, since $\sqrt vK_0(2\pi xv)e^{\pm2\pi iux}$ are Whittaker functions of eigenvalue $\frac14$.
+\item With $(m_{-1},m_0,m_1)=(1,-2,1)$: $\sum_cm_ck_{\tau+c}(x)=-4\sin^2(\pi x)\,k_\tau(x)$.
+\item $k_{\lambda\tau}(x)=k_\tau(\lambda x)$ for $\lambda>0$, and $k_{-\bar\tau}(x)=k_\tau(x)$.
+\item For real $\sigma>-\frac12$, with $\gz(w):=\GR(w+\frac12)^2=\pi^{-w-1/2}\Gamma(\frac{w+1/2}2)^2$,
+$\int_0^\infty|k_\tau(x)|x^{\sigma-1}\dd x\le\frac14\gz(\sigma)v^{-\sigma}$, and $\int_0^\infty|\nabla_\tau k_\tau(x)|x^{\sigma-1}\dd x\le c_1(\sigma)v^{-\sigma-1}$ with
+$c_1(\sigma)<\infty$.
+\end{enumerate}
+(K4) follows from $|k_\tau(x)|\le\sqrt{xv}K_0(2\pi xv)$, the analogous bounds for the derivatives, and
+$\int_0^\infty y^{\mu-1}K_\nu(2\pi y)\dd y=\frac14\pi^{-\mu}\Gamma(\frac{\mu-\nu}2)\Gamma(\frac{\mu+\nu}2)$ \cite[10.43.19]{DLMF}.
+
+\begin{lemma}[The Mellin transform of the kernel]\label{lem:kernel-mellin}
+For $\Re w>-\frac12$ put $m_\tau(w):=\gz(w)^{-1}\int_0^\infty k_\tau(x)x^{w-1}\dd x$. Then:
+\begin{enumerate}[label=\textup{(\roman*)}]
+\item $m_{iv}(w)=\frac14v^{-w}$;
+\item $\tau\mapsto m_\tau(w)$ is an eigenfunction of $\Delta$ with eigenvalue $\frac14$, even in $u$;
+\item writing $\tau=re^{i\theta}$, $m_\tau(w)=r^{-w}f_w(\theta)$, where $f_w$ solves
+\begin{equation}\label{eq:polar-ode}
+f_w''(\theta)+\Big(w^2+\frac1{4\sin^2\theta}\Big)f_w(\theta)=0\qquad(0<\theta<\pi),\qquad f_w(\pi-\theta)=f_w(\theta),\qquad f_w(\tfrac\pi2)=\tfrac14 ;
+\end{equation}
+\item for $|\Re w|<\frac12$, $m_{S\tau}(w)=m_\tau(-w)$.
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+(i) $\int_0^\infty\sqrt xK_0(2\pi x)x^{w-1}\dd x=\frac14\gz(w)$ by \cite[10.43.19]{DLMF}, and $k_{iv}(x)=\sqrt{xv}K_0(2\pi xv)$. (ii) Differentiate under
+the integral (the second $\tau$-derivatives of $k_\tau(x)$ are bounded by $C(1+x^2)$ times the bounds of (K4), locally uniformly in $\tau$) and use
+(K1) and (K3). (iii) By (K3), $m_{re^{i\theta}}(w)=r^{-w}m_{e^{i\theta}}(w)$. In polar coordinates
+$\Delta=-\sin^2\theta(r^2\partial_r^2+r\partial_r+\partial_\theta^2)$, so (ii) gives the differential equation; $e^{i(\pi-\theta)}=-\overline{e^{i\theta}}$ and
+(K3) give the symmetry, and (i) gives the value at $\pi/2$. (iv) The equation \eqref{eq:polar-ode} depends on $w$ only through $w^2$ and is
+regular at $\theta=\frac\pi2$; its solutions with $f'(\frac\pi2)=0$ form a line, fixed by the value at $\frac\pi2$. For $|\Re w|<\frac12$ both
+$f_w$ and $f_{-w}$ are defined, symmetric and equal to $\frac14$ at $\frac\pi2$, so $f_w=f_{-w}$. Since $S(re^{i\theta})=r^{-1}e^{i(\pi-\theta)}$,
+$m_{S\tau}(w)=r^wf_w(\pi-\theta)=r^wf_{-w}(\theta)=m_\tau(-w)$.
+\end{proof}
+
+The one-sided kernel $\sqrt vK_0(2\pi xv)e^{2\pi iux}$ does not have property (iv) off the imaginary axis; only the even kernel \eqref{eq:kernel}
+is used.
+
+\subsection{The Green form and the four-path functional}
+
+For two eigenfunctions $F,g$ of $\Delta$ with eigenvalue $\frac14$ on an open set, put $\omega(F,g):=F\star dg-g\star dF$, where $\star du=dv$
+and $\star dv=-du$. Then $d\omega(F,g)=(F\Delta_0g-g\Delta_0F)\,du\wedge dv=0$, where $\Delta_0=\partial_u^2+\partial_v^2=-v^{-2}\Delta$. The
+Hodge star on $1$-forms is conformally invariant, so $\omega(F\circ\varphi,g\circ\varphi)=\varphi^*\omega(F,g)$ for every holomorphic $\varphi$. Along
+an oriented curve with unit tangent $\hat t=(t_u,t_v)$ and right normal $\hat n=(t_v,-t_u)$ we have $\star dF(\hat t)=\partial_{\hat n}F$; so
+\begin{equation}\label{eq:green-on-zero}
+\omega(F,g)=-g\,\partial_{\hat n}F\,ds\qquad\text{wherever $F=0$ on the curve,}
+\end{equation}
+and no derivative of $g$ appears.
+
+\emph{Paths and weights.} $\gamma_1$ is the arc of the unit circle from $-1$ to $i$, $\gamma_2$ the arc from $1$ to $i$, $\gamma_3$ the segment from
+$0$ to $i$, and $\gamma_4$ the ray from $i$ to $i\infty$. The weights are
+\[
+\Phi_1:=-\tfrac14\Phi(\cdot+1),\qquad\Phi_2:=-\tfrac14\Phi(\cdot-1),\qquad\Phi_3:=\tfrac12\Phi,\qquad\Phi_4:=-\tfrac12\Pt .
+\]
+For $Y\ge\frac12$ let $\tau_+(Y):=(Y^2-\frac14+iY)/(Y^2+\frac14)\in\gamma_2$ and $\tau_-(Y):=-\overline{\tau_+(Y)}\in\gamma_1$; then $|\tau_\pm|=1$,
+$\arg\tau_+(Y)=\theta(Y):=2\operatorname{arccot}(2Y)\in(0,\frac\pi2]$, $S\tau_\pm=\tau_\mp$, and $-1/(\tau_+(Y)-1)=\frac12+iY$.
+
+\begin{lemma}\label{lem:weights}
+$\Phi_j=0$ on $\gamma_j$ for $j=1,\dots,4$.
+\end{lemma}
+
+\begin{proof}
+$\gamma_3,\gamma_4\subset i\RR_+$, where $\Phi=\Pt=0$ (Propositions~\ref{prop:Pt}(c) and~\ref{prop:sym2}(a)). For $\tau=e^{i\theta}$,
+$-1/(\tau-1)=\frac12+\frac i2\cot\frac\theta2$ and $-1/(\tau+1)=-\frac12+\frac i2\tan\frac\theta2$; so $\Phi(\tau\mp1)=\Pt(\pm\frac12+iY)=0$ on the unit circle.
+\end{proof}
+
+\begin{lemma}[The four-path functional]\label{lem:four-path}
+For every function $g$ that is $C^1$ on a neighbourhood of $\gamma_1\cup\dots\cup\gamma_4$ and for which the integrals below converge
+absolutely,
+\begin{equation}\label{eq:four-path}
+\begin{split}
+\Lift[g]:=\sum_{j=1}^4\int_{\gamma_j}\omega(\Phi_j,g)={}&\frac12\int_1^\infty f(iY)\big[g(iY)+g(i/Y)\big]\dd Y\\
+&-\frac14\int_{1/2}^\infty f(\tfrac12+iY)\big[g(\tau_+(Y))+g(\tau_-(Y))\big]\dd Y .
+\end{split}
+\end{equation}
+For $g$ merely continuous on the paths we define $\Lift[g]$ by the right side. Moreover $\Lift[g\circ S]=\Lift[g]$ whenever both sides converge
+absolutely.
+\end{lemma}
+
+\begin{proof}
+By Lemma~\ref{lem:weights} and \eqref{eq:green-on-zero}, $\int_{\gamma_j}\omega(\Phi_j,g)=-\int_{\gamma_j}g\,\partial_{\hat n}\Phi_j\,ds$.
+On $\gamma_4$ ($\tau=iY$, $Y\ge1$, $\hat n=+\partial_u$) this is $\frac12\int_1^\infty f(iY)g(iY)\dd Y$. On $\gamma_3$ ($\tau=iv$, $0<v\le1$) it is
+$\frac12\int_0^1g(iv)D(v)\dd v=\frac12\int_1^\infty g(i/Y)f(iY)\dd Y$, by $D(v)=v^{-2}f(i/v)$. On $\gamma_2$ ($\tau=e^{i\theta}$, $\theta$ from $0$ to
+$\frac\pi2$, $\hat n$ the outward radial direction): $\Phi(\tau-1)=\Pt(\sigma(\tau))$ with $\sigma(\tau)=-1/(\tau-1)$ and
+$\sigma'(\tau)e^{i\theta}=-1/(4\sin^2\frac\theta2)$, which is real; so $\partial_r[\Phi(\tau-1)]=-f(\sigma(\tau))/(4\sin^2\frac\theta2)$ and
+$\partial_{\hat n}\Phi_2=f(\sigma)/(16\sin^2\frac\theta2)$. The substitution $Y=\frac12\cot\frac\theta2$, $\dd\theta/(4\sin^2\frac\theta2)=-\dd Y$, gives
+$-\frac14\int_{1/2}^\infty g(\tau_+(Y))f(\frac12+iY)\dd Y$. On $\gamma_1$ ($\theta$ from $\pi$ to $\frac\pi2$, $\hat n$ the inward radial direction)
+the same computation with $-1/(\tau+1)$, $\sigma'e^{i\theta}=1/(4\cos^2\frac\theta2)$, $Y=\frac12\tan\frac\theta2$ and $f(-\frac12+iY)=f(\frac12+iY)$
+gives $-\frac14\int_{1/2}^\infty g(\tau_-(Y))f(\frac12+iY)\dd Y$. Finally $S$ exchanges $iY$ and $i/Y$ and exchanges $\tau_+(Y)$ and $\tau_-(Y)$,
+and both brackets in \eqref{eq:four-path} are symmetric.
+\end{proof}
+
+\subsection{Class membership}
+
+Define, for $\Re x>0$,
+\begin{equation}\label{eq:GO}
+\GO(x):=\Lift[k_\cdot(x)]=\frac12\int_1^\infty f(iY)\big[k_{iY}(x)+k_{i/Y}(x)\big]\dd Y-\frac12\int_{1/2}^\infty f(\tfrac12+iY)\,k_{\tau_+(Y)}(x)\dd Y ,
+\end{equation}
+where the two arc terms coincide because $k_{-\bar\tau}=k_\tau$. Put $R_L(x):=-\frac1{2\pi^2(x^2-1)}-\frac2{\pi^2(x^2-1)^2}$.
+
+\begin{theorem}[The lift]\label{thm:lift}
+\begin{enumerate}[label=\textup{(\alph*)}]
+\item The integrals in \eqref{eq:GO} converge absolutely, locally uniformly on $\{\Re x>0\}$; $\GO$ is analytic there and real on $(0,\infty)$.
+\item For $x>1$, $\GO(x)=\sin^2(\pi x)\int_0^\infty D(v)\,k_{iv}(x)\dd v$.
+\item For $x>1$,
+\[
+\GO(x)=\pi\sin^2(\pi x)\sqrt x\sum_{n\ge1}\beta_nK_0(4\pi\sqrt{nx})=-16\pi^2\sin^2(\pi x)\sqrt x\sum_{n\ge1}a_nK_0(4\pi\sqrt{nx}),
+\]
+the series converging absolutely and locally uniformly on $\{\Re\sqrt x>1\}$.
+\item For $\Re x>0$, $\GO(x)=\sin^2(\pi x)\big[\sqrt xR_L(x)+\mathcal E(x)\big]$ with $\mathcal E(x):=\int_0^\infty D_{\rm rest}(v)k_{iv}(x)\dd v$
+analytic on $\Re x>0$ (the right side has a removable singularity at $x=1$). In particular $\GO(1)=-\frac12$.
+\item For $\sigma=\Re w>-\frac12$: $\int_0^\infty|\GO(x)|x^{\sigma-1}\dd x<\infty$ and $\int_0^\infty\GO(x)x^{w-1}\dd x=\gz(w)R(w)$ with
+$R(w):=\Lift[m_\cdot(w)]$, which is analytic on $\Re w>-\frac12$. For $|\Re w|<\frac12$, $R(-w)=R(w)$.
+\item $\GO(n)=\GO'(n)=0$ for every integer $n\ge2$.
+\end{enumerate}
+\end{theorem}
+
+\begin{proof}
+(a) On a compact set $K\subset\{\Re x>0\}$: $|\cos(2\pi ux)|\le C_K$ for $|u|\le1$, $|K_0(z)|\le C(1+|\log|z||)$ for $|z|\le1$ and
+$|K_0(z)|\le C_K|z|^{-1/2}e^{-\Re z}$ for $|z|\ge1$, $|\arg z|\le\frac\pi2-\eps_K$ \cite[10.40.2, 10.40.10]{DLMF}. On the paths
+$\Im(iY)=Y\ge1$, $\Im(i/Y)=1/Y$ and $\Im\tau_+(Y)=Y/(Y^2+\frac14)\in[\frac1{2Y},1]$, so $|k_\tau(x)|\le C_K(1+\log(1+Y))$ there, while
+$|f(iY)|,|f(\frac12+iY)|\le C_0e^{-2\pi Y}$. Dominated convergence gives (a).
+
+(b) Fix $x>1$. \emph{Rays.} For $c\in\{-1,0,1\}$ the function $\Phi(\cdot-c)$ vanishes on the ray $c+i\RR_+$, so by \eqref{eq:green-on-zero}
+$\int_{c+i\RR_+}\omega(\Phi(\cdot-c),k_\cdot(x))=\int_0^\infty k_{c+iv}(x)D(v)\dd v$, which converges absolutely because $|D(v)|\le Cv^{3/2}e^{2\pi v}$ for
+$v\ge1$ (by \eqref{eq:D-split}), $k_{iv}(x)=O(e^{-2\pi xv})$, and $D(v)=O(e^{-2\pi/v})$ as $v\to0$. As $k_{c+iv}(x)=\sqrt{xv}K_0(2\pi xv)\cos(2\pi cx)$,
+(K2) gives
+\begin{equation}\label{eq:three-ray}
+\sin^2(\pi x)\int_0^\infty D(v)k_{iv}(x)\dd v=-\frac14\sum_cm_c\int_{c+i\RR_+}\omega\big(\Phi(\cdot-c),k_\cdot(x)\big).
+\end{equation}
+
+\emph{Regions.} For $T>1$ and small $\eps>0$ let $\Omega_1:=\{0<\Re\tau<1,\ |\tau|>1,\ \eps<\Im\tau<T\}$ and $\Omega_{-1}:=-\overline{\Omega_1}$. On
+$\Omega_{\pm1}$ the form $\omega_{\pm1}:=\omega(\Phi(\cdot\mp1),k_\cdot(x))$ is closed, and Stokes' theorem gives, with all vertical segments
+oriented upwards,
+\begin{align*}
+\int_{1+i(\eps,T]}\omega_1&=\int_{\gamma_2}\omega_1+\int_{[i,iT]}\omega_1+\int_{h_1(T)}\omega_1+o(1),\\
+\int_{-1+i(\eps,T]}\omega_{-1}&=\int_{\gamma_1}\omega_{-1}+\int_{[i,iT]}\omega_{-1}+\int_{h_{-1}(T)}\omega_{-1}+o(1)
+\end{align*}
+as $\eps\to0$, where $h_{\pm1}(T)$ is the segment from $iT$ to $\pm1+iT$ and $o(1)$ is the contribution of the bottom cut $h_{\pm1}(\eps)$ near $\pm1$.
+
+\emph{Horn estimate} (at $+1$; $-1$ is symmetric). The map $\sigma(\tau)=-1/(\tau-1)$ sends the lines $\Re\tau=1$ and $|\tau|=1$ to $\Re\sigma=0$
+and $\Re\sigma=\frac12$. On the cut $\{u+i\eps:\sqrt{1-\eps^2}<u<1\}$ we have $|\tau-1|^2\le2\eps^2$, so $|\sigma|\ge1/(\sqrt2\eps)$ and
+$\Im\sigma\ge1/(2\eps)$ for $\eps\le\frac12$; hence $|\Phi(\tau-1)|=|\Pt(\sigma)|\le C_0e^{-\pi/\eps}$ and $|\nabla\Phi(\tau-1)|\le C_0\eps^{-2}e^{-\pi/\eps}$,
+while $|k_\tau(x)|+|\nabla k_\tau(x)|\le C_x\eps^{-1/2}(1+|\log\eps|)$ and the cut has length at most $\eps^2$. So the cut contributes
+$O(e^{-\pi/\eps})$, and the same estimates show that all integrands are super-exponentially small at $\tau=\pm1$.
+
+\emph{Connectors.} On $h_{\pm1}(T)$, $|\Phi(\tau\mp1)|+|\nabla\Phi(\tau\mp1)|\le C_\Phi T^2e^{2\pi T}$ (Proposition~\ref{prop:sym2}(f)) and
+$|k_\tau(x)|+|\nabla k_\tau(x)|\le C_x\sqrt Te^{-2\pi xT}$, so $\int_{h_{\pm1}(T)}\omega_{\pm1}=O(T^{5/2}e^{-2\pi(x-1)T})\to0$. The connectors and the
+convergence of the ray integrals in \eqref{eq:three-ray} are the only places where $x>1$ is used, and this cannot be avoided: $\Phi(\tau\pm1)$
+and $D$ grow like $ve^{2\pi v}$, by the growing modes of Proposition~\ref{prop:sym2}(d).
+
+\emph{Assembly.} The ray $c=0$ is $\gamma_3\cup[i,i\infty)$. Insert the three decompositions into \eqref{eq:three-ray}; the weights $-\frac14m_c$ turn
+$\omega(\Phi(\cdot\mp1),\cdot)$ on $\gamma_2,\gamma_1$ and $\omega(\Phi,\cdot)$ on $\gamma_3$ into $\omega(\Phi_j,\cdot)$, $j=2,1,3$. On $[i,iT]$ the three
+weights combine, by bilinearity and Proposition~\ref{prop:sym2}(b), to $-\frac14[\Phi(\cdot-1)-2\Phi+\Phi(\cdot+1)]=-\frac12\Pt=\Phi_4$. Letting
+$T\to\infty$ gives $\sum_j\int_{\gamma_j}\omega(\Phi_j,k_\cdot(x))=\GO(x)$.
+
+(c) By \eqref{eq:D-cusp0} and Lemma~\ref{lem:K0K0} below,
+$\sum_n2\pi n|\beta_n|\int_0^\infty v^{-5/2}K_0(2\pi n/v)\sqrt{xv}K_0(2\pi xv)\dd v=\pi\sqrt x\sum_n|\beta_n|K_0(4\pi\sqrt{nx})<\infty$ for $x>1$, since
+$|\beta_n|\le52ne^{4\pi\sqrt n}$ and $K_0(y)\le\sqrt{\pi/2y}\,e^{-y}$ \cite[\S10.40(ii)]{DLMF}. Tonelli's theorem allows termwise integration in (b). Only $|\beta_n|$ is used,
+not the sign of the $a_n$. The same bound gives local uniformity on $\{\Re\sqrt x>1\}$.
+
+(d) For $0<a<b$, $\int_0^\infty tI_0(at)K_0(bt)\dd t=1/(b^2-a^2)$: insert $I_0(at)=\sum_k(at/2)^{2k}/k!^2$ and
+$\int_0^\infty t^{2k+1}K_0(bt)\dd t=2^{2k}k!^2b^{-2k-2}$ \cite[10.43.19]{DLMF} (all terms positive). Differentiating in $a$,
+$\int_0^\infty t^2I_1(at)K_0(bt)\dd t=2a/(b^2-a^2)^2$. With \eqref{eq:D-split}, for $x>1$,
+$\int_0^\infty D_{\rm grow}(v)k_{iv}(x)\dd v=\sqrt x\,R_L(x)$. The function $\mathcal E$ is analytic on $\Re x>0$: on $v\ge1$ the integrand is at
+most $C(1+v)^{5/2}e^{-2\pi(1+\Re x)v}(1+|\log v|)$ locally uniformly in $x$, and on $(0,1]$ it is at most $Cv(1+|\log(|x|v)|)$. So
+$V(x):=\sin^2(\pi x)[\sqrt xR_L(x)+\mathcal E(x)]$ is analytic on $\Re x>0$ (the double pole of $R_L$ at $x=1$ is cancelled by $\sin^2$), and
+$V=\GO$ on $(1,\infty)$ by (b); by (a) and the identity theorem $V=\GO$ on $\Re x>0$. Near $x=1$, $\sqrt xR_L(x)=-\frac1{2\pi^2(x-1)^2}+O(1)$
+(the terms in $(x-1)^{-1}$ cancel) and $\sin^2(\pi x)=\pi^2(x-1)^2+O((x-1)^4)$; so $\GO(1)=-\frac12$.
+
+(e) Let $\sigma>-\frac12$. By (K4), $\int_0^\infty|k_\tau(x)|x^{\sigma-1}\dd x\le\frac14\gz(\sigma)(\Im\tau)^{-\sigma}$, and on the parametrised paths
+$(\Im\tau)^{-\sigma}\le2^{|\sigma|}\max(Y^\sigma,Y^{-\sigma})$, while $|f|\le C_0e^{-2\pi Y}$. So $\int_0^\infty\int_{\rm paths}|f||k_\tau(x)|x^{\sigma-1}\dd Y\dd x<\infty$.
+The theorems of Tonelli and Fubini give the absolute convergence and
+\[
+\int_0^\infty\GO(x)x^{w-1}\dd x=\Lift[\gz(w)m_\cdot(w)]=\gz(w)R(w),
+\]
+and $R$ is analytic by dominated convergence. For $|\Re w|<\frac12$, Lemma~\ref{lem:kernel-mellin}(iv) and the $S$-invariance in Lemma~\ref{lem:four-path} give
+$R(-w)=\Lift[m_\cdot(-w)]=\Lift[m_{S\cdot}(w)]=\Lift[m_\cdot(w)]=R(w)$.
+
+(f) By (c), on $(1,\infty)$ we have $\GO=\sin^2(\pi x)\,\widetilde L(x)$ with $\widetilde L$ analytic on a complex neighbourhood of $(1,\infty)$; at an
+integer $n\ge2$, $\sin^2(\pi x)$ has a double zero.
+\end{proof}
+
+\begin{lemma}\label{lem:K0K0}
+For $Z>0$, $\int_0^\infty K_0(Zt)K_0(Z/t)\dd t=(\pi/Z)K_0(2Z)$. Consequently, for $n\ge1$ and $x>0$,
+$\int_0^\infty v^{-2}K_0(2\pi n/v)K_0(2\pi xv)\dd v=K_0(4\pi\sqrt{nx})/(2n)$.
+\end{lemma}
+
+\begin{proof}
+Both sides of the first identity are smooth and decay exponentially in $Z$, so it suffices to compare Mellin transforms in $Z$ for $\Re w>1$.
+With $a=Zt$, $b=Z/t$ (so $\dd Z\dd t=\dd a\dd b/(2b)$), the left side has Mellin transform
+$\frac12M[K_0](\frac{w+1}2)M[K_0](\frac{w-1}2)$ with $M[K_0](s)=2^{s-2}\Gamma(s/2)^2$, which by the duplication formula \cite[5.5.5]{DLMF} equals
+$\frac\pi4\Gamma(\frac{w-1}2)^2$, the Mellin transform of $(\pi/Z)K_0(2Z)$. The second identity follows with $Z=2\pi\sqrt{nx}$, $v=\sqrt{n/x}\,w$ and
+$w\mapsto1/w$.
+\end{proof}
+
+We normalise by
+\begin{equation}\label{eq:Graw}
+\begin{gathered}
+\Gh_{\rm raw}:=-\frac{\GO}{16\pi^2},\qquad\text{so that}\\
+\Gh_{\rm raw}(x)=\sin^2(\pi x)\sqrt x\sum_{n\ge1}a_nK_0(4\pi\sqrt{nx})\quad(x>1),\qquad \Gh_{\rm raw}=\frac1{32\pi^2}\ \text{at }x=1.
+\end{gathered}
+\end{equation}
+In particular $\Gh_{\rm raw}(x)/\sin^2(\pi x)$ has a double pole at $x=1$, with leading coefficient $\frac1{32\pi^4}$ and zero residue, by (d);
+this is the shadow, in the $\Gamma$-only transform, of the evenness of the full transform $\hF$.
+
+\subsection{Small \texorpdfstring{$x$}{x}, entireness and the growth bound}
+
+\begin{lemma}[Small $x$]\label{lem:small-x}
+For $0<x<1$, $\GO(x)=\sqrt x\,[\varphi_1(x^2)+\varphi_2(x^2)\log x]$ with $\varphi_1,\varphi_2$ analytic on the unit disc and
+$\varphi_1(0)=\varphi_2(0)=0$. Consequently $(x\partial_x)^j\GO(x)=O_j(x^{5/2}(1+\log(1/x)))$ as $x\to0^+$, for every $j\ge0$.
+\end{lemma}
+
+\begin{proof}
+By Theorem~\ref{thm:lift}(d), $\GO=\sin^2(\pi x)[\sqrt xR_L(x)+\mathcal E(x)]$. Insert
+\[
+K_0(z)=\sum_{k\ge0}\frac{(z/2)^{2k}}{k!^2}\Big[h_k-\gamma_E-\log\frac z2\Big],\qquad h_k:=\sum_{j\le k}\frac1j,
+\]
+\cite[10.31.2]{DLMF} with $z=2\pi xv$ into $\mathcal E$. Termwise
+integration is justified by dominated convergence: $|D_{\rm rest}(v)|\le C_Dm(v)$ with $m(v)=\sqrt v$ on $(0,1]$ and $(1+v)^2e^{-2\pi v}$ on $(1,\infty)$,
+and $\sum_k(\pi xv)^{2k}k!^{-2}(h_k+\gamma_E+|\log(\pi xv)|)\le I_0(2\pi xv)(2+\log(1+\pi xv)+|\log(\pi xv)|)$, which is integrable against $m(v)\sqrt v$ for
+$0<x<1$. (With $y=\pi xv$, the weights $w_k=y^{2k}/k!^2$ have sum $I_0(2y)$ and mean $\sum_kkw_k/I_0(2y)=yI_1(2y)/I_0(2y)\le y$; as
+$h_k\le1+\log(1+k)$, $\gamma_E<1$ and $\log(1+k)$ is concave in $k$, Jensen's inequality gives the bound.) With $\vartheta_k:=\int_0^\infty D_{\rm rest}(v)v^{2k+1/2}\dd v$ and $\tilde\vartheta_k:=\int_0^\infty D_{\rm rest}(v)v^{2k+1/2}\log v\dd v$, which satisfy
+$|\vartheta_k|,|\tilde\vartheta_k|\le C(1+\Gamma(2k+\frac92)(2\pi)^{-2k}(1+\log(2k+5)))$,
+\[
+\mathcal E(x)/\sqrt x=\sum_{k\ge0}\frac{(\pi x)^{2k}}{k!^2}\big[(h_k-\gamma_E-\log\pi-\log x)\vartheta_k-\tilde\vartheta_k\big]\qquad(|x|<1),
+\]
+and the series converge for $|x|<1$, since $(2k)!/(4^kk!^2)\asymp k^{-1/2}$. This exhibits $\mathcal E(x)/\sqrt x$ as $\psi_1(x^2)+\psi_2(x^2)\log x$
+with $\psi_1,\psi_2$ analytic on the unit disc. Also $R_L$ is even and analytic on the unit disc. The factor $\sin^2(\pi x)$ is even, entire,
+and has a double zero at $0$. Multiplying out gives $\varphi_1,\varphi_2$ with $\varphi_i(0)=0$; the statement about $(x\partial_x)^j$ follows by
+termwise differentiation.
+\end{proof}
+
+The absence of constant terms (Proposition~\ref{prop:sym2}(e)) is used exactly here: it gives the exponential decay of $D_{\rm rest}$. A mode
+$e_1\sqrt v+e_2\sqrt v\log v$ in $E_1$ would add to $\GO$ a term $\sin^2(\pi x)x^{-3/2}(a+b\log x)\sim\pi^2\sqrt x(a+b\log x)$, and the
+corresponding $H$ would have poles at $t=\pm\frac i2$.
+
+\begin{lemma}\label{lem:R-entire}
+\begin{enumerate}[label=\textup{(\alph*)}]
+\item $\int_0^\infty\GO(x)x^{w-1}\dd x$ converges absolutely and is analytic for $\Re w>-\frac52$, and extends meromorphically to $\CC$ with at
+most double poles, all in $\{-\frac12-2k:k\ge1\}$.
+\item $R$ extends to an entire even function with $R(\frac12)=R'(\frac12)=R(-\frac12)=R'(-\frac12)=0$ and $R(\bar w)=\overline{R(w)}$.
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+(a) Split at $r\in(0,1)$. On $[r,\infty)$, $\GO$ is continuous and decays faster than any power (Theorem~\ref{thm:lift}(c)), so
+$\int_r^\infty$ is entire in $w$. On $(0,r]$, Lemma~\ref{lem:small-x} gives $\GO=\sum_{k\ge1}x^{2k+1/2}(c_k+d_k\log x)$ with
+$\sum_k(|c_k|+|d_k|)r^{2k}<\infty$, and integrating termwise gives a series of the functions $r^{w+2k+1/2}/(w+2k+\frac12)$ and
+$r^{w+2k+1/2}/(w+2k+\frac12)^2$ (times constants and $\log r$), which converges locally uniformly off $\{-\frac12-2k\}$. (b) $\gz$ has no zeros
+and has double poles exactly at $w=-\frac12-2k$, $k\ge0$. At $w=-\frac12$ the Mellin transform of $\GO$ is analytic, so $R$ has a double zero
+there; at $w=-\frac12-2k$, $k\ge1$, the poles cancel. So $R$ is entire. By Theorem~\ref{thm:lift}(e), $R(-w)=R(w)$ on $|\Re w|<\frac12$, hence on
+$\CC$; so the double zero at $-\frac12$ is also one at $\frac12$. Reality: $\GO$ is real on $(0,\infty)$ and $\gz(\bar w)=\overline{\gz(w)}$.
+\end{proof}
+
+\begin{definition}\label{def:Hraw}
+$H_{\rm raw}(t):=-\dfrac{R(it)}{8\pi^3(t^2+\frac14)^2}$.
+\end{definition}
+
+\begin{proposition}\label{prop:Hraw}
+\begin{enumerate}[label=\textup{(\alph*)}]
+\item $H_{\rm raw}$ is entire, even, and real on $\RR$.
+\item For every $\delta\in(0,1)$ there is $C_\delta$ with $|H_{\rm raw}(z)|\le C_\delta(1+|z|)^{-9+\delta}e^{\pi|\Re z|/2}$ on $\Strip_\delta$. In
+particular $H_{\rm raw}\in\Wc_\delta$ for every $\delta\in(0,1)$.
+\item The $\Gamma$-only transform of $H_{\rm raw}$ in the sense of \eqref{eq:GH} is $\Gh_{\rm raw}$: for every real $\xi$,
+$\int_\RR\gi(t)^2H_{\rm raw}(t)e^{-2\pi i\xi t}\dd t=\Gh_{\rm raw}(e^{2\pi\xi})$, the integral converging absolutely.
+\end{enumerate}
+\end{proposition}
+
+\begin{proof}
+Throughout, $s=\frac12+it$ and $w=s-\frac12=it$, so $(t^2+\frac14)^2=s^2(s-1)^2$.
+(a) $R$ is entire with double zeros at $w=\pm\frac12$ (Lemma~\ref{lem:R-entire}), and $s^2(s-1)^2$ has double zeros exactly at $w=\mp\frac12$; so
+$H_{\rm raw}$ is entire. Evenness is $R(-w)=R(w)$, and reality on $\RR$ follows from $R(it)=R(-it)=\overline{R(it)}$.
+
+(b) Put $\mathcal M(s):=\int_0^\infty\Gh_{\rm raw}(x)x^{s-3/2}\dd x=-\gz(s-\frac12)R(s-\frac12)/(16\pi^2)$. Since
+$\gi(t)^2=\frac14s^2(s-1)^2\gz(s-\frac12)$,
+\begin{equation}\label{eq:mellin-H}
+2\pi\gi(t)^2H_{\rm raw}(t)=\mathcal M(\tfrac12+it)\qquad\text{as meromorphic functions of }t.
+\end{equation}
+For $j\ge0$ and $\sigma>-2$ let $N_j(\sigma):=\int_0^\infty|(x\partial_x)^j\Gh_{\rm raw}(x)|x^{\sigma-3/2}\dd x$, finite by Lemma~\ref{lem:small-x} and the
+decay at infinity. In $y=\log x$, $\mathcal M(s)=\int_\RR\Gh_{\rm raw}(e^y)e^{(s-1/2)y}\dd y$; integrating by parts $j$ times (the boundary terms vanish
+for $\Re s>-2$ by Lemma~\ref{lem:small-x} and the decay at infinity) gives $|\mathcal M(s)|\le N_j(\Re s)|s-\frac12|^{-j}$. For $z\in\Strip_\delta$ put
+$s=\frac12+iz$; then $\Re s\in[-\delta,1+\delta]$ and $\Im s=\Re z$. Stirling's formula, uniformly in that range \cite[5.11.9]{DLMF}, gives
+$|\gi(z)|^2\ge c_\delta|\Re z|^{3+\Re s}e^{-\pi|\Re z|/2}$ for $|\Re z|\ge T_\delta$. With $j=6$,
+$|H_{\rm raw}(z)|\le(2\pi c_\delta)^{-1}\sup_{[-\delta,1+\delta]}N_6\cdot|\Re z|^{-9-\Re s}e^{\pi|\Re z|/2}$ for $|\Re z|\ge T_\delta$ ($N_6$ is convex in $\sigma$, so
+its supremum is attained at an endpoint); and on the compact rest of $\Strip_\delta$ the entire function $H_{\rm raw}$ is bounded.
+
+(c) On $\Re s=\frac12$, with $g(\xi):=\Gh_{\rm raw}(e^{2\pi\xi})$, $\mathcal M(\frac12+it)=2\pi\int_\RR g(\xi)e^{2\pi i\xi t}\dd\xi$. The function $g$ is
+continuous and integrable ($O(|\xi|e^{5\pi\xi})$ as $\xi\to-\infty$ by Lemma~\ref{lem:small-x}, super-exponentially small as $\xi\to+\infty$), so by
+\eqref{eq:mellin-H} $\gi^2H_{\rm raw}$ is its inverse Fourier transform; it is integrable by (b), and Fourier inversion gives the claim.
+\end{proof}
+
+\begin{remark}[Growth along the imaginary axis; not used]\label{rem:infinite-type}
+One can show that $H_{\rm raw}$ is entire of order $1$ but not of exponential type. For the second point: for real $w\to+\infty$ the Mellin
+integral of $\GO$ is dominated by
+large $x$, where $\GO=-16\pi^2\sin^2(\pi x)\sqrt x\sum_na_nK_0(4\pi\sqrt{nx})$ has one sign once the $a_n$ are known to be positive
+(Theorem~\ref{thm:an-positive}); this gives $|R(w)|\asymp\Gamma(w)(2\pi)^{-w}$ up to powers of $w$, hence
+$|H_{\rm raw}(iy)|=e^{y\log(y/2\pi e)+O(\log y)}$ as $y\to+\infty$. We do not write out the details of this sketch, or of the bound of order
+$1$, since nothing below uses them. What we prove
+and use about the growth of $H_{\rm raw}$ is the strip bound of Proposition~\ref{prop:Hraw}(b), which allows growth like $e^{\pi|\Re z|/2}$
+in the strip; on the real line, Theorem~\ref{thm:large-t} gives $H_{\rm raw}(t)\ge0.2554\,e^{0.6435|t|}/(2\pi^2(t^2+\frac14)^2)$ for $|t|\ge8$.
+\end{remark}
+
+\subsection{Integer zeros and a normalisation identity}
+
+\begin{proposition}\label{prop:C3}
+\begin{enumerate}[label=\textup{(\alph*)}]
+\item $\Gh_{\rm raw}(\xin n)=\partial_\xi\Gh_{\rm raw}(\xin n)=0$ for every integer $n\ge2$, and $\Gh_{\rm raw}(0)=\frac1{32\pi^2}$.
+\item $\displaystyle\int_\RR\Xi(t)^2H_{\rm raw}(t)\dd t=\frac1{32\pi^2}$.
+\end{enumerate}
+\end{proposition}
+
+\begin{proof}
+(a) is Theorem~\ref{thm:lift}(f),(d) and \eqref{eq:Graw}, since $x=e^{2\pi\xi}$ is a real-analytic change of variable. (b) By
+Proposition~\ref{prop:Hraw}, $H_{\rm raw}\in\Wc_\delta$ for $\delta<\frac12$, and its $\Gamma$-only transform is $\Gh_{\rm raw}$. Lemma~\ref{lem:voronoi}(c) at
+$\xi=0$ and (a) give $\int\Xi^2H_{\rm raw}=\sum_md(m)m^{-1/2}\Gh_{\rm raw}(\xin m)=\Gh_{\rm raw}(0)$.
+\end{proof}
+
+The identity (b) is exact and involves no normalising constant; it will fix the sign of the normalisation in Section~\ref{sec:assembly}.

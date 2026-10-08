@@ -1,0 +1,198 @@
+%======================================================================
+\section{The certificates}\label{app:cert}
+%======================================================================
+
+This appendix describes the four computer-assisted ingredients listed in Section~\ref{ssec:claims}. Each has a standalone script in the
+ancillary files, with its exact inputs pinned by SHA-256, the command that was run, and the log of a fresh run; the file \ancf{README.md} of
+the ancillary files lists the expected decisive output lines and the runtimes. Paths below are relative to the top directory of the
+ancillary files. In the scripts and logs the function $\Pi$ of Theorem~\ref{thm:F} is called \texttt{R}, $\Ax$ is \texttt{Phi}, $\Bx$ is \texttt{g},
+$\ck_t$ is \texttt{fhat\_t}, and the large-$|t|$ theorem and the window are called Theorem~L and Certificate~W.
+
+\emph{Conventions.} All bounds are computed in ball arithmetic (Arb \cite{Joh17}, through python-flint, version~0.9.0, built on FLINT
+\cite{FLINT}): every quantity is a midpoint--radius interval with outward rounding that contains the exact value, and every truncation, tail and
+quadrature error is bounded explicitly. Binary64 numbers are used only to choose parameters (cell centres, partitions, ellipse parameters),
+which are then used as the exact binary numbers they are. The modified Bessel function $K_0$ for real arguments is taken from the validated
+library of Part~I (\ancf{lib/besselk.py}, shipped byte-identical); Arb's own \texttt{bessel\_k} gives correct but very wide enclosures at
+moderate arguments and is not used for certified quantities. For complex arguments only the majorant $|K_\nu(w)|\le K_\nu(\Re w)$ ($\Re w>0$,
+$\nu=0,1$) is used, which follows from $K_\nu(w)=\int_0^\infty e^{-w\cosh s}\cosh(\nu s)\dd s$.
+
+\subsection{The coefficient enclosures}\label{app:cert-coeffs}
+
+\emph{Statement.} Certified balls for $a_n=n\Ss_n+\frac14\delta_{n1}$: for $n\le1500$ from the terms $c\le10^4$ ($n\le60$) or
+$c\le\max(600,\lceil4\pi\sqrt n\rceil+1)$ ($60<n\le1500$); for $n\le6$ from $c\le3\cdot10^5$; for $n\le2$ from $c\le6\cdot10^5$; in each case plus a
+rigorous bound for the remaining terms. The positivity certificates use $n\le300$ and the bound $|a_n|\le\abar_n$ beyond; with $c\le3\cdot10^5$,
+\[
+a_1=4581.370553408\pm6.9\cdot10^{-5},\qquad a_2=1025727.234918\pm2.7\cdot10^{-4},
+\]
+$a_3=62590223.689992\pm5.9\cdot10^{-4}$,
+and every $a_n$, $n\le1500$, is certified positive, in agreement with Theorem~\ref{thm:an-positive}.
+
+\emph{Method} (\ancf{coefficients/cert_an.py}, \ancf{coefficients/cert_small_n.py}, \ancf{coefficients/coefflib.py},
+\ancf{coefficients/kloost_fast.py}). For each prime power $q\le10^4$ the whole table $j\mapsto S(1,j;q)$ is obtained from one discrete Fourier
+transform in Arb, and composite moduli by twisted multiplicativity, $S(1,n;qr)=S(1,n\bar r^2;q)S(1,n\bar q^2;r)$ for $(q,r)=1$ (an elementary consequence of the Chinese
+remainder theorem). For prime powers $10^4<q\le6\cdot10^5$ the sums are computed with exact integer residues and a cosine table with a proved
+error at most $10^{-14}$, and the rounding of the summation is bounded by Higham's bound \cite{Hig02}; the proved error of each such sum, times its weight in
+$\Ss_n$, is below $10^{-16}$. The order derivatives $\Jdot,\Idot$ are evaluated from the series of Lemma~\ref{lem:dot-series} with a geometric
+tail bound for arguments $\le8$, and from the closed forms of Lemma~\ref{lem:bessel-basic}(c), with the validated $K_0,K_1$, beyond. The terms
+$c>X$ are bounded by the Weil--Estermann bound $|S(\pm1,n;c)|\le d(c)c^{1/2}$ \cite{Wei48,Est61} (see also \cite[Chapter~11]{IK04}), the small-argument
+bound of Lemma~\ref{lem:small-w}, and partial summation with $\sum_{c\le u}d(c)\le u(1+\log u)$. The stored balls are rounded outward. The
+three coefficient files read by the positivity certificates are in \ancf{coefficients/data/}; a fresh run of the scripts reproduces their
+certified numbers (\ancf{coefficients/compare_outputs.py}).
+
+\subsection{The window}\label{app:cert-W}
+
+\emph{Statement.} Theorem~\ref{thm:window}; script \ancf{positivity/run_window.py} (with \ancf{positivity/cert_window.py} and
+\ancf{positivity/poslib.py}).
+
+\emph{Conical series.} For $Y\ge\frac12$ put $z_1:=\sin^2\frac{\theta(Y)}2=1/(4Y^2+1)\le\frac12$, $s:=t^2$ and
+$c_k(s):=\prod_{j<k}((\frac12+j)^2+s)/k!^2$. Then $\sqrt{\sin\theta}=2\sqrt{Yz_1}$,
+\begin{gather*}
+\pc_t(\cos\theta)=\sum_{k\ge0}c_k(s)z_1^k,\\
+\pc_t(-\cos\theta)=\frac{\cosh\pi t}\pi\sum_{k\ge0}c_k(s)\big[2\psi(k+1)-2\Re\psi(k+\tfrac12+it)-\log z_1\big]z_1^k
+\end{gather*}
+by \cite[14.3.1, 15.8.10]{DLMF}, and $1/\pc_t(0)=\Gamma(\frac34+\frac{it}2)\Gamma(\frac34-\frac{it}2)/\sqrt\pi$. All terms of the first series are
+positive and increase with $s$, and $c_{k+1}(s)/c_k(s)\le1+s/(k+1)^2$. Both series converge geometrically: the ratio of consecutive terms tends to $z_1\le\frac12$. They are
+truncated at $k_{\max}=\lfloor300+8T\rfloor$, $T:=|t_c|+1$, and the tails are bounded with the following lemma, valid uniformly for complex
+$t$ with $|t|\le T$.
+
+\begin{lemma}\label{lem:bracket}
+Let $T\ge0$, $k_{\max}\ge299+8T$, $k\ge k_{\max}+1$, and $|z|\le T$. Then
+$b_k(z):=2\psi(k+1)-\psi(k+\frac12+iz)-\psi(k+\frac12-iz)$ satisfies $|b_k(z)|\le4(\frac12+T)/(k_{\max}+\frac32-T)\le\frac47$.
+\end{lemma}
+
+\begin{proof}
+On the segments from $k+\frac12\pm iz$ to $k+1$ the real part is at least $k+\frac12-T\ge1$, and $|\psi'(w)|\le\psi'(\Re w)\le2/\Re w$ for
+$\Re w\ge1$. Hence $|\psi(k+1)-\psi(k+\frac12\pm iz)|\le2(\frac12+T)/(k+\frac12-T)$; finally $7(\frac12+T)\le k_{\max}+\frac32-T$.
+\end{proof}
+
+\emph{Quadrature.} On each panel $[a,b]$ the integrals in \eqref{eq:physical} are replaced by the Gauss--Legendre rule with $m=30$ nodes, whose
+nodes and weights are computed as Arb balls; there are $30$ panels on $[\frac12,13]$ for the arcs and $20$ on $[1,13]$ for the axis. The error is
+bounded with the following form of \cite[Theorem~19.3]{Tre13}.
+
+\begin{lemma}\label{lem:gauss}
+Let $f$ be analytic in the open Bernstein ellipse $E_\rho$ of $[-1,1]$, $\rho>1$, with $|f|\le M$ there, and let $m\ge2$. The $m$-point
+Gauss--Legendre rule $G_m$ satisfies $|\int_{-1}^1f-G_m(f)|\le\frac{64}{15}M\rho^{-2m}/(1-\rho^{-2})$.
+\end{lemma}
+
+\begin{proof}
+The Chebyshev coefficients satisfy $|a_k|\le2M\rho^{-k}$. The rule is exact for polynomials of degree $\le2m-1$, and both the rule and the integral
+vanish on the odd $T_k$. For even $k\ge4$, $|\int T_k|=2/(k^2-1)$ and $|G_m(T_k)|\le\sum w_j=2$, so the error on $T_k$ is at most $\frac{32}{15}$; sum
+over even $k\ge2m$. (This is \cite[Theorem~19.3]{Tre13} with $n+1=m$ nodes.)
+\end{proof}
+
+On each panel, $M$ is bounded on an outward Arb box containing the image of $E_\rho$, uniformly for $t$ in the cell, using $|K_0(z)|\le K_0(\Re z)$,
+the absolute conical series with $|z_1|\le1/(4(x_{\rm lo}^2-y_{\rm hi}^2)+1)$, $|\cos(t\log Y)|\le\cosh(t\arctan(y_{\rm hi}/x_{\rm lo}))$, and the
+coefficient tail below. The analyticity of the integrand on the box ($\Re Y>0$, $\Re(4Y^2+1)>1.3$, $|\arg Y|+|\arg(4Y^2+1)|<\pi/2$) is checked in Arb.
+Beyond $Y=13$: $\int_{13}^\infty\Ax\le\sup_{[13,14]}\Ax/(1-\sqrt{14/13}\,e^{-2\pi})$, which follows from $\Ax(Y+1)\le\sqrt{(Y+1)/Y}\,e^{-2\pi}\Ax(Y)$ (as
+$(\log K_0)'\le-1$ and $a_n>0$); $|\Bx|\le\Ax$; and $\ck_t$ is bounded from its series at $z_1=1/677$. The $K_0$-sums use the coefficient balls for
+$n\le300$ and $|a_n|\le\abar_n$ with $K_0(x)\le\sqrt{\pi/2x}\,e^{-x}$ and a geometric series beyond.
+
+\emph{Continuum coverage.} On the cell $[t_c-\frac14,t_c+\frac14]$, the quadrature sum $Q$, computed with the truncated conical series, is an analytic
+function of $t$ on $|\Im t|<\frac32$; the truncation does not cancel the poles of $1/\pc_t(0)$ at $t=\pm i(\frac32+2m)$. Its Taylor coefficients
+at $t_c$ up to degree $19$ are computed by power-series arithmetic in Arb. The Taylor remainder is at most $M_Q(d/r_t)^{20}/(1-d/r_t)$ with
+$d=\frac14$, $r_t=1$, and $M_Q\ge\sup_{|z-t_c|=1}|Q(z)|$; $M_Q$ uses $|\pc_z(\cos\alpha)|\le\pc_T(\cos\alpha)$ (Theorem~\ref{thm:kernel-pos}),
+$|\cos(z\log Y)|\le\cosh(\log Y)$, and an Arb bound of $1/|\pc_z(0)|$ on $96$ boxes covering the circle. The Taylor polynomial is evaluated on $8$
+sub-balls covering the cell, and all error terms are subtracted. Everything is computed at $192$ bits.
+
+\emph{Results} (\ancf{positivity/logs/window_0_40.log}). All $80$ cells are certified; the lower bounds on $[0,\frac12]$ and $[39\frac12,40]$
+are $1.12926\cdot10^{-3}$ and $9.034\cdot10^{16}$. Relative to the printed quadrature value $\Pi(t_c)$ at the cell centre, the certified
+lower bound is at least $0.2952\,\Pi(t_c)$ on every cell (the smallest ratio, $0.29528$, is on $[\frac12,1]$), the quadrature error is at most
+$1.35\cdot10^{-7}\,\Pi(t_c)$ (largest ratio $1.3420\cdot10^{-7}$, on $[39\frac12,40]$) and the Taylor remainder at most $1.33\cdot10^{-7}\,\Pi(t_c)$;
+these ratios are informational. The run takes $30$ seconds on $8$ cores. The
+enclosure $\Pi(0)\in[1.400011\cdot10^{-3},1.401747\cdot10^{-3}]$ is computed in the same way on a tiny cell around $0$
+(\ancf{positivity/check_r0.py}).
+
+\emph{Negative control} (\ancf{positivity/negctl.py}; not used in any proof). With $a_n$ replaced by its term $c=1$, the same certifier proves the
+upper bounds of Remark~\ref{rem:negctl}.
+
+\emph{Independent cross-check} (\ancf{coefficients/cert_Ht.py}, \ancf{coefficients/compare_window.py}; not used in any proof). The
+density route of Appendix~\ref{app:cert-C}, run at $s=\frac12+it$, gives certified point values of $H_{\rm raw}(t)$ that do not use the
+conical functions or the four-path formula. At all $16$ cell centres in $[0,8]$ and at $t=10.25,15.25,20.25,30.25,39.75$, these enclosures of
+$\Pi(t)=2\pi^2(t^2+\frac14)^2H_{\rm raw}(t)$ overlap those of the window certificate ($21$ of $21$). The two routes share only the coefficient
+enclosures.
+
+\subsection{The large-\texorpdfstring{$|t|$}{|t|} numbers}\label{app:cert-L}
+
+\emph{Statement.} Proposition~\ref{prop:L-numbers}; scripts \ancf{positivity/cert_large_t.py} (items (i), (iii), (iv)) and
+\ancf{positivity/cert_gtail.py} (item (ii)).
+
+\emph{Method.} $p_+(8)$ is bounded below by a Riemann sum over $2000$ geometric cells of $[1,4]$, with the integrand enclosed on each cell and the
+sum rounded down; $p_-(8)$ is bounded above by a Riemann sum over $8000$ cells of $[\frac12,0.870]$, with $\Bx^-$ bounded by the negative of the
+lower end of the ball of $\Bx$, rounded up; $\pc_0(\pm\cos\theta)$ come from the conical series at $t=0$. The cell minima of $\Bx$ in (i) are the
+minima of the exact lower ends over $300$ cells of $[0.870,1]$ and the $2000$ cells of $[1,4]$. $I_{\rm ax}$ is computed by Gauss--Legendre
+quadrature with Lemma~\ref{lem:gauss} (quadrature error about $2.5\cdot10^{-17}$, tail beyond $Y=13$ about $5\cdot10^{-32}$, both included in the bound). For (ii), the terms
+$2\le n\le399$ of $\bar\rho(4)$ are summed in Arb with $a_1$ replaced by the lower end of its ball, which gives an upper bound for $\bar\rho(4)$, and the terms $n\ge400$ are at most twice the
+term $n=400$, since consecutive ratios are at most $(1+\frac1n)e^{2\pi/\sqrt n-8\pi}<10^{-10}$. The lower bound in (iv) is formed in Arb from the exact
+endpoints of the bounds in (iii); the run takes $138$ seconds on one core.
+
+\subsection{The normalising constant}\label{app:cert-C}
+
+\emph{Statement.} Proposition~\ref{prop:C}; script \ancf{coefficients/cert_H0.py}.
+
+\emph{The formula.} Put $g_{\rm raw}:=\Gh_{\rm raw}/(2\pi\sqrt x)$. By \eqref{eq:mellin-H}, $H_{\rm raw}(0)=\int_0^\infty g_{\rm raw}(x)x^{-1/2}\dd x/\gi(0)^2$ with
+$\gi(0)^2=\pi^{-1/2}\Gamma(\frac14)^2/64$. Let $d:=-D/(16\pi^2)=v^{-5/2}\sum_n2na_nK_0(2\pi n/v)$, $d_{\rm grow}:=-D_{\rm grow}/(16\pi^2)$ and
+$d_{\rm rest}:=d-d_{\rm grow}$. By Theorem~\ref{thm:lift}(d) and the integrals in its proof, $\Gh_{\rm raw}(x)=\sin^2(\pi x)\sqrt x\,[P_L(x)+\int_0^\infty
+d_{\rm rest}(v)\sqrt vK_0(2\pi vx)\dd v]$ with $P_L:=-R_L/(16\pi^2)$, that is, $P_L(x)=\frac1{32\pi^4(x^2-1)}+\frac1{8\pi^4(x^2-1)^2}$. Fubini's theorem gives
+\begin{gather*}
+2\pi\int_0^\infty g_{\rm raw}(x)x^{-1/2}\dd x=\int_0^\infty\sin^2(\pi x)x^{-1/2}P_L(x)\dd x+\int_0^\infty d_{\rm rest}(v)\sqrt v\,\mathcal Q(v)\dd v,\\
+\mathcal Q(v)=\frac{\Gamma(\frac14)^2\,[1-{}_2F_1(\frac14,\frac14;\frac12;-v^{-2})]}{2^{5/2}(2\pi v)^{1/2}},
+\end{gather*}
+where $\mathcal Q(v)=\int_0^\infty\sin^2(\pi x)x^{-1/2}K_0(2\pi vx)\dd x$ is evaluated by \cite[6.699.12]{GR15}. On $(0,1]$, $d_{\rm rest}$ is computed from
+the series for $d$ and the closed form of $d_{\rm grow}$; on $[1,8]$ from the following expansion at the cusp $\infty$, with the coefficients
+$A_n(1)$ and $A_n'(1)=4\Ss_n$ of Theorem~\ref{thm:niebur-fourier}.
+
+\begin{lemma}\label{lem:D-infinity}
+For $v>0$, with $y_n:=2\pi nv$,
+\begin{multline*}
+D(v)=D_{\rm grow}(v)+4\pi v^{3/2}\big[K_1(y_1)-y_1K_0(y_1)\big]\\
++\sum_{n\ge1}4\pi nv^{3/2}\Big[A_n'(1)\big(K_1(y_n)-y_nK_0(y_n)\big)+A_n(1)\Big(\frac{K_0(y_n)}{y_n}-2K_1(y_n)\Big)\Big].
+\end{multline*}
+\end{lemma}
+
+\begin{proof}
+Write $\dot P=\sum_np_n(v)\sin2\pi nu$ and $P_1=\sum_nr_n(v)\sin2\pi nu$ as in Proposition~\ref{prop:sym2}(c). From \eqref{eq:Phi},
+$D=-E_1(iv)-\partial_uE_0(iv)=\sum_n2\pi n[3vp_n+2v^2p_n'-2vr_n]$. Insert $p_n,r_n$ and use $K_0'=-K_1$, $(yK_1)'=-yK_0$, $I_0'=I_1$; the terms
+$-\frac{I_0(2\pi v)}{2\pi\sqrt v}$ of $p_1$ and $\sqrt vI_1(2\pi v)$ of $r_1$ give $D_{\rm grow}$.
+\end{proof}
+
+The two expressions for $d_{\rm rest}$ give overlapping enclosures at $v=1$. The integrals are computed with Arb's rigorous integration routine,
+with $K_\nu$ of complex argument evaluated at exact midpoints plus a derivative bound for the radius; the tails, $n>60$ at the cusp $0$
+and $n>30$ at the cusp $\infty$, use
+$|a_n|\le\abar_n$, $|A_n'(1)|\le4\abar_n/n$ and Lemma~\ref{lem:alpha}. The ends are bounded analytically: on $[0,10^{-8}]$, $0\le d\le10^{-6}\sqrt v/(8\pi^2)$
+and $|\mathcal Q(v)|\le2^{-3/2}\Gamma(\frac14)^2(2\pi v)^{-1/2}$ give a contribution at most $3.2\cdot10^{-14}$; on $[8,\infty)$ a termwise majorant from
+Lemma~\ref{lem:D-infinity}, $K_0\le K_1\le K_{3/2}$ and $|\mathcal Q(v)|\le\sqrt2\pi^2\Gamma(\frac54)^2(2\pi v)^{-5/2}$ gives at most $3.5\cdot10^{-20}$; and
+the part $x>2000$ of the first integral is bracketed with the second mean value theorem.
+
+\emph{Results} (\ancf{coefficients/logs/cert_H0.log}, $160$ bits). With the enclosures of $a_1,a_2$ for $c\le6\cdot10^5$: the first integral is
+$0.0034380158943\pm2.9\cdot10^{-13}$; the second is $-0.0152642540638\pm7.7\cdot10^{-10}$ on $(0,1]$ and $0.0126529953780\pm5.8\cdot10^{-10}$ on $[1,\infty)$;
+so $2\pi\int g_{\rm raw}x^{-1/2}=0.00082675720847\pm1.4\cdot10^{-9}$ and $H_{\rm raw}(0)=0.0011355097904\pm1.86\cdot10^{-9}$. The radius is dominated by the
+bound for the terms $c>6\cdot10^5$ of $\Ss_1$. A second run that splits at $v=1.25$ instead of $v=1$ gives an overlapping enclosure. The run takes
+about $90$ seconds.
+
+\subsection{The constants of Section~\ref{sec:fourier}}
+
+The constants $\lambda_0(4\pi)$, $\varrho(4\pi)$, $\lambda_\pm(4\pi)$, the two monotone envelopes in the proof of Theorem~\ref{thm:an-bounds} and
+$\varrho_\alpha(4\pi)$ are elementary expressions evaluated at one point; \ancf{coefficients/analytic_constants.py} evaluates them in Arb, for
+example $\lambda_-(4\pi)=0.850104915628\pm2\cdot10^{-13}$.
+
+\subsection{The Lean formalisation}\label{app:lean}
+
+The ancillary directory \ancf{lean/} contains a Lean~4 project, built on Mathlib and on the corresponding project for Part~I, that formalises
+the logical spine of the proof. It states Theorems~\ref{thm:main-S} and~\ref{thm:main-U}, Corollary~\ref{cor:main-RH} and the reduction
+(Lemma~\ref{lem:voronoi}(a) and Proposition~\ref{prop:reduction}), and derives them from Mathlib, from six axioms of Part~I's ledger, and from
+exactly two axioms for this paper. The six axioms of Part~I are the explicit formula (Lemma~\ref{lem:I-EF}) and the bound \eqref{eq:XB}, used for
+Theorem~\ref{thm:main-S}; the zero-side support theorem (Theorem~\ref{thm:I-zerosupport}) and Theorem~\ref{thm:I-logic}(b), added for
+Theorem~\ref{thm:main-U}; the duality theorem (Theorem~\ref{thm:I-duality}), added for Corollary~\ref{cor:main-RH}; and the lower bound for
+$\kstar$ of Part~I, Proposition~2.8, used only to show that $\kstar$ and $\kOPS$ are finite. The Part~I axiom for
+Theorem~\ref{thm:I-zerosupport} states only its first conclusion, $\nu=\nuz$; the remaining conclusions, RH and $\mu=\muz$, are derived in Lean
+from Theorem~\ref{thm:I-logic}(b), as in Part~I. The two axioms for this paper are: first, one axiom stating
+parts (b) and (c) of the Voronoi decoupling (Lemma~\ref{lem:voronoi}); second, one joint existence axiom for the object: an $H\in\Wc_\delta$, for
+some $\delta<\frac12$, with (C3), $\Gh_H\ge0$ on $[0,\infty)$ and $H>0$ on $\RR$, which is what Theorem~\ref{thm:main-object} and
+Corollary~\ref{cor:Pi-positive} provide. The
+project builds with no unproved step (\texttt{sorry}) and passes its audit script; its \ancf{README.md}, \ancf{LEDGER.md} and \ancf{FAITHFUL.md}
+describe the axioms and list every difference between the Lean statements and the paper's. In particular the Lean form of the
+first part of Theorem~\ref{thm:main-S} asserts less about $H$ than the paper does: membership in $\Wc_\delta$ for one $\delta<\frac12$, that is, the
+exponent $8$ of (C1) instead of $9-\delta$ for every $\delta<1$, and no entireness. Moreover the differentiability of $\hF$ is not formalised:
+the Lean form of $\hF'(\xin n)=0$ says that the derivative of $\hF$ at $\xin n$, if it exists (\texttt{HasDerivAt}), is $0$. The Lean kernel
+therefore checks the assembly of the proof, namely that the main statements follow from these inputs. It
+does not check the inputs: Sections~\ref{sec:automorphic}--\ref{sec:physical}, the appendices and the certificates are not formalised.

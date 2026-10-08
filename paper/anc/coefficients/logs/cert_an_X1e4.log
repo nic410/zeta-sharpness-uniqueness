@@ -1,0 +1,57 @@
+# command : python -u coefficients/cert_an.py 60 10000 1500 600 X1e4
+# env     : (COEFF_DATA, COEFF_EXTRA, NGL, NSUB not set)
+# date    : 2026-10-07T21:36:33Z
+# system  : Linux x86_64, 1 visible cores
+# python  : 3.10.12 | python-flint 0.9.0 | mpmath 1.3.0
+cert_an.py  NSMALL=60 X=10000 NBIG=1500 C2=600  prec=96
+input hashes: coefflib.py 754c6fb34af93951  cert_an.py 6e91693c35051c55
+Kloosterman tables for prime powers <= 10000 built and saved (162s), sha 8bbdb234c3ecca4f
+max table error 5.69e-14
+   small n: c <= 100 done (163s)
+   small n: c <= 1000 done (165s)
+   small n: c <= 3000 done (170s)
+   small n: c <= 5000 done (174s)
+   small n: c <= 10000 done (184s)
+small n done (184s)
+coefficients/out/an_small_X1e4.json fixed 120 pairs
+wrote coefficients/out/an_small_X1e4.json sha 9858457072c991f3
+a_1 = [4581.37 +/- 6.71e-3] ; alpha_1 = [-55336.18 +/- 3.09e-3]
+b_2/b_1 = [223.891 +/- 3.95e-4]
+b_3/b_1 = [13661.9 +/- 0.0190]
+b_4/b_1 = [4.2957e+5 +/- 4.15]
+b_5/b_1 = [8.8775e+6 +/- 57.1]
+b_6/b_1 = [1.36397e+8 +/- 3.67e+2]
+   large n: n = 250 done (191s)
+   large n: n = 500 done (203s)
+   large n: n = 750 done (215s)
+   large n: n = 1000 done (229s)
+   large n: n = 1250 done (244s)
+   large n: n = 1500 done (259s)
+
+DECISIVE: all a_n > 0 (ball lower endpoints) for n <= 1500: True
+DECISIVE: max_n (sum_{c>=2}|term_c| incl. tail bound)/(c=1 term) = [0.0035753 +/- 2.75e-8] at n = 1
+a_1 = [4581.37 +/- 6.71e-3]
+Kc_1 = [4581.12 +/- 6.71e-3]   (c=1 term [4565.895200290628930730491 +/- 2.56e-22])
+A/b_1 = 1/(8 pi^4 (1 + 4 Kc_1)) = [7.0025e-8 +/- 4.16e-13]
+b_2/b_1 = [223.891 +/- 3.95e-4]
+b_3/b_1 = [13661.9 +/- 0.0190]
+b_4/b_1 = [4.2957e+5 +/- 4.15]
+b_5/b_1 = [8.8775e+6 +/- 57.1]
+b_6/b_1 = [1.36397e+8 +/- 3.67e+2]
+b_7/b_1 = [1.67557e+9 +/- 3.93e+3]
+b_8/b_1 = [1.72519e+10 +/- 6.96e+4]
+b_9/b_1 = [1.53813e+11 +/- 4.75e+5]
+b_10/b_1 = [1.21594e+12 +/- 6.04e+6]
+a_20 = [9.4253266672241210578e+22 +/- 2.98e+2]   rel.rad 2.16e-23   (c-tail bound [0.102 +/- 3.04e-4], c<=10000)
+a_30 = [3.2033703406888621124e+28 +/- 3.88e+8]   rel.rad 1.69e-28   (c-tail bound [0.148 +/- 1.93e-4], c<=10000)
+a_40 = [1.4532446590069768645e+33 +/- 1.86e+12]   rel.rad 3.66e-29   (c-tail bound [0.193 +/- 4.73e-4], c<=10000)
+a_50 = [1.8258794826540388836e+37 +/- 3.11e+17]   rel.rad 3.77e-29   (c-tail bound [0.238 +/- 1.52e-4], c<=10000)
+a_60 = [9.2284411508449206894e+40 +/- 1.43e+20]   rel.rad 4.62e-29   (c-tail bound [0.282 +/- 4.96e-4], c<=10000)
+a_100 = [2.1056900699352784135e+53 +/- 2.58e+33]   rel.rad 4.09e-29   (c-tail bound [12.7 +/- 9.97e-3], c<=600)
+a_200 = [1.0134163400869425152e+76 +/- 3.68e+56]   rel.rad 3.21e-29   (c-tail bound [23.0 +/- 0.0361], c<=600)
+a_400 = [1.1255488907903397924e+108 +/- 2.35e+88]   rel.rad 3.37e-29   (c-tail bound [41.2 +/- 0.0425], c<=600)
+a_800 = [2.1816098250410892618e+153 +/- 3.81e+133]   rel.rad 3.45e-29   (c-tail bound [73.7 +/- 0.0132], c<=600)
+a_1500 = [2.5953431670108063287e+210 +/- 3.42e+190]   rel.rad 3.15e-29   (c-tail bound [1.25e+2 +/- 0.135], c<=600)
+coefficients/out/an_cert_X1e4.json fixed 1500 pairs
+wrote coefficients/out/an_cert_X1e4.json  sha 47cbacc1f928d564  (260s)
+# exit code 0; wall time 259.7 s

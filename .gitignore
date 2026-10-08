@@ -1,0 +1,16 @@
+# LaTeX build intermediates (build/main.pdf and build/main.bbl are tracked)
+**/build/*.aux
+**/build/*.blg
+**/build/*.log
+**/build/*.out
+**/build/*.toc
+**/build/*.fls
+**/build/*.fdb_latexmk
+**/build/*.synctex.gz
+**/build/pass*.txt
+**/build/bibtex.txt
+# Python
+__pycache__/
+*.pyc
+# Lean build products and downloaded dependencies
+.lake/

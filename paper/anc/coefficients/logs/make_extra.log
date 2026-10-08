@@ -1,0 +1,9 @@
+# command : python coefficients/make_extra.py X3e5 X6e5
+# env     : (COEFF_DATA, COEFF_EXTRA, NGL, NSUB not set)
+# date    : 2026-10-07T22:02:45Z
+# system  : Linux x86_64, 1 visible cores
+# python  : 3.10.12 | python-flint 0.9.0 | mpmath 1.3.0
+make_extra.py sha ac2b105495c628d2
+from an_smalln_X3e5.json (sha aacbbba6df55c35d) wrote extra_smalln_X3e5.json sha ff4b86318eed86f1
+from an_smalln_X6e5.json (sha 963ef3cf0adef433) wrote extra_smalln_X6e5.json sha 852b70a17e729118
+# exit code 0; wall time 0.0 s

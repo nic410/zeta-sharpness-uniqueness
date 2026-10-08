@@ -1,0 +1,457 @@
+== statement pin: 74 declarations (closure of 13 theorems, 2 ledger axioms of Part II and 6 ledger axioms of Part I) ==
+
+def PosRig.Admissible
+  : ((ℂ → ℂ) → ℝ) → ℝ → PosRig.Pair → Prop
+  := fun (A : (ℂ → ℂ) → ℝ) (g : ℝ) (p : PosRig.Pair) ↦
+  PosRig.EvenMeasure (PosRig.Pair.μ p) ∧
+    PosRig.CarriedBy (PosRig.Pair.ν p) (Set.Ici g) ∧
+      ∀ F ∈ PosRig.TestClass,
+        MeasureTheory.Integrable (PosRig.onR F) (PosRig.Pair.μ p) ∧
+          MeasureTheory.Integrable (PosRig.FT F) (PosRig.Pair.ν p) ∧
+            ↑(A F) = ∫ (t : ℝ), F ↑t ∂PosRig.Pair.μ p + (1 : ℂ) / ↑Real.pi * ∫ (ξ : ℝ), PosRig.FT F ξ ∂PosRig.Pair.ν p
+  hash 1018704132058997570
+
+def PosRig.Arch
+  : (ℂ → ℂ) → ℝ
+  := fun (F : ℂ → ℂ) ↦
+  Complex.re (F (Complex.I / (2 : ℂ)) + F (-Complex.I / (2 : ℂ))) + ∫ (t : ℝ), Complex.re (F ↑t) * PosRig.Ωinf t
+  hash 17733234025364102088
+
+def PosRig.ArchShift
+  : ℝ → (ℂ → ℂ) → ℝ
+  := fun (lam : ℝ) (F : ℂ → ℂ) ↦ PosRig.Arch F + lam * PosRig.intR F
+  hash 13459873536251249321
+
+def PosRig.CarriedBy
+  : MeasureTheory.Measure ℝ → Set ℝ → Prop
+  := fun (μ : MeasureTheory.Measure ℝ) (S : Set ℝ) ↦ μ Sᶜ = (0 : ENNReal)
+  hash 6979011887598627667
+
+def PosRig.CondE
+  : Prop
+  := Set.Nonempty PosRig.K
+  hash 5963345130725148222
+
+def PosRig.CondS
+  : Prop
+  := PosRig.kappaStar ≤ (0 : EReal)
+  hash 17262047028919970340
+
+def PosRig.CondU
+  : Prop
+  := PosRig.K ⊆ {PosRig.pZeta}
+  hash 6916428012078777511
+
+def PosRig.Cone
+  : Set (ℂ → ℂ)
+  := PosRig.ConeG PosRig.xi2
+  hash 13254127751951288592
+
+def PosRig.ConeG
+  : ℝ → Set (ℂ → ℂ)
+  := fun (g : ℝ) ↦
+  {F : ℂ → ℂ | F ∈ PosRig.TestClass ∧ (∀ (t : ℝ), (0 : ℂ) ≤ F ↑t) ∧ ∀ (ξ : ℝ), g ≤ ξ → (0 : ℂ) ≤ PosRig.FT F ξ}
+  hash 5746961308011177373
+
+def PosRig.ConeOPS
+  : Set (ℂ → ℂ)
+  := {F : ℂ → ℂ | F ∈ PosRig.TestClass ∧ (∀ (t : ℝ), (0 : ℂ) ≤ F ↑t) ∧ ∀ (ξ : ℝ), (0 : ℂ) ≤ PosRig.FT F ξ}
+  hash 17119683194996383562
+
+def PosRig.EvenMeasure
+  : MeasureTheory.Measure ℝ → Prop
+  := fun (μ : MeasureTheory.Measure ℝ) ↦ MeasureTheory.Measure.map (fun (t : ℝ) ↦ -t) μ = μ
+  hash 3945193151863429150
+
+def PosRig.FT
+  : (ℂ → ℂ) → ℝ → ℂ
+  := fun (F : ℂ → ℂ) ↦ FourierTransform.fourier (PosRig.onR F)
+  hash 13300901128620645054
+
+structure PosRig.InTδ
+  : ℝ → (ℂ → ℂ) → Prop
+  | PosRig.InTδ.mk : ∀ {δ : ℝ} {F : ℂ → ℂ},
+  (0 : ℝ) < δ →
+    δ < (1 / 2 : ℝ) →
+      (∀ z ∈ PosRig.closedStrip ((1 / 2 : ℝ) + δ), F (-z) = F z) →
+        (∀ (t : ℝ), Complex.im (F ↑t) = (0 : ℝ)) →
+          AnalyticOnNhd ℂ F (PosRig.closedStrip ((1 / 2 : ℝ) + δ)) →
+            (∃ (C : ℝ), ∀ z ∈ PosRig.closedStrip ((1 / 2 : ℝ) + δ), ((1 : ℝ) + ‖z‖) ^ (2 : ℕ) * ‖F z‖ ≤ C) →
+              PosRig.InTδ δ F
+  hash 7434963793429802912
+
+def PosRig.IsExactMagic
+  : (ℂ → ℂ) → Prop
+  := fun (F : ℂ → ℂ) ↦ F ∈ PosRig.Cone ∧ (0 : ℝ) < PosRig.intR F ∧ PosRig.Arch F = (0 : ℝ)
+  hash 9571446833071026158
+
+def PosRig.K
+  : Set PosRig.Pair
+  := PosRig.Kset PosRig.Arch PosRig.xi2
+  hash 4973673107110248423
+
+def PosRig.Kset
+  : ((ℂ → ℂ) → ℝ) → ℝ → Set PosRig.Pair
+  := fun (A : (ℂ → ℂ) → ℝ) (g : ℝ) ↦ {p : PosRig.Pair | PosRig.Admissible A g p}
+  hash 16455672048350315878
+
+def PosRig.NontrivialZeros
+  : Set ℂ
+  := {s : ℂ | riemannZeta s = (0 : ℂ) ∧ (0 : ℝ) < Complex.re s ∧ Complex.re s < (1 : ℝ)}
+  hash 17208741418371382704
+
+structure PosRig.Pair
+  : Type
+  | PosRig.Pair.mk : MeasureTheory.Measure ℝ → MeasureTheory.Measure ℝ → PosRig.Pair
+  hash 12201836819030551426
+
+def PosRig.Pair.μ
+  : PosRig.Pair → MeasureTheory.Measure ℝ
+  := fun (self : PosRig.Pair) ↦ self.1
+  hash 4626375420545023557
+
+def PosRig.Pair.ν
+  : PosRig.Pair → MeasureTheory.Measure ℝ
+  := fun (self : PosRig.Pair) ↦ self.2
+  hash 1587935074962828443
+
+def PosRig.TestClass
+  : Set (ℂ → ℂ)
+  := {F : ℂ → ℂ | ∃ (δ : ℝ), PosRig.InTδ δ F}
+  hash 14798619684139269686
+
+def PosRig.Xi
+  : ℂ → ℂ
+  := fun (z : ℂ) ↦ PosRig.xiR ((1 / 2 : ℂ) + Complex.I * z)
+  hash 3313605620848375412
+
+def PosRig.ZF
+  : (ℂ → ℂ) → Set ℝ
+  := fun (F : ℂ → ℂ) ↦ {t : ℝ | F ↑t = (0 : ℂ)}
+  hash 6749148115047179333
+
+def PosRig.Zzeta
+  : Set ℝ
+  := {γ : ℝ | riemannZeta ((1 / 2 : ℂ) + Complex.I * ↑γ) = (0 : ℂ)}
+  hash 10537108641610836516
+
+def PosRig.closedStrip
+  : ℝ → Set ℂ
+  := fun (b : ℝ) ↦ {z : ℂ | |Complex.im z| ≤ b}
+  hash 932670462970624076
+
+axiom PosRig.duality_no_gap
+  : ∀ (lam : ℝ),
+  (∀ F ∈ PosRig.Cone, (0 : ℝ) ≤ PosRig.ArchShift lam F) →
+    ∃ (p : PosRig.Pair), PosRig.Admissible (PosRig.ArchShift lam) PosRig.xi2 p
+  hash 1508801727
+
+axiom PosRig.explicit_formula
+  : ∀ F ∈ PosRig.TestClass,
+  (Summable fun (ρ : ↑PosRig.NontrivialZeros) ↦ ↑(PosRig.mult ↑ρ) * F (PosRig.tOf ↑ρ)) ∧
+    (Summable fun (n : ℕ) ↦ ↑(ArithmeticFunction.vonMangoldt n / √↑n) * PosRig.FT F (PosRig.xiOf ↑n)) ∧
+      ↑(PosRig.Arch F) =
+        ∑' (ρ : ↑PosRig.NontrivialZeros), ↑(PosRig.mult ↑ρ) * F (PosRig.tOf ↑ρ) +
+          (1 : ℂ) / ↑Real.pi * ∑' (n : ℕ), ↑(ArithmeticFunction.vonMangoldt n / √↑n) * PosRig.FT F (PosRig.xiOf ↑n)
+  hash 2849605572
+
+axiom PosRig.floor_bound
+  : ∀ F ∈ PosRig.Cone, PosRig.intR F = (1 : ℝ) → -(13231 / 10000 : ℝ) ≤ PosRig.Arch F
+  hash 945037153
+
+def PosRig.intR
+  : (ℂ → ℂ) → ℝ
+  := fun (F : ℂ → ℂ) ↦ ∫ (t : ℝ), Complex.re (F ↑t)
+  hash 17899255834767941018
+
+def PosRig.kappaOPS
+  : EReal
+  := PosRig.slack PosRig.Arch PosRig.ConeOPS
+  hash 7273982770879160331
+
+def PosRig.kappaStar
+  : EReal
+  := PosRig.slack PosRig.Arch PosRig.Cone
+  hash 16246809112542380841
+
+axiom PosRig.logic_b
+  : ∀ (μ : MeasureTheory.Measure ℝ),
+  PosRig.Admissible PosRig.Arch PosRig.xi2 { μ := μ, ν := PosRig.nuZeta } → RiemannHypothesis ∧ μ = PosRig.muZeta
+  hash 4112131183
+
+def PosRig.muZeta
+  : MeasureTheory.Measure ℝ
+  := MeasureTheory.Measure.sum fun (γ : ↑PosRig.Zzeta) ↦
+  ↑(PosRig.mult ((1 / 2 : ℂ) + Complex.I * ↑↑γ)) • MeasureTheory.Measure.dirac ↑γ
+  hash 17329934377695731357
+
+def PosRig.mult
+  : ℂ → ℕ
+  := fun (s : ℂ) ↦ analyticOrderNatAt riemannZeta s
+  hash 13220470614395411177
+
+def PosRig.nuZeta
+  : MeasureTheory.Measure ℝ
+  := MeasureTheory.Measure.sum fun (n : ℕ) ↦
+  ENNReal.ofReal (ArithmeticFunction.vonMangoldt n / √↑n) • MeasureTheory.Measure.dirac (PosRig.xiOf ↑n)
+  hash 7515474729588938160
+
+def PosRig.onR
+  : (ℂ → ℂ) → ℝ → ℂ
+  := fun (F : ℂ → ℂ) (t : ℝ) ↦ F ↑t
+  hash 9768434967632069761
+
+def PosRig.pZeta
+  : PosRig.Pair
+  := { μ := PosRig.muZeta, ν := PosRig.nuZeta }
+  hash 9583922546136359941
+
+def PosRig.qmin
+  : ℝ
+  := Real.exp ((-2 : ℝ) * Real.pi * EReal.toReal PosRig.kappaStar)
+  hash 4915844489146883738
+
+def PosRig.qminOPS
+  : ℝ
+  := Real.exp ((-2 : ℝ) * Real.pi * EReal.toReal PosRig.kappaOPS)
+  hash 7114238431912488507
+
+def PosRig.slack
+  : ((ℂ → ℂ) → ℝ) → Set (ℂ → ℂ) → EReal
+  := fun (A : (ℂ → ℂ) → ℝ) (C : Set (ℂ → ℂ)) ↦ ⨅ F ∈ {F : ℂ → ℂ | F ∈ C ∧ PosRig.intR F = (1 : ℝ)}, ↑(A F)
+  hash 10722363920324599854
+
+def PosRig.tOf
+  : ℂ → ℂ
+  := fun (ρ : ℂ) ↦ -Complex.I * (ρ - (1 / 2 : ℂ))
+  hash 3494240299321013321
+
+def PosRig.xi2
+  : ℝ
+  := PosRig.xiOf (2 : ℝ)
+  hash 7120313297766652855
+
+def PosRig.xiOf
+  : ℝ → ℝ
+  := fun (x : ℝ) ↦ Real.log x / ((2 : ℝ) * Real.pi)
+  hash 8668543778171746165
+
+def PosRig.xiR
+  : ℂ → ℂ
+  := fun (s : ℂ) ↦ (s * (s - (1 : ℂ)) * completedRiemannZeta₀ s + (1 : ℂ)) / (2 : ℂ)
+  hash 13213316365590138015
+
+axiom PosRig.xi_decay
+  : ∀ (b : ℝ),
+  (0 : ℝ) < b →
+    b ≤ (1 : ℝ) →
+      ∃ (C : ℝ),
+        ∀ (z : ℂ),
+          |Complex.im z| ≤ b →
+            ‖PosRig.Xi z‖ ≤ C * ((1 : ℝ) + |Complex.re z|) ^ (3 : ℕ) * Real.exp (-(Real.pi / (4 : ℝ)) * |Complex.re z|)
+  hash 120262926
+
+axiom PosRig.zero_support_rigidity
+  : ∀ p ∈ PosRig.K, PosRig.CarriedBy (PosRig.Pair.μ p) (PosRig.Zzeta ∪ {(0 : ℝ)}) → PosRig.Pair.ν p = PosRig.nuZeta
+  hash 3402161770
+
+def PosRig.Ωinf
+  : ℝ → ℝ
+  := fun (t : ℝ) ↦
+  (1 : ℝ) / ((2 : ℝ) * Real.pi) *
+    (Complex.re (Complex.digamma ((1 / 4 : ℂ) + Complex.I * ↑t / (2 : ℂ))) - Real.log Real.pi)
+  hash 17304744942697244060
+
+structure PosRigII.ClassW
+  : ℝ → (ℂ → ℂ) → Prop
+  | PosRigII.ClassW.mk : ∀ {δ : ℝ} {H : ℂ → ℂ},
+  (0 : ℝ) < δ →
+    δ < (1 : ℝ) →
+      (∀ z ∈ PosRig.closedStrip ((1 / 2 : ℝ) + δ), H (-z) = H z) →
+        (∀ (t : ℝ), Complex.im (H ↑t) = (0 : ℝ)) →
+          AnalyticOnNhd ℂ H (PosRig.closedStrip ((1 / 2 : ℝ) + δ)) →
+            (∃ (C : ℝ),
+                ∀ z ∈ PosRig.closedStrip ((1 / 2 : ℝ) + δ),
+                  ((1 : ℝ) + ‖z‖) ^ (8 : ℕ) * ‖H z‖ ≤ C * Real.exp (Real.pi / (2 : ℝ) * |Complex.re z|)) →
+              PosRigII.ClassW δ H
+  hash 8440578916438939696
+
+def PosRigII.CondC2
+  : (ℂ → ℂ) → Prop
+  := fun (H : ℂ → ℂ) ↦ ∀ (t : ℝ), (0 : ℂ) ≤ H ↑t
+  hash 12601163824015206386
+
+def PosRigII.CondC2Strict
+  : (ℂ → ℂ) → Prop
+  := fun (H : ℂ → ℂ) ↦ ∀ (t : ℝ), (0 : ℂ) < H ↑t
+  hash 10253297376798013161
+
+def PosRigII.CondC3
+  : (ℂ → ℂ) → Prop
+  := fun (H : ℂ → ℂ) ↦ ∀ (k : ℕ), (2 : ℕ) ≤ k → PosRigII.GammaFT H (PosRig.xiOf ↑k) = (0 : ℂ)
+  hash 3549323834749173294
+
+def PosRigII.CondC4
+  : (ℂ → ℂ) → Prop
+  := fun (H : ℂ → ℂ) ↦ ∀ (ξ : ℝ), PosRig.xi2 ≤ ξ → (0 : ℂ) ≤ PosRigII.GammaFT H ξ
+  hash 8604705510918216999
+
+def PosRigII.CondC4Zero
+  : (ℂ → ℂ) → Prop
+  := fun (H : ℂ → ℂ) ↦ ∀ (ξ : ℝ), (0 : ℝ) ≤ ξ → (0 : ℂ) ≤ PosRigII.GammaFT H ξ
+  hash 10787059242611824596
+
+def PosRigII.GammaFT
+  : (ℂ → ℂ) → ℝ → ℂ
+  := fun (H : ℂ → ℂ) ↦ PosRig.FT (PosRigII.GammaOnly H)
+  hash 18377934831912048267
+
+def PosRigII.GammaOnly
+  : (ℂ → ℂ) → ℂ → ℂ
+  := fun (H : ℂ → ℂ) (z : ℂ) ↦ PosRigII.gammaInf ((1 / 2 : ℂ) + Complex.I * z) ^ (2 : ℕ) * H z
+  hash 18000905745283619097
+
+def PosRigII.IntegerCritical
+  : ℝ → (ℂ → ℂ) → Prop
+  := fun (δ : ℝ) (H : ℂ → ℂ) ↦
+  PosRigII.ClassW δ H ∧ H (0 : ℂ) = (1 : ℂ) ∧ PosRigII.CondC2 H ∧ PosRigII.CondC3 H ∧ PosRigII.CondC4 H
+  hash 3057955709242859554
+
+def PosRigII.VoronoiIdentity
+  : (ℂ → ℂ) → Prop
+  := fun (H : ℂ → ℂ) ↦
+  MeasureTheory.Integrable (PosRig.onR (PosRigII.GammaOnly H)) MeasureTheory.MeasureSpace.volume ∧
+    ∀ (ξ : ℝ),
+      Summable (PosRigII.voronoiTerm H ξ) ∧
+        PosRig.FT (fun (z : ℂ) ↦ PosRig.Xi z ^ (2 : ℕ) * H z) ξ = ∑' (m : ℕ), PosRigII.voronoiTerm H ξ m
+  hash 1927241614812405952
+
+theorem PosRigII.corollary3
+  : (RiemannHypothesis ↔ PosRig.CondE) ∧
+  (PosRig.CondE ↔ (0 : EReal) ≤ PosRig.kappaStar) ∧ ((0 : EReal) ≤ PosRig.kappaStar ↔ PosRig.kappaStar = (0 : EReal))
+  hash 277160081
+
+theorem PosRigII.corollary3_RH
+  : RiemannHypothesis →
+  PosRig.K = {PosRig.pZeta} ∧
+    PosRig.kappaStar = (0 : EReal) ∧ PosRig.kappaOPS = (0 : EReal) ∧ PosRig.qmin = (1 : ℝ) ∧ PosRig.qminOPS = (1 : ℝ)
+  hash 111858885
+
+theorem PosRigII.corollary3_notRH
+  : ¬RiemannHypothesis → PosRig.kappaStar < (0 : EReal) ∧ PosRig.K = ∅
+  hash 19159090
+
+theorem PosRigII.corollary_minimiser
+  : ∃ (H : ℂ → ℂ),
+  (∃ δ < (1 / 2 : ℝ), PosRigII.IntegerCritical δ H) ∧
+    PosRigII.CondC2Strict H ∧
+      (PosRig.IsExactMagic fun (z : ℂ) ↦ PosRig.Xi z ^ (2 : ℕ) * H z) ∧
+        (fun (z : ℂ) ↦ PosRig.Xi z ^ (2 : ℕ) * H z) ∈ PosRig.ConeOPS ∧
+          PosRig.kappaStar ≤ PosRig.kappaOPS ∧
+            PosRig.kappaOPS ≤
+                ↑((PosRig.Arch fun (z : ℂ) ↦ PosRig.Xi z ^ (2 : ℕ) * H z) /
+                    PosRig.intR fun (z : ℂ) ↦ PosRig.Xi z ^ (2 : ℕ) * H z) ∧
+              (PosRig.kappaStar =
+                    ↑((PosRig.Arch fun (z : ℂ) ↦ PosRig.Xi z ^ (2 : ℕ) * H z) /
+                        PosRig.intR fun (z : ℂ) ↦ PosRig.Xi z ^ (2 : ℕ) * H z) ↔
+                  RiemannHypothesis) ∧
+                (RiemannHypothesis →
+                  PosRig.kappaOPS =
+                    ↑((PosRig.Arch fun (z : ℂ) ↦ PosRig.Xi z ^ (2 : ℕ) * H z) /
+                        PosRig.intR fun (z : ℂ) ↦ PosRig.Xi z ^ (2 : ℕ) * H z))
+  hash 3988129110
+
+axiom PosRigII.exists_integer_critical_object
+  : ∃ (H : ℂ → ℂ),
+  (∃ δ < (1 / 2 : ℝ), PosRigII.ClassW δ H) ∧ PosRigII.CondC3 H ∧ PosRigII.CondC4Zero H ∧ PosRigII.CondC2Strict H
+  hash 1474173566
+
+def PosRigII.gammaInf
+  : ℂ → ℂ
+  := fun (s : ℂ) ↦ (s - (1 : ℂ)) * ↑Real.pi ^ (-s / (2 : ℂ)) * Complex.Gamma (s / (2 : ℂ) + (1 : ℂ))
+  hash 14107649893857527179
+
+theorem PosRigII.main_summary
+  : PosRig.CondS ∧ PosRig.CondU ∧ (RiemannHypothesis ↔ PosRig.CondE) ∧ (PosRig.CondE ↔ PosRig.kappaStar = (0 : EReal))
+  hash 3343471624
+
+theorem PosRigII.reduction
+  : ∀ {δ : ℝ} {H : ℂ → ℂ},
+  PosRigII.ClassW δ H →
+    δ < (1 / 2 : ℝ) →
+      (∃ z ∈ PosRig.closedStrip ((1 / 2 : ℝ) + δ), H z ≠ (0 : ℂ)) →
+        PosRigII.CondC2 H →
+          PosRigII.CondC3 H →
+            PosRigII.CondC4 H →
+              (fun (z : ℂ) ↦ PosRig.Xi z ^ (2 : ℕ) * H z) ∈ PosRig.Cone ∧
+                (∀ (n : ℕ),
+                    (2 : ℕ) ≤ n → PosRig.FT (fun (z : ℂ) ↦ PosRig.Xi z ^ (2 : ℕ) * H z) (PosRig.xiOf ↑n) = (0 : ℂ)) ∧
+                  ↑(PosRig.intR fun (z : ℂ) ↦ PosRig.Xi z ^ (2 : ℕ) * H z) =
+                      PosRig.FT (fun (z : ℂ) ↦ PosRig.Xi z ^ (2 : ℕ) * H z) (0 : ℝ) ∧
+                    PosRig.FT (fun (z : ℂ) ↦ PosRig.Xi z ^ (2 : ℕ) * H z) (0 : ℝ) = PosRigII.GammaFT H (0 : ℝ) ∧
+                      ((0 : ℝ) < PosRig.intR fun (z : ℂ) ↦ PosRig.Xi z ^ (2 : ℕ) * H z) ∧
+                        (PosRig.Arch fun (z : ℂ) ↦ PosRig.Xi z ^ (2 : ℕ) * H z) = (0 : ℝ) ∧
+                          (PosRig.IsExactMagic fun (z : ℂ) ↦ PosRig.Xi z ^ (2 : ℕ) * H z) ∧
+                            PosRig.kappaStar ≤ (0 : EReal)
+  hash 455191613
+
+theorem PosRigII.reduction_OPS
+  : ∀ {δ : ℝ} {H : ℂ → ℂ},
+  PosRigII.ClassW δ H →
+    δ < (1 / 2 : ℝ) →
+      (∃ z ∈ PosRig.closedStrip ((1 / 2 : ℝ) + δ), H z ≠ (0 : ℂ)) →
+        PosRigII.CondC2 H →
+          PosRigII.CondC3 H →
+            PosRigII.CondC4Zero H →
+              (fun (z : ℂ) ↦ PosRig.Xi z ^ (2 : ℕ) * H z) ∈ PosRig.ConeOPS ∧ PosRig.kappaOPS ≤ (0 : EReal)
+  hash 1287356497
+
+theorem PosRigII.theorem1
+  : PosRig.kappaStar ≤ PosRig.kappaOPS ∧ PosRig.kappaOPS ≤ (0 : EReal)
+  hash 1668454681
+
+theorem PosRigII.theorem1_conductor
+  : PosRig.CondS ∧ (1 : ℝ) ≤ PosRig.qmin ∧ (1 : ℝ) ≤ PosRig.qminOPS
+  hash 2477105749
+
+theorem PosRigII.theorem1_finite
+  : PosRig.kappaStar ≠ ⊥ ∧ PosRig.kappaStar ≠ ⊤ ∧ PosRig.kappaOPS ≠ ⊥ ∧ PosRig.kappaOPS ≠ ⊤
+  hash 944692169
+
+theorem PosRigII.theorem1_object
+  : ∃ (H : ℂ → ℂ),
+  (∃ δ < (1 / 2 : ℝ), PosRigII.IntegerCritical δ H) ∧
+    H (0 : ℂ) = (1 : ℂ) ∧
+      PosRigII.CondC2Strict H ∧
+        (fun (z : ℂ) ↦ PosRig.Xi z ^ (2 : ℕ) * H z) ∈ PosRig.ConeOPS ∧
+          (∀ (n : ℕ),
+              (2 : ℕ) ≤ n →
+                PosRig.FT (fun (z : ℂ) ↦ PosRig.Xi z ^ (2 : ℕ) * H z) (PosRig.xiOf ↑n) = (0 : ℂ) ∧
+                  ∀ (D : ℂ),
+                    HasDerivAt (PosRig.FT fun (z : ℂ) ↦ PosRig.Xi z ^ (2 : ℕ) * H z) D (PosRig.xiOf ↑n) → D = (0 : ℂ)) ∧
+            ↑(PosRig.intR fun (z : ℂ) ↦ PosRig.Xi z ^ (2 : ℕ) * H z) =
+                PosRig.FT (fun (z : ℂ) ↦ PosRig.Xi z ^ (2 : ℕ) * H z) (0 : ℝ) ∧
+              ((0 : ℝ) < PosRig.intR fun (z : ℂ) ↦ PosRig.Xi z ^ (2 : ℕ) * H z) ∧
+                (PosRig.Arch fun (z : ℂ) ↦ PosRig.Xi z ^ (2 : ℕ) * H z) = (0 : ℝ) ∧
+                  (fun (z : ℂ) ↦ PosRig.Xi z ^ (2 : ℕ) * H z) ∈ PosRig.Cone ∧
+                    (PosRig.IsExactMagic fun (z : ℂ) ↦ PosRig.Xi z ^ (2 : ℕ) * H z) ∧
+                      (PosRig.ZF fun (z : ℂ) ↦ PosRig.Xi z ^ (2 : ℕ) * H z) = PosRig.Zzeta
+  hash 2331057270
+
+theorem PosRigII.theorem2
+  : ∀ p ∈ PosRig.K, p = PosRig.pZeta
+  hash 1328321427
+
+theorem PosRigII.theorem2_condU
+  : PosRig.CondU
+  hash 2531135648
+
+def PosRigII.voronoiTerm
+  : (ℂ → ℂ) → ℝ → ℕ → ℂ
+  := fun (H : ℂ → ℂ) (ξ : ℝ) (m : ℕ) ↦
+  ↑(↑((ArithmeticFunction.sigma (0 : ℕ)) m) / √↑m) * PosRigII.GammaFT H (ξ + PosRig.xiOf ↑m)
+  hash 2701597742071403562
+
+axiom PosRigII.voronoi_decoupling
+  : ∀ {δ : ℝ} {H : ℂ → ℂ}, PosRigII.ClassW δ H → δ < (1 / 2 : ℝ) → PosRigII.VoronoiIdentity H
+  hash 799117373

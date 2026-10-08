@@ -1,0 +1,243 @@
+%======================================================================
+\section{Positivity on the physical side}\label{sec:physical}
+%======================================================================
+
+The function $H_{\rm raw}$ is defined through a Mellin transform, and on the Fourier side $\Gh_{\rm raw}$ is of size $O(1)$ while $H_{\rm raw}(t)$
+grows roughly like $e^{\pi|t|/2-2\sqrt{2\pi|t|}}$; a direct Mellin inversion would have to resolve that growth out of a cancellation. Instead we
+apply the four-path functional of Section~\ref{sec:lift} to the Mellin transform of the kernel itself. The result is a formula for $H_{\rm raw}$ in
+which the growth is carried by a positive kernel, built from conical Legendre functions.
+
+\subsection{The conical kernel}
+
+$\Fer_\nu(x)=F(\nu+1,-\nu;1;\frac{1-x}2)$, $-1<x<1$, is the Ferrers (on-the-cut) Legendre function of degree $\nu$ and order $0$
+\cite[14.3.1]{DLMF}. For complex $z$ put $\pc_z:=\Fer_{-1/2+iz}$, a conical function; for real $t$, $\pc_t$ is real and even in $t$, since $\Fer_\nu=\Fer_{-\nu-1}$. Put
+\begin{equation}\label{eq:ck}
+\ck_t(\theta):=\frac{\sqrt{\sin\theta}\,\big[\pc_t(\cos\theta)+\pc_t(-\cos\theta)\big]}{2\,\pc_t(0)}\qquad(0<\theta<\pi).
+\end{equation}
+
+\begin{lemma}[Closed form of the kernel]\label{lem:conical}
+For $|\Re w|<\frac12$ and $0<\theta<\pi$, the function $f_w$ of Lemma~\ref{lem:kernel-mellin} is
+\[
+f_w(\theta)=\frac{\sqrt{\sin\theta}\,\big[\Fer_{w-1/2}(\cos\theta)+\Fer_{w-1/2}(-\cos\theta)\big]}{8\,\Fer_{w-1/2}(0)},\qquad
+\Fer_{w-1/2}(0)=\frac{\sqrt\pi}{\Gamma(\frac34+\frac w2)\Gamma(\frac34-\frac w2)}\ne0 .
+\]
+In particular $f_{it}=\frac14\ck_t$ for real $t$.
+\end{lemma}
+
+\begin{proof}
+If $y$ solves Legendre's equation $(1-x^2)y''-2xy'+\nu(\nu+1)y=0$, then $\phi(\theta):=\sqrt{\sin\theta}\,y(\cos\theta)$ solves
+$\phi''+[(\nu+\frac12)^2+1/(4\sin^2\theta)]\phi=0$ (Liouville normal form). With $\nu=w-\frac12$ this is \eqref{eq:polar-ode}. Both
+$\sqrt{\sin\theta}\,\Fer_{w-1/2}(\pm\cos\theta)$ solve it, so their sum is a solution symmetric about $\frac\pi2$, with value $2\Fer_{w-1/2}(0)$ there.
+The value of $\Fer_\nu(0)$ is \cite[14.5.1]{DLMF}; it is finite and non-zero for $|\Re w|<\frac12$. Symmetric solutions form a line
+(proof of Lemma~\ref{lem:kernel-mellin}(iv)), and $f_w(\frac\pi2)=\frac14$.
+\end{proof}
+
+\begin{theorem}[Positivity of the kernel]\label{thm:kernel-pos}
+For real $t$ and $0<\alpha<\pi$, Mehler--Dirichlet's formula \cite[14.12.1]{DLMF} gives
+\begin{equation}\label{eq:mehler}
+\pc_t(\cos\alpha)=\frac{\sqrt2}\pi\int_0^\alpha\frac{\cosh(t\phi)}{\sqrt{\cos\phi-\cos\alpha}}\dd\phi>0 ,
+\end{equation}
+and $\pc_t(0)=\sqrt\pi/|\Gamma(\frac34+\frac{it}2)|^2>0$. Hence $\ck_t(\theta)>0$ for $0<\theta<\pi$, $\ck_t(\frac\pi2)=1$ and $\ck_{-t}=\ck_t$.
+Moreover $\pc_t(\cos\alpha)$ is even and non-decreasing in $|t|$, $\pc_t(\cos\alpha)\le\cosh(t\alpha)\pc_0(\cos\alpha)$, and for complex $z$,
+$|\pc_z(\cos\alpha)|\le\pc_{\Re z}(\cos\alpha)$.
+\end{theorem}
+
+\begin{proof}
+\eqref{eq:mehler} is \cite[14.12.1]{DLMF} with $\mu=0$ and $\nu+\frac12=it$; the integrand is positive. The other statements follow from
+$\cosh(t\phi)\le\cosh(t\alpha)$ on $[0,\alpha]$ and $|\cosh(z\phi)|\le\cosh(\phi\Re z)$.
+\end{proof}
+
+\subsection{The physical-side formula}
+
+Put, for $Y>0$,
+\begin{equation}\label{eq:AB}
+\Ax(Y):=\sum_{n\ge1}2\pi na_n\sqrt Y\,K_0(2\pi nY),\qquad \Bx(Y):=\sum_{n\ge1}(-1)^{n+1}2\pi na_n\sqrt Y\,K_0(2\pi nY),
+\end{equation}
+so that $f(iY)=-16\pi\Ax(Y)$ and $f(\frac12+iY)=16\pi\Bx(Y)$ by \eqref{eq:f} and $\beta_n=-16\pi a_n$. Recall $\theta(Y)=2\operatorname{arccot}(2Y)$.
+
+\begin{theorem}[The physical-side formula]\label{thm:F}
+For every real $t$,
+\begin{equation}\label{eq:physical}
+H_{\rm raw}(t)=\frac{\Pi(t)}{2\pi^2(t^2+\frac14)^2},\qquad \Pi(t):=\int_1^\infty\Ax(Y)\cos(t\log Y)\dd Y+\frac12\int_{1/2}^\infty\Bx(Y)\,\ck_t(\theta(Y))\dd Y ,
+\end{equation}
+with absolutely convergent integrals. $\Pi$ is even and real, and $\Pi(t)=-R(it)/(4\pi)$. In particular $H_{\rm raw}(t)>0$ if and only if
+$\Pi(t)>0$.
+\end{theorem}
+
+\begin{proof}
+By Theorem~\ref{thm:lift}(e) at $w=it$, $R(it)=\Lift[m_\cdot(it)]$, the integrals converging absolutely: $|m_\tau(it)|\le\frac14\gz(0)/|\gz(it)|$ by (K4),
+and $|f|\le C_0e^{-2\pi Y}$ on the paths. By Lemma~\ref{lem:kernel-mellin}(i), $m_{iY}(it)+m_{i/Y}(it)=\frac14(Y^{-it}+Y^{it})=\frac12\cos(t\log Y)$. On the arcs
+$|\tau_\pm(Y)|=1$, $\arg\tau_+(Y)=\theta(Y)$, $\arg\tau_-(Y)=\pi-\theta(Y)$, so Lemma~\ref{lem:kernel-mellin}(iii) and Lemma~\ref{lem:conical} give
+$m_{\tau_\pm(Y)}(it)=\frac14\ck_t(\theta(Y))$. Inserting into \eqref{eq:four-path},
+\[
+R(it)=\frac14\int_1^\infty f(iY)\cos(t\log Y)\dd Y-\frac18\int_{1/2}^\infty f(\tfrac12+iY)\ck_t(\theta(Y))\dd Y=-4\pi\,\Pi(t),
+\]
+and Definition~\ref{def:Hraw} gives \eqref{eq:physical}. Evenness: $\cos(t\log Y)$ and $\ck_t$ are even in $t$.
+\end{proof}
+
+All Gamma factors have cancelled. The only cancellation left in \eqref{eq:physical} is near $t=0$: there the two integrals are about $+5.585$
+and $-5.584$, and $\Pi(0)=1.40\cdot10^{-3}$; as a function of the coefficients $a_n$ the cancellation is much stronger
+(Remark~\ref{rem:conditioning}). For large $t$ the kernel $\ck_t(\theta)\approx\frac12e^{t(\pi/2-\theta)}$ carries the growth, and the
+arc integral, whose integrand peaks at $Y\approx\sqrt{t/2\pi}$, dominates.
+
+\subsection{Large \texorpdfstring{$|t|$}{|t|}}
+
+Fix $Y_z:=0.870$, $Y_s:=1$, $Y_3:=4$, $\kappa:=\frac12$, $\theta_s:=\theta(Y_s)=2\operatorname{arccot}2=0.9272952\ldots$, so that
+$\frac\pi2-\theta_s=\arctan\frac34=0.6435011\ldots$; and $c_{\min}:=\theta(Y_z)-\theta_s=0.115941\ldots$, $t_{\rm mono}:=1/(2c_{\min})=4.31252\ldots$.
+
+\begin{theorem}[Large $|t|$]\label{thm:large-t}
+$\Pi(t)\ge0.2554\,e^{0.6435|t|}>0$ for every real $t$ with $|t|\ge8$.
+\end{theorem}
+
+The proof is analytic except for the numerical inputs of Proposition~\ref{prop:L-numbers}: the sign of $\Bx$ on $[0.870,4]$, the tail constant
+$\bar\rho(4)$, and three integrals evaluated at $t=8$. A monotonicity argument carries the inequality from $t=8$ to $\infty$. We need four lemmas. Let $r(y):=|\Gamma(\frac34+iy)|^2e^{\pi y}/(2\pi\sqrt y)$, so that by
+\cite[14.5.1]{DLMF}
+\begin{equation}\label{eq:P0}
+1/\pc_t(0)=r(t/2)\sqrt{2\pi t}\,e^{-\pi t/2}\qquad(t>0).
+\end{equation}
+
+\begin{lemma}[Stirling bracket]\label{lem:stirling}
+For $y>0$, $r_-(y):=\exp(-\frac9{32y^2}-\frac1{3y})\le r(y)\le r_+(y):=\exp(\frac9{64y^2}+\frac1{3y})$; $r_-$ is increasing and $r_+$ decreasing.
+\end{lemma}
+
+\begin{proof}
+Write $\log\Gamma(z)=(z-\frac12)\log z-z+\frac12\log2\pi+R_1(z)$ with $|R_1(z)|\le\sec^2(\frac12\operatorname{ph}z)/(12|z|)$ \cite[\S5.11(ii)]{DLMF}. For
+$z=\frac34+iy$, $\operatorname{ph}z\in(0,\frac\pi2)$, so $|R_1|\le1/(6y)$; and $\operatorname{ph}z=\frac\pi2-\arctan\frac3{4y}$ gives
+$\log r(y)=\frac14\log(1+\frac9{16y^2})+2y\arctan\frac3{4y}-\frac32+2\Re R_1(z)$. The first term lies in $[0,\frac9{64y^2}]$, the middle terms in
+$[-\frac9{32y^2},0]$ (as $x-x^3/3\le\arctan x\le x$), and the last in $[-\frac1{3y},\frac1{3y}]$.
+\end{proof}
+
+\begin{lemma}[Kernel bounds]\label{lem:kernel-bounds}
+Let $t>0$.
+\begin{enumerate}[label=\textup{(\alph*)}]
+\item If $0<\theta\le\pi/3$ and $0<\delta\le\theta$, then
+\[
+\ck_t(\theta)\ge\frac12\sqrt{\frac{\sin\theta}{\sin(\theta+\delta/2)}}\;e^{t(\pi/2-\theta)}\operatorname{erf}(\sqrt{t\delta})\,r_-(t/2).
+\]
+\item If $0<\theta\le\pi/2$, then
+\[
+\ck_t(\theta)\le\frac{\sqrt{\sin\theta}}2\,r_+(\tfrac t2)\sqrt{2\pi t}\,\Big[e^{-t(\frac\pi2-\theta)}\pc_0(\cos\theta)+\frac{e^{t(\frac\pi2-\theta)}+e^{-t(\frac{3\pi}2-\theta)}}2\,\pc_0(-\cos\theta)\Big].
+\]
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+(a) Drop $\pc_t(\cos\theta)>0$ and use $\pc_t(-\cos\theta)=\pc_t(\cos\alpha)$, $\alpha=\pi-\theta$. In \eqref{eq:mehler} keep only $\phi=\alpha-u$, $u\in[0,\delta]$
+(note $\delta\le\alpha$). There $\cos\phi-\cos\alpha=2\sin(\theta+\frac u2)\sin\frac u2\le\sin(\theta+\frac\delta2)\,u$, since $\theta+\frac\delta2\le\frac\pi2$, and
+$\cosh(t\phi)\ge\frac12e^{t(\pi-\theta)}e^{-tu}$. With $\int_0^\delta e^{-tu}u^{-1/2}\dd u=\sqrt{\pi/t}\operatorname{erf}(\sqrt{t\delta})$ this gives
+$\pc_t(\cos\alpha)\ge e^{t(\pi-\theta)}\operatorname{erf}(\sqrt{t\delta})/(\sqrt{2\pi t}\sqrt{\sin(\theta+\delta/2)})$. Combine with \eqref{eq:P0} and
+Lemma~\ref{lem:stirling}. (b) Use $\pc_t(\cos\alpha)\le\cosh(t\alpha)\pc_0(\cos\alpha)$ (Theorem~\ref{thm:kernel-pos}) for $\alpha=\theta$ and $\alpha=\pi-\theta$,
+$\cosh(t\theta)e^{-\pi t/2}\le e^{-t(\pi/2-\theta)}$, $\cosh(t(\pi-\theta))e^{-\pi t/2}=\frac12(e^{t(\pi/2-\theta)}+e^{-t(3\pi/2-\theta)})$, \eqref{eq:P0} and
+Lemma~\ref{lem:stirling}.
+\end{proof}
+
+\begin{lemma}[Signs of $\Bx$]\label{lem:B-sign}
+\begin{enumerate}[label=\textup{(\alph*)}]
+\item $\Bx>0$ on $[Y_z,Y_3]=[0.870,4]$.
+\item $\Bx>0$ on $[Y_3,\infty)$.
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+(a) is computer-assisted (Proposition~\ref{prop:L-numbers}(i)). (b) Since $|a_n|\le\abar_n$ (Theorem~\ref{thm:an-bounds}),
+$\Bx(Y)\ge2\pi a_1\sqrt YK_0(2\pi Y)(1-\rho(Y))$ with $\rho(Y):=\sum_{n\ge2}n\abar_nK_0(2\pi nY)/(a_1K_0(2\pi Y))$. By
+$\sqrt{\pi/2x}\,e^{-x}(1-\frac1{8x})\le K_0(x)\le\sqrt{\pi/2x}\,e^{-x}$ for $x>0$ \cite[\S10.40(ii)]{DLMF},
+$\rho(Y)\le\bar\rho(Y):=\sum_{n\ge2}\sqrt n\,(\abar_n/a_1)\,e^{-2\pi(n-1)Y}/(1-\frac1{16\pi Y})$, which is decreasing in $Y$; and $\bar\rho(4)<1$
+(Proposition~\ref{prop:L-numbers}(ii)).
+\end{proof}
+
+On $[\frac12,Y_z]$ the function $\Bx$ changes sign; numerically its zeros there are near $0.5542$ and at $\sqrt3/2$, the image of the elliptic point
+$e^{i\pi/3}$. We do not use any sign information on $[\frac12,Y_z]$: only an upper bound for $\Bx^-:=\max(-\Bx,0)$ enters.
+
+For $t>0$ and $\theta=\theta(Y)$ put
+\begin{align*}
+p_+(t)&:=\frac14\int_{Y_s}^{Y_3}\Bx(Y)\sqrt{\frac{\sin\theta}{\sin(\theta+\kappa\theta/2)}}\,e^{t(\theta_s-\theta)}\operatorname{erf}\big(\sqrt{t\kappa\theta}\big)\,r_-(t/2)\dd Y,\\
+p_-(t)&:=\frac14\int_{1/2}^{Y_z}\Bx^-(Y)\sqrt{\sin\theta}\,r_+(t/2)\sqrt{2\pi t}\,\Big[e^{-t(\pi-\theta-\theta_s)}\pc_0(\cos\theta)\\
+&\hspace{12em}+\frac{e^{-t(\theta-\theta_s)}+e^{-t(2\pi-\theta-\theta_s)}}2\,\pc_0(-\cos\theta)\Big]\dd Y .
+\end{align*}
+
+\begin{lemma}\label{lem:comparison}
+\begin{enumerate}[label=\textup{(\alph*)}]
+\item For $t>0$, $e^{-t(\pi/2-\theta_s)}\cdot\frac12\int_{1/2}^\infty\Bx(Y)\ck_t(\theta(Y))\dd Y\ge p_+(t)-p_-(t)$.
+\item $p_+$ is non-decreasing on $(0,\infty)$, and $p_-$ is non-increasing on $[t_{\rm mono},\infty)$.
+\item $|\int_1^\infty\Ax(Y)\cos(t\log Y)\dd Y|\le I_{\rm ax}:=\int_1^\infty\Ax(Y)\dd Y$.
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+(a) Split $[\frac12,\infty)$ at $Y_z,Y_s,Y_3$. On $[\frac12,Y_z]$, where $\theta\in[\theta(Y_z),\frac\pi2]$, bound the integrand below by $-\Bx^-\ck_t$ and use
+Lemma~\ref{lem:kernel-bounds}(b); multiplied by $e^{-t(\pi/2-\theta_s)}$ this gives $-p_-(t)$. On $[Y_z,Y_s]$ and $[Y_3,\infty)$ the integrand is $\ge0$,
+by Lemma~\ref{lem:B-sign} and Theorem~\ref{thm:kernel-pos}. On $[Y_s,Y_3]$, $\Bx\ge0$ and $\theta\le\theta_s<\pi/3$, and Lemma~\ref{lem:kernel-bounds}(a)
+with $\delta=\kappa\theta$ gives $p_+(t)$. (b) On $[Y_s,Y_3]$, $\theta\le\theta_s$, so $e^{t(\theta_s-\theta)}$ is non-decreasing; $\operatorname{erf}$ and
+$r_-$ are increasing; and $\Bx\ge0$. On $[\frac12,Y_z]$ each exponent $c\in\{\pi-\theta-\theta_s,\ \theta-\theta_s,\ 2\pi-\theta-\theta_s\}$ is $\ge c_{\min}$, so
+$\sqrt te^{-ct}$ is decreasing for $t\ge1/(2c)$, hence on $[t_{\rm mono},\infty)$; and $r_+$ is decreasing. (c) $\Ax>0$ since every $a_n>0$
+(Theorem~\ref{thm:an-positive}).
+\end{proof}
+
+\begin{proposition}[Computer-assisted]\label{prop:L-numbers}
+\begin{enumerate}[label=\textup{(\roman*)}]
+\item $\Bx>0$ on $[0.870,4]$: the certified cell minima are $\ge0.5817$ on $[0.870,1]$ and $\ge1.741\cdot10^{-7}$ on $[1,4]$.
+\item $\bar\rho(4)\le4.1988957\cdot10^{-9}$.
+\item $p_+(8)\ge2.2268109493$, $p_-(8)\le1.9389494542$, $I_{\rm ax}\le5.5848933622$, and $I_{\rm ax}e^{-8(\pi/2-\theta_s)}\le0.0324536121$.
+\item Consequently $p_+(8)-p_-(8)-I_{\rm ax}e^{-8(\pi/2-\theta_s)}\ge0.25540788>0$.
+\end{enumerate}
+\end{proposition}
+
+The integrals in (iii) are enclosed by Riemann sums of ball enclosures over $2000$ cells for $p_+$ and $8000$ cells for $p_-$, and $I_{\rm ax}$ by
+Gauss--Legendre quadrature with a rigorous error bound; all arithmetic is in ball arithmetic (Appendix~\ref{app:cert-L}).
+
+\begin{proof}[Proof of Theorem~\ref{thm:large-t}]
+For $t\ge8\ge t_{\rm mono}$, Theorem~\ref{thm:F} and Lemma~\ref{lem:comparison} give
+\[
+e^{-t(\pi/2-\theta_s)}\,\Pi(t)\ge p_+(t)-p_-(t)-I_{\rm ax}e^{-t(\pi/2-\theta_s)}\ge p_+(8)-p_-(8)-I_{\rm ax}e^{-8(\pi/2-\theta_s)},
+\]
+which is $\ge0.2554$ by Proposition~\ref{prop:L-numbers}. Since $\Pi$ is even, the same holds for $t\le-8$.
+\end{proof}
+
+\subsection{The window}
+
+\begin{theorem}[Window; computer-assisted]\label{thm:window}
+$\Pi(t)>0$ for every $t\in[0,40]$. More precisely, $[0,40]$ is covered by the $80$ closed cells $[t_c-\frac14,t_c+\frac14]$,
+$t_c=\frac14,\frac34,\dots,39\frac34$, and on each cell a certified lower bound for $\Pi$ is positive; on $[0,\frac12]$ it is
+$1.1292\cdot10^{-3}$. Moreover $\Pi(0)\in[1.400011\cdot10^{-3},\,1.401747\cdot10^{-3}]$.
+\end{theorem}
+
+The certificate (Appendix~\ref{app:cert-W}) works on each cell with the quadrature sum $Q(t)$ of the two integrals in \eqref{eq:physical} (Gauss--Legendre
+with $30$ nodes on each of $30$ panels of $[\frac12,13]$ for the arcs and $20$ panels of $[1,13]$ for the axis), which is a real-analytic function of
+$t$. It computes the Taylor polynomial of degree $19$ of $Q$ at $t_c$ in power-series ball arithmetic, bounds the Taylor remainder by Cauchy's
+estimate on the circle $|z-t_c|=1$ with the majorant of Theorem~\ref{thm:kernel-pos}, bounds the quadrature error through Bernstein ellipses, and
+bounds the tails in $Y$ (beyond $13$), in the conical series, and in $n$ (via $|a_n|\le\abar_n$). Every error term is an explicit ball, and the
+certified lower bound on each cell is at least $0.295$ times the value at its centre.
+
+\begin{corollary}\label{cor:Pi-positive}
+$\Pi(t)>0$ for every real $t$. Consequently $H_{\rm raw}(t)>0$ for every real $t$, $H_{\rm raw}(0)=8\Pi(0)/\pi^2>0$, and
+$H:=H_{\rm raw}/H_{\rm raw}(0)$ satisfies $H(0)=1$ and $H(t)>0$ on $\RR$; for $|t|\ge8$,
+$H(t)\ge0.2554\,C\,e^{0.6435|t|}/(2\pi^2(t^2+\frac14)^2)$ with $C=1/H_{\rm raw}(0)$.
+\end{corollary}
+
+\begin{proof}
+$\Pi$ is even; $[0,40]$ is covered by Theorem~\ref{thm:window} and $[8,\infty)$ by Theorem~\ref{thm:large-t}. Theorem~\ref{thm:F} transfers the sign
+to $H_{\rm raw}$.
+\end{proof}
+
+\begin{remark}[The certificate is sharp at small $t$]\label{rem:negctl}
+Positivity of $\Pi$ near $t=0$ depends on the Kloosterman terms with $c\ge2$. If every $a_n$ is replaced by its term $c=1$,
+$n(\Jdot-\Idot)(z_n)+\frac14\delta_{n1}$, the same certifier, with all error terms, proves that the resulting $\Pi$ is negative on $[0,1]$: its
+certified upper bounds are $-0.25267$ on $[-10^{-6},10^{-6}]$, $-0.25060$ on $[0,\frac12]$ and $-0.22702$ on $[\frac12,1]$ (Appendix~\ref{app:cert-W}). The cancellation
+at $t=0$ is about $4000:1$ between the axis and arc integrals, and the terms $c\ge2$ change $a_1$ only by a relative $3.3\cdot10^{-3}$.
+\end{remark}
+
+\begin{remark}[Conditioning of $\Pi(0)$ in the coefficients]\label{rem:conditioning}
+At $t=0$, \eqref{eq:physical} is linear in the coefficients: $\Pi(0)=\sum_na_nw_n$, where $w_n$ is the value at $t=0$ of the two integrals for
+the $n$-th terms of $\Ax$ and $\Bx$. The terms $a_nw_n$ alternate in sign and are large, about $+51.7$, $-330$, $+719$, $-849$, $+680$, $-413$,
+$+203$ for $n=1,\dots,7$, while $\Pi(0)=1.40\cdot10^{-3}$; so in coefficient space the cancellation is about $6\cdot10^5:1$. In particular
+$\partial\Pi(0)/\partial a_1=w_1=0.011287\ldots$, and a relative change of $-2.7\cdot10^{-5}$ in $a_1$ alone (about $-0.124$) would make $\Pi(0)$
+vanish. The certificates take this into account: every $a_n$ enters through a certified enclosure, a ball that includes the tail of its
+Kloosterman series for $n\le300$ (Appendix~\ref{app:cert-coeffs}) and the bounds $0<a_n\le\abar_n$ beyond, and all radii are propagated. The enclosure of $\Pi(0)$ in Theorem~\ref{thm:window} has radius
+$8.7\cdot10^{-7}$, of which $7.7\cdot10^{-7}$ is $w_1$ times the radius $6.9\cdot10^{-5}$ of the ball for $a_1$, and $\Pi(0)$ exceeds this
+radius by a factor of about $1600$. A floating-point evaluation of $H_{\rm raw}(0)=8\Pi(0)/\pi^2$ through \eqref{eq:physical} needs $a_1$ to an
+absolute accuracy of about $2\cdot10^{-7}$ (relative $4\cdot10^{-11}$) to reach the precision of Proposition~\ref{prop:C}, so the $c$-series
+must be summed far: its partial sums for $\Ss_1$ up to $c=10^4$ and up to $c=3\cdot10^5$ differ by $3.2\cdot10^{-7}$. Proposition~\ref{prop:C} is certified by the density route of Appendix~\ref{app:cert-C}, which is far less sensitive to
+$a_1$: with a ball for $a_1$ of radius $2.7\cdot10^{-5}$, the radius of $H_{\rm raw}(0)$ is $1.86\cdot10^{-9}$. The figures in this remark,
+apart from the certified radii, are floating-point evaluations and are not used in any proof.
+\end{remark}

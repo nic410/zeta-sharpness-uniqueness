@@ -1,0 +1,13 @@
+# command : python figures/make_figure1.py
+# env     : (COEFF_DATA, COEFF_EXTRA, NGL, NSUB not set)
+# date    : 2026-10-08T11:22:58Z
+# system  : Linux x86_64, 1 visible cores
+# python  : 3.10.12 | python-flint 0.9.0 | mpmath 1.3.0
+make_figure1: numpy 2.2.6, scipy 1.15.3, matplotlib 3.10.9 (an illustration, not a certificate)
+check: c = 1 term / certified midpoint at n = 1500: 1 -3.56e-14
+check: e^{4 pi} Ghat(1) = 7.995853e+05; series at x = 1.004: 8.197843e+05
+x = 1.5: e^{4 pi sqrt x} Ghat_H(x) / 10^6 = 2.499883
+x = 2.5: e^{4 pi sqrt x} Ghat_H(x) / 10^6 = 1.882818
+x = 3.5: e^{4 pi sqrt x} Ghat_H(x) / 10^6 = 1.963260
+wrote figures/figure1_H.csv, figures/figure1_G.csv, figures/figure1.pdf
+# exit code 0; wall time 3.6 s

@@ -1,0 +1,39 @@
+# command : python -u coefficients/cert_small_n.py 300000 10000 1,2,3,4,5,6 X3e5
+# env     : (COEFF_DATA, COEFF_EXTRA, NGL, NSUB not set)
+# date    : 2026-10-07T21:39:17Z
+# system  : Linux x86_64, 1 visible cores
+# python  : 3.10.12 | python-flint 0.9.0 | mpmath 1.3.0
+cert_small_n.py X=300000 Q0=10000 ns=[1, 2, 3, 4, 5, 6] prec=96
+input hashes: coefflib 754c6fb34af93951 kloost_fast eeefc00b18fcd015 script 5f36508e0bf6f115
+Arb-DFT tables for prime powers <= 10000 loaded (sha 8bbdb234c3ecca4f)
+   large prime powers: 2000 done (q ~ 28687), 38s
+   large prime powers: 4000 done (q ~ 49921), 77s
+   large prime powers: 6000 done (q ~ 71983), 116s
+   large prime powers: 8000 done (q ~ 94603), 161s
+   large prime powers: 10000 done (q ~ 117889), 206s
+   large prime powers: 12000 done (q ~ 141311), 258s
+   large prime powers: 14000 done (q ~ 165397), 304s
+   large prime powers: 16000 done (q ~ 189493), 349s
+   large prime powers: 18000 done (q ~ 213973), 402s
+   large prime powers: 20000 done (q ~ 238789), 463s
+   large prime powers: 22000 done (q ~ 263677), 533s
+   large prime powers: 24000 done (q ~ 288833), 611s
+large prime-power Kloosterman sums done: 24872 moduli q > 10000, max proved float error 1.00e-05 (648s)
+   c <= 10000: Kc partial sums ['[4581.12055308487404 +/- 8.40e-15]', '[512863.617459602200 +/- 3.04e-13]', '[20863407.8966628277 +/- 1.56e-11]', '[492008926.113732087 +/- 7.12e-11]', '[8134264696.72364403 +/- 4.94e-9]', '[104147672807.295440 +/- 1.37e-7]']  (650s)
+   c <= 30000: Kc partial sums ['[4581.1205533589690 +/- 5.39e-14]', '[512863.617459037866 +/- 4.32e-13]', '[20863407.8966638836 +/- 4.97e-11]', '[492008926.113730846 +/- 4.27e-10]', '[8134264696.72364402 +/- 3.49e-9]', '[104147672807.295440 +/- 1.29e-7]']  (653s)
+   c <= 100000: Kc partial sums ['[4581.1205534103319 +/- 5.71e-14]', '[512863.617458973713 +/- 4.20e-13]', '[20863407.8966638631 +/- 4.69e-11]', '[492008926.113730794 +/- 3.00e-10]', '[8134264696.72364410 +/- 4.29e-10]', '[104147672807.295440 +/- 5.66e-8]']  (665s)
+DECISIVE n=1: Kc_n = [4581.121 +/- 5.16e-4] ; a_n = [4581.371 +/- 5.16e-4] (rel rad 1.50e-08) ; alpha_n = [-55336.1783 +/- 5.87e-5] ; c-tail bounds [6.858e-5 +/- 3.89e-9] / [1.143e-5 +/- 4.85e-9]
+DECISIVE n=2: Kc_n = [512863.617 +/- 5.93e-4] ; a_n = [1025727.235 +/- 3.49e-4] (rel rad 2.60e-10) ; alpha_n = [-8871189.5680 +/- 5.03e-5] ; c-tail bounds [0.0001332 +/- 1.08e-8] / [2.287e-5 +/- 3.15e-10]
+DECISIVE n=3: Kc_n = [20863407.897 +/- 5.33e-4] ; a_n = [62590223.690 +/- 5.98e-4] (rel rad 9.41e-12) ; alpha_n = [-444069364.9931 +/- 4.67e-5] ; c-tail bounds [0.0001963 +/- 6.52e-9] / [3.430e-5 +/- 4.53e-9]
+DECISIVE n=4: Kc_n = [492008926.114 +/- 5.28e-4] ; a_n = [1968035704.45 +/- 5.96e-3] (rel rad 5.25e-13) ; alpha_n = [-12127637248.1944 +/- 8.04e-5] ; c-tail bounds [0.0002585 +/- 4.76e-8] / [4.574e-5 +/- 6.30e-10]
+DECISIVE n=5: Kc_n = [8134264696.724 +/- 6.76e-4] ; a_n = [40671323483.62 +/- 3.38e-3] (rel rad 3.93e-14) ; alpha_n = [-224617816301.025 +/- 2.99e-4] ; c-tail bounds [0.0003199 +/- 2.40e-8] / [5.717e-5 +/- 4.22e-9]
+DECISIVE n=6: Kc_n = [104147672807.295 +/- 8.21e-4] ; a_n = [624886036843.77 +/- 4.93e-3] (rel rad 3.66e-15) ; alpha_n = [-3155088175650.214 +/- 1.34e-4] ; c-tail bounds [0.0003807 +/- 2.40e-8] / [6.861e-5 +/- 9.46e-10]
+b_2/b_1 = [223.89091 +/- 6.18e-6]
+b_3/b_1 = [13661.899 +/- 6.22e-4]
+b_4/b_1 = [429573.57 +/- 6.51e-3]
+b_5/b_1 = [8.877545e+6 +/- 0.184]
+b_6/b_1 = [1.3639718e+8 +/- 4.85]
+A/b_1 = 1/(8 pi^4 (1 + 4 Kc_1)) = [7.002532e-8 +/- 2.45e-15]
+coefficients/out/an_smalln_X3e5.json fixed 18 pairs
+wrote coefficients/out/an_smalln_X3e5.json sha aacbbba6df55c35d (699s)
+# exit code 0; wall time 699.7 s

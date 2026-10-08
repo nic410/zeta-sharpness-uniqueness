@@ -1,0 +1,67 @@
+cff-version: 1.2.0
+message: "If you use or refer to this work, please cite the paper as below."
+title: "Sharpness and uniqueness for positive solutions of the explicit formula for ζ(s)"
+type: software
+authors:
+  - family-names: Johns
+    given-names: Nic
+version: "1.0"
+repository-code: "https://github.com/nic410/zeta-sharpness-uniqueness"
+url: "https://github.com/nic410/zeta-sharpness-uniqueness"
+license:
+  - CC-BY-4.0
+  - Apache-2.0
+keywords:
+  - analytic number theory
+  - Riemann zeta function
+  - Weil explicit formula
+  - positivity
+  - linear programming
+  - magic function
+  - Maass forms
+  - Niebur–Poincaré series
+  - Kloosterman sums
+  - conical functions
+  - computer-assisted proof
+abstract: >-
+  Weil's explicit formula for ζ(s) equates a functional 𝒜(F), which depends only on the archimedean data of ζ, with
+  sums over the zeros and over the prime powers. We construct an explicit even function F = Ξ²H, with H entire and
+  positive on ℝ, such that F ≥ 0 and F̂ ≥ 0 on ℝ, F̂ vanishes at log n/(2π) for every integer n ≥ 2, and 𝒜(F) = 0.
+  Since Ξ vanishes at every non-trivial zero, on or off the critical line, no information about the zeros is used. F
+  is an exact magic function, in the sense of the sphere-packing bounds of Cohn–Elkies and Viazovska, for the linear
+  programme of Odlyzko, Poitou and Serre: for the data of ζ the programme has no positive slack, so the method is
+  sharp, and F is a minimiser under RH. With a support theorem of Part I, every pair of positive measures satisfying
+  the formula, on the zero side and on the prime side beyond log 2/(2π), is then ζ's own. This resolves Conjectures
+  S and U of Part I. H comes from an eigenvalue-¼ eigenfunction of the hyperbolic Laplacian through a contour
+  argument of Viazovska's type, with Green's identity in place of Cauchy's theorem; its positivity is partly
+  computer-assisted. We do not prove RH; by these results it is equivalent to the existence of such a pair.
+preferred-citation:
+  type: article
+  status: preprint
+  title: "Sharpness and uniqueness for positive solutions of the explicit formula for ζ(s)"
+  authors:
+    - family-names: Johns
+      given-names: Nic
+  year: 2026
+  month: 10
+  url: "https://github.com/nic410/zeta-sharpness-uniqueness"
+  notes: "This paper was produced by AI agents, mainly Anthropic's Claude with supplementary assistance from OpenAI's Astra, under the author's direction; it has not yet been checked by a human expert."
+references:
+  - type: article
+    status: preprint
+    title: "Positive solutions of the explicit formula for ζ(s): near-criticality and uniqueness"
+    authors:
+      - family-names: Johns
+        given-names: Nic
+    year: 2026
+    month: 10
+    doi: "10.5281/zenodo.23197915"
+    identifiers:
+      - type: doi
+        value: "10.5281/zenodo.23197915"
+        description: "Concept DOI (all versions)"
+      - type: doi
+        value: "10.5281/zenodo.23217537"
+        description: "Version 1.3, on which the Lean formalisation of this paper builds"
+    url: "https://github.com/nic410/zeta-positive-solutions"
+    notes: "Part I of the series."

@@ -1,0 +1,36 @@
+# command : python -u coefficients/cert_H0.py 1 8
+# env     : (COEFF_DATA, COEFF_EXTRA, NGL, NSUB not set)
+# date    : 2026-10-07T22:02:45Z
+# system  : Linux x86_64, 1 visible cores
+# python  : 3.10.12 | python-flint 0.9.0 | mpmath 1.3.0
+cert_H0.py eta1=1.0000000000000000000000000000000000000000000000 eta2=8.0000000000000000000000000000000000000000000000 eps=[1.0000000000000000000000000000000000000000000000e-8 +/- 1.02e-56] XP=2000 prec=160
+input hashes: script feda1a408b04b7ce ; an_small_X1e4.json 9858457072c991f3
+   tighter small-n balls from an_smalln_X3e5.json aacbbba6df55c35d (X = 300000)
+   tighter n<=2 balls from an_smalln_X6e5.json 963ef3cf0adef433 (X = 600000)
+   a_1 = [4581.3706 +/- 7.35e-5] ; alpha_1 = [-55336.17835 +/- 6.99e-6]
+Q(1) = [0.079060414424450298044 +/- 3.09e-22]
+Pint = [0.003438015894 +/- 5.87e-13]   (quadrature [0,2000]: [0.0034380146987026206067 +/- 4.11e-23] ; tail [1.196e-9 +/- 6.90e-13])  (0s)
+J_low = [-0.015264254 +/- 8.27e-10]  (quadrature [-0.015264254 +/- 8.27e-10] ; [0,eps] bound [3.13e-14 +/- 9.54e-18])  (53s)
+J_high = [0.012652995 +/- 9.58e-10]  (quadrature [0.012652995 +/- 9.58e-10] ; [eta2,oo) bound [3.47e-20 +/- 3.61e-24])  (88s)
+
+2 pi M[g](1/2) = [0.00082676 +/- 4.14e-9]
+DECISIVE: H_raw(0) = [0.00113551 +/- 2.07e-9]   (> 0: True)  => SIGN COHERENCE (C > 0)
+DECISIVE: C = 1/H_raw(0) = [880.66 +/- 3.16e-3]
+DECISIVE: b_1 = C a_1 = [4.03464e+6 +/- 8.98]
+A = C/(32 pi^4) = [0.282527 +/- 6.66e-7] ; G^(1) = pi^2 A = [2.78843 +/- 6.85e-6]  (> 0)
+total 88s
+
+mid +- rad:
+  Pint       = 0.0034380158942994743691 +- 2.868e-13
+  J_low      = -0.015264254063822193360 +- 7.622e-10
+  J_high     = 0.012652995377987744636 +- 5.795e-10
+  2 pi M     = 0.00082675720846502564532 +- 1.342e-09
+  H_raw(0)   = 0.0011355097904015565291 +- 1.854e-09
+  C          = 880.66171550750732422 +- 1.441e-03
+  b_1        = 4034637.6509405940556 +- 6.625e+00
+  A          = 0.28252679831348359585 +- 4.636e-07
+  Ghat_S(1)  = 2.7884277347475290298 +- 4.577e-06
+  A/b_1      = 7.0025321400859270174e-8 +- 4.110e-16
+coefficients/out/H0_cert.json fixed 9 pairs
+wrote coefficients/out/H0_cert.json sha 1723e5decb953dc6
+# exit code 0; wall time 88.2 s

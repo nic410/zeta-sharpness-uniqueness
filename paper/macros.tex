@@ -1,0 +1,72 @@
+% macros.tex -- shared macros for main.tex and sections/*.tex (Part II).
+% The general and framework macros are those of Part I (same symbols, same meaning).
+% New local macros in a section file: use \providecommand and a section-specific prefix.
+
+% ---------------------------------------------------------------- general
+\newcommand{\RR}{\mathbb R}
+\newcommand{\ZZ}{\mathbb Z}
+\newcommand{\CC}{\mathbb C}
+\newcommand{\QQ}{\mathbb Q}
+\newcommand{\HH}{\mathbb H}
+\newcommand{\dd}{\,\mathrm d}
+\newcommand{\eps}{\varepsilon}
+\renewcommand{\Re}{\operatorname{Re}}
+\renewcommand{\Im}{\operatorname{Im}}
+\newcommand{\supp}{\operatorname{supp}}
+\newcommand{\FT}[1]{\widehat{#1}}          % Fourier transform, \int f(t)e^{-2\pi i\xi t}dt
+\newcommand{\hF}{\widehat F}
+\newcommand{\hyp}[1]{\textup{(#1)}}       % named hypothesis tag, e.g. \hyp{C1}
+
+% ---------------------------------------------------------------- coordinates and arithmetic data (as in Part I)
+\newcommand{\xin}[1]{\xi_{#1}}            % \xi_n = \log n/(2\pi)
+\newcommand{\PP}{\mathrm{PP}}             % prime powers
+\newcommand{\GR}{\Gamma_{\mathbb R}}
+\newcommand{\GC}{\Gamma_{\mathbb C}}
+\newcommand{\Zz}{Z_\zeta}                 % real zero ordinates of zeta
+\newcommand{\muz}{\mu_\zeta}
+\newcommand{\nuz}{\nu_\zeta}
+\newcommand{\pz}{p_\zeta}
+
+% ---------------------------------------------------------------- framework (as in Part I)
+\newcommand{\Oinf}{\Omega_\infty}         % archimedean density
+\newcommand{\Arch}{\mathcal A}            % archimedean functional
+\newcommand{\Tc}{\mathcal T}              % test class; \Tc_\delta
+\newcommand{\Gc}{\mathcal G_{\mathrm{w}}} % Gaussian wave packets
+\newcommand{\Spec}{\mathcal R}            % right side of the explicit formula
+\newcommand{\Kad}{\mathcal K}             % admissible pairs
+\newcommand{\Cone}{\mathcal C}
+\newcommand{\ConeOPS}{\mathcal C_{\mathrm{OPS}}}
+\newcommand{\kstar}{\kappa^{*}}
+\newcommand{\kOPS}{\kappa^{*}_{\mathrm{OPS}}}
+\newcommand{\qmin}{q_{\min}}
+\newcommand{\condE}{\textup{(E)}}
+\newcommand{\condU}{\textup{(U)}}
+\newcommand{\condS}{\textup{(S)}}
+\newcommand{\RH}{\mathrm{RH}}
+\newcommand{\BRS}{\mathcal M}             % {\log m/(4\pi): m >= 1}
+
+% ---------------------------------------------------------------- ancillary file paths (breakable at /)
+\newcommand{\ancf}[1]{\nolinkurl{#1}}
+
+% ---------------------------------------------------------------- reduction
+\newcommand{\gi}{\gamma_\infty}           % archimedean factor of Xi
+\newcommand{\Gh}{\widehat G}              % Gamma-only transform \widehat G_H
+\newcommand{\Wc}{\mathcal W}              % growth class \Wc_\delta, condition (C1)
+\newcommand{\Hc}{\mathscr H}              % Part I: type < pi/2 class
+\newcommand{\Strip}{S}                    % closed strip S_\delta
+
+% ---------------------------------------------------------------- automorphic input
+\newcommand{\Ss}{\mathcal S}              % Kloosterman--Bessel sums \Ss_n
+\newcommand{\abar}{\bar a}                % main term \abar_n of a_n
+\newcommand{\Idot}{\dot I_2}              % \partial_\mu I_\mu at \mu=2
+\newcommand{\Jdot}{\dot J_2}              % \partial_\mu J_\mu at \mu=2
+\newcommand{\Pt}{\widetilde\Phi}          % the eigenvalue-1/4 Y^2-component
+\newcommand{\gz}{\gamma_0}                % \Gamma_R(w+1/2)^2
+\newcommand{\GO}{\mathcal G}              % the four-path function
+\newcommand{\Lift}{\mathcal L}            % the four-path (Green-flux) functional
+\newcommand{\Fer}{\mathsf P}              % Ferrers (on-the-cut) Legendre function
+\newcommand{\ck}{\mathfrak c}             % conical kernel \ck_t(\theta)
+\newcommand{\pc}{\mathsf p}              % conical function \pc_z = \Fer_{-1/2+iz}
+\newcommand{\Ax}{\mathsf A}               % axis density
+\newcommand{\Bx}{\mathsf B}               % arc density
+\newcommand{\ee}{\mathsf e}               % e^w/\sqrt{2\pi w}

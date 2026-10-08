@@ -1,0 +1,318 @@
+%======================================================================
+\section{The automorphic input}\label{sec:automorphic}
+%======================================================================
+
+This section constructs the eigenfunction of $\Delta$ with eigenvalue $\frac14$ from which the integer-critical function is lifted in
+Section~\ref{sec:lift}: a spectral derivative of an odd Niebur--Poincar\'e series, made into an exact eigenfunction by a first-order
+operator at a double root, together with its symmetric-square partners. It is $1$-periodic, odd and exponentially decaying at the cusp
+$\infty$, but it is not $\mathrm{SL}_2(\ZZ)$-invariant (Remark~\ref{rem:not-invariant}); it is the $Y^2$-component of a vector-valued
+function that is equivariant for the symmetric square (Lemma~\ref{lem:sym2}).
+
+\emph{Notation.} $\Gamma=\mathrm{SL}_2(\ZZ)$, $\Gamma_\infty=\{\pm\left(\begin{smallmatrix}1&k\\0&1\end{smallmatrix}\right)\}$, $\HH$ the upper
+half-plane with $\tau=u+iv$, $e(x)=e^{2\pi ix}$, and $\Delta=-v^2(\partial_u^2+\partial_v^2)$. $S=\left(\begin{smallmatrix}0&-1\\1&0\end{smallmatrix}\right)$
+acts by $S\tau=-1/\tau$. $S(m,n;c)=\sum_{d\bmod c,\,(d,c)=1}e((m\bar d+nd)/c)$ is the Kloosterman sum; it is real, $S(1,-n;c)=S(-1,n;c)$, and
+we use only the trivial bound $|S(m,n;c)|\le\varphi(c)\le c$. The letter $\nu$ denotes a spectral parameter in this section and the next;
+it should not be confused with the prime measure of an admissible pair.
+
+\subsection{Bessel functions}
+
+We use the modified Bessel functions $I_\mu,K_\mu$, the Bessel functions $J_\mu,Y_\mu$, and the order derivatives
+\[
+\Idot(z):=\partial_\mu I_\mu(z)\big|_{\mu=2},\qquad \Jdot(z):=\partial_\mu J_\mu(z)\big|_{\mu=2}\qquad(z>0).
+\]
+
+\begin{lemma}\label{lem:bessel-basic}
+\begin{enumerate}[label=\textup{(\alph*)}]
+\item For $\Re\mu\ge0$ and $y>0$: $|I_\mu(y)|,|J_\mu(y)|\le(y/2)^{\Re\mu}I_0(y)/|\Gamma(\mu+1)|\le(y/2)^{\Re\mu}e^y/|\Gamma(\mu+1)|$.
+\item $\partial_\mu I_\mu|_{\mu=0}=-K_0$, $\partial_\mu K_\mu|_{\mu=0}=0$, $\partial_\mu K_\mu|_{\mu=1}=K_0(z)/z$, and
+\begin{equation}\label{eq:dI1}
+\partial_\mu I_\mu(z)\big|_{\mu=1}=K_1(z)-\frac{I_0(z)}z .
+\end{equation}
+\item $\Idot(z)=-K_2(z)+2I_0(z)/z^2-2I_1(z)/z$ and $\Jdot(z)=\frac\pi2Y_2(z)+2J_0(z)/z^2+2J_1(z)/z$.
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+(a) In the series $I_\mu(y)=(y/2)^\mu\sum_k(y^2/4)^k/(k!\,\Gamma(k+\mu+1))$ write $\Gamma(k+\mu+1)=\Gamma(\mu+1)(\mu+1)_k$ and use
+$|(\mu+1)_k|\ge k!$; the series for $J_\mu$ has the same moduli. (b) The first three identities are \cite[10.38.3]{DLMF} with $n=0$ and \cite[10.38.4]{DLMF} with $n=0$ and $n=1$.
+For \eqref{eq:dI1}, write $\dot I_\mu:=\partial_\mu I_\mu$. Differentiating $I_{\nu-1}-I_{\nu+1}=(2\nu/z)I_\nu$ in $\nu$ at $\nu=0$ gives
+$\dot I_{-1}-\dot I_1=(2/z)I_0$; differentiating $I_{-\nu}=I_\nu+(2/\pi)\sin(\nu\pi)K_\nu$ at $\nu=1$ gives $-\dot I_{-1}=\dot I_1-2K_1$.
+Eliminating $\dot I_{-1}$ gives $\dot I_1=K_1-I_0/z$. (c) These are \cite[10.38.3]{DLMF} and \cite[10.15.3]{DLMF} with $n=2$.
+\end{proof}
+
+The sign in \eqref{eq:dI1} is load-bearing: it determines the growing modes in Proposition~\ref{prop:sym2}(d), hence the exponential decay
+of $D_{\rm rest}$, the double pole in Theorem~\ref{thm:lift}(d) and the value $\GO(1)=-\frac12$. Bounds for $\Idot$ and $\Jdot$ are collected in Appendix~\ref{app:bessel}.
+
+\subsection{The odd Niebur--Poincar\'e series}
+
+For $\nu\in\CC$ and $m\in\{\pm1\}$ put $f_{\nu,m}(\tau):=\sqrt vI_\nu(2\pi v)e(mu)$ and
+\[
+f_\nu:=\frac{f_{\nu,1}-f_{\nu,-1}}{2i}=\sqrt v\,I_\nu(2\pi v)\sin(2\pi u),\qquad
+P_\nu(\tau):=\sum_{\gamma\in\Gamma_\infty\backslash\Gamma}f_\nu(\gamma\tau)\qquad(\Re\nu>\tfrac12).
+\]
+Each $f_{\nu,m}$ satisfies $\Delta f=(\frac14-\nu^2)f$, since $W(v)=\sqrt vI_\nu(2\pi v)$ solves $v^2W''-4\pi^2v^2W+(\frac14-\nu^2)W=0$.
+
+\begin{proposition}\label{prop:niebur}
+\begin{enumerate}[label=\textup{(\alph*)}]
+\item The series $P_\nu$ converges absolutely and uniformly on compact subsets of $\HH\times\{\Re\nu>\frac12\}$, together with the series of
+all its $\tau$-derivatives.
+\item $P_\nu$ is $\Gamma$-invariant, real-analytic in $\tau$, holomorphic in $\nu$, satisfies $\Delta P_\nu=(\frac14-\nu^2)P_\nu$, and is odd:
+$P_\nu(-\bar\tau)=-P_\nu(\tau)$.
+\item $\tau$-derivatives commute with $\partial_\nu$; in particular $\partial_\nu$ commutes with $\Delta$.
+\end{enumerate}
+\end{proposition}
+
+\begin{proof}
+(a) By Lemma~\ref{lem:bessel-basic}(a), $|f_\nu(\tau)|\le|\Gamma(\nu+1)|^{-1}\pi^{\Re\nu}v^{\Re\nu+1/2}e^{2\pi v}$, and, from
+$I_\nu'=I_{\nu+1}+(\nu/z)I_\nu$, the hyperbolic gradient norm $v|\nabla f_\nu|$ obeys a bound of the same form with an extra factor $(1+v)^2$. For
+$\gamma\notin\Gamma_\infty$ and $\tau$ in a compact $K\subset\HH$, $\Im\gamma\tau\le1/v\le1/v_K$, so
+$|f_\nu(\gamma\tau)|+(\Im\gamma\tau)|\nabla f_\nu|(\gamma\tau)\le C_{\nu,K}(\Im\gamma\tau)^{\Re\nu+1/2}$, locally uniformly in $\nu$. The Eisenstein
+series $\sum_{\Gamma_\infty\backslash\Gamma}(\Im\gamma\tau)^\sigma$ converges uniformly on $K$ for $\sigma>1$ \cite[\S3]{Iwa02}, and
+$\Re\nu+\frac12>1$. This gives (a) for the series and its first derivatives. Each term solves the elliptic equation $(\Delta-\frac14+\nu^2)f=0$
+with analytic coefficients, so locally uniform convergence of the solutions implies locally uniform convergence of all their derivatives
+(interior Schauder estimates, \cite[Theorems~6.2 and~6.17]{GT01}).
+(b) Absolute convergence allows reindexing $\gamma\mapsto\gamma g$; the eigen-equation passes to the limit by (a); each term is entire in
+$\nu$ and the convergence is locally uniform. For oddness, $\varepsilon:=\mathrm{diag}(-1,1)$ normalises $\Gamma$ and $\Gamma_\infty$,
+$(\varepsilon\gamma\varepsilon^{-1})(-\bar\tau)=-\overline{\gamma\tau}$, and $f_\nu(-\bar Z)=-f_\nu(Z)$.
+(c) Cauchy's integral formula in $\nu$ on a small circle, with the bounds of (a).
+\end{proof}
+
+\subsection{The Fourier expansion}
+
+\begin{lemma}[The Weyl-element integral]\label{lem:weyl}
+Let $\Re\nu>0$, $\varepsilon\in\{\pm1\}$, $\kappa>0$, and $g_\varepsilon(Z):=\sqrt{\Im Z}\,I_\nu(2\pi\Im Z)\,e(\varepsilon\Re Z)$. For $Y>0$ the
+integral $\Psi_\varepsilon(\kappa,Y):=\int_\RR g_\varepsilon(-\kappa/(U+iY))e(-U)\dd U$ converges absolutely, and
+\[
+\Psi_+(\kappa,Y)=2\sqrt\kappa\,J_{2\nu}(4\pi\sqrt\kappa)\,\sqrt YK_\nu(2\pi Y),\qquad
+\Psi_-(\kappa,Y)=2\sqrt\kappa\,I_{2\nu}(4\pi\sqrt\kappa)\,\sqrt YK_\nu(2\pi Y).
+\]
+\end{lemma}
+
+\begin{proof}
+Put $w=U+iY$ and $G(w):=g_\varepsilon(-\kappa/w)$. Since $w\mapsto-\kappa/w$ is an isometry of $\HH$ and $\Im(-\kappa/w)=\kappa Y/|w|^2$,
+Lemma~\ref{lem:bessel-basic}(a) gives
+\begin{equation}\label{eq:weyl-bound}
+|G(w)|+Y|\nabla G(w)|\le C(\kappa Y)^{\Re\nu+1/2}|w|^{-2\Re\nu-1}\qquad\text{whenever }\kappa Y\le|w|^2 .
+\end{equation}
+
+\emph{Step 1: the shape in $Y$.} $G$ is a continuous eigenfunction of $\Delta$ with eigenvalue $\lambda:=\frac14-\nu^2$, and by
+\eqref{eq:weyl-bound} the function $w\mapsto\int_\RR G(w+t)e(-t)\dd t$ converges absolutely, locally uniformly. Testing against
+$(\Delta-\lambda)\phi$ for compactly supported smooth $\phi$ and using Fubini and the translation invariance of $\Delta$ shows that it is a
+distributional, hence real-analytic, $\lambda$-eigenfunction. It equals $e(U)W(Y)$ with $W(Y)=\Psi_\varepsilon(\kappa,Y)$, so
+$Y^2W''-4\pi^2Y^2W+\lambda W=0$ and $W=\alpha\sqrt YK_\nu(2\pi Y)+\beta\sqrt YI_\nu(2\pi Y)$. By \eqref{eq:weyl-bound}, $W(Y)=O(Y^{1/2})$ as
+$Y\to\infty$, which excludes the exponentially growing solution: $\beta=0$. So $\Psi_\varepsilon(\kappa,Y)=a(\kappa)\sqrt YK_\nu(2\pi Y)$.
+
+\emph{Step 2: an ordinary differential equation in $\kappa$, for real $\nu>1$.} Then $K_\nu>0$ on $(0,\infty)$. The translation
+$Z\mapsto Z+t$, conjugated by $Z=-\kappa/w$, is the flow $w\mapsto w/(1-tw/\kappa)$, and $g_\varepsilon(Z+t)=e(\varepsilon t)g_\varepsilon(Z)$.
+Differentiating at $t=0$ gives
+\begin{equation}\label{eq:weyl-pde}
+(U^2-Y^2)\,\partial_UG+2UY\,\partial_YG=2\pi i\varepsilon\kappa\,G .
+\end{equation}
+For $\nu>1$, \eqref{eq:weyl-bound} makes $U^2G$, $U^2\partial_UG$ and $U\partial_YG$ integrable in $U$, so we may apply the transform
+$\widetilde G(\eta,Y):=\int G(U+iY)e(-\eta U)\dd U$ ($\eta$ near $1$) to \eqref{eq:weyl-pde}. With $\widetilde{Uh}=(i/2\pi)\partial_\eta\widetilde h$ and
+$\widetilde{\partial_Uh}=2\pi i\eta\widetilde h$,
+\[
+\partial_\eta^2(\eta\widetilde G)+4\pi^2Y^2\eta\widetilde G-2Y\partial_\eta\partial_Y\widetilde G+4\pi^2\varepsilon\kappa\widetilde G=0 .
+\]
+The substitution $U=U'/\eta$ gives $\widetilde G(\eta,Y)=\eta^{-1}a(\kappa\eta)W_0(\eta Y)$ with $W_0(y)=\sqrt yK_\nu(2\pi y)$ (so $a\in C^2$). With
+$k=\kappa\eta$ and $y=\eta Y$ one has $\partial_\eta^2(\eta\widetilde G)=\kappa^2a''W_0+2\kappa Ya'W_0'+Y^2aW_0''$ and
+$\partial_\eta\partial_Y\widetilde G=\kappa a'W_0'+YaW_0''$, so the terms with $W_0'$ cancel and, after multiplication by $\eta^2$,
+\[
+k^2a''(k)W_0(y)+a(k)\big[-y^2W_0''(y)+4\pi^2y^2W_0(y)\big]+4\pi^2\varepsilon k\,a(k)W_0(y)=0 .
+\]
+Since $-y^2W_0''+4\pi^2y^2W_0=\lambda W_0$ and $W_0>0$,
+\begin{equation}\label{eq:weyl-ode}
+k^2a''(k)+\big(4\pi^2\varepsilon k+\tfrac14-\nu^2\big)a(k)=0 .
+\end{equation}
+With $a(k)=\sqrt k\,b(z)$, $z=4\pi\sqrt k$, this becomes $z^2b''+zb'+(\varepsilon z^2-4\nu^2)b=0$: Bessel's equation of order $2\nu$
+($\varepsilon=1$) or the modified one ($\varepsilon=-1$). So $a(k)=\sqrt k[\alpha J_{2\nu}+\beta\tilde Y](4\pi\sqrt k)$ with $\tilde Y\in\{J_{-2\nu},Y_{2\nu}\}$,
+respectively $a(k)=\sqrt k[\alpha I_{2\nu}+\beta K_{2\nu}](4\pi\sqrt k)$.
+
+\emph{Step 3: normalisation as $\kappa\to0$, for real $\nu>1$.} Fix $Y=1$. As $\kappa\to0$,
+$\kappa^{-\nu-1/2}g_\varepsilon(-\kappa/(U+i))\to\pi^\nu\Gamma(\nu+1)^{-1}(U^2+1)^{-\nu-1/2}$, dominated by $C(U^2+1)^{-\nu-1/2}$. By
+$\int_\RR(U^2+1)^{-\nu-1/2}e(-U)\dd U=2\pi^{\nu+1/2}K_\nu(2\pi)/\Gamma(\nu+\frac12)$ \cite[10.32.11]{DLMF} and Legendre's duplication formula \cite[5.5.5]{DLMF},
+$a(\kappa)=2(2\pi)^{2\nu}\kappa^{\nu+1/2}\Gamma(2\nu+1)^{-1}(1+o(1))$ for both signs. The second solutions are $\asymp\kappa^{1/2-\nu}$, which is
+incompatible with $a=O(\kappa^{\nu+1/2})$; so $\beta=0$. Since $\sqrt kJ_{2\nu}(4\pi\sqrt k)$ and $\sqrt kI_{2\nu}(4\pi\sqrt k)$ are both
+$(2\pi)^{2\nu}k^{\nu+1/2}\Gamma(2\nu+1)^{-1}(1+O(k))$, we get $\alpha=2$.
+
+\emph{Step 4: all $\Re\nu>0$.} Both sides of the claim are holomorphic in $\nu$ on $\Re\nu>0$ (for the left side, by \eqref{eq:weyl-bound} and
+dominated convergence), and they agree for real $\nu>1$.
+\end{proof}
+
+\begin{theorem}[Fourier expansion]\label{thm:niebur-fourier}
+For $\Re\nu>\frac12$ and $\tau\in\HH$,
+\[
+P_\nu(\tau)=\sqrt v\,I_\nu(2\pi v)\sin(2\pi u)+\sum_{n\ge1}A_n(\nu)\sqrt v\,K_\nu(2\pi nv)\sin(2\pi nu),
+\]
+\[
+A_n(\nu)=2\sum_{c\ge1}\frac1c\Big[S(1,n;c)J_{2\nu}\Big(\frac{4\pi\sqrt n}c\Big)-S(-1,n;c)I_{2\nu}\Big(\frac{4\pi\sqrt n}c\Big)\Big].
+\]
+The $c$-series converges absolutely and locally uniformly in $\nu$, so $A_n$ is holomorphic on $\Re\nu>\frac12$ and may be differentiated
+termwise; $|A_n(\nu)|\le4\zeta(2\Re\nu)(2\pi\sqrt n)^{2\Re\nu}e^{4\pi\sqrt n}/|\Gamma(2\nu+1)|$; and the $n$-series converges absolutely and locally
+uniformly on $\HH\times\{\Re\nu>\frac12\}$. In particular $P_\nu$ has no constant term.
+\end{theorem}
+
+\begin{proof}
+Representatives of $\Gamma_\infty\backslash\Gamma$ are the identity and, for $c\ge1$ and $(c,d)=1$, matrices $\gamma_{c,d}$ with bottom row
+$(c,d)$. Writing $d=d_0+kc$ with $d_0$ modulo $c$, $\gamma_{c,d}\tau=a/c-1/(c^2(\tau+d_0/c+k))$ with $a\equiv\bar d_0\pmod c$, and
+$f_{\nu,m}(Z+a/c)=e(ma/c)f_{\nu,m}(Z)$. By \eqref{eq:weyl-bound} (with $\kappa=c^{-2}$) Poisson summation applies to each block, and since the
+whole series converges absolutely, uniformly in $u$ (Proposition~\ref{prop:niebur}), the Fourier coefficients may be taken block by block. The
+$e(nu)$-coefficient of the blocks with modulus $c$ of $\sum_\gamma f_{\nu,m}(\gamma\tau)$ is $S(m,n;c)B_c(m,n;v)$ with
+$B_c(m,n;v):=\int_\RR f_{\nu,m}(-1/(c^2(U+iv)))e(-nU)\dd U$. For $n\ge1$, $f_{\nu,m}(Z)=g_{\operatorname{sgn}m}(Z)$, and the substitution
+$U=U'/n$ turns $B_c$ into $n^{-1}\Psi_{\operatorname{sgn}m}(n/c^2,nv)$; Lemma~\ref{lem:weyl} gives
+$B_c(m,n;v)=(2/c)\sqrt vK_\nu(2\pi nv)$ times $J_{2\nu}(4\pi\sqrt n/c)$ if $m=1$ and $I_{2\nu}(4\pi\sqrt n/c)$ if $m=-1$. For $n\le-1$, $u\mapsto-u$ gives
+$B_c(m,n;v)=B_c(-m,-n;v)$. Assembling $f_\nu=(f_{\nu,1}-f_{\nu,-1})/(2i)$ with $S(1,-n;c)=S(-1,n;c)$ gives the stated sine series; the identity
+coset contributes $f_\nu$, and the constant term vanishes because $P_\nu$ is odd. The bound follows from $|S|\le c$ and
+Lemma~\ref{lem:bessel-basic}(a) at order $2\nu$; with $K_\nu(2\pi nv)\le C_\nu e^{-2\pi nv}(1+(nv)^{-\Re\nu})$ the $n$-series converges.
+\end{proof}
+
+\begin{remark}[The literature]\label{rem:niebur-lit}
+Series of this kind were introduced by Niebur \cite{Nie73}; see also Fay \cite{Fay77}. The expansion of Theorem~\ref{thm:niebur-fourier},
+with exactly the constant $2$ and the assignment of $J$ to $mn>0$ and $I$ to $mn<0$, is stated by Bringmann, Jorgenson and Smajlovi\'c
+\cite[\S2.4]{BJS25} (with $s=\nu+\frac12$), who note that they correct misprints in Niebur's Theorem~1. Lemma~\ref{lem:weyl} proves it from
+scratch for every $\Re\nu>0$, so no normalisation is taken from the literature; the termwise $\nu$-derivative below relies on this.
+\end{remark}
+
+\subsection{The double root and the eigenvalue-\texorpdfstring{$\frac14$}{1/4} eigenfunction}
+
+\begin{lemma}[A Jordan block]\label{lem:jordan}
+If $\phi\in C^3(\HH)$ satisfies $\Delta\phi=\lambda\phi$, then
+\[
+(\Delta-\tfrac14)\Big(2\partial_v\phi+\big(\tfrac14-\lambda\big)\frac\phi v\Big)=-\big(\lambda+\tfrac34\big)^2\frac\phi v .
+\]
+\end{lemma}
+
+\begin{proof}
+$\Delta(\partial_v\phi)=\partial_v(\Delta\phi)-(2/v)\Delta\phi=\lambda\partial_v\phi-2\lambda\phi/v$ and $\Delta(\phi/v)=\lambda\phi/v+2\partial_v\phi-2\phi/v$.
+Hence $\Delta(2\partial_v\phi+(\frac14-\lambda)\phi/v)=\frac12\partial_v\phi-(\lambda^2+\frac74\lambda+\frac12)\phi/v$; subtracting $\frac14$ times the
+argument leaves $-(\lambda^2+\frac32\lambda+\frac9{16})\phi/v$.
+\end{proof}
+
+For $\phi=P_\nu$ we have $\lambda=\frac14-\nu^2$, so $\frac14-\lambda=\nu^2$ and $\lambda+\frac34=1-\nu^2$: the right side of Lemma~\ref{lem:jordan}
+has a double zero at $\nu=1$, where the eigenvalue of $P_\nu$ is $-\frac34$. Put $P_1:=P_\nu|_{\nu=1}$, $\dot P:=\partial_\nu P_\nu|_{\nu=1}$,
+\begin{equation}\label{eq:Pt}
+\Pt:=\partial_\nu\Big[\Big(2\partial_v+\frac{\nu^2}v\Big)P_\nu\Big]_{\nu=1}=2\partial_v\dot P+\frac{\dot P}v+\frac{2P_1}v ,
+\end{equation}
+and, for $n\ge1$,
+\begin{equation}\label{eq:an}
+\Ss_n:=\sum_{c\ge1}\frac1c\Big[S(1,n;c)\,\Jdot\Big(\frac{4\pi\sqrt n}c\Big)-S(-1,n;c)\,\Idot\Big(\frac{4\pi\sqrt n}c\Big)\Big],\qquad
+a_n:=n\Ss_n+\tfrac14\delta_{n1}.
+\end{equation}
+Since $\partial_\nu J_{2\nu}=2(\partial_\mu J_\mu)|_{\mu=2\nu}$, termwise differentiation in Theorem~\ref{thm:niebur-fourier} gives $A_n'(1)=4\Ss_n$.
+
+\begin{proposition}\label{prop:Pt}
+\begin{enumerate}[label=\textup{(\alph*)}]
+\item $(\Delta+\frac34)\dot P=-2P_1$.
+\item $(\Delta-\frac14)\Pt=0$.
+\item $\Pt$ is $1$-periodic and odd, $\Pt(-\bar\tau)=-\Pt(\tau)$; in particular $\Pt=0$ on the lines $\Re\tau\in\frac12\ZZ$.
+\item $\displaystyle\Pt(\tau)=\sum_{n\ge1}\beta_n\sqrt v\,K_0(2\pi nv)\sin(2\pi nu)$ with $\beta_n=-4\pi\big(nA_n'(1)+\delta_{n1}\big)=-16\pi a_n$.
+\item $|A_n(1)|\le\frac{4\pi^4}3ne^{4\pi\sqrt n}$, $|\Ss_n|\le1.02\,e^{4\pi\sqrt n}$ and $|\beta_n|\le52\,n\,e^{4\pi\sqrt n}$ for all $n\ge1$.
+Consequently $\Pt$ and all its derivatives are $O_{v_0}(e^{-2\pi v})$ for $v\ge v_0>0$, uniformly in $u$: $\Pt$ decays exponentially at the
+cusp $\infty$.
+\end{enumerate}
+\end{proposition}
+
+\begin{proof}
+(a) Differentiate $(\Delta-\frac14+\nu^2)P_\nu=0$ in $\nu$ at $\nu=1$ (Proposition~\ref{prop:niebur}(c)). (b) By Lemma~\ref{lem:jordan},
+$(\Delta-\frac14)[(2\partial_v+\nu^2/v)P_\nu]=-(1-\nu^2)^2P_\nu/v$, whose $\nu$-derivative vanishes at $\nu=1$. (c) $P_\nu$ is $1$-periodic and odd,
+and $2\partial_v+\nu^2/v$ preserves both properties. (d) From $I_\nu'=I_{\nu-1}-(\nu/z)I_\nu$ and $K_\nu'=-K_{\nu-1}-(\nu/z)K_\nu$, the $n$-th sine
+coefficient of $(2\partial_v+\nu^2/v)P_\nu$ is
+$\delta_{n1}[4\pi\sqrt vI_{\nu-1}(2\pi v)+(1-\nu)^2I_\nu(2\pi v)/\sqrt v]+A_n(\nu)[-4\pi n\sqrt vK_{\nu-1}(2\pi nv)+(1-\nu)^2K_\nu(2\pi nv)/\sqrt v]$.
+The coefficients are holomorphic in $\nu$ and commute with $\partial_\nu$. At $\nu=1$, Lemma~\ref{lem:bessel-basic}(b) gives the $\nu$-derivative
+$-4\pi\sqrt vK_0(2\pi v)\delta_{n1}-4\pi nA_n'(1)\sqrt vK_0(2\pi nv)$. (e) The first bound is Theorem~\ref{thm:niebur-fourier} at $\nu=1$. For
+$\Ss_n$, split the $c$-sum at $c_0=2\pi\sqrt n$: by Lemma~\ref{lem:dotbounds} the terms with $z_c=4\pi\sqrt n/c\ge2$ contribute at most
+$e^{4\pi\sqrt n}+2\pi\sqrt ne^{2\pi\sqrt n}+2\pi\sqrt n(\frac\pi2+1)$, and those with $c>c_0$ at most $50\sqrt n$. For the latter,
+$z_c<2$, and Lemma~\ref{lem:dotbounds}(c) with $|S|\le c$, $e^{z_c^2/4}<e$, $z_c^2/12<\frac13$ and $\log(2/z_c)=\log(c/c_0)$ bounds the $c$-th
+term by $e\,(c_0/c)^2[\log(c/c_0)+\psi(3)+\frac13]$; since $\sum_{c>c_0}c^{-2}\le c_0^{-1}+c_0^{-2}$ and
+$\sum_{c>c_0}c^{-2}\log(c/c_0)\le\int_{c_0}^\infty c^{-2}\log(c/c_0)\dd c+\max_{c\ge c_0}c^{-2}\log(c/c_0)=c_0^{-1}+(2ec_0^2)^{-1}$, their sum is
+at most $e\,c_0(\frac43+\psi(3))+\frac12+e(\psi(3)+\frac13)<38.6\sqrt n+4\le50\sqrt n$, as $c_0=2\pi\sqrt n$ and $\psi(3)=\frac32-\gamma_E$. Finally
+$e^{-4\pi\sqrt n}(2\pi\sqrt ne^{2\pi\sqrt n}+67\sqrt n)<0.012$. Then $|\beta_n|=16\pi|n\Ss_n+\frac14\delta_{n1}|\le52ne^{4\pi\sqrt n}$. The decay
+follows from $K_0(y)\le\sqrt{\pi/2y}\,e^{-y}$ \cite[\S10.40(ii)]{DLMF} and $\sum_nn^{j+1}e^{4\pi\sqrt n-2\pi n v_0}<\infty$.
+\end{proof}
+
+The bounds in (e) are crude: in fact $a_n\sim\abar_n:=n^{1/4}e^{4\pi\sqrt n}/(4\sqrt2\pi^2)$ (Theorem~\ref{thm:an-positive}). They are used only
+for absolute convergence, which keeps the existence part of the argument independent of the positivity of the $a_n$.
+
+\subsection{The symmetric-square structure}
+
+\begin{lemma}[Symmetric-square equivariance]\label{lem:sym2}
+Let $\phi\in C^2(\HH)$ be $\Gamma$-invariant and $\nu\in\CC$. Define $\Psi_0,\Psi_1,\Psi_2$ by
+\[
+2\Re\big[(2i\partial_\tau\phi)(\tau X+Y)^2\big]+\nu^2\phi\,\frac{|\tau X+Y|^2}v=\Psi_0(\tau)Y^2+\Psi_1(\tau)XY+\Psi_2(\tau)X^2 .
+\]
+Then $\Psi_0=2\partial_v\phi+\nu^2\phi/v$, $\Psi_1=2u\Psi_0-4v\partial_u\phi$ and $\Psi_2=u^2\Psi_0-4uv\partial_u\phi+\nu^2v\phi-2v^2\partial_v\phi$. Moreover
+$\Psi_2=\Psi_0\circ S$, $\Psi_0(\tau+1)=\Psi_0(\tau)$, $\Psi_1(\tau+1)=\Psi_1(\tau)+2\Psi_0(\tau)$, $\Psi_2(\tau+1)=\Psi_2(\tau)+\Psi_1(\tau)+\Psi_0(\tau)$; hence
+\begin{equation}\label{eq:TT}
+\Psi_2(\tau+1)-2\Psi_2(\tau)+\Psi_2(\tau-1)=2\Psi_0(\tau).
+\end{equation}
+\end{lemma}
+
+\begin{proof}
+For $\gamma=\left(\begin{smallmatrix}a&b\\c&d\end{smallmatrix}\right)\in\Gamma$: $(\partial_\tau\phi)(\gamma\tau)=(c\tau+d)^2\partial_\tau\phi(\tau)$, $(\gamma\tau)X+Y=(\tau X'+Y')/(c\tau+d)$
+with $(X',Y')=(X,Y)\gamma$, and $\Im\gamma\tau=v/|c\tau+d|^2$. So the left side $\mathfrak F(\tau;X,Y)$ satisfies
+$\mathfrak F(\gamma\tau;(X,Y))=\mathfrak F(\tau;(X,Y)\gamma)$. The components follow from $2i\partial_\tau\phi=\partial_v\phi+i\partial_u\phi$ and
+$|\tau X+Y|^2=|\tau|^2X^2+2uXY+Y^2$. For $\gamma=S$, $(X,Y)S=(Y,-X)$, which gives $\Psi_2\circ S=\Psi_0$; for
+$T=\left(\begin{smallmatrix}1&1\\0&1\end{smallmatrix}\right)$, $(X,Y)T=(X,X+Y)$, which gives the translation rules, and \eqref{eq:TT} follows by
+applying them at $\tau$ and $\tau-1$.
+\end{proof}
+
+Apply Lemma~\ref{lem:sym2} to $\phi=P_\nu$ and differentiate in $\nu$ at $\nu=1$. Then $\partial_\nu\Psi_0|_{\nu=1}=\Pt$, and we put
+\begin{equation}\label{eq:Phi}
+\Phi:=\partial_\nu\Psi_2\big|_{\nu=1},\qquad E_1:=-4v\,\partial_u\dot P,\qquad E_0:=2vP_1+v\dot P-2v^2\partial_v\dot P,
+\end{equation}
+so that $\Phi=u^2\Pt+uE_1+E_0$ with $E_1,E_0$ $1$-periodic.
+
+\begin{proposition}\label{prop:sym2}
+\begin{enumerate}[label=\textup{(\alph*)}]
+\item $\Phi=\Pt\circ S$. $\Phi$ is an eigenfunction of $\Delta$ with eigenvalue $\frac14$, it is odd, and $\Phi(iv)=0$ for $v>0$.
+\item $\Phi(\tau+1)-2\Phi(\tau)+\Phi(\tau-1)=2\Pt(\tau)$.
+\item $\dot P=\sqrt v\big[K_1(2\pi v)-\frac{I_0(2\pi v)}{2\pi v}\big]\sin2\pi u+\sum_{n\ge1}\Big[A_n'(1)\sqrt vK_1(2\pi nv)+A_n(1)\frac{K_0(2\pi nv)}{2\pi n\sqrt v}\Big]\sin2\pi nu$
+and $P_1=\sqrt vI_1(2\pi v)\sin2\pi u+\sum_{n\ge1}A_n(1)\sqrt vK_1(2\pi nv)\sin2\pi nu$.
+\item (Growing modes.) $E_1=4\sqrt vI_0(2\pi v)\cos2\pi u+(\text{decaying})$ and
+$E_0=\big[4v^{3/2}I_1(2\pi v)-\frac1\pi\sqrt vI_0(2\pi v)\big]\sin2\pi u+(\text{decaying})$, where ``decaying'' is a series
+$\sum_{n\ge1}c_n(v)\cos2\pi nu$, respectively $\sum_{n\ge1}c_n(v)\sin2\pi nu$, with $|c_n(v)|+|c_n'(v)|\le Cn^3e^{4\pi\sqrt n}(1+v)^2e^{-2\pi nv}$ for $v\ge\frac12$.
+\item (No constant terms.) $E_1$ and $E_0$ have zero mean in $u$ for every $v$.
+\item For $v\ge1$ and $|u|\le2$, $|\Phi(\tau)|+|\nabla\Phi(\tau)|\le C_\Phi v^2e^{2\pi v}$.
+\end{enumerate}
+\end{proposition}
+
+\begin{proof}
+(a) $\Psi_2=\Psi_0\circ S$ for every $\nu$; transport Proposition~\ref{prop:Pt}(b),(c) by the isometry $S$, which commutes with
+$\tau\mapsto-\bar\tau$; and $\Pt(i/v)=0$. (b) is \eqref{eq:TT} differentiated in $\nu$. (c) follows from Theorem~\ref{thm:niebur-fourier} by
+termwise differentiation and Lemma~\ref{lem:bessel-basic}(b). (d) The growing part of $\dot P$ is $-(2\pi)^{-1}v^{-1/2}I_0(2\pi v)\sin2\pi u$, by
+\eqref{eq:dI1}. Then $-4v\partial_u$ of it is $4\sqrt vI_0(2\pi v)\cos2\pi u$, and, with $I_0'=I_1$, the growing part of $E_0$ is
+$2v^{3/2}I_1-(2\pi)^{-1}\sqrt vI_0-(2\pi)^{-1}\sqrt vI_0+2v^{3/2}I_1$. The remaining terms are the $K$-modes and the $K_1$ part of the first mode;
+the bounds follow from Proposition~\ref{prop:Pt}(e) and $K_j(y)\le C(1+y^{-j})e^{-y}$. (e) Every term in (c) carries $\sin2\pi nu$ or (after
+$\partial_u$) $\cos2\pi nu$ with $n\ge1$; this is where the oddness of the seed is used. (f) follows from $\Phi=u^2\Pt+uE_1+E_0$, (d) and
+$I_j(y)\le e^y$.
+\end{proof}
+
+\begin{remark}[$\Pt$ is not $\Gamma$-invariant]\label{rem:not-invariant}
+If $\Pt\circ S=\Pt$, then $\Phi=\Pt$ would be $1$-periodic, the left side of Proposition~\ref{prop:sym2}(b) would vanish, and $\Pt=0$; but
+$\beta_1=-16\pi a_1\ne0$ (Theorem~\ref{thm:an-positive}). So $\Pt$ is a $1$-periodic, odd eigenfunction of $\Delta$ with eigenvalue $\frac14$
+that decays exponentially at the cusp $\infty$, but it is not an automorphic form for $\Gamma$, in particular not a Maass cusp form; the
+$\Gamma$-equivariant object is the triple $(\Psi_0,\Psi_1,\Psi_2)$ of Lemma~\ref{lem:sym2}, differentiated in $\nu$. Nothing below uses
+$\Gamma$-invariance of $\Pt$.
+\end{remark}
+
+Writing the growing modes as $E_1\ni q\sqrt vI_0(2\pi v)\cos2\pi u$ and $E_0\ni(qv^{3/2}I_1(2\pi v)+q'\sqrt vI_0(2\pi v))\sin2\pi u$, we have
+$(q,q')=(4,-1/\pi)$ exactly, so $q'/q=-1/(4\pi)$; this ratio is what makes the double pole in Theorem~\ref{thm:lift}(d) residue-free.
+
+\emph{The density on the imaginary axis.} Put $D(v):=-\partial_u\Phi(iv)$ for $v>0$. Since $\Phi=\Pt\circ S$,
+\begin{equation}\label{eq:D-cusp0}
+D(v)=v^{-2}(\partial_u\Pt)(i/v)=v^{-5/2}\sum_{n\ge1}2\pi n\beta_nK_0(2\pi n/v),
+\end{equation}
+which is $O(e^{-2\pi/v})$ as $v\to0$. On the other hand $D=-E_1(iv)-\partial_uE_0(iv)$, so Proposition~\ref{prop:sym2}(d) gives
+\begin{equation}\label{eq:D-split}
+D=D_{\rm grow}+D_{\rm rest},\qquad D_{\rm grow}(v)=-2\sqrt vI_0(2\pi v)-8\pi v^{3/2}I_1(2\pi v),
+\end{equation}
+with $|D_{\rm rest}(v)|\le C_D(1+v)^2e^{-2\pi v}$ for $v\ge1$ and $|D_{\rm rest}(v)|\le C_D\sqrt v$ for $0<v\le1$. The factor $(1+v)^2$ cannot be
+removed: the first mode gives $D_{\rm rest}(v)=-4\pi^2(1+4\Ss_1)v^2e^{-2\pi v}(1+O(1/v))$.
+
+\begin{remark}[Representation-theoretic meaning]\label{rem:rep}
+Tensoring a principal series representation $\pi_s$ of $\mathrm{SL}_2(\RR)$ with $\mathrm{Sym}^2$ produces constituents with the infinitesimal
+characters of $\pi_{s-1},\pi_s,\pi_{s+1}$ (Bernstein--Gelfand \cite{BG80}; for Maass forms see \cite[\S4]{ABR25}). The $\Delta$-eigenvalue
+$(s-1)(2-s)$ of the constituent $\pi_{s-1}$ is stationary at $s=\frac32$ ($\nu=1$), where it equals $\frac14$; Lemma~\ref{lem:jordan} is this
+double root, and the $\nu$-derivative of the $Y^2$-component in Lemma~\ref{lem:sym2} is the resulting eigenvalue-$\frac14$ eigenfunction. This
+interpretation is heuristic and is not used in the proofs.
+\end{remark}

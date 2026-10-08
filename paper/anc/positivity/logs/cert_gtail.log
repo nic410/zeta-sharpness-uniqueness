@@ -1,0 +1,9 @@
+# command : python positivity/cert_gtail.py
+# env     : COEFF_EXTRA=coefficients/data/extra_smalln_X3e5.json
+# date    : 2026-10-08T11:22:11Z
+# system  : Linux x86_64, 1 visible cores
+# python  : 3.10.12 | python-flint 0.9.0 | mpmath 1.3.0
+cert_gtail: hashes poslib 6d1830c291015d03 cert_gtail 5601d7dc6c5f48b8 an_small 59fe6e24647252db an_cert 59d50f17db2199b1 extra ff4b86318eed86f1
+rhobar(4) = [4.198895694e-9 +/- 1.65e-19]  (< 1 needed): True
+DECISIVE: g > 0 on [4, oo): True
+# exit code 0; wall time 0.1 s

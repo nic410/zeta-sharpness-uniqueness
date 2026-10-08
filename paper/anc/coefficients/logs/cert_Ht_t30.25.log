@@ -1,0 +1,21 @@
+# command : python -u coefficients/cert_Ht.py 30.25
+# env     : (COEFF_DATA, COEFF_EXTRA, NGL, NSUB not set)
+# date    : 2026-10-07T22:07:16Z
+# system  : Linux x86_64, 1 visible cores
+# python  : 3.10.12 | python-flint 0.9.0 | mpmath 1.3.0
+cert_Ht.py t=30.250000000000000000000000000000000000000000000 eta1=1.0000000000000000000000000000000000000000000000 eta2=8.0000000000000000000000000000000000000000000000 eps=[1.0000000000000000000000000000000000000000000000e-8 +/- 1.02e-56] XP=2000 prec=160
+input hashes: script 6be8f92c984d0357 ; an_small_X1e4.json 9858457072c991f3
+   tighter small-n balls from an_smalln_X3e5.json aacbbba6df55c35d (X = 300000)
+   tighter n<=2 balls from an_smalln_X6e5.json 963ef3cf0adef433 (X = 600000)
+   a_1 = [4581.3706 +/- 7.35e-5] ; alpha_1 = [-55336.17835 +/- 6.99e-6]
+Q(1) = [-2.6363608614630222337e-12 +/- 4.01e-32]
+Pint_s = [3.25944e-6 +/- 2.79e-12] + [2.70045e-6 +/- 6.94e-12]j   (quadrature: [3.25941028389760e-6 +/- 4.73e-21] + [2.70050568943776e-6 +/- 4.49e-21]j ; tail main [3.0519e-11 +/- 1.36e-16] + [-5.0742e-11 +/- 8.15e-17]j ; err [1.98e-12 +/- 4.61e-15])  (0s)
+J_low = [-3.2596993e-6 +/- 5.15e-14] + [-2.7007209e-6 +/- 4.87e-14]j  (quadrature [-3.25969927986e-6 +/- 6.84e-18] + [-2.70072088263e-6 +/- 7.03e-18]j ; [0,eps] bound [3.13e-14 +/- 9.54e-18])  (67s)
+J_high = [-2.10472e-14 +/- 7.87e-20] + [4.56074e-14 +/- 7.93e-20]j  (quadrature [-2.104724e-14 +/- 4.19e-21] + [4.560744e-14 +/- 4.53e-21]j ; [eta2,oo) bound [3.47e-20 +/- 3.61e-24])  (100s)
+
+2 pi M(s) = [-2.6e-10 +/- 3.52e-12] + [-2.7e-10 +/- 6.13e-12]j
+DECISIVE: H_raw(t=30.250) = [1.3e+5 +/- 4.79e+3] + [+/- 1.03e+3]j   (imag part should contain 0: True)
+          H(t) = C H_raw(t), C from H0_cert.json (sha 1723e5decb953dc6) = [880.66 +/- 3.16e-3]:  [1.2e+8 +/- 3.11e+6]
+mid +- rad: Re H_raw(t) = 133760.31394315180738 +- 1.028e+03 ; Im = -0.14856 +- 1.028e+03
+total 100s
+# exit code 0; wall time 100.3 s

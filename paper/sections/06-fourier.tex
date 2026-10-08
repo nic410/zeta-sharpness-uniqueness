@@ -1,0 +1,103 @@
+%======================================================================
+\section{Positivity on the Fourier side}\label{sec:fourier}
+%======================================================================
+
+On $(1,\infty)$ the $\Gamma$-only transform is $\sin^2(\pi x)\sqrt x\sum_na_nK_0(4\pi\sqrt{nx})$ (Theorem~\ref{thm:lift}(c)), so the sign of
+$\Gh_{\rm raw}$ beyond $x=1$ is decided by the signs of the coefficients $a_n=n\Ss_n+\frac14\delta_{n1}$ of \eqref{eq:an}. This section proves that
+every $a_n$ is positive, with explicit two-sided bounds, using only the trivial bound for Kloosterman sums; and it records the certified value
+of the normalising constant.
+
+\subsection{The coefficients are positive}
+
+Put $z_n:=4\pi\sqrt n$, $\ee(w):=e^w/\sqrt{2\pi w}$ and $\abar_n:=n\cdot\frac2{z_n}\ee(z_n)=\frac{n^{1/4}e^{4\pi\sqrt n}}{4\sqrt2\,\pi^2}$. With
+$\kappa_1:=1+e/3$, $\kappa_2:=2e/9$ and $\kappa_3:=\kappa_1\psi(3)+\kappa_2=2.36297\ldots$, define for $z\ge4\pi$
+\begin{gather*}
+\lambda_0(z):=\Big(1-\frac1z\Big)\Big(1-\frac3{8z}-\frac{15}{32z^2}\Big)-\frac{\pi^3}{16z^2},\\
+\varrho(z):=\frac{(\pi+2)z}{8\ee(z)}+\sqrt2e^{-z/2}+\frac{(\pi+2)z^2}{8\ee(z)}+\frac{\sqrt3z^2}4e^{-2z/3}+\Big[\kappa_3+\frac z2(\kappa_1+\kappa_3)\Big]\frac z{2\ee(z)},\\
+\lambda_-(z):=\lambda_0(z)-\frac{(\pi+1)z}{4\ee(z)}-\varrho(z),\qquad \lambda_+(z):=1-\frac1z+\Big(\frac{\pi+1}2+\frac2{z^2}\Big)\frac z{2\ee(z)}+\varrho(z).
+\end{gather*}
+
+\begin{theorem}[Positivity of the coefficients]\label{thm:an-positive}
+For every $n\ge1$,
+\[
+\frac2{z_n}\ee(z_n)\,\lambda_-(z_n)\le\Ss_n\le\frac2{z_n}\ee(z_n)\,\lambda_+(z_n),
+\]
+and $\lambda_-$ is increasing on $[4\pi,\infty)$ with $\lambda_-(4\pi)=0.85010\ldots$. Hence $\Ss_n>0$ and $a_n>0$ for every $n\ge1$. The proof uses
+only the trivial bound $|S(\pm1,n;c)|\le\varphi(c)$; it involves no check over finitely many $n$, and its only numerical input is the
+evaluation of $\lambda_-$ at the single point $z=4\pi$.
+\end{theorem}
+
+\begin{theorem}[Two-sided bounds]\label{thm:an-bounds}
+For every $n\ge1$, $(1-2/z_n)\,\abar_n\le a_n\le\abar_n$.
+\end{theorem}
+
+The decisive numbers are elementary evaluations at the single point $z=4\pi$: $\lambda_0(4\pi)=0.877952$, $(\pi+1)z/(4\ee(z))=0.000403$, and the five
+summands of $\varrho(4\pi)$ are $0.000250$, $0.002641$, $0.003145$, $0.015725$, $0.005683$, so $\lambda_-(4\pi)=0.850105$. We evaluated all of them
+in ball arithmetic as a check (Appendix~\ref{app:cert}); a pocket calculator suffices.
+
+\begin{proof}[Proof of Theorem~\ref{thm:an-positive}]
+Fix $n$ and write $z=z_n\ge4\pi$, $M(w):=|\Jdot(w)|+|\Idot(w)|$, and $\Ss_n=T_1+R_n$ with $T_1:=\Jdot(z)-\Idot(z)$ the term $c=1$. By the trivial
+bound, $|R_n|\le\sum_{c\ge2}(\varphi(c)/c)M(z/c)$. We split the sum, using the Bessel bounds of Lemmas~\ref{lem:Jdot-uniform}--\ref{lem:Idot} in
+Appendix~\ref{app:bessel}.
+\begin{enumerate}[label=(\roman*)]
+\item $c=2$: $\varphi(2)/2=\frac12$ and $w=z/2\ge2\pi$, so $M(z/2)\le\frac{\pi+2}2+\frac4z\ee(z/2)$; since $\ee(z/2)/\ee(z)=\sqrt2e^{-z/2}$, the contribution
+divided by $\frac2z\ee(z)$ is at most $\frac{(\pi+2)z}{8\ee(z)}+\sqrt2e^{-z/2}$.
+\item $3\le c\le z/2$: $w=z/c\ge2$ and $\varphi(c)/c\le1$, so $M(z/c)\le\frac{\pi+2}2+\frac{2c}z\ee(z/c)\le\frac{\pi+2}2+\ee(z/3)$, as $\ee$ is increasing on
+$[\frac12,\infty)$. There are at most $z/2$ such $c$, and $\ee(z/3)/\ee(z)=\sqrt3e^{-2z/3}$; the contribution divided by $\frac2z\ee(z)$ is at most
+$\frac{(\pi+2)z^2}{8\ee(z)}+\frac{\sqrt3z^2}4e^{-2z/3}$.
+\item $c>z/2$: $w=z/c<2$, and by Lemma~\ref{lem:small-w}(c), $(\varphi(c)/c)M(z/c)\le f(c)$ with
+$f(y):=\frac{z^2}4y^{-2}[\kappa_1\log(2y/z)+\kappa_3]$, which is positive and decreasing on $[z/2,\infty)$ (as $\kappa_1<2\kappa_3$). So
+$\sum_{c>z/2}f(c)\le f(z/2)+\int_{z/2}^\infty f=\kappa_3+\frac z2(\kappa_1+\kappa_3)$, and divided by $\frac2z\ee(z)$ this is the last summand of $\varrho$.
+\end{enumerate}
+Hence $|R_n|\le\frac2z\ee(z)\varrho(z)$. For the term $c=1$, Lemmas~\ref{lem:Jdot-uniform} and~\ref{lem:Idot}(c) give
+$T_1\ge\frac2z\ee(z)\lambda_0(z)-\frac{\pi+1}2$ and $T_1\le\frac{\pi+1}2+\frac2{z^2}+\frac2z\ee(z)(1-\frac1z)$; this gives both inequalities.
+\emph{Monotonicity.} $\lambda_0$ is increasing on $[1,\infty)$: it is a product of two non-negative increasing factors minus a decreasing term.
+Each of $z^k/\ee(z)\propto z^{k+1/2}e^{-z}$ ($k\le3$), $e^{-z/2}$ and $z^2e^{-2z/3}$ is decreasing on $[4\pi,\infty)$, so every subtracted term in
+$\lambda_-$ decreases there, and $\lambda_-$ increases. Finally $\lambda_-(4\pi)=0.850105>0$, so $\Ss_n>0$, and $a_n=n\Ss_n+\frac14\delta_{n1}>0$.
+\end{proof}
+
+\begin{proof}[Proof of Theorem~\ref{thm:an-bounds}]
+Upper bound: $z(\lambda_+(z)-1+\frac1z)=(\frac{\pi+1}2+\frac2{z^2})\frac{z^2}{2\ee(z)}+z\varrho(z)$ is decreasing on $[4\pi,\infty)$, by the same monotonicity
+facts, and equals $0.34996$ at $z=4\pi$; so $\lambda_+(z)\le1-0.65/z$ and $a_n\le\abar_n(1-0.65/z_n)+\frac14\delta_{n1}\le\abar_n$, because
+$0.65\,\abar_1/(4\pi)=265.6>\frac14$. Lower bound: $a_n\ge n\Ss_n\ge\abar_n\lambda_-(z_n)$, and
+$z(\lambda_-(z)-1+\frac2z)=z(\lambda_0(z)-1+\frac2z)-z[\frac{(\pi+1)z}{4\ee(z)}+\varrho(z)]$, where
+$z(\lambda_0(z)-1+\frac2z)=0.625-(\frac3{32}+\frac{\pi^3}{16})z^{-1}+\frac{15}{32}z^{-2}$ is increasing (value $0.46630$ at $4\pi$) and the bracketed term
+is decreasing (value $0.34993$ at $4\pi$). So $\lambda_-(z)\ge1-2/z$ on $[4\pi,\infty)$.
+\end{proof}
+
+The bounds are sharp in the main term: the term $c=1$ alone is $nT_1=\frac{\sqrt n}{2\pi}I_1(z_n)-\frac{I_0(z_n)}{8\pi^2}+n[K_2(z_n)+\Jdot(z_n)]$ by
+Lemma~\ref{lem:bessel-basic}(c), and the certified values of Appendix~\ref{app:cert} show $\sum_{c\ge2}|\text{term}_c|\le3.6\cdot10^{-3}\,T_1$ for
+$n\le1500$, so Theorem~\ref{thm:an-positive} loses only a factor of about $8$ in $\varrho$.
+
+\begin{remark}[The Weil bound is not needed]
+The Weil--Estermann bound $|S(m,n;c)|\le d(c)(m,n,c)^{1/2}c^{1/2}$ \cite{Wei48,Est61} (see also \cite[Chapter~11]{IK04}) would improve the constants, but
+the trivial bound already suffices for every $n$. The Weil bound enters the paper only through the tails of the certified coefficient
+enclosures (Appendix~\ref{app:cert}), which are used by the window, by the numbers of the large-$|t|$ theorem and by the value of $C$.
+\end{remark}
+
+\subsection{The normalising constant}\label{ssec:C}
+
+The function $H_{\rm raw}$ of Definition~\ref{def:Hraw} has $\Gamma$-only transform $\Gh_{\rm raw}$, whose coefficients are the $a_n$. The object of
+Theorem~\ref{thm:main-object} is normalised by $H(0)=1$, i.e.\ $H:=H_{\rm raw}/H_{\rm raw}(0)$, provided $H_{\rm raw}(0)\neq0$. Its sign is decided
+by the physical side: we prove in Section~\ref{sec:physical} that $H_{\rm raw}>0$ on all of $\RR$, so $H_{\rm raw}(0)>0$. The value is
+computer-assisted.
+
+\begin{proposition}[Computer-assisted]\label{prop:C}
+$H_{\rm raw}(0)=0.0011355097904\pm1.86\cdot10^{-9}$. Hence $C:=1/H_{\rm raw}(0)\in[880.66027,\,880.66316]$, and
+$\Gh_{\rm raw}(0)\cdot C=C/(32\pi^2)=2.788428\pm5\cdot10^{-6}$.
+\end{proposition}
+
+The certificate (Appendix~\ref{app:cert-C}) evaluates the Mellin transform of $\Gh_{\rm raw}/(2\pi\sqrt x)$ at $s=\frac12$ through a route that is
+independent of the physical-side formula of Section~\ref{sec:physical}: the density \eqref{eq:D-cusp0} on $(0,1]$, an explicit cusp-$\infty$
+expansion of $D$ on $[1,\infty)$, and closed-form Mellin kernels. The two routes share only the coefficient enclosures. Through the
+physical-side formula, $H_{\rm raw}(0)$ is very sensitive to $a_1$ (Remark~\ref{rem:conditioning}); the route used here is far less so, which
+is why its radius is small. With
+Theorem~\ref{thm:an-bounds}, Proposition~\ref{prop:C} gives the normalised bounds of Theorem~\ref{thm:main-object}:
+$C/(4\sqrt2\pi^2)\in[15.77370,15.77376]$.
+
+\begin{remark}[Sign coherence three times]\label{rem:sign}
+The positivity of $C$ follows in three independent ways: from Proposition~\ref{prop:C}; from the certified value $\Pi(0)>0$ of the physical-side
+function (Section~\ref{sec:physical}), since $H_{\rm raw}(0)=\Pi(0)/(2\pi^2\cdot\frac1{16})$; and, given only that $H_{\rm raw}$ has constant sign on
+$\RR$, from the exact identity $\int\Xi^2H_{\rm raw}=\frac1{32\pi^2}>0$ of Proposition~\ref{prop:C3}(b). The proof of the main theorems uses the
+second.
+\end{remark}

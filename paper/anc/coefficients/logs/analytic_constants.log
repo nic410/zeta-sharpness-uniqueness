@@ -1,0 +1,26 @@
+# command : python coefficients/analytic_constants.py
+# env     : (COEFF_DATA, COEFF_EXTRA, NGL, NSUB not set)
+# date    : 2026-10-07T21:36:33Z
+# system  : Linux x86_64, 1 visible cores
+# python  : 3.10.12 | python-flint 0.9.0 | mpmath 1.3.0
+analytic_constants.py  sha256 148b48d1350884bc
+k1 = 1+e/3 = [1.906093943 +/- 1.81e-10] ; k2 = 2e/9 = [0.6040626285 +/- 4.65e-11] ; k3 = [2.362976260 +/- 2.07e-10]
+z0 = 4 pi = [12.5663706143592 +/- 2.71e-14] ; E(z0) = [32270.8607370506 +/- 4.07e-11] ; G(z0) = (2/z0)E(z0) = [5136.06700413176 +/- 1.36e-12]
+lambda(4pi) = [0.877951668804044 +/- 4.15e-16]
+  r1(4pi) = [0.00025026896 +/- 3.08e-12]
+  r2(4pi) = [0.0026409628 +/- 3.82e-11]
+  r3(4pi) = [0.0031449725 +/- 4.33e-11]
+  r4(4pi) = [0.015724738 +/- 8.63e-11]
+  r5(4pi) = [0.0056826236 +/- 2.61e-11]
+rho(4pi) = [0.02744356600 +/- 4.63e-12]
+DECISIVE: Lambda(4pi) = [0.850104915628 +/- 1.60e-13]  (> 0 required; Kc_n >= Lambda(z_n) G(z_n) for all n)
+DECISIVE: Upsilon(4pi) = [0.948271747553 +/- 3.66e-13] ; 4pi*(Upsilon - 1 + 1/z)(4pi) = [0.349963608522 +/- 4.63e-13]  (< 1 required => a_n <= A0(n) for all n)
+DECISIVE: at 4pi: z(lambda - 1 + 2/z) = [0.4662954373 +/- 2.76e-11] (increasing in z) ; z*(decaying part) = [0.3499326208 +/- 1.48e-11] (decreasing) ; difference [0.1163628165 +/- 1.29e-11] (> 0 required)
+A0(1) = [5136.06700413 +/- 1.77e-9] ; A0(1) Upsilon(4pi) + 1/4 = [4870.63723356 +/- 7.96e-10]
+[not a certificate] grid z in [4pi, 404pi] (4001 pts): Lambda increasing, z(Upsilon-1+1/z) decreasing, z(Lambda-1+2/z) > 0: True
+[not a certificate] Lambda(z) at z = 4pi*sqrt(n), n = 1,2,4,10,100: [0.850105 +/- 8.44e-8], [0.914986 +/- 1.62e-7], [0.942084 +/- 6.18e-8], [0.964120 +/- 4.22e-7], [0.988930 +/- 3.22e-7]
+§alpha: rho_alpha(4pi) = [0.0081679591 +/- 3.61e-11] ; |alpha_n| <= 2E(z_n) * [1.1624115 +/- 1.56e-8] ; -alpha_n >= 2E(z_n) * [0.80505803 +/- 6.76e-10]  (at n = 1; upper factor decreasing, lower increasing in z)
+[not a certificate] grid: alpha upper factor decreasing and lower factor increasing on [4pi, 404pi]: True
+§Jhat-large: for x >= 2, |Jhat(x)| <= [1.57970 +/- 4.69e-7] x^{-1/2} + [1.65908 +/- 2.08e-6] x^{-3/2} + [1.59577 +/- 8.79e-7] x^{-5/2}
+[not a certificate] grid x in [2, 102]: bound holds and x M_nu^2 monotone as stated (nu=0 incr., nu=1,2 decr.): True
+# exit code 0; wall time 0.7 s

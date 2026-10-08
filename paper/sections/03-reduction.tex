@@ -1,0 +1,107 @@
+%======================================================================
+\section{Reduction to a \texorpdfstring{$\Gamma$}{Gamma}-only integer-critical function}\label{sec:reduction}
+%======================================================================
+
+A function $F=\Xi^2H$ kills every zero of $\zeta$ (Corollary~\ref{cor:I-zerokilling}), so $\Arch(F)$ is a sum over prime powers. This
+section removes the arithmetic from the prime side as well: on a line where the Dirichlet series of $\zeta^2$ converges absolutely, $\hF$
+is a positive combination of shifts of the transform of $\gi^2H$, which involves only the Gamma factor. The positive combination runs over
+the integers, which are closed under multiplication; so it suffices to make the $\Gamma$-only transform vanish at all integers $x\ge2$ and be
+non-negative beyond the gap.
+
+\subsection{The growth class and the Voronoi decoupling}
+
+For $H$ even, real on $\RR$ and analytic on a neighbourhood of $\Strip_\delta$ put
+\begin{equation}\label{eq:GH}
+\begin{gathered}
+G_H(t):=\gi(t)^2H(t),\qquad \Gh_H(\xi):=\int_\RR G_H(t)e^{-2\pi i\xi t}\dd t,\\
+\Gh_H(x):=\Gh_H\Big(\frac{\log x}{2\pi}\Big)=\int_\RR G_H(t)x^{-it}\dd t .
+\end{gathered}
+\end{equation}
+We use the two readings of $\Gh_H$, in $\xi$ and in $x=e^{2\pi\xi}$, interchangeably; in particular $\Gh_H(0)$ always means $\xi=0$, i.e.
+$x=1$. Note that $\Gh_H$ is not even in $\xi$, since $\gi$ is not real on $\RR$.
+
+\begin{definition}[The class $\Wc_\delta$]\label{def:W}
+For $0<\delta<1$, $\Wc_\delta$ is the set of even functions $H$, real on $\RR$, analytic on a neighbourhood of $\Strip_\delta$, such that
+\begin{equation*}
+\sup_{z\in \Strip_\delta}(1+|z|)^8e^{-\pi|\Re z|/2}|H(z)|<\infty .\tag{C1}\label{eq:C1}
+\end{equation*}
+\end{definition}
+
+Condition \eqref{eq:C1} is a bound in the strip $\Strip_\delta$ only; it allows growth like $e^{\pi|\Re z|/2}$ in the strip and says nothing
+about the growth of $H$ elsewhere. This is the boundary case: Part~I's class $\Hc$ allows only growth like $e^{a|\Re z|}$ with $a<\pi/2$ in
+the strip, and at the rate $e^{\pi|\Re z|/2}$ this factor cancels exactly against the decay $|\Xi|^2\ll e^{-\pi|\Re z|/2}$ of \eqref{eq:XB},
+so the power $8$ is what makes $\Xi^2H$ a test function.
+
+\begin{lemma}[Voronoi decoupling]\label{lem:voronoi}
+Let $0<\delta<\frac12$ and $H\in\Wc_\delta$. Then:
+\begin{enumerate}[label=\textup{(\alph*)}]
+\item $F:=\Xi^2H\in\Tc_\delta$.
+\item $|G_H(z)|\le C(1+|\Re z|)^{-4+\delta}$ on $\Strip_\delta$; in particular $\sup_{|y|\le\frac12+\delta}\int_\RR|G_H(u+iy)|\dd u<\infty$.
+$\Gh_H$ is real and continuous, and $|\Gh_H(\xi)|\le Ce^{-\pi(1+2\delta)|\xi|}$.
+\item For every real $\xi$,
+\begin{equation}\label{eq:voronoi}
+\hF(\xi)=\sum_{m\ge1}d(m)\,m^{-1/2}\,\Gh_H(\xi+\xin m),
+\end{equation}
+and for each $\eta\in(\frac12,\frac12+\delta]$ the $m$-th term is bounded by $C_\eta d(m)m^{-1/2-\eta}e^{-2\pi\eta\xi}$; the series converges
+absolutely.
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+(a) Lemma~\ref{lem:I-XB} with $b=\frac12+\delta<1$ gives $|\Xi(z)|^2\le C(1+|\Re z|)^6e^{-\pi|\Re z|/2}$ on $\Strip_\delta$. With
+\eqref{eq:C1}, $|F(z)|\le C(1+|\Re z|)^6(1+|z|)^{-8}\le C(1+|z|)^{-2}$. $F$ is even, real on $\RR$ and analytic near $\Strip_\delta$.
+
+(b) For $z\in \Strip_\delta$ put $s=\frac12+iz$; then $\Re s=\frac12-\Im z\in[-\delta,1+\delta]$ and $\Im s=\Re z$. The function $\gi$ has no
+poles in $\Strip_\delta$. Stirling's formula \cite[5.11.9]{DLMF}, uniformly for $\Re s$ in a compact interval and $|\Im s|\ge1$, gives
+$|\gi(z)|^2=\frac14|s|^2|s-1|^2\pi^{-\Re s}|\Gamma(s/2)|^2\asymp|\Im s|^{3+\Re s}e^{-\pi|\Im s|/2}$. With \eqref{eq:C1},
+$|G_H(z)|\le C(1+|\Re z|)^{3+(1+\delta)-8}$. This gives uniform integrability on horizontal lines and uniform decay at their ends. For real
+$t$, $G_H(-t)=\overline{G_H(t)}$, so $\Gh_H$ is real. The bound on $\Gh_H$ follows by moving the line of integration to $\Im t=\mp(\frac12+\delta)$
+for $\pm\xi>0$, as in Lemma~\ref{lem:I-decay}.
+
+(c) Fix $\eta\in(\frac12,\frac12+\delta]$. By (a) and Cauchy's theorem, $\hF(\xi)=\int_{\Im w=-\eta}F(w)e^{-2\pi i\xi w}\dd w$. On this line
+$\Re(\frac12+iw)=\frac12+\eta>1$, so $\zeta(\frac12+iw)^2=\sum_md(m)m^{-1/2-iw}$, with $\sum_md(m)|m^{-1/2-iw}|=\zeta(\frac12+\eta)^2$. Since
+$F=G_H\,\zeta(\frac12+i\,\cdot)^2$ and, by (b), $\int_{\Im w=-\eta}|G_H(w)e^{-2\pi i\xi w}||\dd w|=e^{-2\pi\eta\xi}\int|G_H(u-i\eta)|\dd u<\infty$,
+Fubini's theorem gives
+\[
+\hF(\xi)=\sum_{m\ge1}d(m)m^{-1/2}\int_{\Im w=-\eta}G_H(w)e^{-2\pi i(\xi+\xin m)w}\dd w ,
+\]
+using $m^{-iw}=e^{-2\pi i\xin mw}$. The function $G_H$ is analytic on $-\eta\le\Im w\le0$ and decays uniformly there by (b), so each line moves
+back to $\RR$, and the $m$-th term is $d(m)m^{-1/2}\Gh_H(\xi+\xin m)$, of size at most
+$d(m)m^{-1/2}e^{-2\pi\eta(\xi+\xin m)}\int|G_H(u-i\eta)|\dd u$.
+\end{proof}
+
+The double pole of $\zeta^2$ at $w=-\frac i2$ is crossed only by $F$ as a whole, where $\Xi$ is entire, and never by a single term.
+
+\begin{proposition}[Exact magic functions from $\Gamma$-only data]\label{prop:reduction}
+Let $0<\delta<\frac12$ and $H\in\Wc_\delta$, $H\not\equiv0$, and assume
+\begin{enumerate}[label=\textup{(C\arabic*)},start=2]
+\item $H\ge0$ on $\RR$;
+\item $\Gh_H(\xin k)=0$ for every integer $k\ge2$;
+\item $\Gh_H\ge0$ on $[\xin2,\infty)$.
+\end{enumerate}
+Then $F:=\Xi^2H$ lies in $\Cone$, $\hF(\xin n)=0$ for every integer $n\ge2$, $\int F=\hF(0)=\Gh_H(0)>0$ and $\Arch(F)=0$. So $F$ is an exact
+magic function and $\kstar\le0$. If moreover $\Gh_H\ge0$ on $[0,\infty)$, then $F\in\ConeOPS$ and $\kOPS\le0$.
+\end{proposition}
+
+\begin{proof}
+By Lemma~\ref{lem:voronoi}(a), $F\in\Tc$, and $F\ge0$ on $\RR$ because $\Xi$ is real there. If $\xi\ge\xin2$, then every argument $\xi+\xin m$
+in \eqref{eq:voronoi} is $\ge\xin2$, and the weights $d(m)m^{-1/2}$ are positive; so $\hF(\xi)\ge0$ by (C4), and $F\in\Cone$. For $n\ge2$,
+$\hF(\xin n)=\sum_md(m)m^{-1/2}\Gh_H(\xin{nm})=0$ by (C3). Corollary~\ref{cor:I-zerokilling} applies, since $H$ is analytic on $\Strip_\delta$ and
+$F\in\Tc$, and gives $\Arch(F)=\frac1\pi\sum_{n\in\PP}\Lambda(n)n^{-1/2}\hF(\xin n)=0$. At $\xi=0$, \eqref{eq:voronoi} and (C3) give
+$\hF(0)=\Gh_H(0)$. Since $F\ge0$ is continuous and not identically zero ($\Xi$ has isolated zeros and $H\not\equiv0$), $\int F>0$; then
+$F/\int F\in\Cone$ has $\int=1$ and $\Arch=0$, so $\kstar\le0$. If $\Gh_H\ge0$ on $[0,\infty)$, the same argument gives $\hF\ge0$ on
+$[0,\infty)$, and $\hF$ is even (Lemma~\ref{lem:I-decay}); so $F\in\ConeOPS$ and $\kOPS\le0$.
+\end{proof}
+
+No zero in (C3) needs to be double, and no condition on the zeros of $\Gh_H$ or $\hF$ off the integers is used. Only the prime powers are
+needed in Corollary~\ref{cor:I-zerokilling}; vanishing at all integers is what the decoupling requires.
+
+\begin{remark}[The converse direction; not used]\label{rem:mobius}
+Since $\sum_{d\mid m}(\boldsymbol\mu*\boldsymbol\mu)(d)\,d(m/d)=\delta_{m1}$, where $\boldsymbol\mu$ is the M\"obius function, \eqref{eq:voronoi}
+can be inverted at the integer nodes: $\Gh_H(\xin n)=\sum_m(\boldsymbol\mu*\boldsymbol\mu)(m)m^{-1/2}\hF(\xin{mn})$, the double series converging
+absolutely by the decay in Lemma~\ref{lem:voronoi}. So (C3) is equivalent to $\hF(\xin n)=0$ for all $n\ge2$: the arithmetic-free problem at the
+integer nodes is equivalent to the problem for $\Xi^2H$. We use only the direction proved in Proposition~\ref{prop:reduction}.
+\end{remark}
+
+Following the terminology of the introduction, we call an $H\in\Wc_\delta$ with $H(0)=1$ that satisfies (C2)--(C4) a \emph{$\Gamma$-only
+integer-critical function}. The rest of the paper constructs one, with $H>0$ on all of $\RR$ and $\Gh_H\ge0$ on $[0,\infty)$.
